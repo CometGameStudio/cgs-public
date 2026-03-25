@@ -6,13 +6,13 @@
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:xe,defineProperty:we,getOwnPropertyDescriptor:Ae,getOwnPropertyNames:Se,getOwnPropertySymbols:Ce,getPrototypeOf:Te}=Object,G=globalThis,J=G.trustedTypes,Ie=J?J.emptyScript:"",Me=G.reactiveElementPolyfillSupport,_=(t,e)=>t,N={toAttribute(t,e){switch(e){case Boolean:t=t?Ie:null;break;case Object:case Array:t=t==null?t:JSON.stringify(t)}return t},fromAttribute(t,e){let i=t;switch(e){case Boolean:i=t!==null;break;case Number:i=t===null?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t)}catch{i=null}}return i}},V=(t,e)=>!xe(t,e),Z={attribute:!0,type:String,converter:N,reflect:!1,useDefault:!1,hasChanged:V};Symbol.metadata??=Symbol("metadata"),G.litPropertyMetadata??=new WeakMap;let I=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,i=Z){if(i.state&&(i.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((i=Object.create(i)).wrapped=!0),this.elementProperties.set(e,i),!i.noAccessor){const s=Symbol(),a=this.getPropertyDescriptor(e,s,i);a!==void 0&&we(this.prototype,e,a)}}static getPropertyDescriptor(e,i,s){const{get:a,set:r}=Ae(this.prototype,e)??{get(){return this[i]},set(o){this[i]=o}};return{get:a,set(o){const n=a?.call(this);r?.call(this,o),this.requestUpdate(e,n,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??Z}static _$Ei(){if(this.hasOwnProperty(_("elementProperties")))return;const e=Te(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(_("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(_("properties"))){const i=this.properties,s=[...Se(i),...Ce(i)];for(const a of s)this.createProperty(a,i[a])}const e=this[Symbol.metadata];if(e!==null){const i=litPropertyMetadata.get(e);if(i!==void 0)for(const[s,a]of i)this.elementProperties.set(s,a)}this._$Eh=new Map;for(const[i,s]of this.elementProperties){const a=this._$Eu(i,s);a!==void 0&&this._$Eh.set(a,i)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const i=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const a of s)i.unshift(Q(a))}else e!==void 0&&i.push(Q(e));return i}static _$Eu(e,i){const s=i.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,i=this.constructor.elementProperties;for(const s of i.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ye(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,i,s){this._$AK(e,s)}_$ET(e,i){const s=this.constructor.elementProperties.get(e),a=this.constructor._$Eu(e,s);if(a!==void 0&&s.reflect===!0){const r=(s.converter?.toAttribute!==void 0?s.converter:N).toAttribute(i,s.type);this._$Em=e,r==null?this.removeAttribute(a):this.setAttribute(a,r),this._$Em=null}}_$AK(e,i){const s=this.constructor,a=s._$Eh.get(e);if(a!==void 0&&this._$Em!==a){const r=s.getPropertyOptions(a),o=typeof r.converter=="function"?{fromAttribute:r.converter}:r.converter?.fromAttribute!==void 0?r.converter:N;this._$Em=a;const n=o.fromAttribute(i,r.type);this[a]=n??this._$Ej?.get(a)??n,this._$Em=null}}requestUpdate(e,i,s,a=!1,r){if(e!==void 0){const o=this.constructor;if(a===!1&&(r=this[e]),s??=o.getPropertyOptions(e),!((s.hasChanged??V)(r,i)||s.useDefault&&s.reflect&&r===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,s))))return;this.C(e,i,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,i,{useDefault:s,reflect:a,wrapped:r},o){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,o??i??this[e]),r!==!0||o!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(i=void 0),this._$AL.set(e,i)),a===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(i){Promise.reject(i)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[a,r]of this._$Ep)this[a]=r;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[a,r]of s){const{wrapped:o}=r,n=this[a];o!==!0||this._$AL.has(a)||n===void 0||this.C(a,void 0,r,n)}}let e=!1;const i=this._$AL;try{e=this.shouldUpdate(i),e?(this.willUpdate(i),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(i)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(i)}willUpdate(e){}_$AE(e){this._$EO?.forEach(i=>i.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(i=>this._$ET(i,this[i])),this._$EM()}updated(e){}firstUpdated(e){}};I.elementStyles=[],I.shadowRootOptions={mode:"open"},I[_("elementProperties")]=new Map,I[_("finalized")]=new Map,Me?.({ReactiveElement:I}),(G.reactiveElementVersions??=[]).push("2.1.2");/**
+ */const{is:xe,defineProperty:we,getOwnPropertyDescriptor:Ae,getOwnPropertyNames:Se,getOwnPropertySymbols:Ce,getPrototypeOf:Te}=Object,F=globalThis,J=F.trustedTypes,Ie=J?J.emptyScript:"",Me=F.reactiveElementPolyfillSupport,_=(t,e)=>t,N={toAttribute(t,e){switch(e){case Boolean:t=t?Ie:null;break;case Object:case Array:t=t==null?t:JSON.stringify(t)}return t},fromAttribute(t,e){let i=t;switch(e){case Boolean:i=t!==null;break;case Number:i=t===null?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t)}catch{i=null}}return i}},V=(t,e)=>!xe(t,e),Z={attribute:!0,type:String,converter:N,reflect:!1,useDefault:!1,hasChanged:V};Symbol.metadata??=Symbol("metadata"),F.litPropertyMetadata??=new WeakMap;let I=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,i=Z){if(i.state&&(i.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((i=Object.create(i)).wrapped=!0),this.elementProperties.set(e,i),!i.noAccessor){const s=Symbol(),a=this.getPropertyDescriptor(e,s,i);a!==void 0&&we(this.prototype,e,a)}}static getPropertyDescriptor(e,i,s){const{get:a,set:r}=Ae(this.prototype,e)??{get(){return this[i]},set(o){this[i]=o}};return{get:a,set(o){const n=a?.call(this);r?.call(this,o),this.requestUpdate(e,n,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??Z}static _$Ei(){if(this.hasOwnProperty(_("elementProperties")))return;const e=Te(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(_("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(_("properties"))){const i=this.properties,s=[...Se(i),...Ce(i)];for(const a of s)this.createProperty(a,i[a])}const e=this[Symbol.metadata];if(e!==null){const i=litPropertyMetadata.get(e);if(i!==void 0)for(const[s,a]of i)this.elementProperties.set(s,a)}this._$Eh=new Map;for(const[i,s]of this.elementProperties){const a=this._$Eu(i,s);a!==void 0&&this._$Eh.set(a,i)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const i=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const a of s)i.unshift(Q(a))}else e!==void 0&&i.push(Q(e));return i}static _$Eu(e,i){const s=i.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,i=this.constructor.elementProperties;for(const s of i.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ye(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,i,s){this._$AK(e,s)}_$ET(e,i){const s=this.constructor.elementProperties.get(e),a=this.constructor._$Eu(e,s);if(a!==void 0&&s.reflect===!0){const r=(s.converter?.toAttribute!==void 0?s.converter:N).toAttribute(i,s.type);this._$Em=e,r==null?this.removeAttribute(a):this.setAttribute(a,r),this._$Em=null}}_$AK(e,i){const s=this.constructor,a=s._$Eh.get(e);if(a!==void 0&&this._$Em!==a){const r=s.getPropertyOptions(a),o=typeof r.converter=="function"?{fromAttribute:r.converter}:r.converter?.fromAttribute!==void 0?r.converter:N;this._$Em=a;const n=o.fromAttribute(i,r.type);this[a]=n??this._$Ej?.get(a)??n,this._$Em=null}}requestUpdate(e,i,s,a=!1,r){if(e!==void 0){const o=this.constructor;if(a===!1&&(r=this[e]),s??=o.getPropertyOptions(e),!((s.hasChanged??V)(r,i)||s.useDefault&&s.reflect&&r===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,s))))return;this.C(e,i,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,i,{useDefault:s,reflect:a,wrapped:r},o){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,o??i??this[e]),r!==!0||o!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(i=void 0),this._$AL.set(e,i)),a===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(i){Promise.reject(i)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[a,r]of this._$Ep)this[a]=r;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[a,r]of s){const{wrapped:o}=r,n=this[a];o!==!0||this._$AL.has(a)||n===void 0||this.C(a,void 0,r,n)}}let e=!1;const i=this._$AL;try{e=this.shouldUpdate(i),e?(this.willUpdate(i),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(i)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(i)}willUpdate(e){}_$AE(e){this._$EO?.forEach(i=>i.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(i=>this._$ET(i,this[i])),this._$EM()}updated(e){}firstUpdated(e){}};I.elementStyles=[],I.shadowRootOptions={mode:"open"},I[_("elementProperties")]=new Map,I[_("finalized")]=new Map,Me?.({ReactiveElement:I}),(F.reactiveElementVersions??=[]).push("2.1.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */const j=globalThis,ee=t=>t,U=j.trustedTypes,te=U?U.createPolicy("lit-html",{createHTML:t=>t}):void 0,le="$lit$",w=`lit$${Math.random().toFixed(9).slice(2)}$`,pe="?"+w,Pe=`<${pe}>`,C=document,D=()=>C.createComment(""),E=t=>t===null||typeof t!="object"&&typeof t!="function",q=Array.isArray,ke=t=>q(t)||typeof t?.[Symbol.iterator]=="function",B=`[ 	
 \f\r]`,L=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,ie=/-->/g,se=/>/g,A=RegExp(`>|${B}(?:([^\\s"'>=/]+)(${B}*=${B}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),ae=/'/g,re=/"/g,ue=/^(?:script|style|textarea|title)$/i,Oe=t=>(e,...i)=>({_$litType$:t,strings:e,values:i}),c=Oe(1),P=Symbol.for("lit-noChange"),g=Symbol.for("lit-nothing"),oe=new WeakMap,S=C.createTreeWalker(C,129);function he(t,e){if(!q(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return te!==void 0?te.createHTML(e):e}const Le=(t,e)=>{const i=t.length-1,s=[];let a,r=e===2?"<svg>":e===3?"<math>":"",o=L;for(let n=0;n<i;n++){const d=t[n];let l,u,p=-1,h=0;for(;h<d.length&&(o.lastIndex=h,u=o.exec(d),u!==null);)h=o.lastIndex,o===L?u[1]==="!--"?o=ie:u[1]!==void 0?o=se:u[2]!==void 0?(ue.test(u[2])&&(a=RegExp("</"+u[2],"g")),o=A):u[3]!==void 0&&(o=A):o===A?u[0]===">"?(o=a??L,p=-1):u[1]===void 0?p=-2:(p=o.lastIndex-u[2].length,l=u[1],o=u[3]===void 0?A:u[3]==='"'?re:ae):o===re||o===ae?o=A:o===ie||o===se?o=L:(o=A,a=void 0);const m=o===A&&t[n+1].startsWith("/>")?" ":"";r+=o===L?d+Pe:p>=0?(s.push(l),d.slice(0,p)+le+d.slice(p)+w+m):d+w+(p===-2?n:m)}return[he(t,r+(t[i]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),s]};class ${constructor({strings:e,_$litType$:i},s){let a;this.parts=[];let r=0,o=0;const n=e.length-1,d=this.parts,[l,u]=Le(e,i);if(this.el=$.createElement(l,s),S.currentNode=this.el.content,i===2||i===3){const p=this.el.content.firstChild;p.replaceWith(...p.childNodes)}for(;(a=S.nextNode())!==null&&d.length<n;){if(a.nodeType===1){if(a.hasAttributes())for(const p of a.getAttributeNames())if(p.endsWith(le)){const h=u[o++],m=a.getAttribute(p).split(w),T=/([.?@])?(.*)/.exec(h);d.push({type:1,index:r,name:T[2],strings:m,ctor:T[1]==="."?De:T[1]==="?"?Ee:T[1]==="@"?$e:F}),a.removeAttribute(p)}else p.startsWith(w)&&(d.push({type:6,index:r}),a.removeAttribute(p));if(ue.test(a.tagName)){const p=a.textContent.split(w),h=p.length-1;if(h>0){a.textContent=U?U.emptyScript:"";for(let m=0;m<h;m++)a.append(p[m],D()),S.nextNode(),d.push({type:2,index:++r});a.append(p[h],D())}}}else if(a.nodeType===8)if(a.data===pe)d.push({type:2,index:r});else{let p=-1;for(;(p=a.data.indexOf(w,p+1))!==-1;)d.push({type:7,index:r}),p+=w.length-1}r++}}static createElement(e,i){const s=C.createElement("template");return s.innerHTML=e,s}}function k(t,e,i=t,s){if(e===P)return e;let a=s!==void 0?i._$Co?.[s]:i._$Cl;const r=E(e)?void 0:e._$litDirective$;return a?.constructor!==r&&(a?._$AO?.(!1),r===void 0?a=void 0:(a=new r(t),a._$AT(t,i,s)),s!==void 0?(i._$Co??=[])[s]=a:i._$Cl=a),a!==void 0&&(e=k(t,a._$AS(t,e.values),a,s)),e}class _e{constructor(e,i){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=i}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:i},parts:s}=this._$AD,a=(e?.creationScope??C).importNode(i,!0);S.currentNode=a;let r=S.nextNode(),o=0,n=0,d=s[0];for(;d!==void 0;){if(o===d.index){let l;d.type===2?l=new z(r,r.nextSibling,this,e):d.type===1?l=new d.ctor(r,d.name,d.strings,this,e):d.type===6&&(l=new ze(r,this,e)),this._$AV.push(l),d=s[++n]}o!==d?.index&&(r=S.nextNode(),o++)}return S.currentNode=C,a}p(e){let i=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(e,s,i),i+=s.strings.length-2):s._$AI(e[i])),i++}}class z{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,i,s,a){this.type=2,this._$AH=g,this._$AN=void 0,this._$AA=e,this._$AB=i,this._$AM=s,this.options=a,this._$Cv=a?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const i=this._$AM;return i!==void 0&&e?.nodeType===11&&(e=i.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,i=this){e=k(this,e,i),E(e)?e===g||e==null||e===""?(this._$AH!==g&&this._$AR(),this._$AH=g):e!==this._$AH&&e!==P&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):ke(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==g&&E(this._$AH)?this._$AA.nextSibling.data=e:this.T(C.createTextNode(e)),this._$AH=e}$(e){const{values:i,_$litType$:s}=e,a=typeof s=="number"?this._$AC(e):(s.el===void 0&&(s.el=$.createElement(he(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===a)this._$AH.p(i);else{const r=new _e(a,this),o=r.u(this.options);r.p(i),this.T(o),this._$AH=r}}_$AC(e){let i=oe.get(e.strings);return i===void 0&&oe.set(e.strings,i=new $(e)),i}k(e){q(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,a=0;for(const r of e)a===i.length?i.push(s=new z(this.O(D()),this.O(D()),this,this.options)):s=i[a],s._$AI(r),a++;a<i.length&&(this._$AR(s&&s._$AB.nextSibling,a),i.length=a)}_$AR(e=this._$AA.nextSibling,i){for(this._$AP?.(!1,!0,i);e!==this._$AB;){const s=ee(e).nextSibling;ee(e).remove(),e=s}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class F{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,i,s,a,r){this.type=1,this._$AH=g,this._$AN=void 0,this.element=e,this.name=i,this._$AM=a,this.options=r,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=g}_$AI(e,i=this,s,a){const r=this.strings;let o=!1;if(r===void 0)e=k(this,e,i,0),o=!E(e)||e!==this._$AH&&e!==P,o&&(this._$AH=e);else{const n=e;let d,l;for(e=r[0],d=0;d<r.length-1;d++)l=k(this,n[s+d],i,d),l===P&&(l=this._$AH[d]),o||=!E(l)||l!==this._$AH[d],l===g?e=g:e!==g&&(e+=(l??"")+r[d+1]),this._$AH[d]=l}o&&!a&&this.j(e)}j(e){e===g?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class De extends F{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===g?void 0:e}}class Ee extends F{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==g)}}class $e extends F{constructor(e,i,s,a,r){super(e,i,s,a,r),this.type=5}_$AI(e,i=this){if((e=k(this,e,i,0)??g)===P)return;const s=this._$AH,a=e===g&&s!==g||e.capture!==s.capture||e.once!==s.once||e.passive!==s.passive,r=e!==g&&(s===g||a);a&&this.element.removeEventListener(this.name,this,s),r&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class ze{constructor(e,i,s){this.element=e,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(e){k(this,e)}}const Re=j.litHtmlPolyfillSupport;Re?.($,z),(j.litHtmlVersions??=[]).push("3.3.2");const Ne=(t,e,i)=>{const s=i?.renderBefore??e;let a=s._$litPart$;if(a===void 0){const r=i?.renderBefore??null;s._$litPart$=a=new z(e.insertBefore(D(),r),r,void 0,i??{})}return a._$AI(t),a};/**
+\f\r"'\`<>=]|("|')|))|$)`,"g"),ae=/'/g,re=/"/g,ue=/^(?:script|style|textarea|title)$/i,Oe=t=>(e,...i)=>({_$litType$:t,strings:e,values:i}),c=Oe(1),P=Symbol.for("lit-noChange"),g=Symbol.for("lit-nothing"),oe=new WeakMap,S=C.createTreeWalker(C,129);function he(t,e){if(!q(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return te!==void 0?te.createHTML(e):e}const Le=(t,e)=>{const i=t.length-1,s=[];let a,r=e===2?"<svg>":e===3?"<math>":"",o=L;for(let n=0;n<i;n++){const d=t[n];let l,u,p=-1,h=0;for(;h<d.length&&(o.lastIndex=h,u=o.exec(d),u!==null);)h=o.lastIndex,o===L?u[1]==="!--"?o=ie:u[1]!==void 0?o=se:u[2]!==void 0?(ue.test(u[2])&&(a=RegExp("</"+u[2],"g")),o=A):u[3]!==void 0&&(o=A):o===A?u[0]===">"?(o=a??L,p=-1):u[1]===void 0?p=-2:(p=o.lastIndex-u[2].length,l=u[1],o=u[3]===void 0?A:u[3]==='"'?re:ae):o===re||o===ae?o=A:o===ie||o===se?o=L:(o=A,a=void 0);const m=o===A&&t[n+1].startsWith("/>")?" ":"";r+=o===L?d+Pe:p>=0?(s.push(l),d.slice(0,p)+le+d.slice(p)+w+m):d+w+(p===-2?n:m)}return[he(t,r+(t[i]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),s]};class ${constructor({strings:e,_$litType$:i},s){let a;this.parts=[];let r=0,o=0;const n=e.length-1,d=this.parts,[l,u]=Le(e,i);if(this.el=$.createElement(l,s),S.currentNode=this.el.content,i===2||i===3){const p=this.el.content.firstChild;p.replaceWith(...p.childNodes)}for(;(a=S.nextNode())!==null&&d.length<n;){if(a.nodeType===1){if(a.hasAttributes())for(const p of a.getAttributeNames())if(p.endsWith(le)){const h=u[o++],m=a.getAttribute(p).split(w),T=/([.?@])?(.*)/.exec(h);d.push({type:1,index:r,name:T[2],strings:m,ctor:T[1]==="."?De:T[1]==="?"?Ee:T[1]==="@"?$e:G}),a.removeAttribute(p)}else p.startsWith(w)&&(d.push({type:6,index:r}),a.removeAttribute(p));if(ue.test(a.tagName)){const p=a.textContent.split(w),h=p.length-1;if(h>0){a.textContent=U?U.emptyScript:"";for(let m=0;m<h;m++)a.append(p[m],D()),S.nextNode(),d.push({type:2,index:++r});a.append(p[h],D())}}}else if(a.nodeType===8)if(a.data===pe)d.push({type:2,index:r});else{let p=-1;for(;(p=a.data.indexOf(w,p+1))!==-1;)d.push({type:7,index:r}),p+=w.length-1}r++}}static createElement(e,i){const s=C.createElement("template");return s.innerHTML=e,s}}function k(t,e,i=t,s){if(e===P)return e;let a=s!==void 0?i._$Co?.[s]:i._$Cl;const r=E(e)?void 0:e._$litDirective$;return a?.constructor!==r&&(a?._$AO?.(!1),r===void 0?a=void 0:(a=new r(t),a._$AT(t,i,s)),s!==void 0?(i._$Co??=[])[s]=a:i._$Cl=a),a!==void 0&&(e=k(t,a._$AS(t,e.values),a,s)),e}class _e{constructor(e,i){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=i}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:i},parts:s}=this._$AD,a=(e?.creationScope??C).importNode(i,!0);S.currentNode=a;let r=S.nextNode(),o=0,n=0,d=s[0];for(;d!==void 0;){if(o===d.index){let l;d.type===2?l=new z(r,r.nextSibling,this,e):d.type===1?l=new d.ctor(r,d.name,d.strings,this,e):d.type===6&&(l=new ze(r,this,e)),this._$AV.push(l),d=s[++n]}o!==d?.index&&(r=S.nextNode(),o++)}return S.currentNode=C,a}p(e){let i=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(e,s,i),i+=s.strings.length-2):s._$AI(e[i])),i++}}class z{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,i,s,a){this.type=2,this._$AH=g,this._$AN=void 0,this._$AA=e,this._$AB=i,this._$AM=s,this.options=a,this._$Cv=a?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const i=this._$AM;return i!==void 0&&e?.nodeType===11&&(e=i.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,i=this){e=k(this,e,i),E(e)?e===g||e==null||e===""?(this._$AH!==g&&this._$AR(),this._$AH=g):e!==this._$AH&&e!==P&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):ke(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==g&&E(this._$AH)?this._$AA.nextSibling.data=e:this.T(C.createTextNode(e)),this._$AH=e}$(e){const{values:i,_$litType$:s}=e,a=typeof s=="number"?this._$AC(e):(s.el===void 0&&(s.el=$.createElement(he(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===a)this._$AH.p(i);else{const r=new _e(a,this),o=r.u(this.options);r.p(i),this.T(o),this._$AH=r}}_$AC(e){let i=oe.get(e.strings);return i===void 0&&oe.set(e.strings,i=new $(e)),i}k(e){q(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,a=0;for(const r of e)a===i.length?i.push(s=new z(this.O(D()),this.O(D()),this,this.options)):s=i[a],s._$AI(r),a++;a<i.length&&(this._$AR(s&&s._$AB.nextSibling,a),i.length=a)}_$AR(e=this._$AA.nextSibling,i){for(this._$AP?.(!1,!0,i);e!==this._$AB;){const s=ee(e).nextSibling;ee(e).remove(),e=s}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class G{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,i,s,a,r){this.type=1,this._$AH=g,this._$AN=void 0,this.element=e,this.name=i,this._$AM=a,this.options=r,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=g}_$AI(e,i=this,s,a){const r=this.strings;let o=!1;if(r===void 0)e=k(this,e,i,0),o=!E(e)||e!==this._$AH&&e!==P,o&&(this._$AH=e);else{const n=e;let d,l;for(e=r[0],d=0;d<r.length-1;d++)l=k(this,n[s+d],i,d),l===P&&(l=this._$AH[d]),o||=!E(l)||l!==this._$AH[d],l===g?e=g:e!==g&&(e+=(l??"")+r[d+1]),this._$AH[d]=l}o&&!a&&this.j(e)}j(e){e===g?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class De extends G{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===g?void 0:e}}class Ee extends G{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==g)}}class $e extends G{constructor(e,i,s,a,r){super(e,i,s,a,r),this.type=5}_$AI(e,i=this){if((e=k(this,e,i,0)??g)===P)return;const s=this._$AH,a=e===g&&s!==g||e.capture!==s.capture||e.once!==s.once||e.passive!==s.passive,r=e!==g&&(s===g||a);a&&this.element.removeEventListener(this.name,this,s),r&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class ze{constructor(e,i,s){this.element=e,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(e){k(this,e)}}const Re=j.litHtmlPolyfillSupport;Re?.($,z),(j.litHtmlVersions??=[]).push("3.3.2");const Ne=(t,e,i)=>{const s=i?.renderBefore??e;let a=s._$litPart$;if(a===void 0){const r=i?.renderBefore??null;s._$litPart$=a=new z(e.insertBefore(D(),r),r,void 0,i??{})}return a._$AI(t),a};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
@@ -24,11 +24,11 @@
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Ge={attribute:!0,type:String,converter:N,reflect:!1,hasChanged:V},Fe=(t=Ge,e,i)=>{const{kind:s,metadata:a}=i;let r=globalThis.litPropertyMetadata.get(a);if(r===void 0&&globalThis.litPropertyMetadata.set(a,r=new Map),s==="setter"&&((t=Object.create(t)).wrapped=!0),r.set(i.name,t),s==="accessor"){const{name:o}=i;return{set(n){const d=e.get.call(this);e.set.call(this,n),this.requestUpdate(o,d,t,!0,n)},init(n){return n!==void 0&&this.C(o,void 0,t,n),n}}}if(s==="setter"){const{name:o}=i;return function(n){const d=this[o];e.call(this,n),this.requestUpdate(o,d,t,!0,n)}}throw Error("Unsupported decorator location: "+s)};function O(t){return(e,i)=>typeof i=="object"?Fe(t,e,i):((s,a,r)=>{const o=a.hasOwnProperty(r);return a.constructor.createProperty(r,s),o?Object.getOwnPropertyDescriptor(a,r):void 0})(t,e,i)}/**
+ */const Fe={attribute:!0,type:String,converter:N,reflect:!1,hasChanged:V},Ge=(t=Fe,e,i)=>{const{kind:s,metadata:a}=i;let r=globalThis.litPropertyMetadata.get(a);if(r===void 0&&globalThis.litPropertyMetadata.set(a,r=new Map),s==="setter"&&((t=Object.create(t)).wrapped=!0),r.set(i.name,t),s==="accessor"){const{name:o}=i;return{set(n){const d=e.get.call(this);e.set.call(this,n),this.requestUpdate(o,d,t,!0,n)},init(n){return n!==void 0&&this.C(o,void 0,t,n),n}}}if(s==="setter"){const{name:o}=i;return function(n){const d=this[o];e.call(this,n),this.requestUpdate(o,d,t,!0,n)}}throw Error("Unsupported decorator location: "+s)};function O(t){return(e,i)=>typeof i=="object"?Ge(t,e,i):((s,a,r)=>{const o=a.hasOwnProperty(r);return a.constructor.createProperty(r,s),o?Object.getOwnPropertyDescriptor(a,r):void 0})(t,e,i)}/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function v(t){return O({...t,state:!0,attribute:!1})}var Be=Object.defineProperty,He=Object.getOwnPropertyDescriptor,y=(t,e,i,s)=>{for(var a=s>1?void 0:s?He(e,i):e,r=t.length-1,o;r>=0;r--)(o=t[r])&&(a=(s?o(e,i,a):o(a))||a);return s&&a&&Be(e,i,a),a};let f=class extends M{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragStartX=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:4,eula:4,"third-party":4,safety:4,disclaimers:4},this._touchStartX=0,this._touchStartY=0,this._nextCard=()=>{this.currentCardIndex=(this.currentCardIndex+1)%this._currentTabCardCount},this._prevCard=()=>{this.currentCardIndex=(this.currentCardIndex-1+this._currentTabCardCount)%this._currentTabCardCount},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY},this._onTouchEnd=t=>{if(!this.fullPage)return;const e=t.changedTouches[0].clientX-this._touchStartX,i=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,Math.abs(e)>Math.abs(i)&&Math.abs(e)>this.cardDragThreshold&&(e<0?this._nextCard():this._prevCard())},this._onCardMouseDown=t=>{this.fullPage&&(t.target.closest(".about-carousel-arrow")||(this.cardDragStartX=t.clientX))},this._onCardMouseMove=t=>{if(!this.fullPage||this.cardDragStartX===0)return;const e=t.clientX-this.cardDragStartX;Math.abs(e)>5&&(this.isCardDragging=!0)},this._onCardMouseUp=t=>{if(!this.fullPage)return;const e=t.clientX-this.cardDragStartX;this.isCardDragging=!1,this.cardDragStartX=0,Math.abs(e)>this.cardDragThreshold&&(e<0?this._nextCard():this._prevCard())},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const e=this.position||this._defaultPosition();this.dragStartPosX=e.x,this.dragStartPosY=e.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const e=t.clientX-this.dragStartX,i=t.clientY-this.dragStartY,s={x:this.dragStartPosX+e,y:this.dragStartPosY+i};this.position=s,this.dispatchEvent(new CustomEvent("position-changed",{detail:s}))}if(this.isResizing){const e=t.clientX-this.dragStartX,i=t.clientY-this.dragStartY,s={width:Math.max(500,this.resizeStartWidth+e),height:Math.max(400,this.resizeStartHeight+i)};this.size=s,this.dispatchEvent(new CustomEvent("size-changed",{detail:s}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1},this.TAB_ITEMS=[{id:"about",icon:"ℹ️",label:"About"},{id:"privacy",icon:"🔒",label:"Privacy Policy"},{id:"eula",icon:"📜",label:"EULA"},{id:"third-party",icon:"📦",label:"Third Party Notice"},{id:"safety",icon:"🛡️",label:"Safety"},{id:"disclaimers",icon:"⚠️",label:"Disclaimers"}]}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}connectedCallback(){super.connectedCallback(),window.addEventListener("mousemove",this._onMouseMove),window.addEventListener("mouseup",this._onMouseUp),window.addEventListener("keydown",this._onKeyDown),window.addEventListener("touchstart",this._onTouchStart,{passive:!0}),window.addEventListener("touchend",this._onTouchEnd,{passive:!0}),window.addEventListener("mousemove",this._onCardMouseMove),window.addEventListener("mouseup",this._onCardMouseUp),window.addEventListener("mousedown",this._onCardMouseDown)}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("mousemove",this._onMouseMove),window.removeEventListener("mouseup",this._onMouseUp),window.removeEventListener("keydown",this._onKeyDown),window.removeEventListener("touchstart",this._onTouchStart),window.removeEventListener("touchend",this._onTouchEnd),window.removeEventListener("mousemove",this._onCardMouseMove),window.removeEventListener("mouseup",this._onCardMouseUp),window.removeEventListener("mousedown",this._onCardMouseDown)}willUpdate(t){t.has("activeTab")&&(this.currentCardIndex=0)}_effectiveSize(){const t=Math.max(500,window.innerWidth*.94),e=Math.max(400,window.innerHeight*.92);return{width:Math.min(this.size.width,t),height:Math.min(this.size.height,e)}}_defaultPosition(){const{width:t,height:e}=this._effectiveSize();return{x:Math.max(20,(window.innerWidth-t)/2),y:Math.max(20,(window.innerHeight-e)/2)}}render(){if(!this.open&&!this.fullPage)return c``;const t=c`
+ */function v(t){return O({...t,state:!0,attribute:!1})}var Be=Object.defineProperty,He=Object.getOwnPropertyDescriptor,y=(t,e,i,s)=>{for(var a=s>1?void 0:s?He(e,i):e,r=t.length-1,o;r>=0;r--)(o=t[r])&&(a=(s?o(e,i,a):o(a))||a);return s&&a&&Be(e,i,a),a};let f=class extends M{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragStartX=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:4,eula:4,"third-party":4,safety:4,disclaimers:4},this._touchStartX=0,this._touchStartY=0,this._nextCard=()=>{this.currentCardIndex=(this.currentCardIndex+1)%this._currentTabCardCount},this._prevCard=()=>{this.currentCardIndex=(this.currentCardIndex-1+this._currentTabCardCount)%this._currentTabCardCount},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY},this._onTouchEnd=t=>{if(!this.fullPage)return;const e=t.changedTouches[0].clientX-this._touchStartX,i=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,Math.abs(e)>Math.abs(i)&&Math.abs(e)>this.cardDragThreshold&&(e<0?this._nextCard():this._prevCard())},this._onCardMouseDown=t=>{this.fullPage&&(t.target.closest(".about-nav-side-arrow")||(this.cardDragStartX=t.clientX))},this._onCardMouseMove=t=>{if(!this.fullPage||this.cardDragStartX===0)return;const e=t.clientX-this.cardDragStartX;Math.abs(e)>5&&(this.isCardDragging=!0)},this._onCardMouseUp=t=>{if(!this.fullPage)return;const e=t.clientX-this.cardDragStartX;this.isCardDragging=!1,this.cardDragStartX=0,Math.abs(e)>this.cardDragThreshold&&(e<0?this._nextCard():this._prevCard())},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const e=this.position||this._defaultPosition();this.dragStartPosX=e.x,this.dragStartPosY=e.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const e=t.clientX-this.dragStartX,i=t.clientY-this.dragStartY,s={x:this.dragStartPosX+e,y:this.dragStartPosY+i};this.position=s,this.dispatchEvent(new CustomEvent("position-changed",{detail:s}))}if(this.isResizing){const e=t.clientX-this.dragStartX,i=t.clientY-this.dragStartY,s={width:Math.max(500,this.resizeStartWidth+e),height:Math.max(400,this.resizeStartHeight+i)};this.size=s,this.dispatchEvent(new CustomEvent("size-changed",{detail:s}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1},this.TAB_ITEMS=[{id:"about",icon:"ℹ️",label:"About"},{id:"privacy",icon:"🔒",label:"Privacy Policy"},{id:"eula",icon:"📜",label:"EULA"},{id:"third-party",icon:"📦",label:"Third Party Notice"},{id:"safety",icon:"🛡️",label:"Safety"},{id:"disclaimers",icon:"⚠️",label:"Disclaimers"}]}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}connectedCallback(){super.connectedCallback(),window.addEventListener("mousemove",this._onMouseMove),window.addEventListener("mouseup",this._onMouseUp),window.addEventListener("keydown",this._onKeyDown),window.addEventListener("touchstart",this._onTouchStart,{passive:!0}),window.addEventListener("touchend",this._onTouchEnd,{passive:!0}),window.addEventListener("mousemove",this._onCardMouseMove),window.addEventListener("mouseup",this._onCardMouseUp),window.addEventListener("mousedown",this._onCardMouseDown)}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("mousemove",this._onMouseMove),window.removeEventListener("mouseup",this._onMouseUp),window.removeEventListener("keydown",this._onKeyDown),window.removeEventListener("touchstart",this._onTouchStart),window.removeEventListener("touchend",this._onTouchEnd),window.removeEventListener("mousemove",this._onCardMouseMove),window.removeEventListener("mouseup",this._onCardMouseUp),window.removeEventListener("mousedown",this._onCardMouseDown)}willUpdate(t){t.has("activeTab")&&(this.currentCardIndex=0)}_effectiveSize(){const t=Math.max(500,window.innerWidth*.94),e=Math.max(400,window.innerHeight*.92);return{width:Math.min(this.size.width,t),height:Math.min(this.size.height,e)}}_defaultPosition(){const{width:t,height:e}=this._effectiveSize();return{x:Math.max(20,(window.innerWidth-t)/2),y:Math.max(20,(window.innerHeight-e)/2)}}render(){if(!this.open&&!this.fullPage)return c``;const t=c`
       <div
         class="about-panel ${this.fullPage?"full-page":""} ${this.isDragging?"dragging":""} ${this.isResizing?"resizing":""}"
         style="${this.fullPage?"":`left: ${(this.position||this._defaultPosition()).x}px; top: ${(this.position||this._defaultPosition()).y}px; width: ${this._effectiveSize().width}px; height: ${this._effectiveSize().height}px;`}"
@@ -452,45 +452,32 @@
           </p>
         </div>
 
-        <!-- Navigation Dots -->
-        <div class="about-carousel-dots">
-          ${Array.from({length:this._tabCardCounts.about},(t,e)=>c`
-            <div
-              class="about-carousel-dot ${e===this.currentCardIndex?"active":""}"
-              @click=${()=>this._goToCard(e)}
-            ></div>
-          `)}
-        </div>
+        <!-- Navigation: side arrows + bottom dots -->
+        ${this._renderCarouselDots(this._tabCardCounts.about)}
       </div>
     `}_cardClass(t){return this.currentCardIndex===t?"active":this.currentCardIndex>t?"prev":"next"}_renderCarouselDots(t){return c`
-      <div class="about-carousel-controls">
-        <button
-          class="about-carousel-arrow"
-          @click=${()=>this._prevCard()}
-          title="Previous card (or drag left)"
-          aria-label="Previous"
-        >
-          ◀
-        </button>
-        <div class="about-carousel-dots">
-          ${Array.from({length:t},(e,i)=>c`
-            <div
-              class="about-carousel-dot ${i===this.currentCardIndex?"active":""}"
-              @click=${()=>this._goToCard(i)}
-              title="Go to card ${i+1}"
-              role="button"
-              tabindex="0"
-            ></div>
-          `)}
-        </div>
-        <button
-          class="about-carousel-arrow"
-          @click=${()=>this._nextCard()}
-          title="Next card (or drag right)"
-          aria-label="Next"
-        >
-          ▶
-        </button>
+      <button
+        class="about-nav-side-arrow prev-arrow"
+        @click=${()=>this._prevCard()}
+        title="Previous card"
+        aria-label="Previous"
+      >◀</button>
+      <button
+        class="about-nav-side-arrow next-arrow"
+        @click=${()=>this._nextCard()}
+        title="Next card"
+        aria-label="Next"
+      >▶</button>
+      <div class="about-carousel-dots">
+        ${Array.from({length:t},(e,i)=>c`
+          <div
+            class="about-carousel-dot ${i===this.currentCardIndex?"active":""}"
+            @click=${()=>this._goToCard(i)}
+            title="Go to card ${i+1}"
+            role="button"
+            tabindex="0"
+          ></div>
+        `)}
       </div>
     `}_renderPrivacyCarousel(){return c`
       <div class="about-content-carousel" @mousedown=${this._onCardMouseDown} @mousemove=${this._onCardMouseMove} @mouseup=${this._onCardMouseUp}>
@@ -2346,57 +2333,54 @@
     }
 
     /* ── Carousel Navigation Controls ────────────────────────────── */
-    .about-carousel-controls {
+/* ── Side Navigation Arrows (◀ left / ▶ right of cards) ─────── */
+    .about-nav-side-arrow {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      z-index: 20;
-      background: linear-gradient(180deg, transparent, rgba(15, 15, 25, 0.4));
-      pointer-events: none;
-    }
-
-    .about-carousel-arrow {
-      width: 40px;
-      height: 40px;
+      top: calc(50% - 30px); /* slightly above center to stay clear of the dots bar */
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
       border: 2px solid rgba(99, 102, 241, 0.4);
       border-radius: 50%;
-      background: rgba(99, 102, 241, 0.05);
+      background: rgba(8, 8, 18, 0.75);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 18px;
       color: #a5b4fc;
-      transition: all 0.3s ease;
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       pointer-events: auto;
       user-select: none;
-      flex-shrink: 0;
+      z-index: 20;
+      backdrop-filter: blur(6px);
     }
 
-    .about-carousel-arrow:hover {
-      background: rgba(99, 102, 241, 0.15);
+    .about-nav-side-arrow.prev-arrow { left: 12px; }
+    .about-nav-side-arrow.next-arrow { right: 12px; }
+
+    .about-nav-side-arrow:hover {
+      background: rgba(99, 102, 241, 0.2);
       border-color: rgba(99, 102, 241, 0.7);
       color: #c7d2fe;
       box-shadow: 0 0 16px rgba(99, 102, 241, 0.3);
-      transform: scale(1.1);
     }
 
-    .about-carousel-arrow:active {
-      transform: scale(0.95);
+    .about-nav-side-arrow:active {
+      background: rgba(99, 102, 241, 0.3);
     }
 
     /* ── Carousel Navigation Dots ────────────────────────────────── */
     .about-carousel-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       gap: 8px;
       z-index: 20;
       pointer-events: auto;
+      white-space: nowrap;
     }
 
     .about-carousel-dot {
@@ -2854,12 +2838,15 @@
         max-height: unset !important;
       }
 
-      .about-carousel-arrow {
+      .about-nav-side-arrow {
         width: 36px !important;
         height: 36px !important;
-        font-size: 16px !important;
+        font-size: 15px !important;
         border-width: 1.5px !important;
       }
+
+      .about-nav-side-arrow.prev-arrow { left: 4px !important; }
+      .about-nav-side-arrow.next-arrow { right: 4px !important; }
 
       /* Carousel: allow vertical pan inside card; horizontal swipe handled by JS */
       .about-content-carousel {
@@ -2900,12 +2887,11 @@
         font-size: 11.5px !important;
       }
 
-      .about-carousel-arrow {
+      .about-nav-side-arrow {
         width: 32px !important;
         height: 32px !important;
         border-width: 1.5px !important;
-        font-size: 14px !important;
-        gap: 16px !important;
+        font-size: 13px !important;
       }
     }
 
@@ -2985,7 +2971,7 @@
                     <div class="error-text">${this._errorMessage}</div>
                 </div>
             `:c`
-            <div class="cgs-main">
+            <div class="cgs-main${this._activeSection==="orus-ai"?" cgs-main--fullscreen":""}">
                 <!-- 3D Background Canvas — canvas is always rendered once ready; Three.js init fires via updated() -->
                 <div class="cgs-canvas-container">
                     ${this._threeCanvasReady?c`<canvas id="cgs-canvas"></canvas>`:c`
@@ -2994,7 +2980,8 @@
                         `}
                 </div>
 
-                <!-- Top Navigation -->
+                <!-- Top Navigation — hidden in full-page orus-ai mode -->
+                ${this._activeSection!=="orus-ai"?c`
                 <nav class="cgs-nav">
                     <div class="cgs-logo" @click=${()=>this._navigateTo("home")}>
                         Comet Game Studio Ltd
@@ -3004,19 +2991,20 @@
                                 @click=${()=>this._navigateTo("home")}>Home</button>
                         <button class="cgs-nav-link ${this._activeSection==="products"?"active":""}"
                                 @click=${()=>this._navigateTo("products")}>Products</button>
-                        <button class="cgs-nav-link ${this._activeSection==="orus-ai"?"active":""}"
+                        <button class="cgs-nav-link"
                                 @click=${()=>this._navigateTo("orus-ai")}>ORUS AI System</button>
                         <button class="cgs-nav-link ${this._activeSection==="about"?"active":""}"
                                 @click=${()=>this._navigateTo("about")}>About</button>
                     </div>
-                </nav>
+                </nav>`:""}
 
                 <!-- Content Area -->
                 <div class="cgs-content${this._activeSection==="orus-ai"?" cgs-content--full":""}">
                     ${this._renderActiveSection()}
                 </div>
 
-                <!-- Footer -->
+                <!-- Footer — hidden in full-page orus-ai mode -->
+                ${this._activeSection!=="orus-ai"?c`
                 <footer class="cgs-footer">
                     <div class="cgs-footer-links">
                         <button class="cgs-footer-link" @click=${()=>this._navigateTo("privacy")}>Privacy Policy</button>
@@ -3036,7 +3024,7 @@
                         AI outputs may be inaccurate — always verify important information independently.
                         Governing law: England and Wales.
                     </div>
-                </footer>
+                </footer>`:""}
 
                 <!-- About Orus Dialog -->
                 <orus-about-dialog
@@ -3829,6 +3817,12 @@
             align-items: stretch !important;
             justify-content: flex-start !important;
             overflow: hidden !important;
+        }
+
+        /* ── Fullscreen mode — hides nav so orus-about can own the viewport ── */
+
+        .cgs-main--fullscreen {
+            padding-top: 0 !important;
         }
 
         /* ── About Section ─────────────────────────────────── */
