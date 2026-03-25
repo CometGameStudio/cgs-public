@@ -1,34 +1,34 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const a of document.querySelectorAll('link[rel="modulepreload"]'))s(a);new MutationObserver(a=>{for(const r of a)if(r.type==="childList")for(const o of r.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&s(o)}).observe(document,{childList:!0,subtree:!0});function t(a){const r={};return a.integrity&&(r.integrity=a.integrity),a.referrerPolicy&&(r.referrerPolicy=a.referrerPolicy),a.crossOrigin==="use-credentials"?r.credentials="include":a.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function s(a){if(a.ep)return;a.ep=!0;const r=t(a);fetch(a.href,r)}})();const me="modulepreload",ve=function(i){return"/cgs-public/"+i},X={},fe=function(e,t,s){let a=Promise.resolve();if(t&&t.length>0){let o=function(l){return Promise.all(l.map(u=>Promise.resolve(u).then(p=>({status:"fulfilled",value:p}),p=>({status:"rejected",reason:p}))))};document.getElementsByTagName("link");const n=document.querySelector("meta[property=csp-nonce]"),d=n?.nonce||n?.getAttribute("nonce");a=o(t.map(l=>{if(l=ve(l),l in X)return;X[l]=!0;const u=l.endsWith(".css"),p=u?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${l}"]${p}`))return;const h=document.createElement("link");if(h.rel=u?"stylesheet":me,u||(h.as="script"),h.crossOrigin="",h.href=l,d&&h.setAttribute("nonce",d),document.head.appendChild(h),u)return new Promise((m,I)=>{h.addEventListener("load",m),h.addEventListener("error",()=>I(new Error(`Unable to preload CSS for ${l}`)))})}))}function r(o){const n=new Event("vite:preloadError",{cancelable:!0});if(n.payload=o,window.dispatchEvent(n),!n.defaultPrevented)throw o}return a.then(o=>{for(const n of o||[])n.status==="rejected"&&r(n.reason);return e().catch(r)})};/**
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const a of document.querySelectorAll('link[rel="modulepreload"]'))s(a);new MutationObserver(a=>{for(const r of a)if(r.type==="childList")for(const o of r.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&s(o)}).observe(document,{childList:!0,subtree:!0});function i(a){const r={};return a.integrity&&(r.integrity=a.integrity),a.referrerPolicy&&(r.referrerPolicy=a.referrerPolicy),a.crossOrigin==="use-credentials"?r.credentials="include":a.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function s(a){if(a.ep)return;a.ep=!0;const r=i(a);fetch(a.href,r)}})();const me="modulepreload",ve=function(t){return"/cgs-public/"+t},X={},fe=function(e,i,s){let a=Promise.resolve();if(i&&i.length>0){let o=function(l){return Promise.all(l.map(u=>Promise.resolve(u).then(p=>({status:"fulfilled",value:p}),p=>({status:"rejected",reason:p}))))};document.getElementsByTagName("link");const n=document.querySelector("meta[property=csp-nonce]"),d=n?.nonce||n?.getAttribute("nonce");a=o(i.map(l=>{if(l=ve(l),l in X)return;X[l]=!0;const u=l.endsWith(".css"),p=u?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${l}"]${p}`))return;const h=document.createElement("link");if(h.rel=u?"stylesheet":me,u||(h.as="script"),h.crossOrigin="",h.href=l,d&&h.setAttribute("nonce",d),document.head.appendChild(h),u)return new Promise((m,T)=>{h.addEventListener("load",m),h.addEventListener("error",()=>T(new Error(`Unable to preload CSS for ${l}`)))})}))}function r(o){const n=new Event("vite:preloadError",{cancelable:!0});if(n.payload=o,window.dispatchEvent(n),!n.defaultPrevented)throw o}return a.then(o=>{for(const n of o||[])n.status==="rejected"&&r(n.reason);return e().catch(r)})};/**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const R=globalThis,H=R.ShadowRoot&&(R.ShadyCSS===void 0||R.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,W=Symbol(),K=new WeakMap;let de=class{constructor(e,t,s){if(this._$cssResult$=!0,s!==W)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(H&&e===void 0){const s=t!==void 0&&t.length===1;s&&(e=K.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),s&&K.set(t,e))}return e}toString(){return this.cssText}};const be=i=>new de(typeof i=="string"?i:i+"",void 0,W),ce=(i,...e)=>{const t=i.length===1?i[0]:e.reduce((s,a,r)=>s+(o=>{if(o._$cssResult$===!0)return o.cssText;if(typeof o=="number")return o;throw Error("Value passed to 'css' function must be a 'css' function result: "+o+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(a)+i[r+1],i[0]);return new de(t,i,W)},ye=(i,e)=>{if(H)i.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const s=document.createElement("style"),a=R.litNonce;a!==void 0&&s.setAttribute("nonce",a),s.textContent=t.cssText,i.appendChild(s)}},Q=H?i=>i:i=>i instanceof CSSStyleSheet?(e=>{let t="";for(const s of e.cssRules)t+=s.cssText;return be(t)})(i):i;/**
+ */const R=globalThis,H=R.ShadowRoot&&(R.ShadyCSS===void 0||R.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,W=Symbol(),K=new WeakMap;let de=class{constructor(e,i,s){if(this._$cssResult$=!0,s!==W)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=i}get styleSheet(){let e=this.o;const i=this.t;if(H&&e===void 0){const s=i!==void 0&&i.length===1;s&&(e=K.get(i)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),s&&K.set(i,e))}return e}toString(){return this.cssText}};const be=t=>new de(typeof t=="string"?t:t+"",void 0,W),ce=(t,...e)=>{const i=t.length===1?t[0]:e.reduce((s,a,r)=>s+(o=>{if(o._$cssResult$===!0)return o.cssText;if(typeof o=="number")return o;throw Error("Value passed to 'css' function must be a 'css' function result: "+o+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(a)+t[r+1],t[0]);return new de(i,t,W)},ye=(t,e)=>{if(H)t.adoptedStyleSheets=e.map(i=>i instanceof CSSStyleSheet?i:i.styleSheet);else for(const i of e){const s=document.createElement("style"),a=R.litNonce;a!==void 0&&s.setAttribute("nonce",a),s.textContent=i.cssText,t.appendChild(s)}},Q=H?t=>t:t=>t instanceof CSSStyleSheet?(e=>{let i="";for(const s of e.cssRules)i+=s.cssText;return be(i)})(t):t;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:xe,defineProperty:we,getOwnPropertyDescriptor:Ae,getOwnPropertyNames:Se,getOwnPropertySymbols:Te,getPrototypeOf:Ie}=Object,G=globalThis,J=G.trustedTypes,Ce=J?J.emptyScript:"",Pe=G.reactiveElementPolyfillSupport,_=(i,e)=>i,N={toAttribute(i,e){switch(e){case Boolean:i=i?Ce:null;break;case Object:case Array:i=i==null?i:JSON.stringify(i)}return i},fromAttribute(i,e){let t=i;switch(e){case Boolean:t=i!==null;break;case Number:t=i===null?null:Number(i);break;case Object:case Array:try{t=JSON.parse(i)}catch{t=null}}return t}},V=(i,e)=>!xe(i,e),Z={attribute:!0,type:String,converter:N,reflect:!1,useDefault:!1,hasChanged:V};Symbol.metadata??=Symbol("metadata"),G.litPropertyMetadata??=new WeakMap;let C=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=Z){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const s=Symbol(),a=this.getPropertyDescriptor(e,s,t);a!==void 0&&we(this.prototype,e,a)}}static getPropertyDescriptor(e,t,s){const{get:a,set:r}=Ae(this.prototype,e)??{get(){return this[t]},set(o){this[t]=o}};return{get:a,set(o){const n=a?.call(this);r?.call(this,o),this.requestUpdate(e,n,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??Z}static _$Ei(){if(this.hasOwnProperty(_("elementProperties")))return;const e=Ie(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(_("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(_("properties"))){const t=this.properties,s=[...Se(t),...Te(t)];for(const a of s)this.createProperty(a,t[a])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[s,a]of t)this.elementProperties.set(s,a)}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const a=this._$Eu(t,s);a!==void 0&&this._$Eh.set(a,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const a of s)t.unshift(Q(a))}else e!==void 0&&t.push(Q(e));return t}static _$Eu(e,t){const s=t.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const s of t.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ye(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,s){this._$AK(e,s)}_$ET(e,t){const s=this.constructor.elementProperties.get(e),a=this.constructor._$Eu(e,s);if(a!==void 0&&s.reflect===!0){const r=(s.converter?.toAttribute!==void 0?s.converter:N).toAttribute(t,s.type);this._$Em=e,r==null?this.removeAttribute(a):this.setAttribute(a,r),this._$Em=null}}_$AK(e,t){const s=this.constructor,a=s._$Eh.get(e);if(a!==void 0&&this._$Em!==a){const r=s.getPropertyOptions(a),o=typeof r.converter=="function"?{fromAttribute:r.converter}:r.converter?.fromAttribute!==void 0?r.converter:N;this._$Em=a;const n=o.fromAttribute(t,r.type);this[a]=n??this._$Ej?.get(a)??n,this._$Em=null}}requestUpdate(e,t,s,a=!1,r){if(e!==void 0){const o=this.constructor;if(a===!1&&(r=this[e]),s??=o.getPropertyOptions(e),!((s.hasChanged??V)(r,t)||s.useDefault&&s.reflect&&r===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,s))))return;this.C(e,t,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:s,reflect:a,wrapped:r},o){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,o??t??this[e]),r!==!0||o!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(t=void 0),this._$AL.set(e,t)),a===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[a,r]of this._$Ep)this[a]=r;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[a,r]of s){const{wrapped:o}=r,n=this[a];o!==!0||this._$AL.has(a)||n===void 0||this.C(a,void 0,r,n)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(t)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};C.elementStyles=[],C.shadowRootOptions={mode:"open"},C[_("elementProperties")]=new Map,C[_("finalized")]=new Map,Pe?.({ReactiveElement:C}),(G.reactiveElementVersions??=[]).push("2.1.2");/**
+ */const{is:xe,defineProperty:we,getOwnPropertyDescriptor:Ae,getOwnPropertyNames:Se,getOwnPropertySymbols:Ce,getPrototypeOf:Te}=Object,G=globalThis,J=G.trustedTypes,Ie=J?J.emptyScript:"",Me=G.reactiveElementPolyfillSupport,_=(t,e)=>t,N={toAttribute(t,e){switch(e){case Boolean:t=t?Ie:null;break;case Object:case Array:t=t==null?t:JSON.stringify(t)}return t},fromAttribute(t,e){let i=t;switch(e){case Boolean:i=t!==null;break;case Number:i=t===null?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t)}catch{i=null}}return i}},V=(t,e)=>!xe(t,e),Z={attribute:!0,type:String,converter:N,reflect:!1,useDefault:!1,hasChanged:V};Symbol.metadata??=Symbol("metadata"),G.litPropertyMetadata??=new WeakMap;let I=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,i=Z){if(i.state&&(i.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((i=Object.create(i)).wrapped=!0),this.elementProperties.set(e,i),!i.noAccessor){const s=Symbol(),a=this.getPropertyDescriptor(e,s,i);a!==void 0&&we(this.prototype,e,a)}}static getPropertyDescriptor(e,i,s){const{get:a,set:r}=Ae(this.prototype,e)??{get(){return this[i]},set(o){this[i]=o}};return{get:a,set(o){const n=a?.call(this);r?.call(this,o),this.requestUpdate(e,n,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??Z}static _$Ei(){if(this.hasOwnProperty(_("elementProperties")))return;const e=Te(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(_("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(_("properties"))){const i=this.properties,s=[...Se(i),...Ce(i)];for(const a of s)this.createProperty(a,i[a])}const e=this[Symbol.metadata];if(e!==null){const i=litPropertyMetadata.get(e);if(i!==void 0)for(const[s,a]of i)this.elementProperties.set(s,a)}this._$Eh=new Map;for(const[i,s]of this.elementProperties){const a=this._$Eu(i,s);a!==void 0&&this._$Eh.set(a,i)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const i=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const a of s)i.unshift(Q(a))}else e!==void 0&&i.push(Q(e));return i}static _$Eu(e,i){const s=i.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,i=this.constructor.elementProperties;for(const s of i.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ye(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,i,s){this._$AK(e,s)}_$ET(e,i){const s=this.constructor.elementProperties.get(e),a=this.constructor._$Eu(e,s);if(a!==void 0&&s.reflect===!0){const r=(s.converter?.toAttribute!==void 0?s.converter:N).toAttribute(i,s.type);this._$Em=e,r==null?this.removeAttribute(a):this.setAttribute(a,r),this._$Em=null}}_$AK(e,i){const s=this.constructor,a=s._$Eh.get(e);if(a!==void 0&&this._$Em!==a){const r=s.getPropertyOptions(a),o=typeof r.converter=="function"?{fromAttribute:r.converter}:r.converter?.fromAttribute!==void 0?r.converter:N;this._$Em=a;const n=o.fromAttribute(i,r.type);this[a]=n??this._$Ej?.get(a)??n,this._$Em=null}}requestUpdate(e,i,s,a=!1,r){if(e!==void 0){const o=this.constructor;if(a===!1&&(r=this[e]),s??=o.getPropertyOptions(e),!((s.hasChanged??V)(r,i)||s.useDefault&&s.reflect&&r===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,s))))return;this.C(e,i,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,i,{useDefault:s,reflect:a,wrapped:r},o){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,o??i??this[e]),r!==!0||o!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(i=void 0),this._$AL.set(e,i)),a===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(i){Promise.reject(i)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[a,r]of this._$Ep)this[a]=r;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[a,r]of s){const{wrapped:o}=r,n=this[a];o!==!0||this._$AL.has(a)||n===void 0||this.C(a,void 0,r,n)}}let e=!1;const i=this._$AL;try{e=this.shouldUpdate(i),e?(this.willUpdate(i),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(i)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(i)}willUpdate(e){}_$AE(e){this._$EO?.forEach(i=>i.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(i=>this._$ET(i,this[i])),this._$EM()}updated(e){}firstUpdated(e){}};I.elementStyles=[],I.shadowRootOptions={mode:"open"},I[_("elementProperties")]=new Map,I[_("finalized")]=new Map,Me?.({ReactiveElement:I}),(G.reactiveElementVersions??=[]).push("2.1.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const j=globalThis,ee=i=>i,U=j.trustedTypes,te=U?U.createPolicy("lit-html",{createHTML:i=>i}):void 0,le="$lit$",w=`lit$${Math.random().toFixed(9).slice(2)}$`,pe="?"+w,Me=`<${pe}>`,T=document,D=()=>T.createComment(""),E=i=>i===null||typeof i!="object"&&typeof i!="function",q=Array.isArray,ke=i=>q(i)||typeof i?.[Symbol.iterator]=="function",B=`[ 	
+ */const j=globalThis,ee=t=>t,U=j.trustedTypes,te=U?U.createPolicy("lit-html",{createHTML:t=>t}):void 0,le="$lit$",w=`lit$${Math.random().toFixed(9).slice(2)}$`,pe="?"+w,Pe=`<${pe}>`,C=document,D=()=>C.createComment(""),E=t=>t===null||typeof t!="object"&&typeof t!="function",q=Array.isArray,ke=t=>q(t)||typeof t?.[Symbol.iterator]=="function",B=`[ 	
 \f\r]`,L=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,ie=/-->/g,se=/>/g,A=RegExp(`>|${B}(?:([^\\s"'>=/]+)(${B}*=${B}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),ae=/'/g,re=/"/g,ue=/^(?:script|style|textarea|title)$/i,Oe=i=>(e,...t)=>({_$litType$:i,strings:e,values:t}),c=Oe(1),M=Symbol.for("lit-noChange"),g=Symbol.for("lit-nothing"),oe=new WeakMap,S=T.createTreeWalker(T,129);function he(i,e){if(!q(i)||!i.hasOwnProperty("raw"))throw Error("invalid template strings array");return te!==void 0?te.createHTML(e):e}const Le=(i,e)=>{const t=i.length-1,s=[];let a,r=e===2?"<svg>":e===3?"<math>":"",o=L;for(let n=0;n<t;n++){const d=i[n];let l,u,p=-1,h=0;for(;h<d.length&&(o.lastIndex=h,u=o.exec(d),u!==null);)h=o.lastIndex,o===L?u[1]==="!--"?o=ie:u[1]!==void 0?o=se:u[2]!==void 0?(ue.test(u[2])&&(a=RegExp("</"+u[2],"g")),o=A):u[3]!==void 0&&(o=A):o===A?u[0]===">"?(o=a??L,p=-1):u[1]===void 0?p=-2:(p=o.lastIndex-u[2].length,l=u[1],o=u[3]===void 0?A:u[3]==='"'?re:ae):o===re||o===ae?o=A:o===ie||o===se?o=L:(o=A,a=void 0);const m=o===A&&i[n+1].startsWith("/>")?" ":"";r+=o===L?d+Me:p>=0?(s.push(l),d.slice(0,p)+le+d.slice(p)+w+m):d+w+(p===-2?n:m)}return[he(i,r+(i[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),s]};class z{constructor({strings:e,_$litType$:t},s){let a;this.parts=[];let r=0,o=0;const n=e.length-1,d=this.parts,[l,u]=Le(e,t);if(this.el=z.createElement(l,s),S.currentNode=this.el.content,t===2||t===3){const p=this.el.content.firstChild;p.replaceWith(...p.childNodes)}for(;(a=S.nextNode())!==null&&d.length<n;){if(a.nodeType===1){if(a.hasAttributes())for(const p of a.getAttributeNames())if(p.endsWith(le)){const h=u[o++],m=a.getAttribute(p).split(w),I=/([.?@])?(.*)/.exec(h);d.push({type:1,index:r,name:I[2],strings:m,ctor:I[1]==="."?De:I[1]==="?"?Ee:I[1]==="@"?ze:F}),a.removeAttribute(p)}else p.startsWith(w)&&(d.push({type:6,index:r}),a.removeAttribute(p));if(ue.test(a.tagName)){const p=a.textContent.split(w),h=p.length-1;if(h>0){a.textContent=U?U.emptyScript:"";for(let m=0;m<h;m++)a.append(p[m],D()),S.nextNode(),d.push({type:2,index:++r});a.append(p[h],D())}}}else if(a.nodeType===8)if(a.data===pe)d.push({type:2,index:r});else{let p=-1;for(;(p=a.data.indexOf(w,p+1))!==-1;)d.push({type:7,index:r}),p+=w.length-1}r++}}static createElement(e,t){const s=T.createElement("template");return s.innerHTML=e,s}}function k(i,e,t=i,s){if(e===M)return e;let a=s!==void 0?t._$Co?.[s]:t._$Cl;const r=E(e)?void 0:e._$litDirective$;return a?.constructor!==r&&(a?._$AO?.(!1),r===void 0?a=void 0:(a=new r(i),a._$AT(i,t,s)),s!==void 0?(t._$Co??=[])[s]=a:t._$Cl=a),a!==void 0&&(e=k(i,a._$AS(i,e.values),a,s)),e}class _e{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:s}=this._$AD,a=(e?.creationScope??T).importNode(t,!0);S.currentNode=a;let r=S.nextNode(),o=0,n=0,d=s[0];for(;d!==void 0;){if(o===d.index){let l;d.type===2?l=new $(r,r.nextSibling,this,e):d.type===1?l=new d.ctor(r,d.name,d.strings,this,e):d.type===6&&(l=new $e(r,this,e)),this._$AV.push(l),d=s[++n]}o!==d?.index&&(r=S.nextNode(),o++)}return S.currentNode=T,a}p(e){let t=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(e,s,t),t+=s.strings.length-2):s._$AI(e[t])),t++}}class ${get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,s,a){this.type=2,this._$AH=g,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=s,this.options=a,this._$Cv=a?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=k(this,e,t),E(e)?e===g||e==null||e===""?(this._$AH!==g&&this._$AR(),this._$AH=g):e!==this._$AH&&e!==M&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):ke(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==g&&E(this._$AH)?this._$AA.nextSibling.data=e:this.T(T.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:s}=e,a=typeof s=="number"?this._$AC(e):(s.el===void 0&&(s.el=z.createElement(he(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===a)this._$AH.p(t);else{const r=new _e(a,this),o=r.u(this.options);r.p(t),this.T(o),this._$AH=r}}_$AC(e){let t=oe.get(e.strings);return t===void 0&&oe.set(e.strings,t=new z(e)),t}k(e){q(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let s,a=0;for(const r of e)a===t.length?t.push(s=new $(this.O(D()),this.O(D()),this,this.options)):s=t[a],s._$AI(r),a++;a<t.length&&(this._$AR(s&&s._$AB.nextSibling,a),t.length=a)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const s=ee(e).nextSibling;ee(e).remove(),e=s}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class F{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,s,a,r){this.type=1,this._$AH=g,this._$AN=void 0,this.element=e,this.name=t,this._$AM=a,this.options=r,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=g}_$AI(e,t=this,s,a){const r=this.strings;let o=!1;if(r===void 0)e=k(this,e,t,0),o=!E(e)||e!==this._$AH&&e!==M,o&&(this._$AH=e);else{const n=e;let d,l;for(e=r[0],d=0;d<r.length-1;d++)l=k(this,n[s+d],t,d),l===M&&(l=this._$AH[d]),o||=!E(l)||l!==this._$AH[d],l===g?e=g:e!==g&&(e+=(l??"")+r[d+1]),this._$AH[d]=l}o&&!a&&this.j(e)}j(e){e===g?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class De extends F{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===g?void 0:e}}class Ee extends F{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==g)}}class ze extends F{constructor(e,t,s,a,r){super(e,t,s,a,r),this.type=5}_$AI(e,t=this){if((e=k(this,e,t,0)??g)===M)return;const s=this._$AH,a=e===g&&s!==g||e.capture!==s.capture||e.once!==s.once||e.passive!==s.passive,r=e!==g&&(s===g||a);a&&this.element.removeEventListener(this.name,this,s),r&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class $e{constructor(e,t,s){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(e){k(this,e)}}const Re=j.litHtmlPolyfillSupport;Re?.(z,$),(j.litHtmlVersions??=[]).push("3.3.2");const Ne=(i,e,t)=>{const s=t?.renderBefore??e;let a=s._$litPart$;if(a===void 0){const r=t?.renderBefore??null;s._$litPart$=a=new $(e.insertBefore(D(),r),r,void 0,t??{})}return a._$AI(i),a};/**
+\f\r"'\`<>=]|("|')|))|$)`,"g"),ae=/'/g,re=/"/g,ue=/^(?:script|style|textarea|title)$/i,Oe=t=>(e,...i)=>({_$litType$:t,strings:e,values:i}),c=Oe(1),P=Symbol.for("lit-noChange"),g=Symbol.for("lit-nothing"),oe=new WeakMap,S=C.createTreeWalker(C,129);function he(t,e){if(!q(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return te!==void 0?te.createHTML(e):e}const Le=(t,e)=>{const i=t.length-1,s=[];let a,r=e===2?"<svg>":e===3?"<math>":"",o=L;for(let n=0;n<i;n++){const d=t[n];let l,u,p=-1,h=0;for(;h<d.length&&(o.lastIndex=h,u=o.exec(d),u!==null);)h=o.lastIndex,o===L?u[1]==="!--"?o=ie:u[1]!==void 0?o=se:u[2]!==void 0?(ue.test(u[2])&&(a=RegExp("</"+u[2],"g")),o=A):u[3]!==void 0&&(o=A):o===A?u[0]===">"?(o=a??L,p=-1):u[1]===void 0?p=-2:(p=o.lastIndex-u[2].length,l=u[1],o=u[3]===void 0?A:u[3]==='"'?re:ae):o===re||o===ae?o=A:o===ie||o===se?o=L:(o=A,a=void 0);const m=o===A&&t[n+1].startsWith("/>")?" ":"";r+=o===L?d+Pe:p>=0?(s.push(l),d.slice(0,p)+le+d.slice(p)+w+m):d+w+(p===-2?n:m)}return[he(t,r+(t[i]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),s]};class ${constructor({strings:e,_$litType$:i},s){let a;this.parts=[];let r=0,o=0;const n=e.length-1,d=this.parts,[l,u]=Le(e,i);if(this.el=$.createElement(l,s),S.currentNode=this.el.content,i===2||i===3){const p=this.el.content.firstChild;p.replaceWith(...p.childNodes)}for(;(a=S.nextNode())!==null&&d.length<n;){if(a.nodeType===1){if(a.hasAttributes())for(const p of a.getAttributeNames())if(p.endsWith(le)){const h=u[o++],m=a.getAttribute(p).split(w),T=/([.?@])?(.*)/.exec(h);d.push({type:1,index:r,name:T[2],strings:m,ctor:T[1]==="."?De:T[1]==="?"?Ee:T[1]==="@"?$e:F}),a.removeAttribute(p)}else p.startsWith(w)&&(d.push({type:6,index:r}),a.removeAttribute(p));if(ue.test(a.tagName)){const p=a.textContent.split(w),h=p.length-1;if(h>0){a.textContent=U?U.emptyScript:"";for(let m=0;m<h;m++)a.append(p[m],D()),S.nextNode(),d.push({type:2,index:++r});a.append(p[h],D())}}}else if(a.nodeType===8)if(a.data===pe)d.push({type:2,index:r});else{let p=-1;for(;(p=a.data.indexOf(w,p+1))!==-1;)d.push({type:7,index:r}),p+=w.length-1}r++}}static createElement(e,i){const s=C.createElement("template");return s.innerHTML=e,s}}function k(t,e,i=t,s){if(e===P)return e;let a=s!==void 0?i._$Co?.[s]:i._$Cl;const r=E(e)?void 0:e._$litDirective$;return a?.constructor!==r&&(a?._$AO?.(!1),r===void 0?a=void 0:(a=new r(t),a._$AT(t,i,s)),s!==void 0?(i._$Co??=[])[s]=a:i._$Cl=a),a!==void 0&&(e=k(t,a._$AS(t,e.values),a,s)),e}class _e{constructor(e,i){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=i}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:i},parts:s}=this._$AD,a=(e?.creationScope??C).importNode(i,!0);S.currentNode=a;let r=S.nextNode(),o=0,n=0,d=s[0];for(;d!==void 0;){if(o===d.index){let l;d.type===2?l=new z(r,r.nextSibling,this,e):d.type===1?l=new d.ctor(r,d.name,d.strings,this,e):d.type===6&&(l=new ze(r,this,e)),this._$AV.push(l),d=s[++n]}o!==d?.index&&(r=S.nextNode(),o++)}return S.currentNode=C,a}p(e){let i=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(e,s,i),i+=s.strings.length-2):s._$AI(e[i])),i++}}class z{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,i,s,a){this.type=2,this._$AH=g,this._$AN=void 0,this._$AA=e,this._$AB=i,this._$AM=s,this.options=a,this._$Cv=a?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const i=this._$AM;return i!==void 0&&e?.nodeType===11&&(e=i.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,i=this){e=k(this,e,i),E(e)?e===g||e==null||e===""?(this._$AH!==g&&this._$AR(),this._$AH=g):e!==this._$AH&&e!==P&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):ke(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==g&&E(this._$AH)?this._$AA.nextSibling.data=e:this.T(C.createTextNode(e)),this._$AH=e}$(e){const{values:i,_$litType$:s}=e,a=typeof s=="number"?this._$AC(e):(s.el===void 0&&(s.el=$.createElement(he(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===a)this._$AH.p(i);else{const r=new _e(a,this),o=r.u(this.options);r.p(i),this.T(o),this._$AH=r}}_$AC(e){let i=oe.get(e.strings);return i===void 0&&oe.set(e.strings,i=new $(e)),i}k(e){q(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,a=0;for(const r of e)a===i.length?i.push(s=new z(this.O(D()),this.O(D()),this,this.options)):s=i[a],s._$AI(r),a++;a<i.length&&(this._$AR(s&&s._$AB.nextSibling,a),i.length=a)}_$AR(e=this._$AA.nextSibling,i){for(this._$AP?.(!1,!0,i);e!==this._$AB;){const s=ee(e).nextSibling;ee(e).remove(),e=s}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class F{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,i,s,a,r){this.type=1,this._$AH=g,this._$AN=void 0,this.element=e,this.name=i,this._$AM=a,this.options=r,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=g}_$AI(e,i=this,s,a){const r=this.strings;let o=!1;if(r===void 0)e=k(this,e,i,0),o=!E(e)||e!==this._$AH&&e!==P,o&&(this._$AH=e);else{const n=e;let d,l;for(e=r[0],d=0;d<r.length-1;d++)l=k(this,n[s+d],i,d),l===P&&(l=this._$AH[d]),o||=!E(l)||l!==this._$AH[d],l===g?e=g:e!==g&&(e+=(l??"")+r[d+1]),this._$AH[d]=l}o&&!a&&this.j(e)}j(e){e===g?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class De extends F{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===g?void 0:e}}class Ee extends F{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==g)}}class $e extends F{constructor(e,i,s,a,r){super(e,i,s,a,r),this.type=5}_$AI(e,i=this){if((e=k(this,e,i,0)??g)===P)return;const s=this._$AH,a=e===g&&s!==g||e.capture!==s.capture||e.once!==s.once||e.passive!==s.passive,r=e!==g&&(s===g||a);a&&this.element.removeEventListener(this.name,this,s),r&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class ze{constructor(e,i,s){this.element=e,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(e){k(this,e)}}const Re=j.litHtmlPolyfillSupport;Re?.($,z),(j.litHtmlVersions??=[]).push("3.3.2");const Ne=(t,e,i)=>{const s=i?.renderBefore??e;let a=s._$litPart$;if(a===void 0){const r=i?.renderBefore??null;s._$litPart$=a=new z(e.insertBefore(D(),r),r,void 0,i??{})}return a._$AI(t),a};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Y=globalThis;class P extends C{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Ne(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return M}}P._$litElement$=!0,P.finalized=!0,Y.litElementHydrateSupport?.({LitElement:P});const Ue=Y.litElementPolyfillSupport;Ue?.({LitElement:P});(Y.litElementVersions??=[]).push("4.2.2");/**
+ */const Y=globalThis;class M extends I{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const i=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Ne(i,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return P}}M._$litElement$=!0,M.finalized=!0,Y.litElementHydrateSupport?.({LitElement:M});const Ue=Y.litElementPolyfillSupport;Ue?.({LitElement:M});(Y.litElementVersions??=[]).push("4.2.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const ge=i=>(e,t)=>{t!==void 0?t.addInitializer(()=>{customElements.define(i,e)}):customElements.define(i,e)};/**
+ */const ge=t=>(e,i)=>{i!==void 0?i.addInitializer(()=>{customElements.define(t,e)}):customElements.define(t,e)};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Ge={attribute:!0,type:String,converter:N,reflect:!1,hasChanged:V},Fe=(i=Ge,e,t)=>{const{kind:s,metadata:a}=t;let r=globalThis.litPropertyMetadata.get(a);if(r===void 0&&globalThis.litPropertyMetadata.set(a,r=new Map),s==="setter"&&((i=Object.create(i)).wrapped=!0),r.set(t.name,i),s==="accessor"){const{name:o}=t;return{set(n){const d=e.get.call(this);e.set.call(this,n),this.requestUpdate(o,d,i,!0,n)},init(n){return n!==void 0&&this.C(o,void 0,i,n),n}}}if(s==="setter"){const{name:o}=t;return function(n){const d=this[o];e.call(this,n),this.requestUpdate(o,d,i,!0,n)}}throw Error("Unsupported decorator location: "+s)};function O(i){return(e,t)=>typeof t=="object"?Fe(i,e,t):((s,a,r)=>{const o=a.hasOwnProperty(r);return a.constructor.createProperty(r,s),o?Object.getOwnPropertyDescriptor(a,r):void 0})(i,e,t)}/**
+ */const Ge={attribute:!0,type:String,converter:N,reflect:!1,hasChanged:V},Fe=(t=Ge,e,i)=>{const{kind:s,metadata:a}=i;let r=globalThis.litPropertyMetadata.get(a);if(r===void 0&&globalThis.litPropertyMetadata.set(a,r=new Map),s==="setter"&&((t=Object.create(t)).wrapped=!0),r.set(i.name,t),s==="accessor"){const{name:o}=i;return{set(n){const d=e.get.call(this);e.set.call(this,n),this.requestUpdate(o,d,t,!0,n)},init(n){return n!==void 0&&this.C(o,void 0,t,n),n}}}if(s==="setter"){const{name:o}=i;return function(n){const d=this[o];e.call(this,n),this.requestUpdate(o,d,t,!0,n)}}throw Error("Unsupported decorator location: "+s)};function O(t){return(e,i)=>typeof i=="object"?Fe(t,e,i):((s,a,r)=>{const o=a.hasOwnProperty(r);return a.constructor.createProperty(r,s),o?Object.getOwnPropertyDescriptor(a,r):void 0})(t,e,i)}/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function f(i){return O({...i,state:!0,attribute:!1})}var Be=Object.defineProperty,He=Object.getOwnPropertyDescriptor,x=(i,e,t,s)=>{for(var a=s>1?void 0:s?He(e,t):e,r=i.length-1,o;r>=0;r--)(o=i[r])&&(a=(s?o(e,t,a):o(a))||a);return s&&a&&Be(e,t,a),a};let b=class extends P{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this._tabCardCounts={about:12,privacy:4,eula:4,"third-party":4,safety:4,disclaimers:4},this._touchStartX=0,this._touchStartY=0,this._nextCard=()=>{this.currentCardIndex=(this.currentCardIndex+1)%this._currentTabCardCount},this._prevCard=()=>{this.currentCardIndex=(this.currentCardIndex-1+this._currentTabCardCount)%this._currentTabCardCount},this._goToCard=i=>{this.currentCardIndex=Math.max(0,Math.min(i,this._currentTabCardCount-1))},this._onKeyDown=i=>{this.fullPage&&(i.key==="ArrowRight"?(i.preventDefault(),this._nextCard()):i.key==="ArrowLeft"&&(i.preventDefault(),this._prevCard()))},this._onTouchStart=i=>{this._touchStartX=i.touches[0].clientX,this._touchStartY=i.touches[0].clientY},this._onTouchEnd=i=>{if(!this.fullPage)return;const e=i.changedTouches[0].clientX-this._touchStartX,t=i.changedTouches[0].clientY-this._touchStartY;Math.abs(e)>Math.abs(t)&&Math.abs(e)>40&&(e<0?this._nextCard():this._prevCard())},this._onDragStart=i=>{if(i.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=i.clientX,this.dragStartY=i.clientY;const e=this.position||this._defaultPosition();this.dragStartPosX=e.x,this.dragStartPosY=e.y,i.preventDefault()},this._onResizeStart=i=>{this.isResizing=!0,this.dragStartX=i.clientX,this.dragStartY=i.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,i.preventDefault(),i.stopPropagation()},this._onMouseMove=i=>{if(this.isDragging){const e=i.clientX-this.dragStartX,t=i.clientY-this.dragStartY,s={x:this.dragStartPosX+e,y:this.dragStartPosY+t};this.position=s,this.dispatchEvent(new CustomEvent("position-changed",{detail:s}))}if(this.isResizing){const e=i.clientX-this.dragStartX,t=i.clientY-this.dragStartY,s={width:Math.max(500,this.resizeStartWidth+e),height:Math.max(400,this.resizeStartHeight+t)};this.size=s,this.dispatchEvent(new CustomEvent("size-changed",{detail:s}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1},this.TAB_ITEMS=[{id:"about",icon:"ℹ️",label:"About"},{id:"privacy",icon:"🔒",label:"Privacy Policy"},{id:"eula",icon:"📜",label:"EULA"},{id:"third-party",icon:"📦",label:"Third Party Notice"},{id:"safety",icon:"🛡️",label:"Safety"},{id:"disclaimers",icon:"⚠️",label:"Disclaimers"}]}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}connectedCallback(){super.connectedCallback(),window.addEventListener("mousemove",this._onMouseMove),window.addEventListener("mouseup",this._onMouseUp),window.addEventListener("keydown",this._onKeyDown),window.addEventListener("touchstart",this._onTouchStart,{passive:!0}),window.addEventListener("touchend",this._onTouchEnd,{passive:!0})}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("mousemove",this._onMouseMove),window.removeEventListener("mouseup",this._onMouseUp),window.removeEventListener("keydown",this._onKeyDown),window.removeEventListener("touchstart",this._onTouchStart),window.removeEventListener("touchend",this._onTouchEnd)}willUpdate(i){i.has("activeTab")&&(this.currentCardIndex=0)}_effectiveSize(){const i=Math.max(500,window.innerWidth*.94),e=Math.max(400,window.innerHeight*.92);return{width:Math.min(this.size.width,i),height:Math.min(this.size.height,e)}}_defaultPosition(){const{width:i,height:e}=this._effectiveSize();return{x:Math.max(20,(window.innerWidth-i)/2),y:Math.max(20,(window.innerHeight-e)/2)}}render(){if(!this.open&&!this.fullPage)return c``;const i=c`
+ */function v(t){return O({...t,state:!0,attribute:!1})}var Be=Object.defineProperty,He=Object.getOwnPropertyDescriptor,y=(t,e,i,s)=>{for(var a=s>1?void 0:s?He(e,i):e,r=t.length-1,o;r>=0;r--)(o=t[r])&&(a=(s?o(e,i,a):o(a))||a);return s&&a&&Be(e,i,a),a};let f=class extends M{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragStartX=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:4,eula:4,"third-party":4,safety:4,disclaimers:4},this._touchStartX=0,this._touchStartY=0,this._nextCard=()=>{this.currentCardIndex=(this.currentCardIndex+1)%this._currentTabCardCount},this._prevCard=()=>{this.currentCardIndex=(this.currentCardIndex-1+this._currentTabCardCount)%this._currentTabCardCount},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY},this._onTouchEnd=t=>{if(!this.fullPage)return;const e=t.changedTouches[0].clientX-this._touchStartX,i=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,Math.abs(e)>Math.abs(i)&&Math.abs(e)>this.cardDragThreshold&&(e<0?this._nextCard():this._prevCard())},this._onCardMouseDown=t=>{this.fullPage&&(t.target.closest(".about-carousel-arrow")||(this.cardDragStartX=t.clientX))},this._onCardMouseMove=t=>{if(!this.fullPage||this.cardDragStartX===0)return;const e=t.clientX-this.cardDragStartX;Math.abs(e)>5&&(this.isCardDragging=!0)},this._onCardMouseUp=t=>{if(!this.fullPage)return;const e=t.clientX-this.cardDragStartX;this.isCardDragging=!1,this.cardDragStartX=0,Math.abs(e)>this.cardDragThreshold&&(e<0?this._nextCard():this._prevCard())},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const e=this.position||this._defaultPosition();this.dragStartPosX=e.x,this.dragStartPosY=e.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const e=t.clientX-this.dragStartX,i=t.clientY-this.dragStartY,s={x:this.dragStartPosX+e,y:this.dragStartPosY+i};this.position=s,this.dispatchEvent(new CustomEvent("position-changed",{detail:s}))}if(this.isResizing){const e=t.clientX-this.dragStartX,i=t.clientY-this.dragStartY,s={width:Math.max(500,this.resizeStartWidth+e),height:Math.max(400,this.resizeStartHeight+i)};this.size=s,this.dispatchEvent(new CustomEvent("size-changed",{detail:s}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1},this.TAB_ITEMS=[{id:"about",icon:"ℹ️",label:"About"},{id:"privacy",icon:"🔒",label:"Privacy Policy"},{id:"eula",icon:"📜",label:"EULA"},{id:"third-party",icon:"📦",label:"Third Party Notice"},{id:"safety",icon:"🛡️",label:"Safety"},{id:"disclaimers",icon:"⚠️",label:"Disclaimers"}]}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}connectedCallback(){super.connectedCallback(),window.addEventListener("mousemove",this._onMouseMove),window.addEventListener("mouseup",this._onMouseUp),window.addEventListener("keydown",this._onKeyDown),window.addEventListener("touchstart",this._onTouchStart,{passive:!0}),window.addEventListener("touchend",this._onTouchEnd,{passive:!0}),window.addEventListener("mousemove",this._onCardMouseMove),window.addEventListener("mouseup",this._onCardMouseUp),window.addEventListener("mousedown",this._onCardMouseDown)}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("mousemove",this._onMouseMove),window.removeEventListener("mouseup",this._onMouseUp),window.removeEventListener("keydown",this._onKeyDown),window.removeEventListener("touchstart",this._onTouchStart),window.removeEventListener("touchend",this._onTouchEnd),window.removeEventListener("mousemove",this._onCardMouseMove),window.removeEventListener("mouseup",this._onCardMouseUp),window.removeEventListener("mousedown",this._onCardMouseDown)}willUpdate(t){t.has("activeTab")&&(this.currentCardIndex=0)}_effectiveSize(){const t=Math.max(500,window.innerWidth*.94),e=Math.max(400,window.innerHeight*.92);return{width:Math.min(this.size.width,t),height:Math.min(this.size.height,e)}}_defaultPosition(){const{width:t,height:e}=this._effectiveSize();return{x:Math.max(20,(window.innerWidth-t)/2),y:Math.max(20,(window.innerHeight-e)/2)}}render(){if(!this.open&&!this.fullPage)return c``;const t=c`
       <div
         class="about-panel ${this.fullPage?"full-page":""} ${this.isDragging?"dragging":""} ${this.isResizing?"resizing":""}"
         style="${this.fullPage?"":`left: ${(this.position||this._defaultPosition()).x}px; top: ${(this.position||this._defaultPosition()).y}px; width: ${this._effectiveSize().width}px; height: ${this._effectiveSize().height}px;`}"
@@ -78,9 +78,9 @@
 
         ${this.fullPage?"":c`<div class="resize-handle" @mousedown=${this._onResizeStart}></div>`}
       </div>
-    `;return this.fullPage?i:c`
+    `;return this.fullPage?t:c`
       <div class="about-overlay" @mousedown=${e=>{e.target.classList.contains("about-overlay")&&this.dispatchEvent(new CustomEvent("close"))}}>
-        ${i}
+        ${t}
       </div>
     `}_renderAbout(){return c`
       <div class="about-hero">
@@ -200,13 +200,14 @@
       <h3>AI Tools &amp; Reasoning</h3>
       <ul>
         <li><strong>BrainStorm</strong> — Cognitive brainstorming with multiple reasoning frameworks and streaming sessions</li>
-        <li><strong>Chain-of-Thought Editor</strong> — Editable CoT prompt system with presets, cognitive analysis overlays, and chain builder</li>
-        <li><strong>Canvas (AI Code Editor)</strong> — Iterative Self-Loop code editor with AI-assisted generation and validation</li>
-        <li><strong>Presenter (Adaptive Learning)</strong> — Learning presentation module with agenda generation, voice interruption handling, and revision support</li>
-        <li><strong>Prompt Creator</strong> — Interactive prompt engineering tool with iterative refinement</li>
-        <li><strong>UI Interpreter</strong> — Screen/UI analysis tool for GUI element interpretation and assistance</li>
-        <li><strong>Bulk Intelligence</strong> — Bulk question automation and testing with CSV audit export and evaluation criteria</li>
-        <li><strong>Precision file replacement</strong> — Diff preview, atomic writes, and undo for AI-generated code edits</li>
+        <li><strong>Canvas (AI Code Editor)</strong> — Iterative Self-Loop code editor with AI-assisted generation, validation, and intelligent diff preview for safe code replacement</li>
+        <li><strong>Presenter (Adaptive Learning)</strong> — Learning presentation module with AI-generated agendas, voice interruption handling, and revision support for dynamic teaching</li>
+        <li><strong>System Dialogue</strong> — Health diagnostics and system information retrieval with natural language interaction</li>
+        <li><strong>Prompt Creator</strong> — Interactive prompt engineering tool with iterative refinement and testing</li>
+        <li><strong>UI Interpreter</strong> — Advanced screen/UI element analysis with visual reasoning and GUI assistance</li>
+        <li><strong>Bulk Intelligence</strong> — Batch question automation with CSV audit export, evaluation criteria, and result ranking</li>
+        <li><strong>Activity Transition System</strong> — Voice-driven voice-driven popup/panel switching across 30+ transitional activities (brainstorm, taskchat, memory-lab, presenter, canvas, minigames, training-lab, defrag, and more) with intelligent context awareness</li>
+        <li><strong>Minigames</strong> — 30 pen-and-paper games (TTT, Hangman, NIM, riddle games, trivia, word games, logic puzzles) with voice ordinal navigation and streaming responses</li>
       </ul>
 
       <!-- ─────────────────────────────────────────────────────────────────── -->
@@ -231,7 +232,7 @@
       <h3>Platform &amp; Infrastructure</h3>
       <ul>
         <li><strong>Game Engine</strong> — Interactive 3D world building with Shell Director, popup window management, and auth state forwarding</li>
-        <li><strong>Live Vision</strong> — Real-time screen share analysis with CoT editor, cognitive overlays, and WebSocket streaming</li>
+        <li><strong>Live Vision</strong> — Real-time screen capture and AI analysis with constrained visual command generation, cognitive overlays, and WebSocket streaming</li>
         <li><strong>Webcam streaming</strong> — Real-time AI vision with visual input modes</li>
         <li><strong>Remote Pixel pipeline</strong> — Server-side rendering via Playwright headless browser</li>
         <li><strong>VRAM Manager</strong> — Centralized GPU memory dashboard with model load/unload controls and compute utilization metrics</li>
@@ -280,9 +281,9 @@
         Powered by the Microsoft Phi-4 model family. 40+ integrated features.<br/>
       </p>
     `}_renderAboutCarousel(){return c`
-      <div class="about-content-carousel">
+      <div class="about-content-carousel" @mousedown=${this._onCardMouseDown} @mousemove=${this._onCardMouseMove} @mouseup=${this._onCardMouseUp}>
         <!-- Card 0: Hero -->
-        <div class="about-card hero ${this.currentCardIndex===0?"active":this.currentCardIndex>0?"prev":"next"}">
+        <div class="about-card hero ${this.currentCardIndex===0?"active":this.currentCardIndex>0?"prev":"next"} ${this.isCardDragging?"dragging":""}">
           <div class="about-hero-logo">◉</div>
           <h1>Orus</h1>
           <span class="version-badge">v1.0.1 — March 2026</span>
@@ -290,7 +291,7 @@
         </div>
 
         <!-- Card 1: Intro & Data Path -->
-        <div class="about-card ${this.currentCardIndex===1?"active":this.currentCardIndex>1?"prev":"next"}">
+        <div class="about-card ${this.currentCardIndex===1?"active":this.currentCardIndex>1?"prev":"next"} ${this.isCardDragging?"dragging":""}">
           <h2>🌐 Data Path</h2>
           <p>Orus AI System is a locally hosted personal assistant licensed per host device, providing browser-based access to connected client devices within the same local network, with memory-enabled operational assistance and local-first processing. Built on the Phi-4 Multimodal language model with GPU-accelerated vLLM inference, Orus delivers a seamless bridge between human intent and machine intelligence.</p>
           <div class="disclaimer-card">
@@ -299,7 +300,7 @@
         </div>
 
         <!-- Card 2: Architecture Overview -->
-        <div class="about-card ${this.currentCardIndex===2?"active":this.currentCardIndex>2?"prev":"next"}">
+        <div class="about-card ${this.currentCardIndex===2?"active":this.currentCardIndex>2?"prev":"next"} ${this.isCardDragging?"dragging":""}">
           <h2>🏗️ Architecture Overview</h2>
           <h3>🧠 AI Engine</h3>
           <p>Designed by Comet Game Studio Ltd and powered by Microsoft's Phi-4 Multimodal (14B) via vLLM with Paged Attention, Phi's LoRA adapters for vision/audio, constrained generation, and semantic intent calculations.</p>
@@ -316,7 +317,7 @@
         </div>
 
         <!-- Card 3: Core AI & Voice -->
-        <div class="about-card ${this.currentCardIndex===3?"active":this.currentCardIndex>3?"prev":"next"}">
+        <div class="about-card ${this.currentCardIndex===3?"active":this.currentCardIndex>3?"prev":"next"} ${this.isCardDragging?"dragging":""}">
           <h2>🎤 Core AI &amp; Voice</h2>
           <ul>
             <li><strong>Real-time voice conversation</strong> — Multi-speaker diarization, per-app audio capture, voice profiles with multi-language support</li>
@@ -330,7 +331,7 @@
         </div>
 
         <!-- Card 4: 3D Visualization & Creative -->
-        <div class="about-card ${this.currentCardIndex===4?"active":this.currentCardIndex>4?"prev":"next"}">
+        <div class="about-card ${this.currentCardIndex===4?"active":this.currentCardIndex>4?"prev":"next"} ${this.isCardDragging?"dragging":""}">
           <h2>🎨 3D Visualization & Creative</h2>
           <ul>
             <li><strong>Procedural 3D visualization</strong> — Audio-reactive Living Machine effects and procedural shader generation</li>
@@ -344,7 +345,7 @@
         </div>
 
         <!-- Card 5: Document Intelligence & Knowledge -->
-        <div class="about-card ${this.currentCardIndex===5?"active":this.currentCardIndex>5?"prev":"next"}">
+        <div class="about-card ${this.currentCardIndex===5?"active":this.currentCardIndex>5?"prev":"next"} ${this.isCardDragging?"dragging":""}">
           <h2>📄 Document Intelligence & Knowledge</h2>
           <ul>
             <li><strong>Document ingestion</strong> — PDF, DOCX, Excel, and image processing with AI-assisted analysis and OCR</li>
@@ -358,17 +359,18 @@
         </div>
 
         <!-- Card 6: AI Tools & Reasoning -->
-        <div class="about-card ${this.currentCardIndex===6?"active":this.currentCardIndex>6?"prev":"next"}">
+        <div class="about-card ${this.currentCardIndex===6?"active":this.currentCardIndex>6?"prev":"next"} ${this.isCardDragging?"dragging":""}">
           <h2>⚙️ AI Tools & Reasoning</h2>
           <ul>
             <li><strong>BrainStorm</strong> — Cognitive brainstorming with multiple reasoning frameworks and streaming sessions</li>
-            <li><strong>Chain-of-Thought Editor</strong> — Editable CoT prompt system with presets, cognitive analysis overlays, and chain builder</li>
-            <li><strong>Canvas (AI Code Editor)</strong> — Iterative Self-Loop code editor with AI-assisted generation and validation</li>
-            <li><strong>Presenter (Adaptive Learning)</strong> — Learning presentation module with agenda generation, voice interruption handling, and revision support</li>
-            <li><strong>Prompt Creator</strong> — Interactive prompt engineering tool with iterative refinement</li>
-            <li><strong>UI Interpreter</strong> — Screen/UI analysis tool for GUI element interpretation and assistance</li>
-            <li><strong>Bulk Intelligence</strong> — Bulk question automation and testing with CSV audit export and evaluation criteria</li>
-            <li><strong>Precision file replacement</strong> — Diff preview, atomic writes, and undo for AI-generated code edits</li>
+            <li><strong>Canvas (AI Code Editor)</strong> — Iterative Self-Loop code editor with AI-assisted generation, validation, and intelligent diff preview for safe code replacement</li>
+            <li><strong>Presenter (Adaptive Learning)</strong> — Learning presentation module with AI-generated agendas, voice interruption handling, and revision support for dynamic teaching</li>
+            <li><strong>System Dialogue</strong> — Health diagnostics and system information retrieval with natural language interaction</li>
+            <li><strong>Prompt Creator</strong> — Interactive prompt engineering tool with iterative refinement and testing</li>
+            <li><strong>UI Interpreter</strong> — Advanced screen/UI element analysis with visual reasoning and GUI assistance</li>
+            <li><strong>Bulk Intelligence</strong> — Batch question automation with CSV audit export, evaluation criteria, and result ranking</li>
+            <li><strong>Activity Transition System</strong> — Voice-driven popup/panel switching across 30+ transitional activities with intelligent context awareness</li>
+            <li><strong>Minigames</strong> — 30 pen-and-paper games (TTT, Hangman, NIM, riddle games, trivia, word games, logic puzzles) with voice ordinal navigation</li>
           </ul>
         </div>
 
@@ -393,7 +395,7 @@
           <h2>🖥️ Platform & Infrastructure</h2>
           <ul>
             <li><strong>Game Engine</strong> — Interactive 3D world building with Shell Director, popup window management, and auth state forwarding</li>
-            <li><strong>Live Vision</strong> — Real-time screen share analysis with CoT editor, cognitive overlays, and WebSocket streaming</li>
+            <li><strong>Live Vision</strong> — Real-time screen capture and AI analysis with constrained visual command generation, cognitive overlays, and WebSocket streaming</li>
             <li><strong>Webcam streaming</strong> — Real-time AI vision with visual input modes</li>
             <li><strong>Remote Pixel pipeline</strong> — Server-side rendering via Playwright headless browser</li>
             <li><strong>VRAM Manager</strong> — Centralized GPU memory dashboard with model load/unload controls and compute utilization metrics</li>
@@ -452,7 +454,7 @@
 
         <!-- Navigation Dots -->
         <div class="about-carousel-dots">
-          ${Array.from({length:this._tabCardCounts.about},(i,e)=>c`
+          ${Array.from({length:this._tabCardCounts.about},(t,e)=>c`
             <div
               class="about-carousel-dot ${e===this.currentCardIndex?"active":""}"
               @click=${()=>this._goToCard(e)}
@@ -460,18 +462,39 @@
           `)}
         </div>
       </div>
-    `}_cardClass(i){return this.currentCardIndex===i?"active":this.currentCardIndex>i?"prev":"next"}_renderCarouselDots(i){return c`
-      <div class="about-carousel-dots">
-        ${Array.from({length:i},(e,t)=>c`
-          <div
-            class="about-carousel-dot ${t===this.currentCardIndex?"active":""}"
-            @click=${()=>this._goToCard(t)}
-          ></div>
-        `)}
+    `}_cardClass(t){return this.currentCardIndex===t?"active":this.currentCardIndex>t?"prev":"next"}_renderCarouselDots(t){return c`
+      <div class="about-carousel-controls">
+        <button
+          class="about-carousel-arrow"
+          @click=${()=>this._prevCard()}
+          title="Previous card (or drag left)"
+          aria-label="Previous"
+        >
+          ◀
+        </button>
+        <div class="about-carousel-dots">
+          ${Array.from({length:t},(e,i)=>c`
+            <div
+              class="about-carousel-dot ${i===this.currentCardIndex?"active":""}"
+              @click=${()=>this._goToCard(i)}
+              title="Go to card ${i+1}"
+              role="button"
+              tabindex="0"
+            ></div>
+          `)}
+        </div>
+        <button
+          class="about-carousel-arrow"
+          @click=${()=>this._nextCard()}
+          title="Next card (or drag right)"
+          aria-label="Next"
+        >
+          ▶
+        </button>
       </div>
     `}_renderPrivacyCarousel(){return c`
-      <div class="about-content-carousel">
-        <div class="about-card ${this._cardClass(0)}">
+      <div class="about-content-carousel" @mousedown=${this._onCardMouseDown} @mousemove=${this._onCardMouseMove} @mouseup=${this._onCardMouseUp}>
+        <div class="about-card ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
           <h2>🔒 Privacy Policy</h2>
           <p style="font-size: 11px; color: #64748b; margin-bottom: 16px;">Last Updated: March 24, 2026</p>
           <div class="disclaimer-card">
@@ -490,7 +513,7 @@
           </div>
         </div>
 
-        <div class="about-card ${this._cardClass(1)}">
+        <div class="about-card ${this._cardClass(1)} ${this.isCardDragging?"dragging":""}">
           <h2>🔒 Privacy Policy</h2>
           <div class="disclaimer-card">
             <div class="disclaimer-card-title">🛡️ Local Data Artifacts</div>
@@ -524,7 +547,7 @@
           </div>
         </div>
 
-        <div class="about-card ${this._cardClass(3)}">
+        <div class="about-card ${this._cardClass(3)} ${this.isCardDragging?"dragging":""}">
           <h2>🔒 Privacy Policy</h2>
           <div class="tp-section-header">📧 Privacy Contact</div>
           <div style="background: rgba(30,41,59,0.5); border: 1px solid rgba(148,163,184,0.1); border-radius: 8px; padding: 16px; margin-top: 12px;">
@@ -537,8 +560,8 @@
         ${this._renderCarouselDots(4)}
       </div>
     `}_renderEULACarousel(){return c`
-      <div class="about-content-carousel">
-        <div class="about-card ${this._cardClass(0)}">
+      <div class="about-content-carousel" @mousedown=${this._onCardMouseDown} @mousemove=${this._onCardMouseMove} @mouseup=${this._onCardMouseUp}>
+        <div class="about-card ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
           <h2>📜 End-User Licence Agreement</h2>
           <div class="legal-effective-date">Effective Date: March 24, 2026</div>
           <div class="legal-section">
@@ -555,7 +578,7 @@
           </div>
         </div>
 
-        <div class="about-card ${this._cardClass(1)}">
+        <div class="about-card ${this._cardClass(1)} ${this.isCardDragging?"dragging":""}">
           <h2>📜 EULA — Subscription Tiers</h2>
           <div class="legal-section">
             <h3>2. Subscription Tiers &amp; Add-On Packs</h3>
@@ -632,8 +655,8 @@
         ${this._renderCarouselDots(4)}
       </div>
     `}_renderThirdPartyCarousel(){return c`
-      <div class="about-content-carousel">
-        <div class="about-card ${this._cardClass(0)}">
+      <div class="about-content-carousel" @mousedown=${this._onCardMouseDown} @mousemove=${this._onCardMouseMove} @mouseup=${this._onCardMouseUp}>
+        <div class="about-card ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
           <h2>📦 Third Party — Frontend &amp; Backend</h2>
           <p style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">Open-source components used in Orus. Full license texts available in each package's repository.</p>
           <div class="tp-section-header">🌐 Frontend (npm)</div>
@@ -771,8 +794,8 @@
         ${this._renderCarouselDots(4)}
       </div>
     `}_renderSafetyCarousel(){return c`
-      <div class="about-content-carousel">
-        <div class="about-card ${this._cardClass(0)}">
+      <div class="about-content-carousel" @mousedown=${this._onCardMouseDown} @mousemove=${this._onCardMouseMove} @mouseup=${this._onCardMouseUp}>
+        <div class="about-card ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
           <h2>🛡️ Safety &amp; Content Governance</h2>
           <p style="font-size: 11px; color: #64748b; margin-bottom: 12px;">Last Updated: March 24, 2026 · UK Online Safety Act 2023 Compliance</p>
           <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 1px solid rgba(56,189,248,0.3); border-radius: 10px; padding: 16px; margin-bottom: 14px;">
@@ -792,26 +815,26 @@
         <div class="about-card ${this._cardClass(1)}">
           <h2>🛡️ Priority Illegal Content Categories</h2>
           <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">Categories aligned with OSA 2023 Schedule 7 and Ofcom's 17 priority illegal content groupings.</p>
-          <div style="background: rgba(30,41,59,0.8); border: 1px solid rgba(148,163,184,0.2); border-radius: 8px; padding: 14px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 12px;">
-              <div>✅ Terrorism &amp; radicalisation</div>
-              <div>✅ Child sexual exploitation (CSEA)</div>
-              <div>✅ Hate content</div>
-              <div>✅ Harassment &amp; stalking</div>
-              <div>✅ Controlling/coercive behaviour</div>
-              <div>✅ Intimate image abuse (deepfakes)</div>
-              <div>✅ Extreme pornography</div>
-              <div>✅ Adult sexual exploitation</div>
-              <div>✅ Human trafficking</div>
-              <div>✅ Unlawful immigration assistance</div>
-              <div>✅ Fraud &amp; financial crime</div>
-              <div>✅ Proceeds of crime / laundering</div>
-              <div>✅ Drugs &amp; controlled substances</div>
-              <div>✅ Firearms &amp; weapons</div>
-              <div>✅ Suicide &amp; self-harm encouragement</div>
-              <div>✅ Foreign interference</div>
-              <div>✅ Animal cruelty</div>
-              <div>✅ Epilepsy trolling (Zach's Law)</div>
+          <div style="background: rgba(30,41,59,0.8); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 14px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 12px; color: #cbd5e1;">
+              <div>• Terrorism &amp; radicalisation</div>
+              <div>• Child sexual exploitation (CSEA)</div>
+              <div>• Hate content</div>
+              <div>• Harassment &amp; stalking</div>
+              <div>• Controlling/coercive behaviour</div>
+              <div>• Intimate image abuse (deepfakes)</div>
+              <div>• Extreme pornography</div>
+              <div>• Adult sexual exploitation</div>
+              <div>• Human trafficking</div>
+              <div>• Unlawful immigration assistance</div>
+              <div>• Fraud &amp; financial crime</div>
+              <div>• Proceeds of crime / laundering</div>
+              <div>• Drugs &amp; controlled substances</div>
+              <div>• Firearms &amp; weapons</div>
+              <div>• Suicide &amp; self-harm encouragement</div>
+              <div>• Foreign interference</div>
+              <div>• Animal cruelty</div>
+              <div>• Epilepsy trolling (Zach's Law)</div>
             </div>
           </div>
           <p style="font-size: 11px; color: #64748b; margin-top: 10px;">Age-aware routing provides differentiated responses for children, teens, and adults where appropriate.</p>
@@ -869,8 +892,8 @@
         ${this._renderCarouselDots(4)}
       </div>
     `}_renderDisclaimersCarousel(){return c`
-      <div class="about-content-carousel">
-        <div class="about-card ${this._cardClass(0)}">
+      <div class="about-content-carousel" @mousedown=${this._onCardMouseDown} @mousemove=${this._onCardMouseMove} @mouseup=${this._onCardMouseUp}>
+        <div class="about-card ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
           <h2>⚠️ Disclaimers</h2>
           <p style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">Orus is a local-first AI assistant. AI outputs may be inaccurate. Users remain responsible for verifying important outputs, obtaining consent, and securing the host device.</p>
           <div class="disclaimer-card">
@@ -2041,10 +2064,12 @@
            or at: <a href="https://www.cometgamestudio.com">cometgamestudio.com</a>
          </p>
       </div>
-    `}};b.styles=ce`
+    `}};f.styles=ce`
     :host {
       display: block;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      /* Layout spacing variable — prevents header overlap */
+      --about-header-height: 52px;
     }
 
     .about-overlay {
@@ -2171,6 +2196,8 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      /* In full-page mode, reserve space at top for header */
+      padding-top: var(--about-header-height);
     }
 
     .about-header {
@@ -2181,6 +2208,15 @@
       border-bottom: 1px solid rgba(99, 102, 241, 0.1);
       cursor: grab;
       min-height: 20px;
+      /* Fixed header when in full-page mode */
+      position: fixed;
+      top: 0;
+      left: 170px;
+      right: 0;
+      height: var(--about-header-height);
+      z-index: 30;
+      background: var(--ui-popup-bg, rgba(12, 12, 22, 0.97));
+      backdrop-filter: blur(4px);
     }
 
     .about-header:active {
@@ -2225,6 +2261,8 @@
       justify-content: center;
       position: relative;
       background: linear-gradient(135deg, rgba(15, 15, 25, 0.5), rgba(20, 20, 35, 0.5));
+      /* Content starts below fixed header in full-page mode */
+      margin-top: 0;
     }
 
     /* ── Non-carousel (EULA, Privacy, Safety, Disclaimers, etc.) ── */
@@ -2254,9 +2292,9 @@
     /* ── Individual Cards in Carousel ────────────────────────────── */
     .about-card {
       position: absolute;
-      width: 85%;
-      max-width: 600px;
-      height: 85%;
+      width: 95%;
+      max-width: 750px;
+      height: calc(100% - 80px);
       background: rgba(15, 15, 25, 0.95);
       border: 1px solid rgba(99, 102, 241, 0.25);
       border-radius: 12px;
@@ -2268,6 +2306,12 @@
       transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      cursor: grab;
+    }
+
+    .about-card.dragging {
+      cursor: grabbing;
+      transition: none;
     }
 
     .about-card::-webkit-scrollbar {
@@ -2301,15 +2345,58 @@
       z-index: 2;
     }
 
+    /* ── Carousel Navigation Controls ────────────────────────────── */
+    .about-carousel-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      z-index: 20;
+      background: linear-gradient(180deg, transparent, rgba(15, 15, 25, 0.4));
+      pointer-events: none;
+    }
+
+    .about-carousel-arrow {
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(99, 102, 241, 0.4);
+      border-radius: 50%;
+      background: rgba(99, 102, 241, 0.05);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #a5b4fc;
+      transition: all 0.3s ease;
+      pointer-events: auto;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .about-carousel-arrow:hover {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.7);
+      color: #c7d2fe;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.3);
+      transform: scale(1.1);
+    }
+
+    .about-carousel-arrow:active {
+      transform: scale(0.95);
+    }
+
     /* ── Carousel Navigation Dots ────────────────────────────────── */
     .about-carousel-dots {
-      position: absolute;
-      bottom: 16px;
-      left: 50%;
-      transform: translateX(-50%);
       display: flex;
       gap: 8px;
       z-index: 20;
+      pointer-events: auto;
     }
 
     .about-carousel-dot {
@@ -2603,25 +2690,43 @@
       border-bottom: 1px solid rgba(99, 102, 241, 0.1);
     }
 
-    /* ── Full-page mode ──────────────────────────────────── */
-
-    :host([full-page]) {
+    /* Full-page mode layout */
+    :host([full-page]) .about-panel {
+      position: fixed !important;
       display: flex;
-      width: 100%;
-      height: 100%;
-    }
-
-    .about-panel.full-page {
-      position: relative !important;
-      left: unset !important;
-      top: unset !important;
+      flex-direction: row;
+      left: 0 !important;
+      top: 0 !important;
       width: 100% !important;
       height: 100% !important;
       border-radius: 0 !important;
-      box-shadow: none !important;
-      border-left: none !important;
-      border-right: none !important;
-      border-bottom: none !important;
+      box-shadow: none !
+ important;
+      border: none !important;
+    }
+
+    :host([full-page]) .about-header {
+      position: fixed;
+      top: 0;
+      left: 170px;
+      right: 0;
+      height: var(--about-header-height);
+      z-index: 30;
+      border-radius: 0;
+    }
+
+    :host([full-page]) .about-sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 170px !important;
+      z-index: 31;
+    }
+
+    :host([full-page]) .about-main {
+      margin-left: 170px;
+      padding-top: var(--about-header-height);
     }
 
     /* Resize handle */
@@ -2739,14 +2844,21 @@
         padding: 5px 7px !important;
       }
 
-      /* Carousel cards: explicitly positioned from top so dots never overlap */
+      /* Carousel cards: explicitly positioned from top so controls never overlap */
       .about-card {
-        left: 3% !important;
-        top: 4% !important;
-        width: 94% !important;
+        left: 2% !important;
+        top: 3% !important;
+        width: 96% !important;
         max-width: unset !important;
-        height: calc(92% - 48px) !important;
+        height: calc(94% - 80px) !important;
         max-height: unset !important;
+      }
+
+      .about-carousel-arrow {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 16px !important;
+        border-width: 1.5px !important;
       }
 
       /* Carousel: allow vertical pan inside card; horizontal swipe handled by JS */
@@ -2786,6 +2898,14 @@
       .about-content.scroll-mode {
         padding: 10px !important;
         font-size: 11.5px !important;
+      }
+
+      .about-carousel-arrow {
+        width: 32px !important;
+        height: 32px !important;
+        border-width: 1.5px !important;
+        font-size: 14px !important;
+        gap: 16px !important;
       }
     }
 
@@ -2851,7 +2971,7 @@
       color: #94a3b8;
       margin: 0;
     }
-  `;x([O({type:Boolean})],b.prototype,"open",2);x([O({type:Boolean,attribute:"full-page"})],b.prototype,"fullPage",2);x([O({type:Object})],b.prototype,"position",2);x([O({type:Object})],b.prototype,"size",2);x([f()],b.prototype,"activeTab",2);x([f()],b.prototype,"isDragging",2);x([f()],b.prototype,"isResizing",2);x([f()],b.prototype,"currentCardIndex",2);b=x([ge("orus-about-dialog")],b);var We=Object.defineProperty,Ve=Object.getOwnPropertyDescriptor,y=(i,e,t,s)=>{for(var a=s>1?void 0:s?Ve(e,t):e,r=i.length-1,o;r>=0;r--)(o=i[r])&&(a=(s?o(e,t,a):o(a))||a);return s&&a&&We(e,t,a),a};const je=!0,qe=!0,Ye=!0,Xe=!0;globalThis.WEBSITE_MODE=je;globalThis.PRODUCTION_MODE=qe;globalThis.NO_INFERENCE_MODE=Ye;globalThis.NO_AUTH_REQUIRED=Xe;let v=class extends P{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._threeScene=null,this._threeCamera=null,this._animationFrameId=0,this._canvasRef=null}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._bootSequence()}disconnectedCallback(){super.disconnectedCallback(),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId)}firstUpdated(){}updated(i){super.updated(i),i.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(i){this._errorMessage=`Failed to load: ${i instanceof Error?i.message:String(i)}`,this._loading=!1}}async _initThreeScene(){try{const i=this.shadowRoot?.querySelector("#cgs-canvas");if(!i)return;this._canvasRef=i;const e=await fe(()=>import("./three.module-CIzvuMnW.js"),[]),t=new e.Scene,s=new e.PerspectiveCamera(60,i.clientWidth/i.clientHeight,.1,1e3);s.position.set(0,0,8);const a=new e.WebGLRenderer({canvas:i,antialias:!0,alpha:!0});a.setSize(i.clientWidth,i.clientHeight),a.setPixelRatio(Math.min(window.devicePixelRatio,2)),a.setClearColor(657935,1);const r=new e.IcosahedronGeometry(2,15),o=new e.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),n=new e.Mesh(r,o);t.add(n);const d=new e.AmbientLight(16777215,.3);t.add(d);const l=new e.PointLight(6333946,1.5,20);l.position.set(5,5,5),t.add(l),this._threeRenderer=a,this._threeScene=t,this._threeCamera=s,this._threeCanvasReady=!0;const u=()=>{this._animationFrameId=requestAnimationFrame(u),!document.hidden&&(n.rotation.y+=.003,n.rotation.x+=.001,a.render(t,s))};u(),new ResizeObserver(()=>{if(!i.parentElement)return;const h=i.clientWidth,m=i.clientHeight;s.aspect=h/m,s.updateProjectionMatrix(),a.setSize(h,m)}).observe(i)}catch{this._threeCanvasReady=!1}}_navigateTo(i){this._activeSection=i}render(){return this._loading?c`
+  `;y([O({type:Boolean})],f.prototype,"open",2);y([O({type:Boolean,attribute:"full-page"})],f.prototype,"fullPage",2);y([O({type:Object})],f.prototype,"position",2);y([O({type:Object})],f.prototype,"size",2);y([v()],f.prototype,"activeTab",2);y([v()],f.prototype,"isDragging",2);y([v()],f.prototype,"isResizing",2);y([v()],f.prototype,"currentCardIndex",2);y([v()],f.prototype,"isCardDragging",2);f=y([ge("orus-about-dialog")],f);var We=Object.defineProperty,Ve=Object.getOwnPropertyDescriptor,x=(t,e,i,s)=>{for(var a=s>1?void 0:s?Ve(e,i):e,r=t.length-1,o;r>=0;r--)(o=t[r])&&(a=(s?o(e,i,a):o(a))||a);return s&&a&&We(e,i,a),a};const je=!0,qe=!0,Ye=!0,Xe=!0;globalThis.WEBSITE_MODE=je;globalThis.PRODUCTION_MODE=qe;globalThis.NO_INFERENCE_MODE=Ye;globalThis.NO_AUTH_REQUIRED=Xe;let b=class extends M{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._threeScene=null,this._threeCamera=null,this._animationFrameId=0,this._canvasRef=null}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._bootSequence()}disconnectedCallback(){super.disconnectedCallback(),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId)}firstUpdated(){}updated(t){super.updated(t),t.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(t){this._errorMessage=`Failed to load: ${t instanceof Error?t.message:String(t)}`,this._loading=!1}}async _initThreeScene(){try{const t=this.shadowRoot?.querySelector("#cgs-canvas");if(!t)return;this._canvasRef=t;const e=await fe(()=>import("./three.module-CIzvuMnW.js"),[]),i=new e.Scene,s=new e.PerspectiveCamera(60,t.clientWidth/t.clientHeight,.1,1e3);s.position.set(0,0,8);const a=new e.WebGLRenderer({canvas:t,antialias:!0,alpha:!0});a.setSize(t.clientWidth,t.clientHeight),a.setPixelRatio(Math.min(window.devicePixelRatio,2)),a.setClearColor(657935,1);const r=new e.IcosahedronGeometry(2,15),o=new e.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),n=new e.Mesh(r,o);i.add(n);const d=new e.AmbientLight(16777215,.3);i.add(d);const l=new e.PointLight(6333946,1.5,20);l.position.set(5,5,5),i.add(l),this._threeRenderer=a,this._threeScene=i,this._threeCamera=s,this._threeCanvasReady=!0;const u=()=>{this._animationFrameId=requestAnimationFrame(u),!document.hidden&&(n.rotation.y+=.003,n.rotation.x+=.001,a.render(i,s))};u(),new ResizeObserver(()=>{if(!t.parentElement)return;const h=t.clientWidth,m=t.clientHeight;s.aspect=h/m,s.updateProjectionMatrix(),a.setSize(h,m)}).observe(t)}catch{this._threeCanvasReady=!1}}_navigateTo(t){this._activeSection=t}render(){return this._loading?c`
                 <div class="loading-overlay">
                     <div class="loading-spinner"></div>
                     <div class="loading-text">${this._loadingMessage}</div>
@@ -3384,7 +3504,7 @@
                 dependencies and their licences, refer to the NOTICE file included in your Orus installation,
                 or run <code>pip-licenses</code> and <code>npm ls</code> in your Orus installation environment.</p>
             </div>
-        `}};v.styles=ce`
+        `}};b.styles=ce`
         :host {
             display: block;
             width: 100%;
@@ -4265,4 +4385,4 @@
             color: #94a3b8;
             line-height: 1.7;
         }
-    `;y([f()],v.prototype,"_loading",2);y([f()],v.prototype,"_loadingMessage",2);y([f()],v.prototype,"_loadingProgress",2);y([f()],v.prototype,"_ready",2);y([f()],v.prototype,"_errorMessage",2);y([f()],v.prototype,"_activeSection",2);y([f()],v.prototype,"_threeCanvasReady",2);y([f()],v.prototype,"_aboutOpen",2);y([O({type:String,attribute:"site-url"})],v.prototype,"siteUrl",2);v=y([ge("orus-cgs-home")],v);const ne={log:console.log.bind(console),warn:console.warn.bind(console),error:console.error.bind(console)};function Ke(){const i=()=>{};console.debug=i,console.trace=i,console.dir=i,console.dirxml=i,console.table=i;try{console.clear()}catch{}ne.log("%c Comet Game Studio %c Orus AI System %c","background: #6366f1; color: #fff; padding: 4px 8px; border-radius: 4px 0 0 4px; font-weight: 700;","background: #1e1b4b; color: #c4b5fd; padding: 4px 8px; border-radius: 0 4px 4px 0;",""),ne.log("%chttps://www.cometgamestudio.com","color: #94a3b8; font-size: 11px;")}function Qe(){document.addEventListener("keydown",i=>{i.ctrlKey&&!i.shiftKey&&(i.key==="u"||i.key==="U")&&i.preventDefault()},!0),document.addEventListener("contextmenu",i=>(i.preventDefault(),!1))}function Je(){typeof performance<"u"&&performance.clearResourceTimings&&setInterval(()=>{try{performance.clearResourceTimings()}catch{}},1e4)}Ke();Qe();Je();
+    `;x([v()],b.prototype,"_loading",2);x([v()],b.prototype,"_loadingMessage",2);x([v()],b.prototype,"_loadingProgress",2);x([v()],b.prototype,"_ready",2);x([v()],b.prototype,"_errorMessage",2);x([v()],b.prototype,"_activeSection",2);x([v()],b.prototype,"_threeCanvasReady",2);x([v()],b.prototype,"_aboutOpen",2);x([O({type:String,attribute:"site-url"})],b.prototype,"siteUrl",2);b=x([ge("orus-cgs-home")],b);const ne={log:console.log.bind(console),warn:console.warn.bind(console),error:console.error.bind(console)};function Ke(){const t=()=>{};console.debug=t,console.trace=t,console.dir=t,console.dirxml=t,console.table=t;try{console.clear()}catch{}ne.log("%c Comet Game Studio %c Orus AI System %c","background: #6366f1; color: #fff; padding: 4px 8px; border-radius: 4px 0 0 4px; font-weight: 700;","background: #1e1b4b; color: #c4b5fd; padding: 4px 8px; border-radius: 0 4px 4px 0;",""),ne.log("%chttps://www.cometgamestudio.com","color: #94a3b8; font-size: 11px;")}function Qe(){document.addEventListener("keydown",t=>{t.ctrlKey&&!t.shiftKey&&(t.key==="u"||t.key==="U")&&t.preventDefault()},!0),document.addEventListener("contextmenu",t=>(t.preventDefault(),!1))}function Je(){typeof performance<"u"&&performance.clearResourceTimings&&setInterval(()=>{try{performance.clearResourceTimings()}catch{}},1e4)}Ke();Qe();Je();
