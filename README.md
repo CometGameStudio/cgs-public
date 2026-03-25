@@ -1,2 +1,0 @@
-# cgs-public
-website

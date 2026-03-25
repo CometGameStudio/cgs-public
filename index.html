@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comet Game Studio — AI · VR · Music</title>
+  <meta name="description" content="Comet Game Studio builds privacy-first AI tools and immersive VR experiences. Home of Orus the Living Machine and Islands of Life.">
+  <meta name="keywords" content="Comet Game Studio, Orus AI, Islands of Life, VR game, local AI, multimodal AI">
+
+  <!-- Content Security Policy: Strict baseline for public website -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self' https://fonts.googleapis.com;
+                 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+                 font-src 'self' https://fonts.gstatic.com;
+                 img-src 'self' data: blob: https:;
+                 media-src 'self' blob: https:;
+                 frame-src https://www.youtube.com https://w.soundcloud.com;
+                 connect-src 'self' https://www.cometgamestudio.com;
+                 worker-src 'self' blob:;
+                 object-src 'none';
+                 base-uri 'self';
+                 form-action 'self';
+                 frame-ancestors 'none';
+                 upgrade-insecure-requests;">
+
+  <!-- Prevent caching of source in browser -->
+  <meta http-equiv="Cache-Control" content="no-store">
+  <meta http-equiv="Pragma" content="no-cache">
+
+  <!-- Open Graph meta for social sharing -->
+  <meta property="og:title" content="Comet Game Studio">
+  <meta property="og:description" content="AI-Powered Creative Tools — Orus Multimodal AI System">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.cometgamestudio.com">
+  <meta property="og:image" content="https://www.cometgamestudio.com/images/og-banner.avif">
+
+  <!-- Twitter/X card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Comet Game Studio">
+  <meta name="twitter:description" content="Privacy-first AI tools and immersive VR experiences.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.cometgamestudio.com/">
+
+  <!-- Font Stack: Inter, Orbitron, Raleway, Cormorant Garamond -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Raleway:wght@200;300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Viewport fill */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0a0a0f;
+    }
+    orus-cgs-home {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    /* Prevent FOUC — but only briefly: if JS hasn't loaded in 4s, unhide anyway */
+    orus-cgs-home:not(:defined) {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  </style>
+  <script type="module" crossorigin src="/js/main-1IA77JVP.js"></script>
+</head>
+<body>
+  <!-- CGS Home: Public website component (no auth required) -->
+  <orus-cgs-home site-url="https://www.cometgamestudio.com"></orus-cgs-home>
+
+  <!-- Fallback: unhide element if JS takes too long (blocked by CSP inline, served as external file) -->
+  <script src="./fallback.js"></script>
+
+  <!-- Entry: installs console branding + keyboard guards, then mounts orus-cgs-home -->
+</body>
+</html>

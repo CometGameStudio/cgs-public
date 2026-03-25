@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "slotCount": 8,
+    "radius": 4.2,
+    "y": 0,
+    "wheelStep": 1,
+    "rotationSensitivity": 1,
+    "fadeInMs": 340,
+    "fadeOutMs": 500,
+    "textSize": 20,
+    "tileWidth": 154,
+    "tileHeight": 42,
+    "textFont": "droid_serif",
+    "ringColor": "#0a0aff",
+    "ringEmissiveColor": "#ffeb0a",
+    "ringMetalness": 0.8,
+    "ringRoughness": 0.2,
+    "ringEmissiveIntensity": 1,
+    "ringBloomStrength": 1.5,
+    "ringBloomRadius": 0.8,
+    "ringThickness": 0.01,
+    "ringEnvMapEnabled": true,
+    "ringEnvMapIntensity": 1,
+    "tileGlowEnabled": true,
+    "tileGlowColor": "#60a5fa",
+    "tileGlowIntensity": 15,
+    "tileGlowOpacity": 0.7,
+    "textColor": "#120202",
+    "textEmissiveColor": "#82b201",
+    "textEmissiveIntensity": 0.4,
+    "textMetalness": 0,
+    "textRoughness": 0.05,
+    "textYOffset": -0.06,
+    "textRadiusOffset": 0.5,
+    "angleLockEnabled": true,
+    "angleLockAngle": 0.11598758549007182,
+    "angleLockCapturing": false
+  },
+  "items": [
+    {
+      "id": "nav-home",
+      "label": "Home",
+      "icon": "🏠",
+      "action": {
+        "kind": "tab",
+        "tab": "home"
+      },
+      "color": "#6366f1"
+    },
+    {
+      "id": "nav-products",
+      "label": "Products",
+      "icon": "🛠️",
+      "action": {
+        "kind": "tab",
+        "tab": "products"
+      },
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "nav-about",
+      "label": "About",
+      "icon": "ℹ️",
+      "action": {
+        "kind": "tab",
+        "tab": "about"
+      },
+      "color": "#6366f1"
+    },
+    {
+      "id": "nav-contact",
+      "label": "Contact",
+      "icon": "✉️",
+      "action": {
+        "kind": "tab",
+        "tab": "contact"
+      },
+      "color": "#3b82f6"
+    },
+    {
+      "id": "ext-youtube",
+      "label": "YouTube",
+      "icon": "▶️",
+      "action": {
+        "kind": "navigate",
+        "href": "https://www.youtube.com/@CometGameStudio",
+        "newTab": true
+      },
+      "color": "#ef4444"
+    },
+    {
+      "id": "ext-store",
+      "label": "MS Store",
+      "icon": "🪟",
+      "action": {
+        "kind": "navigate",
+        "href": "https://apps.microsoft.com/store/search/Orus",
+        "newTab": true
+      },
+      "color": "#22c55e"
+    }
+  ]
+}
