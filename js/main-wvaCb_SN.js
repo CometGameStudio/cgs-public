@@ -1,4 +1,4 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))a(s);new MutationObserver(s=>{for(const r of s)if(r.type==="childList")for(const o of r.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&a(o)}).observe(document,{childList:!0,subtree:!0});function t(s){const r={};return s.integrity&&(r.integrity=s.integrity),s.referrerPolicy&&(r.referrerPolicy=s.referrerPolicy),s.crossOrigin==="use-credentials"?r.credentials="include":s.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function a(s){if(s.ep)return;s.ep=!0;const r=t(s);fetch(s.href,r)}})();const me="modulepreload",ve=function(i){return"/cgs-public/"+i},X={},fe=function(e,t,a){let s=Promise.resolve();if(t&&t.length>0){let o=function(l){return Promise.all(l.map(u=>Promise.resolve(u).then(p=>({status:"fulfilled",value:p}),p=>({status:"rejected",reason:p}))))};document.getElementsByTagName("link");const n=document.querySelector("meta[property=csp-nonce]"),d=n?.nonce||n?.getAttribute("nonce");s=o(t.map(l=>{if(l=ve(l),l in X)return;X[l]=!0;const u=l.endsWith(".css"),p=u?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${l}"]${p}`))return;const h=document.createElement("link");if(h.rel=u?"stylesheet":me,u||(h.as="script"),h.crossOrigin="",h.href=l,d&&h.setAttribute("nonce",d),document.head.appendChild(h),u)return new Promise((m,T)=>{h.addEventListener("load",m),h.addEventListener("error",()=>T(new Error(`Unable to preload CSS for ${l}`)))})}))}function r(o){const n=new Event("vite:preloadError",{cancelable:!0});if(n.payload=o,window.dispatchEvent(n),!n.defaultPrevented)throw o}return s.then(o=>{for(const n of o||[])n.status==="rejected"&&r(n.reason);return e().catch(r)})};/**
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))a(s);new MutationObserver(s=>{for(const r of s)if(r.type==="childList")for(const o of r.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&a(o)}).observe(document,{childList:!0,subtree:!0});function t(s){const r={};return s.integrity&&(r.integrity=s.integrity),s.referrerPolicy&&(r.referrerPolicy=s.referrerPolicy),s.crossOrigin==="use-credentials"?r.credentials="include":s.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function a(s){if(s.ep)return;s.ep=!0;const r=t(s);fetch(s.href,r)}})();const me="modulepreload",ve=function(i){return"/cgs-public/"+i},X={},fe=function(e,t,a){let s=Promise.resolve();if(t&&t.length>0){let o=function(l){return Promise.all(l.map(u=>Promise.resolve(u).then(p=>({status:"fulfilled",value:p}),p=>({status:"rejected",reason:p}))))};document.getElementsByTagName("link");const n=document.querySelector("meta[property=csp-nonce]"),d=n?.nonce||n?.getAttribute("nonce");s=o(t.map(l=>{if(l=ve(l),l in X)return;X[l]=!0;const u=l.endsWith(".css"),p=u?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${l}"]${p}`))return;const g=document.createElement("link");if(g.rel=u?"stylesheet":me,u||(g.as="script"),g.crossOrigin="",g.href=l,d&&g.setAttribute("nonce",d),document.head.appendChild(g),u)return new Promise((m,I)=>{g.addEventListener("load",m),g.addEventListener("error",()=>I(new Error(`Unable to preload CSS for ${l}`)))})}))}function r(o){const n=new Event("vite:preloadError",{cancelable:!0});if(n.payload=o,window.dispatchEvent(n),!n.defaultPrevented)throw o}return s.then(o=>{for(const n of o||[])n.status==="rejected"&&r(n.reason);return e().catch(r)})};/**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
@@ -6,21 +6,21 @@
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:xe,defineProperty:we,getOwnPropertyDescriptor:Ae,getOwnPropertyNames:Se,getOwnPropertySymbols:Ce,getPrototypeOf:Te}=Object,F=globalThis,J=F.trustedTypes,Ie=J?J.emptyScript:"",Pe=F.reactiveElementPolyfillSupport,_=(i,e)=>i,N={toAttribute(i,e){switch(e){case Boolean:i=i?Ie:null;break;case Object:case Array:i=i==null?i:JSON.stringify(i)}return i},fromAttribute(i,e){let t=i;switch(e){case Boolean:t=i!==null;break;case Number:t=i===null?null:Number(i);break;case Object:case Array:try{t=JSON.parse(i)}catch{t=null}}return t}},V=(i,e)=>!xe(i,e),Z={attribute:!0,type:String,converter:N,reflect:!1,useDefault:!1,hasChanged:V};Symbol.metadata??=Symbol("metadata"),F.litPropertyMetadata??=new WeakMap;let I=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=Z){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const a=Symbol(),s=this.getPropertyDescriptor(e,a,t);s!==void 0&&we(this.prototype,e,s)}}static getPropertyDescriptor(e,t,a){const{get:s,set:r}=Ae(this.prototype,e)??{get(){return this[t]},set(o){this[t]=o}};return{get:s,set(o){const n=s?.call(this);r?.call(this,o),this.requestUpdate(e,n,a)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??Z}static _$Ei(){if(this.hasOwnProperty(_("elementProperties")))return;const e=Te(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(_("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(_("properties"))){const t=this.properties,a=[...Se(t),...Ce(t)];for(const s of a)this.createProperty(s,t[s])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[a,s]of t)this.elementProperties.set(a,s)}this._$Eh=new Map;for(const[t,a]of this.elementProperties){const s=this._$Eu(t,a);s!==void 0&&this._$Eh.set(s,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const a=new Set(e.flat(1/0).reverse());for(const s of a)t.unshift(Q(s))}else e!==void 0&&t.push(Q(e));return t}static _$Eu(e,t){const a=t.attribute;return a===!1?void 0:typeof a=="string"?a:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const a of t.keys())this.hasOwnProperty(a)&&(e.set(a,this[a]),delete this[a]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ye(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,a){this._$AK(e,a)}_$ET(e,t){const a=this.constructor.elementProperties.get(e),s=this.constructor._$Eu(e,a);if(s!==void 0&&a.reflect===!0){const r=(a.converter?.toAttribute!==void 0?a.converter:N).toAttribute(t,a.type);this._$Em=e,r==null?this.removeAttribute(s):this.setAttribute(s,r),this._$Em=null}}_$AK(e,t){const a=this.constructor,s=a._$Eh.get(e);if(s!==void 0&&this._$Em!==s){const r=a.getPropertyOptions(s),o=typeof r.converter=="function"?{fromAttribute:r.converter}:r.converter?.fromAttribute!==void 0?r.converter:N;this._$Em=s;const n=o.fromAttribute(t,r.type);this[s]=n??this._$Ej?.get(s)??n,this._$Em=null}}requestUpdate(e,t,a,s=!1,r){if(e!==void 0){const o=this.constructor;if(s===!1&&(r=this[e]),a??=o.getPropertyOptions(e),!((a.hasChanged??V)(r,t)||a.useDefault&&a.reflect&&r===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,a))))return;this.C(e,t,a)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:a,reflect:s,wrapped:r},o){a&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,o??t??this[e]),r!==!0||o!==void 0)||(this._$AL.has(e)||(this.hasUpdated||a||(t=void 0),this._$AL.set(e,t)),s===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[s,r]of this._$Ep)this[s]=r;this._$Ep=void 0}const a=this.constructor.elementProperties;if(a.size>0)for(const[s,r]of a){const{wrapped:o}=r,n=this[s];o!==!0||this._$AL.has(s)||n===void 0||this.C(s,void 0,r,n)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(a=>a.hostUpdate?.()),this.update(t)):this._$EM()}catch(a){throw e=!1,this._$EM(),a}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};I.elementStyles=[],I.shadowRootOptions={mode:"open"},I[_("elementProperties")]=new Map,I[_("finalized")]=new Map,Pe?.({ReactiveElement:I}),(F.reactiveElementVersions??=[]).push("2.1.2");/**
+ */const{is:xe,defineProperty:we,getOwnPropertyDescriptor:Ae,getOwnPropertyNames:Se,getOwnPropertySymbols:Ce,getPrototypeOf:Ie}=Object,F=globalThis,J=F.trustedTypes,Te=J?J.emptyScript:"",Pe=F.reactiveElementPolyfillSupport,_=(i,e)=>i,N={toAttribute(i,e){switch(e){case Boolean:i=i?Te:null;break;case Object:case Array:i=i==null?i:JSON.stringify(i)}return i},fromAttribute(i,e){let t=i;switch(e){case Boolean:t=i!==null;break;case Number:t=i===null?null:Number(i);break;case Object:case Array:try{t=JSON.parse(i)}catch{t=null}}return t}},V=(i,e)=>!xe(i,e),Z={attribute:!0,type:String,converter:N,reflect:!1,useDefault:!1,hasChanged:V};Symbol.metadata??=Symbol("metadata"),F.litPropertyMetadata??=new WeakMap;let T=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=Z){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const a=Symbol(),s=this.getPropertyDescriptor(e,a,t);s!==void 0&&we(this.prototype,e,s)}}static getPropertyDescriptor(e,t,a){const{get:s,set:r}=Ae(this.prototype,e)??{get(){return this[t]},set(o){this[t]=o}};return{get:s,set(o){const n=s?.call(this);r?.call(this,o),this.requestUpdate(e,n,a)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??Z}static _$Ei(){if(this.hasOwnProperty(_("elementProperties")))return;const e=Ie(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(_("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(_("properties"))){const t=this.properties,a=[...Se(t),...Ce(t)];for(const s of a)this.createProperty(s,t[s])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[a,s]of t)this.elementProperties.set(a,s)}this._$Eh=new Map;for(const[t,a]of this.elementProperties){const s=this._$Eu(t,a);s!==void 0&&this._$Eh.set(s,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const a=new Set(e.flat(1/0).reverse());for(const s of a)t.unshift(Q(s))}else e!==void 0&&t.push(Q(e));return t}static _$Eu(e,t){const a=t.attribute;return a===!1?void 0:typeof a=="string"?a:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const a of t.keys())this.hasOwnProperty(a)&&(e.set(a,this[a]),delete this[a]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ye(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,a){this._$AK(e,a)}_$ET(e,t){const a=this.constructor.elementProperties.get(e),s=this.constructor._$Eu(e,a);if(s!==void 0&&a.reflect===!0){const r=(a.converter?.toAttribute!==void 0?a.converter:N).toAttribute(t,a.type);this._$Em=e,r==null?this.removeAttribute(s):this.setAttribute(s,r),this._$Em=null}}_$AK(e,t){const a=this.constructor,s=a._$Eh.get(e);if(s!==void 0&&this._$Em!==s){const r=a.getPropertyOptions(s),o=typeof r.converter=="function"?{fromAttribute:r.converter}:r.converter?.fromAttribute!==void 0?r.converter:N;this._$Em=s;const n=o.fromAttribute(t,r.type);this[s]=n??this._$Ej?.get(s)??n,this._$Em=null}}requestUpdate(e,t,a,s=!1,r){if(e!==void 0){const o=this.constructor;if(s===!1&&(r=this[e]),a??=o.getPropertyOptions(e),!((a.hasChanged??V)(r,t)||a.useDefault&&a.reflect&&r===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,a))))return;this.C(e,t,a)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:a,reflect:s,wrapped:r},o){a&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,o??t??this[e]),r!==!0||o!==void 0)||(this._$AL.has(e)||(this.hasUpdated||a||(t=void 0),this._$AL.set(e,t)),s===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[s,r]of this._$Ep)this[s]=r;this._$Ep=void 0}const a=this.constructor.elementProperties;if(a.size>0)for(const[s,r]of a){const{wrapped:o}=r,n=this[s];o!==!0||this._$AL.has(s)||n===void 0||this.C(s,void 0,r,n)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(a=>a.hostUpdate?.()),this.update(t)):this._$EM()}catch(a){throw e=!1,this._$EM(),a}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};T.elementStyles=[],T.shadowRootOptions={mode:"open"},T[_("elementProperties")]=new Map,T[_("finalized")]=new Map,Pe?.({ReactiveElement:T}),(F.reactiveElementVersions??=[]).push("2.1.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */const j=globalThis,ee=i=>i,U=j.trustedTypes,te=U?U.createPolicy("lit-html",{createHTML:i=>i}):void 0,le="$lit$",w=`lit$${Math.random().toFixed(9).slice(2)}$`,pe="?"+w,ke=`<${pe}>`,C=document,D=()=>C.createComment(""),E=i=>i===null||typeof i!="object"&&typeof i!="function",q=Array.isArray,Me=i=>q(i)||typeof i?.[Symbol.iterator]=="function",B=`[ 	
 \f\r]`,L=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,ie=/-->/g,ae=/>/g,A=RegExp(`>|${B}(?:([^\\s"'>=/]+)(${B}*=${B}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),se=/'/g,re=/"/g,ue=/^(?:script|style|textarea|title)$/i,Oe=i=>(e,...t)=>({_$litType$:i,strings:e,values:t}),c=Oe(1),k=Symbol.for("lit-noChange"),g=Symbol.for("lit-nothing"),oe=new WeakMap,S=C.createTreeWalker(C,129);function he(i,e){if(!q(i)||!i.hasOwnProperty("raw"))throw Error("invalid template strings array");return te!==void 0?te.createHTML(e):e}const Le=(i,e)=>{const t=i.length-1,a=[];let s,r=e===2?"<svg>":e===3?"<math>":"",o=L;for(let n=0;n<t;n++){const d=i[n];let l,u,p=-1,h=0;for(;h<d.length&&(o.lastIndex=h,u=o.exec(d),u!==null);)h=o.lastIndex,o===L?u[1]==="!--"?o=ie:u[1]!==void 0?o=ae:u[2]!==void 0?(ue.test(u[2])&&(s=RegExp("</"+u[2],"g")),o=A):u[3]!==void 0&&(o=A):o===A?u[0]===">"?(o=s??L,p=-1):u[1]===void 0?p=-2:(p=o.lastIndex-u[2].length,l=u[1],o=u[3]===void 0?A:u[3]==='"'?re:se):o===re||o===se?o=A:o===ie||o===ae?o=L:(o=A,s=void 0);const m=o===A&&i[n+1].startsWith("/>")?" ":"";r+=o===L?d+ke:p>=0?(a.push(l),d.slice(0,p)+le+d.slice(p)+w+m):d+w+(p===-2?n:m)}return[he(i,r+(i[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),a]};class ${constructor({strings:e,_$litType$:t},a){let s;this.parts=[];let r=0,o=0;const n=e.length-1,d=this.parts,[l,u]=Le(e,t);if(this.el=$.createElement(l,a),S.currentNode=this.el.content,t===2||t===3){const p=this.el.content.firstChild;p.replaceWith(...p.childNodes)}for(;(s=S.nextNode())!==null&&d.length<n;){if(s.nodeType===1){if(s.hasAttributes())for(const p of s.getAttributeNames())if(p.endsWith(le)){const h=u[o++],m=s.getAttribute(p).split(w),T=/([.?@])?(.*)/.exec(h);d.push({type:1,index:r,name:T[2],strings:m,ctor:T[1]==="."?De:T[1]==="?"?Ee:T[1]==="@"?$e:G}),s.removeAttribute(p)}else p.startsWith(w)&&(d.push({type:6,index:r}),s.removeAttribute(p));if(ue.test(s.tagName)){const p=s.textContent.split(w),h=p.length-1;if(h>0){s.textContent=U?U.emptyScript:"";for(let m=0;m<h;m++)s.append(p[m],D()),S.nextNode(),d.push({type:2,index:++r});s.append(p[h],D())}}}else if(s.nodeType===8)if(s.data===pe)d.push({type:2,index:r});else{let p=-1;for(;(p=s.data.indexOf(w,p+1))!==-1;)d.push({type:7,index:r}),p+=w.length-1}r++}}static createElement(e,t){const a=C.createElement("template");return a.innerHTML=e,a}}function M(i,e,t=i,a){if(e===k)return e;let s=a!==void 0?t._$Co?.[a]:t._$Cl;const r=E(e)?void 0:e._$litDirective$;return s?.constructor!==r&&(s?._$AO?.(!1),r===void 0?s=void 0:(s=new r(i),s._$AT(i,t,a)),a!==void 0?(t._$Co??=[])[a]=s:t._$Cl=s),s!==void 0&&(e=M(i,s._$AS(i,e.values),s,a)),e}class _e{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:a}=this._$AD,s=(e?.creationScope??C).importNode(t,!0);S.currentNode=s;let r=S.nextNode(),o=0,n=0,d=a[0];for(;d!==void 0;){if(o===d.index){let l;d.type===2?l=new z(r,r.nextSibling,this,e):d.type===1?l=new d.ctor(r,d.name,d.strings,this,e):d.type===6&&(l=new ze(r,this,e)),this._$AV.push(l),d=a[++n]}o!==d?.index&&(r=S.nextNode(),o++)}return S.currentNode=C,s}p(e){let t=0;for(const a of this._$AV)a!==void 0&&(a.strings!==void 0?(a._$AI(e,a,t),t+=a.strings.length-2):a._$AI(e[t])),t++}}class z{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,a,s){this.type=2,this._$AH=g,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=a,this.options=s,this._$Cv=s?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=M(this,e,t),E(e)?e===g||e==null||e===""?(this._$AH!==g&&this._$AR(),this._$AH=g):e!==this._$AH&&e!==k&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):Me(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==g&&E(this._$AH)?this._$AA.nextSibling.data=e:this.T(C.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:a}=e,s=typeof a=="number"?this._$AC(e):(a.el===void 0&&(a.el=$.createElement(he(a.h,a.h[0]),this.options)),a);if(this._$AH?._$AD===s)this._$AH.p(t);else{const r=new _e(s,this),o=r.u(this.options);r.p(t),this.T(o),this._$AH=r}}_$AC(e){let t=oe.get(e.strings);return t===void 0&&oe.set(e.strings,t=new $(e)),t}k(e){q(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let a,s=0;for(const r of e)s===t.length?t.push(a=new z(this.O(D()),this.O(D()),this,this.options)):a=t[s],a._$AI(r),s++;s<t.length&&(this._$AR(a&&a._$AB.nextSibling,s),t.length=s)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const a=ee(e).nextSibling;ee(e).remove(),e=a}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class G{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,a,s,r){this.type=1,this._$AH=g,this._$AN=void 0,this.element=e,this.name=t,this._$AM=s,this.options=r,a.length>2||a[0]!==""||a[1]!==""?(this._$AH=Array(a.length-1).fill(new String),this.strings=a):this._$AH=g}_$AI(e,t=this,a,s){const r=this.strings;let o=!1;if(r===void 0)e=M(this,e,t,0),o=!E(e)||e!==this._$AH&&e!==k,o&&(this._$AH=e);else{const n=e;let d,l;for(e=r[0],d=0;d<r.length-1;d++)l=M(this,n[a+d],t,d),l===k&&(l=this._$AH[d]),o||=!E(l)||l!==this._$AH[d],l===g?e=g:e!==g&&(e+=(l??"")+r[d+1]),this._$AH[d]=l}o&&!s&&this.j(e)}j(e){e===g?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class De extends G{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===g?void 0:e}}class Ee extends G{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==g)}}class $e extends G{constructor(e,t,a,s,r){super(e,t,a,s,r),this.type=5}_$AI(e,t=this){if((e=M(this,e,t,0)??g)===k)return;const a=this._$AH,s=e===g&&a!==g||e.capture!==a.capture||e.once!==a.once||e.passive!==a.passive,r=e!==g&&(a===g||s);s&&this.element.removeEventListener(this.name,this,a),r&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class ze{constructor(e,t,a){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=a}get _$AU(){return this._$AM._$AU}_$AI(e){M(this,e)}}const Re=j.litHtmlPolyfillSupport;Re?.($,z),(j.litHtmlVersions??=[]).push("3.3.2");const Ne=(i,e,t)=>{const a=t?.renderBefore??e;let s=a._$litPart$;if(s===void 0){const r=t?.renderBefore??null;a._$litPart$=s=new z(e.insertBefore(D(),r),r,void 0,t??{})}return s._$AI(i),s};/**
+\f\r"'\`<>=]|("|')|))|$)`,"g"),se=/'/g,re=/"/g,ue=/^(?:script|style|textarea|title)$/i,Oe=i=>(e,...t)=>({_$litType$:i,strings:e,values:t}),c=Oe(1),k=Symbol.for("lit-noChange"),h=Symbol.for("lit-nothing"),oe=new WeakMap,S=C.createTreeWalker(C,129);function ge(i,e){if(!q(i)||!i.hasOwnProperty("raw"))throw Error("invalid template strings array");return te!==void 0?te.createHTML(e):e}const Le=(i,e)=>{const t=i.length-1,a=[];let s,r=e===2?"<svg>":e===3?"<math>":"",o=L;for(let n=0;n<t;n++){const d=i[n];let l,u,p=-1,g=0;for(;g<d.length&&(o.lastIndex=g,u=o.exec(d),u!==null);)g=o.lastIndex,o===L?u[1]==="!--"?o=ie:u[1]!==void 0?o=ae:u[2]!==void 0?(ue.test(u[2])&&(s=RegExp("</"+u[2],"g")),o=A):u[3]!==void 0&&(o=A):o===A?u[0]===">"?(o=s??L,p=-1):u[1]===void 0?p=-2:(p=o.lastIndex-u[2].length,l=u[1],o=u[3]===void 0?A:u[3]==='"'?re:se):o===re||o===se?o=A:o===ie||o===ae?o=L:(o=A,s=void 0);const m=o===A&&i[n+1].startsWith("/>")?" ":"";r+=o===L?d+ke:p>=0?(a.push(l),d.slice(0,p)+le+d.slice(p)+w+m):d+w+(p===-2?n:m)}return[ge(i,r+(i[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),a]};class z{constructor({strings:e,_$litType$:t},a){let s;this.parts=[];let r=0,o=0;const n=e.length-1,d=this.parts,[l,u]=Le(e,t);if(this.el=z.createElement(l,a),S.currentNode=this.el.content,t===2||t===3){const p=this.el.content.firstChild;p.replaceWith(...p.childNodes)}for(;(s=S.nextNode())!==null&&d.length<n;){if(s.nodeType===1){if(s.hasAttributes())for(const p of s.getAttributeNames())if(p.endsWith(le)){const g=u[o++],m=s.getAttribute(p).split(w),I=/([.?@])?(.*)/.exec(g);d.push({type:1,index:r,name:I[2],strings:m,ctor:I[1]==="."?De:I[1]==="?"?Ee:I[1]==="@"?ze:G}),s.removeAttribute(p)}else p.startsWith(w)&&(d.push({type:6,index:r}),s.removeAttribute(p));if(ue.test(s.tagName)){const p=s.textContent.split(w),g=p.length-1;if(g>0){s.textContent=U?U.emptyScript:"";for(let m=0;m<g;m++)s.append(p[m],D()),S.nextNode(),d.push({type:2,index:++r});s.append(p[g],D())}}}else if(s.nodeType===8)if(s.data===pe)d.push({type:2,index:r});else{let p=-1;for(;(p=s.data.indexOf(w,p+1))!==-1;)d.push({type:7,index:r}),p+=w.length-1}r++}}static createElement(e,t){const a=C.createElement("template");return a.innerHTML=e,a}}function M(i,e,t=i,a){if(e===k)return e;let s=a!==void 0?t._$Co?.[a]:t._$Cl;const r=E(e)?void 0:e._$litDirective$;return s?.constructor!==r&&(s?._$AO?.(!1),r===void 0?s=void 0:(s=new r(i),s._$AT(i,t,a)),a!==void 0?(t._$Co??=[])[a]=s:t._$Cl=s),s!==void 0&&(e=M(i,s._$AS(i,e.values),s,a)),e}class _e{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:a}=this._$AD,s=(e?.creationScope??C).importNode(t,!0);S.currentNode=s;let r=S.nextNode(),o=0,n=0,d=a[0];for(;d!==void 0;){if(o===d.index){let l;d.type===2?l=new $(r,r.nextSibling,this,e):d.type===1?l=new d.ctor(r,d.name,d.strings,this,e):d.type===6&&(l=new $e(r,this,e)),this._$AV.push(l),d=a[++n]}o!==d?.index&&(r=S.nextNode(),o++)}return S.currentNode=C,s}p(e){let t=0;for(const a of this._$AV)a!==void 0&&(a.strings!==void 0?(a._$AI(e,a,t),t+=a.strings.length-2):a._$AI(e[t])),t++}}class ${get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,a,s){this.type=2,this._$AH=h,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=a,this.options=s,this._$Cv=s?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=M(this,e,t),E(e)?e===h||e==null||e===""?(this._$AH!==h&&this._$AR(),this._$AH=h):e!==this._$AH&&e!==k&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):Me(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==h&&E(this._$AH)?this._$AA.nextSibling.data=e:this.T(C.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:a}=e,s=typeof a=="number"?this._$AC(e):(a.el===void 0&&(a.el=z.createElement(ge(a.h,a.h[0]),this.options)),a);if(this._$AH?._$AD===s)this._$AH.p(t);else{const r=new _e(s,this),o=r.u(this.options);r.p(t),this.T(o),this._$AH=r}}_$AC(e){let t=oe.get(e.strings);return t===void 0&&oe.set(e.strings,t=new z(e)),t}k(e){q(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let a,s=0;for(const r of e)s===t.length?t.push(a=new $(this.O(D()),this.O(D()),this,this.options)):a=t[s],a._$AI(r),s++;s<t.length&&(this._$AR(a&&a._$AB.nextSibling,s),t.length=s)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const a=ee(e).nextSibling;ee(e).remove(),e=a}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class G{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,a,s,r){this.type=1,this._$AH=h,this._$AN=void 0,this.element=e,this.name=t,this._$AM=s,this.options=r,a.length>2||a[0]!==""||a[1]!==""?(this._$AH=Array(a.length-1).fill(new String),this.strings=a):this._$AH=h}_$AI(e,t=this,a,s){const r=this.strings;let o=!1;if(r===void 0)e=M(this,e,t,0),o=!E(e)||e!==this._$AH&&e!==k,o&&(this._$AH=e);else{const n=e;let d,l;for(e=r[0],d=0;d<r.length-1;d++)l=M(this,n[a+d],t,d),l===k&&(l=this._$AH[d]),o||=!E(l)||l!==this._$AH[d],l===h?e=h:e!==h&&(e+=(l??"")+r[d+1]),this._$AH[d]=l}o&&!s&&this.j(e)}j(e){e===h?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class De extends G{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===h?void 0:e}}class Ee extends G{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==h)}}class ze extends G{constructor(e,t,a,s,r){super(e,t,a,s,r),this.type=5}_$AI(e,t=this){if((e=M(this,e,t,0)??h)===k)return;const a=this._$AH,s=e===h&&a!==h||e.capture!==a.capture||e.once!==a.once||e.passive!==a.passive,r=e!==h&&(a===h||s);s&&this.element.removeEventListener(this.name,this,a),r&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class $e{constructor(e,t,a){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=a}get _$AU(){return this._$AM._$AU}_$AI(e){M(this,e)}}const Re=j.litHtmlPolyfillSupport;Re?.(z,$),(j.litHtmlVersions??=[]).push("3.3.2");const Ne=(i,e,t)=>{const a=t?.renderBefore??e;let s=a._$litPart$;if(s===void 0){const r=t?.renderBefore??null;a._$litPart$=s=new $(e.insertBefore(D(),r),r,void 0,t??{})}return s._$AI(i),s};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Y=globalThis;class P extends I{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Ne(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return k}}P._$litElement$=!0,P.finalized=!0,Y.litElementHydrateSupport?.({LitElement:P});const Ue=Y.litElementPolyfillSupport;Ue?.({LitElement:P});(Y.litElementVersions??=[]).push("4.2.2");/**
+ */const Y=globalThis;class P extends T{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Ne(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return k}}P._$litElement$=!0,P.finalized=!0,Y.litElementHydrateSupport?.({LitElement:P});const Ue=Y.litElementPolyfillSupport;Ue?.({LitElement:P});(Y.litElementVersions??=[]).push("4.2.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const ge=i=>(e,t)=>{t!==void 0?t.addInitializer(()=>{customElements.define(i,e)}):customElements.define(i,e)};/**
+ */const he=i=>(e,t)=>{t!==void 0?t.addInitializer(()=>{customElements.define(i,e)}):customElements.define(i,e)};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
@@ -288,6 +288,36 @@
           <h1>Orus</h1>
           <span class="version-badge">v1.0.1 — March 2026</span>
           <p>Locally Hosted Personal Assistant &amp; 3D Visualisation Engine</p>
+
+          <!-- Key stats -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 14px;text-align:center;">
+            <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:8px;padding:14px 8px;">
+              <div style="font-family:'Orbitron',sans-serif;font-size:28px;color:#a5b4fc;font-weight:700;">40+</div>
+              <div style="font-size:12px;color:#64748b;margin-top:4px;">Integrated Features</div>
+            </div>
+            <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:8px;padding:14px 8px;">
+              <div style="font-family:'Orbitron',sans-serif;font-size:28px;color:#a5b4fc;font-weight:700;">14B</div>
+              <div style="font-size:12px;color:#64748b;margin-top:4px;">Phi-4 Parameters</div>
+            </div>
+            <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:8px;padding:14px 8px;">
+              <div style="font-family:'Orbitron',sans-serif;font-size:28px;color:#a5b4fc;font-weight:700;">100%</div>
+              <div style="font-size:12px;color:#64748b;margin-top:4px;">Local-First Privacy</div>
+            </div>
+          </div>
+
+          <!-- Capability chips -->
+          <div style="display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin:0 0 16px;">
+            <span style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:5px 13px;font-size:12px;color:#a5b4fc;">🎤 Voice AI</span>
+            <span style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:5px 13px;font-size:12px;color:#a5b4fc;">🎨 3D Visualisation</span>
+            <span style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:5px 13px;font-size:12px;color:#a5b4fc;">📄 Document AI</span>
+            <span style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:5px 13px;font-size:12px;color:#a5b4fc;">🧠 Memory System</span>
+            <span style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:5px 13px;font-size:12px;color:#a5b4fc;">⚡ GPU-Accelerated</span>
+            <span style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:5px 13px;font-size:12px;color:#a5b4fc;">🏪 Microsoft Store</span>
+          </div>
+
+          <p style="font-size:12px;color:#64748b;margin-top:4px;">
+            By <strong style="color:#a5b4fc;">Comet Game Studio Ltd</strong> · Powered by Microsoft Phi-4 Multimodal
+          </p>
         </div>
 
         <!-- Card 1: Intro & Data Path -->
@@ -2443,7 +2473,7 @@
 
     .about-card h3 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       color: #a5b4fc;
       margin: 16px 0 8px 0;
@@ -2452,7 +2482,7 @@
     }
 
     .about-card p {
-      font-size: 12px;
+      font-size: 15px;
       color: #cbd5e1;
       line-height: 1.65;
       margin: 0 0 12px 0;
@@ -2465,7 +2495,7 @@
     }
 
     .about-card ul li {
-      font-size: 12px;
+      font-size: 15px;
       color: #cbd5e1;
       margin-bottom: 8px;
       padding-left: 16px;
@@ -2534,7 +2564,7 @@
     /* Content styling (fallback for non-carousel mode) */
     .about-content h2 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
       color: #e2e8f0;
       margin: 0 0 12px 0;
@@ -2543,7 +2573,7 @@
 
     .about-content h3 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       color: #a5b4fc;
       margin: 20px 0 8px 0;
@@ -2635,14 +2665,14 @@
     }
 
     .about-arch-card-title {
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 600;
       color: #a5b4fc;
       margin-bottom: 4px;
     }
 
     .about-arch-card-value {
-      font-size: 11px;
+      font-size: 13px;
       color: #94a3b8;
     }
 
@@ -2693,7 +2723,7 @@
     .tp-license-badge.other { background: rgba(100, 116, 139, 0.12); color: #94a3b8; }
 
     .tp-section-header {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 600;
       color: #818cf8;
       margin: 16px 0 8px;
@@ -2890,13 +2920,13 @@
         overscroll-behavior: contain !important;
         padding: 14px !important;
         touch-action: pan-y !important;
-        font-size: 12px !important;
+        font-size: 14px !important;
       }
       .about-content.scroll-mode h2 {
-        font-size: 15px !important;
+        font-size: 17px !important;
       }
       .about-content.scroll-mode h3 {
-        font-size: 12px !important;
+        font-size: 14px !important;
       }
     }
 
@@ -2913,7 +2943,7 @@
       }
       .about-content.scroll-mode {
         padding: 10px !important;
-        font-size: 11.5px !important;
+        font-size: 13px !important;
       }
 
       .about-nav-side-arrow {
@@ -2935,7 +2965,7 @@
     }
 
     .legal-section h3 {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       color: #c7d2fe;
       margin: 0 0 8px 0;
@@ -2944,7 +2974,7 @@
     }
 
     .legal-section p, .legal-section li {
-      font-size: 12px;
+      font-size: 15px;
       line-height: 1.7;
       color: #94a3b8;
     }
@@ -2976,7 +3006,7 @@
     }
 
     .disclaimer-card-title {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 600;
       color: #c7d2fe;
       margin-bottom: 6px;
@@ -2986,12 +3016,12 @@
     }
 
     .disclaimer-card p {
-      font-size: 11.5px;
+      font-size: 15px;
       line-height: 1.65;
       color: #94a3b8;
       margin: 0;
     }
-  `;y([O({type:Boolean})],f.prototype,"open",2);y([O({type:Boolean,attribute:"full-page"})],f.prototype,"fullPage",2);y([O({type:Object})],f.prototype,"position",2);y([O({type:Object})],f.prototype,"size",2);y([v()],f.prototype,"activeTab",2);y([v()],f.prototype,"isDragging",2);y([v()],f.prototype,"isResizing",2);y([v()],f.prototype,"currentCardIndex",2);y([v()],f.prototype,"isCardDragging",2);f=y([ge("orus-about-dialog")],f);var We=Object.defineProperty,Ve=Object.getOwnPropertyDescriptor,x=(i,e,t,a)=>{for(var s=a>1?void 0:a?Ve(e,t):e,r=i.length-1,o;r>=0;r--)(o=i[r])&&(s=(a?o(e,t,s):o(s))||s);return a&&s&&We(e,t,s),s};const je=!0,qe=!0,Ye=!0,Xe=!0;globalThis.WEBSITE_MODE=je;globalThis.PRODUCTION_MODE=qe;globalThis.NO_INFERENCE_MODE=Ye;globalThis.NO_AUTH_REQUIRED=Xe;let b=class extends P{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._threeScene=null,this._threeCamera=null,this._animationFrameId=0,this._canvasRef=null}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._bootSequence()}disconnectedCallback(){super.disconnectedCallback(),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId)}firstUpdated(){}updated(i){super.updated(i),i.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(i){this._errorMessage=`Failed to load: ${i instanceof Error?i.message:String(i)}`,this._loading=!1}}async _initThreeScene(){try{const i=this.shadowRoot?.querySelector("#cgs-canvas");if(!i)return;this._canvasRef=i;const e=await fe(()=>import("./three.module-CIzvuMnW.js"),[]),t=new e.Scene,a=new e.PerspectiveCamera(60,i.clientWidth/i.clientHeight,.1,1e3);a.position.set(0,0,8);const s=new e.WebGLRenderer({canvas:i,antialias:!0,alpha:!0});s.setSize(i.clientWidth,i.clientHeight),s.setPixelRatio(Math.min(window.devicePixelRatio,2)),s.setClearColor(657935,1);const r=new e.IcosahedronGeometry(2,15),o=new e.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),n=new e.Mesh(r,o);t.add(n);const d=new e.AmbientLight(16777215,.3);t.add(d);const l=new e.PointLight(6333946,1.5,20);l.position.set(5,5,5),t.add(l),this._threeRenderer=s,this._threeScene=t,this._threeCamera=a,this._threeCanvasReady=!0;const u=()=>{this._animationFrameId=requestAnimationFrame(u),!document.hidden&&(n.rotation.y+=.003,n.rotation.x+=.001,s.render(t,a))};u(),new ResizeObserver(()=>{if(!i.parentElement)return;const h=i.clientWidth,m=i.clientHeight;a.aspect=h/m,a.updateProjectionMatrix(),s.setSize(h,m)}).observe(i)}catch{this._threeCanvasReady=!1}}_navigateTo(i){this._activeSection=i}render(){return this._loading?c`
+  `;y([O({type:Boolean})],f.prototype,"open",2);y([O({type:Boolean,attribute:"full-page"})],f.prototype,"fullPage",2);y([O({type:Object})],f.prototype,"position",2);y([O({type:Object})],f.prototype,"size",2);y([v()],f.prototype,"activeTab",2);y([v()],f.prototype,"isDragging",2);y([v()],f.prototype,"isResizing",2);y([v()],f.prototype,"currentCardIndex",2);y([v()],f.prototype,"isCardDragging",2);f=y([he("orus-about-dialog")],f);var We=Object.defineProperty,Ve=Object.getOwnPropertyDescriptor,x=(i,e,t,a)=>{for(var s=a>1?void 0:a?Ve(e,t):e,r=i.length-1,o;r>=0;r--)(o=i[r])&&(s=(a?o(e,t,s):o(s))||s);return a&&s&&We(e,t,s),s};const je=!0,qe=!0,Ye=!0,Xe=!0;globalThis.WEBSITE_MODE=je;globalThis.PRODUCTION_MODE=qe;globalThis.NO_INFERENCE_MODE=Ye;globalThis.NO_AUTH_REQUIRED=Xe;let b=class extends P{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._threeScene=null,this._threeCamera=null,this._animationFrameId=0,this._canvasRef=null}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._bootSequence()}disconnectedCallback(){super.disconnectedCallback(),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId)}firstUpdated(){}updated(i){super.updated(i),i.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(i){this._errorMessage=`Failed to load: ${i instanceof Error?i.message:String(i)}`,this._loading=!1}}async _initThreeScene(){try{const i=this.shadowRoot?.querySelector("#cgs-canvas");if(!i)return;this._canvasRef=i;const e=await fe(()=>import("./three.module-CIzvuMnW.js"),[]),t=new e.Scene,a=new e.PerspectiveCamera(60,i.clientWidth/i.clientHeight,.1,1e3);a.position.set(0,0,8);const s=new e.WebGLRenderer({canvas:i,antialias:!0,alpha:!0});s.setSize(i.clientWidth,i.clientHeight),s.setPixelRatio(Math.min(window.devicePixelRatio,2)),s.setClearColor(657935,1);const r=new e.IcosahedronGeometry(2,15),o=new e.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),n=new e.Mesh(r,o);t.add(n);const d=new e.AmbientLight(16777215,.3);t.add(d);const l=new e.PointLight(6333946,1.5,20);l.position.set(5,5,5),t.add(l),this._threeRenderer=s,this._threeScene=t,this._threeCamera=a,this._threeCanvasReady=!0;const u=()=>{this._animationFrameId=requestAnimationFrame(u),!document.hidden&&(n.rotation.y+=.003,n.rotation.x+=.001,s.render(t,a))};u(),new ResizeObserver(()=>{if(!i.parentElement)return;const g=i.clientWidth,m=i.clientHeight;a.aspect=g/m,a.updateProjectionMatrix(),s.setSize(g,m)}).observe(i)}catch{this._threeCanvasReady=!1}}_navigateTo(i){this._activeSection=i}render(){return this._loading?c`
                 <div class="loading-overlay">
                     <div class="loading-spinner"></div>
                     <div class="loading-text">${this._loadingMessage}</div>
@@ -3018,7 +3048,7 @@
                 ${this._activeSection!=="orus-ai"?c`
                 <nav class="cgs-nav">
                     <div class="cgs-logo" @click=${()=>this._navigateTo("home")}>
-                        Comet Game Studio Ltd
+                        Comet Game Studio
                     </div>
                     <div class="cgs-nav-links">
                         <button class="cgs-nav-link ${this._activeSection==="home"?"active":""}"
@@ -3731,9 +3761,9 @@
 
         .cgs-hero-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            color: #e2e8f0;
+            color: #ffffff;
             margin-bottom: 16px;
             letter-spacing: 2px;
         }
@@ -3747,9 +3777,11 @@
         }
 
         .cgs-hero-tagline {
-            font-size: 14px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px;
+            font-weight: 600;
             color: #6366f1;
-            letter-spacing: 3px;
+            letter-spacing: 6px;
             text-transform: uppercase;
             margin-bottom: 48px;
         }
@@ -4161,7 +4193,7 @@
                 max-width: 100%;
             }
             .cgs-hero-title {
-                font-size: 26px;
+                font-size: 30px;
                 letter-spacing: 1px;
             }
             .cgs-hero-subtitle {
@@ -4169,8 +4201,8 @@
                 margin-bottom: 20px;
             }
             .cgs-hero-tagline {
-                font-size: 12px;
-                letter-spacing: 2px;
+                font-size: 18px;
+                letter-spacing: 4px;
                 margin-bottom: 28px;
             }
 
@@ -4305,14 +4337,14 @@
             }
 
             .cgs-hero-title {
-                font-size: 22px;
+                font-size: 24px;
             }
             .cgs-hero-subtitle {
                 font-size: 15px;
             }
             .cgs-hero-tagline {
-                font-size: 11px;
-                letter-spacing: 1.5px;
+                font-size: 15px;
+                letter-spacing: 3px;
             }
 
             .cgs-content {
@@ -4413,4 +4445,4 @@
             color: #94a3b8;
             line-height: 1.7;
         }
-    `;x([v()],b.prototype,"_loading",2);x([v()],b.prototype,"_loadingMessage",2);x([v()],b.prototype,"_loadingProgress",2);x([v()],b.prototype,"_ready",2);x([v()],b.prototype,"_errorMessage",2);x([v()],b.prototype,"_activeSection",2);x([v()],b.prototype,"_threeCanvasReady",2);x([v()],b.prototype,"_aboutOpen",2);x([O({type:String,attribute:"site-url"})],b.prototype,"siteUrl",2);b=x([ge("orus-cgs-home")],b);const ne={log:console.log.bind(console),warn:console.warn.bind(console),error:console.error.bind(console)};function Ke(){const i=()=>{};console.debug=i,console.trace=i,console.dir=i,console.dirxml=i,console.table=i;try{console.clear()}catch{}ne.log("%c Comet Game Studio %c Orus AI System %c","background: #6366f1; color: #fff; padding: 4px 8px; border-radius: 4px 0 0 4px; font-weight: 700;","background: #1e1b4b; color: #c4b5fd; padding: 4px 8px; border-radius: 0 4px 4px 0;",""),ne.log("%chttps://www.cometgamestudio.com","color: #94a3b8; font-size: 11px;")}function Qe(){document.addEventListener("keydown",i=>{i.ctrlKey&&!i.shiftKey&&(i.key==="u"||i.key==="U")&&i.preventDefault()},!0),document.addEventListener("contextmenu",i=>(i.preventDefault(),!1))}function Je(){typeof performance<"u"&&performance.clearResourceTimings&&setInterval(()=>{try{performance.clearResourceTimings()}catch{}},1e4)}Ke();Qe();Je();
+    `;x([v()],b.prototype,"_loading",2);x([v()],b.prototype,"_loadingMessage",2);x([v()],b.prototype,"_loadingProgress",2);x([v()],b.prototype,"_ready",2);x([v()],b.prototype,"_errorMessage",2);x([v()],b.prototype,"_activeSection",2);x([v()],b.prototype,"_threeCanvasReady",2);x([v()],b.prototype,"_aboutOpen",2);x([O({type:String,attribute:"site-url"})],b.prototype,"siteUrl",2);b=x([he("orus-cgs-home")],b);const ne={log:console.log.bind(console),warn:console.warn.bind(console),error:console.error.bind(console)};function Ke(){const i=()=>{};console.debug=i,console.trace=i,console.dir=i,console.dirxml=i,console.table=i;try{console.clear()}catch{}ne.log("%c Comet Game Studio %c Orus AI System %c","background: #6366f1; color: #fff; padding: 4px 8px; border-radius: 4px 0 0 4px; font-weight: 700;","background: #1e1b4b; color: #c4b5fd; padding: 4px 8px; border-radius: 0 4px 4px 0;",""),ne.log("%chttps://www.cometgamestudio.com","color: #94a3b8; font-size: 11px;")}function Qe(){document.addEventListener("keydown",i=>{i.ctrlKey&&!i.shiftKey&&(i.key==="u"||i.key==="U")&&i.preventDefault()},!0),document.addEventListener("contextmenu",i=>(i.preventDefault(),!1))}function Je(){typeof performance<"u"&&performance.clearResourceTimings&&setInterval(()=>{try{performance.clearResourceTimings()}catch{}},1e4)}Ke();Qe();Je();
