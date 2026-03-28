@@ -1,34 +1,34 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))s(r);new MutationObserver(r=>{for(const o of r)if(o.type==="childList")for(const n of o.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&s(n)}).observe(document,{childList:!0,subtree:!0});function a(r){const o={};return r.integrity&&(o.integrity=r.integrity),r.referrerPolicy&&(o.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?o.credentials="include":r.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function s(r){if(r.ep)return;r.ep=!0;const o=a(r);fetch(r.href,o)}})();const ke="modulepreload",Te=function(i){return"/cgs-public/"+i},se={},re=function(t,a,s){let r=Promise.resolve();if(a&&a.length>0){let n=function(p){return Promise.all(p.map(g=>Promise.resolve(g).then(u=>({status:"fulfilled",value:u}),u=>({status:"rejected",reason:u}))))};document.getElementsByTagName("link");const d=document.querySelector("meta[property=csp-nonce]"),l=d?.nonce||d?.getAttribute("nonce");r=n(a.map(p=>{if(p=Te(p),p in se)return;se[p]=!0;const g=p.endsWith(".css"),u=g?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${p}"]${u}`))return;const h=document.createElement("link");if(h.rel=g?"stylesheet":ke,g||(h.as="script"),h.crossOrigin="",h.href=p,l&&h.setAttribute("nonce",l),document.head.appendChild(h),g)return new Promise((y,I)=>{h.addEventListener("load",y),h.addEventListener("error",()=>I(new Error(`Unable to preload CSS for ${p}`)))})}))}function o(n){const d=new Event("vite:preloadError",{cancelable:!0});if(d.payload=n,window.dispatchEvent(d),!d.defaultPrevented)throw n}return r.then(n=>{for(const d of n||[])d.status==="rejected"&&o(d.reason);return t().catch(o)})};/**
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))s(o);new MutationObserver(o=>{for(const r of o)if(r.type==="childList")for(const n of r.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&s(n)}).observe(document,{childList:!0,subtree:!0});function i(o){const r={};return o.integrity&&(r.integrity=o.integrity),o.referrerPolicy&&(r.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?r.credentials="include":o.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function s(o){if(o.ep)return;o.ep=!0;const r=i(o);fetch(o.href,r)}})();const Se="modulepreload",ke=function(a){return"/cgs-public/"+a},ae={},se=function(t,i,s){let o=Promise.resolve();if(i&&i.length>0){let n=function(p){return Promise.all(p.map(g=>Promise.resolve(g).then(u=>({status:"fulfilled",value:u}),u=>({status:"rejected",reason:u}))))};document.getElementsByTagName("link");const c=document.querySelector("meta[property=csp-nonce]"),d=c?.nonce||c?.getAttribute("nonce");o=n(i.map(p=>{if(p=ke(p),p in ae)return;ae[p]=!0;const g=p.endsWith(".css"),u=g?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${p}"]${u}`))return;const h=document.createElement("link");if(h.rel=g?"stylesheet":Se,g||(h.as="script"),h.crossOrigin="",h.href=p,d&&h.setAttribute("nonce",d),document.head.appendChild(h),g)return new Promise((y,I)=>{h.addEventListener("load",y),h.addEventListener("error",()=>I(new Error(`Unable to preload CSS for ${p}`)))})}))}function r(n){const c=new Event("vite:preloadError",{cancelable:!0});if(c.payload=n,window.dispatchEvent(c),!c.defaultPrevented)throw n}return o.then(n=>{for(const c of n||[])c.status==="rejected"&&r(c.reason);return t().catch(r)})};/**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const H=globalThis,J=H.ShadowRoot&&(H.ShadyCSS===void 0||H.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,Z=Symbol(),oe=new WeakMap;let ye=class{constructor(t,a,s){if(this._$cssResult$=!0,s!==Z)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=a}get styleSheet(){let t=this.o;const a=this.t;if(J&&t===void 0){const s=a!==void 0&&a.length===1;s&&(t=oe.get(a)),t===void 0&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),s&&oe.set(a,t))}return t}toString(){return this.cssText}};const Ce=i=>new ye(typeof i=="string"?i:i+"",void 0,Z),xe=(i,...t)=>{const a=i.length===1?i[0]:t.reduce((s,r,o)=>s+(n=>{if(n._$cssResult$===!0)return n.cssText;if(typeof n=="number")return n;throw Error("Value passed to 'css' function must be a 'css' function result: "+n+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(r)+i[o+1],i[0]);return new ye(a,i,Z)},Ie=(i,t)=>{if(J)i.adoptedStyleSheets=t.map(a=>a instanceof CSSStyleSheet?a:a.styleSheet);else for(const a of t){const s=document.createElement("style"),r=H.litNonce;r!==void 0&&s.setAttribute("nonce",r),s.textContent=a.cssText,i.appendChild(s)}},ne=J?i=>i:i=>i instanceof CSSStyleSheet?(t=>{let a="";for(const s of t.cssRules)a+=s.cssText;return Ce(a)})(i):i;/**
+ */const U=globalThis,K=U.ShadowRoot&&(U.ShadyCSS===void 0||U.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,J=Symbol(),oe=new WeakMap;let ve=class{constructor(t,i,s){if(this._$cssResult$=!0,s!==J)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=i}get styleSheet(){let t=this.o;const i=this.t;if(K&&t===void 0){const s=i!==void 0&&i.length===1;s&&(t=oe.get(i)),t===void 0&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),s&&oe.set(i,t))}return t}toString(){return this.cssText}};const Te=a=>new ve(typeof a=="string"?a:a+"",void 0,J),ye=(a,...t)=>{const i=a.length===1?a[0]:t.reduce((s,o,r)=>s+(n=>{if(n._$cssResult$===!0)return n.cssText;if(typeof n=="number")return n;throw Error("Value passed to 'css' function must be a 'css' function result: "+n+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(o)+a[r+1],a[0]);return new ve(i,a,J)},Ce=(a,t)=>{if(K)a.adoptedStyleSheets=t.map(i=>i instanceof CSSStyleSheet?i:i.styleSheet);else for(const i of t){const s=document.createElement("style"),o=U.litNonce;o!==void 0&&s.setAttribute("nonce",o),s.textContent=i.cssText,a.appendChild(s)}},re=K?a=>a:a=>a instanceof CSSStyleSheet?(t=>{let i="";for(const s of t.cssRules)i+=s.cssText;return Te(i)})(a):a;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:Pe,defineProperty:ze,getOwnPropertyDescriptor:Me,getOwnPropertyNames:Oe,getOwnPropertySymbols:De,getPrototypeOf:Le}=Object,W=globalThis,ce=W.trustedTypes,Ee=ce?ce.emptyScript:"",Re=W.reactiveElementPolyfillSupport,L=(i,t)=>i,B={toAttribute(i,t){switch(t){case Boolean:i=i?Ee:null;break;case Object:case Array:i=i==null?i:JSON.stringify(i)}return i},fromAttribute(i,t){let a=i;switch(t){case Boolean:a=i!==null;break;case Number:a=i===null?null:Number(i);break;case Object:case Array:try{a=JSON.parse(i)}catch{a=null}}return a}},ee=(i,t)=>!Pe(i,t),de={attribute:!0,type:String,converter:B,reflect:!1,useDefault:!1,hasChanged:ee};Symbol.metadata??=Symbol("metadata"),W.litPropertyMetadata??=new WeakMap;let P=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,a=de){if(a.state&&(a.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((a=Object.create(a)).wrapped=!0),this.elementProperties.set(t,a),!a.noAccessor){const s=Symbol(),r=this.getPropertyDescriptor(t,s,a);r!==void 0&&ze(this.prototype,t,r)}}static getPropertyDescriptor(t,a,s){const{get:r,set:o}=Me(this.prototype,t)??{get(){return this[a]},set(n){this[a]=n}};return{get:r,set(n){const d=r?.call(this);o?.call(this,n),this.requestUpdate(t,d,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??de}static _$Ei(){if(this.hasOwnProperty(L("elementProperties")))return;const t=Le(this);t.finalize(),t.l!==void 0&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(L("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(L("properties"))){const a=this.properties,s=[...Oe(a),...De(a)];for(const r of s)this.createProperty(r,a[r])}const t=this[Symbol.metadata];if(t!==null){const a=litPropertyMetadata.get(t);if(a!==void 0)for(const[s,r]of a)this.elementProperties.set(s,r)}this._$Eh=new Map;for(const[a,s]of this.elementProperties){const r=this._$Eu(a,s);r!==void 0&&this._$Eh.set(r,a)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const a=[];if(Array.isArray(t)){const s=new Set(t.flat(1/0).reverse());for(const r of s)a.unshift(ne(r))}else t!==void 0&&a.push(ne(t));return a}static _$Eu(t,a){const s=a.attribute;return s===!1?void 0:typeof s=="string"?s:typeof t=="string"?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),this.renderRoot!==void 0&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,a=this.constructor.elementProperties;for(const s of a.keys())this.hasOwnProperty(s)&&(t.set(s,this[s]),delete this[s]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return Ie(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,a,s){this._$AK(t,s)}_$ET(t,a){const s=this.constructor.elementProperties.get(t),r=this.constructor._$Eu(t,s);if(r!==void 0&&s.reflect===!0){const o=(s.converter?.toAttribute!==void 0?s.converter:B).toAttribute(a,s.type);this._$Em=t,o==null?this.removeAttribute(r):this.setAttribute(r,o),this._$Em=null}}_$AK(t,a){const s=this.constructor,r=s._$Eh.get(t);if(r!==void 0&&this._$Em!==r){const o=s.getPropertyOptions(r),n=typeof o.converter=="function"?{fromAttribute:o.converter}:o.converter?.fromAttribute!==void 0?o.converter:B;this._$Em=r;const d=n.fromAttribute(a,o.type);this[r]=d??this._$Ej?.get(r)??d,this._$Em=null}}requestUpdate(t,a,s,r=!1,o){if(t!==void 0){const n=this.constructor;if(r===!1&&(o=this[t]),s??=n.getPropertyOptions(t),!((s.hasChanged??ee)(o,a)||s.useDefault&&s.reflect&&o===this._$Ej?.get(t)&&!this.hasAttribute(n._$Eu(t,s))))return;this.C(t,a,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(t,a,{useDefault:s,reflect:r,wrapped:o},n){s&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,n??a??this[t]),o!==!0||n!==void 0)||(this._$AL.has(t)||(this.hasUpdated||s||(a=void 0),this._$AL.set(t,a)),r===!0&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(a){Promise.reject(a)}const t=this.scheduleUpdate();return t!=null&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[r,o]of this._$Ep)this[r]=o;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[r,o]of s){const{wrapped:n}=o,d=this[r];n!==!0||this._$AL.has(r)||d===void 0||this.C(r,void 0,o,d)}}let t=!1;const a=this._$AL;try{t=this.shouldUpdate(a),t?(this.willUpdate(a),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(a)):this._$EM()}catch(s){throw t=!1,this._$EM(),s}t&&this._$AE(a)}willUpdate(t){}_$AE(t){this._$EO?.forEach(a=>a.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(a=>this._$ET(a,this[a])),this._$EM()}updated(t){}firstUpdated(t){}};P.elementStyles=[],P.shadowRootOptions={mode:"open"},P[L("elementProperties")]=new Map,P[L("finalized")]=new Map,Re?.({ReactiveElement:P}),(W.reactiveElementVersions??=[]).push("2.1.2");/**
+ */const{is:Ie,defineProperty:Pe,getOwnPropertyDescriptor:ze,getOwnPropertyNames:Me,getOwnPropertySymbols:Oe,getPrototypeOf:De}=Object,F=globalThis,ne=F.trustedTypes,Le=ne?ne.emptyScript:"",Ee=F.reactiveElementPolyfillSupport,L=(a,t)=>a,H={toAttribute(a,t){switch(t){case Boolean:a=a?Le:null;break;case Object:case Array:a=a==null?a:JSON.stringify(a)}return a},fromAttribute(a,t){let i=a;switch(t){case Boolean:i=a!==null;break;case Number:i=a===null?null:Number(a);break;case Object:case Array:try{i=JSON.parse(a)}catch{i=null}}return i}},Z=(a,t)=>!Ie(a,t),ce={attribute:!0,type:String,converter:H,reflect:!1,useDefault:!1,hasChanged:Z};Symbol.metadata??=Symbol("metadata"),F.litPropertyMetadata??=new WeakMap;let P=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,i=ce){if(i.state&&(i.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((i=Object.create(i)).wrapped=!0),this.elementProperties.set(t,i),!i.noAccessor){const s=Symbol(),o=this.getPropertyDescriptor(t,s,i);o!==void 0&&Pe(this.prototype,t,o)}}static getPropertyDescriptor(t,i,s){const{get:o,set:r}=ze(this.prototype,t)??{get(){return this[i]},set(n){this[i]=n}};return{get:o,set(n){const c=o?.call(this);r?.call(this,n),this.requestUpdate(t,c,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??ce}static _$Ei(){if(this.hasOwnProperty(L("elementProperties")))return;const t=De(this);t.finalize(),t.l!==void 0&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(L("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(L("properties"))){const i=this.properties,s=[...Me(i),...Oe(i)];for(const o of s)this.createProperty(o,i[o])}const t=this[Symbol.metadata];if(t!==null){const i=litPropertyMetadata.get(t);if(i!==void 0)for(const[s,o]of i)this.elementProperties.set(s,o)}this._$Eh=new Map;for(const[i,s]of this.elementProperties){const o=this._$Eu(i,s);o!==void 0&&this._$Eh.set(o,i)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const i=[];if(Array.isArray(t)){const s=new Set(t.flat(1/0).reverse());for(const o of s)i.unshift(re(o))}else t!==void 0&&i.push(re(t));return i}static _$Eu(t,i){const s=i.attribute;return s===!1?void 0:typeof s=="string"?s:typeof t=="string"?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),this.renderRoot!==void 0&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,i=this.constructor.elementProperties;for(const s of i.keys())this.hasOwnProperty(s)&&(t.set(s,this[s]),delete this[s]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return Ce(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,i,s){this._$AK(t,s)}_$ET(t,i){const s=this.constructor.elementProperties.get(t),o=this.constructor._$Eu(t,s);if(o!==void 0&&s.reflect===!0){const r=(s.converter?.toAttribute!==void 0?s.converter:H).toAttribute(i,s.type);this._$Em=t,r==null?this.removeAttribute(o):this.setAttribute(o,r),this._$Em=null}}_$AK(t,i){const s=this.constructor,o=s._$Eh.get(t);if(o!==void 0&&this._$Em!==o){const r=s.getPropertyOptions(o),n=typeof r.converter=="function"?{fromAttribute:r.converter}:r.converter?.fromAttribute!==void 0?r.converter:H;this._$Em=o;const c=n.fromAttribute(i,r.type);this[o]=c??this._$Ej?.get(o)??c,this._$Em=null}}requestUpdate(t,i,s,o=!1,r){if(t!==void 0){const n=this.constructor;if(o===!1&&(r=this[t]),s??=n.getPropertyOptions(t),!((s.hasChanged??Z)(r,i)||s.useDefault&&s.reflect&&r===this._$Ej?.get(t)&&!this.hasAttribute(n._$Eu(t,s))))return;this.C(t,i,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(t,i,{useDefault:s,reflect:o,wrapped:r},n){s&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,n??i??this[t]),r!==!0||n!==void 0)||(this._$AL.has(t)||(this.hasUpdated||s||(i=void 0),this._$AL.set(t,i)),o===!0&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(i){Promise.reject(i)}const t=this.scheduleUpdate();return t!=null&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[o,r]of this._$Ep)this[o]=r;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[o,r]of s){const{wrapped:n}=r,c=this[o];n!==!0||this._$AL.has(o)||c===void 0||this.C(o,void 0,r,c)}}let t=!1;const i=this._$AL;try{t=this.shouldUpdate(i),t?(this.willUpdate(i),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(i)):this._$EM()}catch(s){throw t=!1,this._$EM(),s}t&&this._$AE(i)}willUpdate(t){}_$AE(t){this._$EO?.forEach(i=>i.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(i=>this._$ET(i,this[i])),this._$EM()}updated(t){}firstUpdated(t){}};P.elementStyles=[],P.shadowRootOptions={mode:"open"},P[L("elementProperties")]=new Map,P[L("finalized")]=new Map,Ee?.({ReactiveElement:P}),(F.reactiveElementVersions??=[]).push("2.1.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const te=globalThis,le=i=>i,F=te.trustedTypes,pe=F?F.createPolicy("lit-html",{createHTML:i=>i}):void 0,we="$lit$",$=`lit$${Math.random().toFixed(9).slice(2)}$`,$e="?"+$,qe=`<${$e}>`,T=document,E=()=>T.createComment(""),R=i=>i===null||typeof i!="object"&&typeof i!="function",ie=Array.isArray,Ue=i=>ie(i)||typeof i?.[Symbol.iterator]=="function",j=`[ 	
-\f\r]`,D=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,ue=/-->/g,ge=/>/g,_=RegExp(`>|${j}(?:([^\\s"'>=/]+)(${j}*=${j}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),he=/'/g,me=/"/g,_e=/^(?:script|style|textarea|title)$/i,Ne=i=>(t,...a)=>({_$litType$:i,strings:t,values:a}),c=Ne(1),M=Symbol.for("lit-noChange"),f=Symbol.for("lit-nothing"),be=new WeakMap,S=T.createTreeWalker(T,129);function Ae(i,t){if(!ie(i)||!i.hasOwnProperty("raw"))throw Error("invalid template strings array");return pe!==void 0?pe.createHTML(t):t}const He=(i,t)=>{const a=i.length-1,s=[];let r,o=t===2?"<svg>":t===3?"<math>":"",n=D;for(let d=0;d<a;d++){const l=i[d];let p,g,u=-1,h=0;for(;h<l.length&&(n.lastIndex=h,g=n.exec(l),g!==null);)h=n.lastIndex,n===D?g[1]==="!--"?n=ue:g[1]!==void 0?n=ge:g[2]!==void 0?(_e.test(g[2])&&(r=RegExp("</"+g[2],"g")),n=_):g[3]!==void 0&&(n=_):n===_?g[0]===">"?(n=r??D,u=-1):g[1]===void 0?u=-2:(u=n.lastIndex-g[2].length,p=g[1],n=g[3]===void 0?_:g[3]==='"'?me:he):n===me||n===he?n=_:n===ue||n===ge?n=D:(n=_,r=void 0);const y=n===_&&i[d+1].startsWith("/>")?" ":"";o+=n===D?l+qe:u>=0?(s.push(p),l.slice(0,u)+we+l.slice(u)+$+y):l+$+(u===-2?d:y)}return[Ae(i,o+(i[a]||"<?>")+(t===2?"</svg>":t===3?"</math>":"")),s]};class q{constructor({strings:t,_$litType$:a},s){let r;this.parts=[];let o=0,n=0;const d=t.length-1,l=this.parts,[p,g]=He(t,a);if(this.el=q.createElement(p,s),S.currentNode=this.el.content,a===2||a===3){const u=this.el.content.firstChild;u.replaceWith(...u.childNodes)}for(;(r=S.nextNode())!==null&&l.length<d;){if(r.nodeType===1){if(r.hasAttributes())for(const u of r.getAttributeNames())if(u.endsWith(we)){const h=g[n++],y=r.getAttribute(u).split($),I=/([.?@])?(.*)/.exec(h);l.push({type:1,index:o,name:I[2],strings:y,ctor:I[1]==="."?Be:I[1]==="?"?Fe:I[1]==="@"?We:V}),r.removeAttribute(u)}else u.startsWith($)&&(l.push({type:6,index:o}),r.removeAttribute(u));if(_e.test(r.tagName)){const u=r.textContent.split($),h=u.length-1;if(h>0){r.textContent=F?F.emptyScript:"";for(let y=0;y<h;y++)r.append(u[y],E()),S.nextNode(),l.push({type:2,index:++o});r.append(u[h],E())}}}else if(r.nodeType===8)if(r.data===$e)l.push({type:2,index:o});else{let u=-1;for(;(u=r.data.indexOf($,u+1))!==-1;)l.push({type:7,index:o}),u+=$.length-1}o++}}static createElement(t,a){const s=T.createElement("template");return s.innerHTML=t,s}}function O(i,t,a=i,s){if(t===M)return t;let r=s!==void 0?a._$Co?.[s]:a._$Cl;const o=R(t)?void 0:t._$litDirective$;return r?.constructor!==o&&(r?._$AO?.(!1),o===void 0?r=void 0:(r=new o(i),r._$AT(i,a,s)),s!==void 0?(a._$Co??=[])[s]=r:a._$Cl=r),r!==void 0&&(t=O(i,r._$AS(i,t.values),r,s)),t}class Ge{constructor(t,a){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=a}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:a},parts:s}=this._$AD,r=(t?.creationScope??T).importNode(a,!0);S.currentNode=r;let o=S.nextNode(),n=0,d=0,l=s[0];for(;l!==void 0;){if(n===l.index){let p;l.type===2?p=new U(o,o.nextSibling,this,t):l.type===1?p=new l.ctor(o,l.name,l.strings,this,t):l.type===6&&(p=new Ve(o,this,t)),this._$AV.push(p),l=s[++d]}n!==l?.index&&(o=S.nextNode(),n++)}return S.currentNode=T,r}p(t){let a=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(t,s,a),a+=s.strings.length-2):s._$AI(t[a])),a++}}class U{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,a,s,r){this.type=2,this._$AH=f,this._$AN=void 0,this._$AA=t,this._$AB=a,this._$AM=s,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const a=this._$AM;return a!==void 0&&t?.nodeType===11&&(t=a.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,a=this){t=O(this,t,a),R(t)?t===f||t==null||t===""?(this._$AH!==f&&this._$AR(),this._$AH=f):t!==this._$AH&&t!==M&&this._(t):t._$litType$!==void 0?this.$(t):t.nodeType!==void 0?this.T(t):Ue(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==f&&R(this._$AH)?this._$AA.nextSibling.data=t:this.T(T.createTextNode(t)),this._$AH=t}$(t){const{values:a,_$litType$:s}=t,r=typeof s=="number"?this._$AC(t):(s.el===void 0&&(s.el=q.createElement(Ae(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===r)this._$AH.p(a);else{const o=new Ge(r,this),n=o.u(this.options);o.p(a),this.T(n),this._$AH=o}}_$AC(t){let a=be.get(t.strings);return a===void 0&&be.set(t.strings,a=new q(t)),a}k(t){ie(this._$AH)||(this._$AH=[],this._$AR());const a=this._$AH;let s,r=0;for(const o of t)r===a.length?a.push(s=new U(this.O(E()),this.O(E()),this,this.options)):s=a[r],s._$AI(o),r++;r<a.length&&(this._$AR(s&&s._$AB.nextSibling,r),a.length=r)}_$AR(t=this._$AA.nextSibling,a){for(this._$AP?.(!1,!0,a);t!==this._$AB;){const s=le(t).nextSibling;le(t).remove(),t=s}}setConnected(t){this._$AM===void 0&&(this._$Cv=t,this._$AP?.(t))}}class V{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,a,s,r,o){this.type=1,this._$AH=f,this._$AN=void 0,this.element=t,this.name=a,this._$AM=r,this.options=o,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=f}_$AI(t,a=this,s,r){const o=this.strings;let n=!1;if(o===void 0)t=O(this,t,a,0),n=!R(t)||t!==this._$AH&&t!==M,n&&(this._$AH=t);else{const d=t;let l,p;for(t=o[0],l=0;l<o.length-1;l++)p=O(this,d[s+l],a,l),p===M&&(p=this._$AH[l]),n||=!R(p)||p!==this._$AH[l],p===f?t=f:t!==f&&(t+=(p??"")+o[l+1]),this._$AH[l]=p}n&&!r&&this.j(t)}j(t){t===f?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class Be extends V{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===f?void 0:t}}class Fe extends V{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==f)}}class We extends V{constructor(t,a,s,r,o){super(t,a,s,r,o),this.type=5}_$AI(t,a=this){if((t=O(this,t,a,0)??f)===M)return;const s=this._$AH,r=t===f&&s!==f||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,o=t!==f&&(s===f||r);r&&this.element.removeEventListener(this.name,this,s),o&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class Ve{constructor(t,a,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=a,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(t){O(this,t)}}const je=te.litHtmlPolyfillSupport;je?.(q,U),(te.litHtmlVersions??=[]).push("3.3.2");const Qe=(i,t,a)=>{const s=a?.renderBefore??t;let r=s._$litPart$;if(r===void 0){const o=a?.renderBefore??null;s._$litPart$=r=new U(t.insertBefore(E(),o),o,void 0,a??{})}return r._$AI(i),r};/**
+ */const ee=globalThis,de=a=>a,B=ee.trustedTypes,le=B?B.createPolicy("lit-html",{createHTML:a=>a}):void 0,xe="$lit$",$=`lit$${Math.random().toFixed(9).slice(2)}$`,we="?"+$,qe=`<${we}>`,T=document,E=()=>T.createComment(""),q=a=>a===null||typeof a!="object"&&typeof a!="function",te=Array.isArray,Re=a=>te(a)||typeof a?.[Symbol.iterator]=="function",j=`[ 	
+\f\r]`,D=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,pe=/-->/g,ue=/>/g,_=RegExp(`>|${j}(?:([^\\s"'>=/]+)(${j}*=${j}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`,"g"),ge=/'/g,he=/"/g,$e=/^(?:script|style|textarea|title)$/i,Ne=a=>(t,...i)=>({_$litType$:a,strings:t,values:i}),l=Ne(1),M=Symbol.for("lit-noChange"),m=Symbol.for("lit-nothing"),me=new WeakMap,S=T.createTreeWalker(T,129);function _e(a,t){if(!te(a)||!a.hasOwnProperty("raw"))throw Error("invalid template strings array");return le!==void 0?le.createHTML(t):t}const Ue=(a,t)=>{const i=a.length-1,s=[];let o,r=t===2?"<svg>":t===3?"<math>":"",n=D;for(let c=0;c<i;c++){const d=a[c];let p,g,u=-1,h=0;for(;h<d.length&&(n.lastIndex=h,g=n.exec(d),g!==null);)h=n.lastIndex,n===D?g[1]==="!--"?n=pe:g[1]!==void 0?n=ue:g[2]!==void 0?($e.test(g[2])&&(o=RegExp("</"+g[2],"g")),n=_):g[3]!==void 0&&(n=_):n===_?g[0]===">"?(n=o??D,u=-1):g[1]===void 0?u=-2:(u=n.lastIndex-g[2].length,p=g[1],n=g[3]===void 0?_:g[3]==='"'?he:ge):n===he||n===ge?n=_:n===pe||n===ue?n=D:(n=_,o=void 0);const y=n===_&&a[c+1].startsWith("/>")?" ":"";r+=n===D?d+qe:u>=0?(s.push(p),d.slice(0,u)+xe+d.slice(u)+$+y):d+$+(u===-2?c:y)}return[_e(a,r+(a[i]||"<?>")+(t===2?"</svg>":t===3?"</math>":"")),s]};class R{constructor({strings:t,_$litType$:i},s){let o;this.parts=[];let r=0,n=0;const c=t.length-1,d=this.parts,[p,g]=Ue(t,i);if(this.el=R.createElement(p,s),S.currentNode=this.el.content,i===2||i===3){const u=this.el.content.firstChild;u.replaceWith(...u.childNodes)}for(;(o=S.nextNode())!==null&&d.length<c;){if(o.nodeType===1){if(o.hasAttributes())for(const u of o.getAttributeNames())if(u.endsWith(xe)){const h=g[n++],y=o.getAttribute(u).split($),I=/([.?@])?(.*)/.exec(h);d.push({type:1,index:r,name:I[2],strings:y,ctor:I[1]==="."?He:I[1]==="?"?Be:I[1]==="@"?Fe:W}),o.removeAttribute(u)}else u.startsWith($)&&(d.push({type:6,index:r}),o.removeAttribute(u));if($e.test(o.tagName)){const u=o.textContent.split($),h=u.length-1;if(h>0){o.textContent=B?B.emptyScript:"";for(let y=0;y<h;y++)o.append(u[y],E()),S.nextNode(),d.push({type:2,index:++r});o.append(u[h],E())}}}else if(o.nodeType===8)if(o.data===we)d.push({type:2,index:r});else{let u=-1;for(;(u=o.data.indexOf($,u+1))!==-1;)d.push({type:7,index:r}),u+=$.length-1}r++}}static createElement(t,i){const s=T.createElement("template");return s.innerHTML=t,s}}function O(a,t,i=a,s){if(t===M)return t;let o=s!==void 0?i._$Co?.[s]:i._$Cl;const r=q(t)?void 0:t._$litDirective$;return o?.constructor!==r&&(o?._$AO?.(!1),r===void 0?o=void 0:(o=new r(a),o._$AT(a,i,s)),s!==void 0?(i._$Co??=[])[s]=o:i._$Cl=o),o!==void 0&&(t=O(a,o._$AS(a,t.values),o,s)),t}class Ge{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,o=(t?.creationScope??T).importNode(i,!0);S.currentNode=o;let r=S.nextNode(),n=0,c=0,d=s[0];for(;d!==void 0;){if(n===d.index){let p;d.type===2?p=new N(r,r.nextSibling,this,t):d.type===1?p=new d.ctor(r,d.name,d.strings,this,t):d.type===6&&(p=new We(r,this,t)),this._$AV.push(p),d=s[++c]}n!==d?.index&&(r=S.nextNode(),n++)}return S.currentNode=T,o}p(t){let i=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++}}class N{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,o){this.type=2,this._$AH=m,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return i!==void 0&&t?.nodeType===11&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=O(this,t,i),q(t)?t===m||t==null||t===""?(this._$AH!==m&&this._$AR(),this._$AH=m):t!==this._$AH&&t!==M&&this._(t):t._$litType$!==void 0?this.$(t):t.nodeType!==void 0?this.T(t):Re(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==m&&q(this._$AH)?this._$AA.nextSibling.data=t:this.T(T.createTextNode(t)),this._$AH=t}$(t){const{values:i,_$litType$:s}=t,o=typeof s=="number"?this._$AC(t):(s.el===void 0&&(s.el=R.createElement(_e(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===o)this._$AH.p(i);else{const r=new Ge(o,this),n=r.u(this.options);r.p(i),this.T(n),this._$AH=r}}_$AC(t){let i=me.get(t.strings);return i===void 0&&me.set(t.strings,i=new R(t)),i}k(t){te(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,o=0;for(const r of t)o===i.length?i.push(s=new N(this.O(E()),this.O(E()),this,this.options)):s=i[o],s._$AI(r),o++;o<i.length&&(this._$AR(s&&s._$AB.nextSibling,o),i.length=o)}_$AR(t=this._$AA.nextSibling,i){for(this._$AP?.(!1,!0,i);t!==this._$AB;){const s=de(t).nextSibling;de(t).remove(),t=s}}setConnected(t){this._$AM===void 0&&(this._$Cv=t,this._$AP?.(t))}}class W{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,o,r){this.type=1,this._$AH=m,this._$AN=void 0,this.element=t,this.name=i,this._$AM=o,this.options=r,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=m}_$AI(t,i=this,s,o){const r=this.strings;let n=!1;if(r===void 0)t=O(this,t,i,0),n=!q(t)||t!==this._$AH&&t!==M,n&&(this._$AH=t);else{const c=t;let d,p;for(t=r[0],d=0;d<r.length-1;d++)p=O(this,c[s+d],i,d),p===M&&(p=this._$AH[d]),n||=!q(p)||p!==this._$AH[d],p===m?t=m:t!==m&&(t+=(p??"")+r[d+1]),this._$AH[d]=p}n&&!o&&this.j(t)}j(t){t===m?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class He extends W{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===m?void 0:t}}class Be extends W{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==m)}}class Fe extends W{constructor(t,i,s,o,r){super(t,i,s,o,r),this.type=5}_$AI(t,i=this){if((t=O(this,t,i,0)??m)===M)return;const s=this._$AH,o=t===m&&s!==m||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,r=t!==m&&(s===m||o);o&&this.element.removeEventListener(this.name,this,s),r&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class We{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(t){O(this,t)}}const je=ee.litHtmlPolyfillSupport;je?.(R,N),(ee.litHtmlVersions??=[]).push("3.3.2");const Ve=(a,t,i)=>{const s=i?.renderBefore??t;let o=s._$litPart$;if(o===void 0){const r=i?.renderBefore??null;s._$litPart$=o=new N(t.insertBefore(E(),r),r,void 0,i??{})}return o._$AI(a),o};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const ae=globalThis;class z extends P{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const a=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=Qe(a,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return M}}z._$litElement$=!0,z.finalized=!0,ae.litElementHydrateSupport?.({LitElement:z});const Ye=ae.litElementPolyfillSupport;Ye?.({LitElement:z});(ae.litElementVersions??=[]).push("4.2.2");/**
+ */const ie=globalThis;class z extends P{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const i=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=Ve(i,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return M}}z._$litElement$=!0,z.finalized=!0,ie.litElementHydrateSupport?.({LitElement:z});const Qe=ie.litElementPolyfillSupport;Qe?.({LitElement:z});(ie.litElementVersions??=[]).push("4.2.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Xe=i=>(t,a)=>{a!==void 0?a.addInitializer(()=>{customElements.define(i,t)}):customElements.define(i,t)};/**
+ */const Ye=a=>(t,i)=>{i!==void 0?i.addInitializer(()=>{customElements.define(a,t)}):customElements.define(a,t)};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Ke={attribute:!0,type:String,converter:B,reflect:!1,hasChanged:ee},Je=(i=Ke,t,a)=>{const{kind:s,metadata:r}=a;let o=globalThis.litPropertyMetadata.get(r);if(o===void 0&&globalThis.litPropertyMetadata.set(r,o=new Map),s==="setter"&&((i=Object.create(i)).wrapped=!0),o.set(a.name,i),s==="accessor"){const{name:n}=a;return{set(d){const l=t.get.call(this);t.set.call(this,d),this.requestUpdate(n,l,i,!0,d)},init(d){return d!==void 0&&this.C(n,void 0,i,d),d}}}if(s==="setter"){const{name:n}=a;return function(d){const l=this[n];t.call(this,d),this.requestUpdate(n,l,i,!0,d)}}throw Error("Unsupported decorator location: "+s)};function C(i){return(t,a)=>typeof a=="object"?Je(i,t,a):((s,r,o)=>{const n=r.hasOwnProperty(o);return r.constructor.createProperty(o,s),n?Object.getOwnPropertyDescriptor(r,o):void 0})(i,t,a)}/**
+ */const Xe={attribute:!0,type:String,converter:H,reflect:!1,hasChanged:Z},Ke=(a=Xe,t,i)=>{const{kind:s,metadata:o}=i;let r=globalThis.litPropertyMetadata.get(o);if(r===void 0&&globalThis.litPropertyMetadata.set(o,r=new Map),s==="setter"&&((a=Object.create(a)).wrapped=!0),r.set(i.name,a),s==="accessor"){const{name:n}=i;return{set(c){const d=t.get.call(this);t.set.call(this,c),this.requestUpdate(n,d,a,!0,c)},init(c){return c!==void 0&&this.C(n,void 0,a,c),c}}}if(s==="setter"){const{name:n}=i;return function(c){const d=this[n];t.call(this,c),this.requestUpdate(n,d,a,!0,c)}}throw Error("Unsupported decorator location: "+s)};function C(a){return(t,i)=>typeof i=="object"?Ke(a,t,i):((s,o,r)=>{const n=o.hasOwnProperty(r);return o.constructor.createProperty(r,s),n?Object.getOwnPropertyDescriptor(o,r):void 0})(a,t,i)}/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function m(i){return C({...i,state:!0,attribute:!1})}const Q=[{code:"en",name:"English",native:"English",flag:"🇬🇧"},{code:"tr",name:"Turkish",native:"Türkçe",flag:"🇹🇷"},{code:"de",name:"German",native:"Deutsch",flag:"🇩🇪"},{code:"fr",name:"French",native:"Français",flag:"🇫🇷"},{code:"es",name:"Spanish",native:"Español",flag:"🇪🇸"},{code:"it",name:"Italian",native:"Italiano",flag:"🇮🇹"},{code:"pt",name:"Portuguese",native:"Português",flag:"🇵🇹"},{code:"nl",name:"Dutch",native:"Nederlands",flag:"🇳🇱"},{code:"pl",name:"Polish",native:"Polski",flag:"🇵🇱"},{code:"ru",name:"Russian",native:"Русский",flag:"🇷🇺"},{code:"zh",name:"Chinese",native:"中文",flag:"🇨🇳"},{code:"ja",name:"Japanese",native:"日本語",flag:"🇯🇵"},{code:"ko",name:"Korean",native:"한국어",flag:"🇰🇷"},{code:"ar",name:"Arabic",native:"العربية",flag:"🇸🇦"},{code:"hi",name:"Hindi",native:"हिन्दी",flag:"🇮🇳"},{code:"sv",name:"Swedish",native:"Svenska",flag:"🇸🇪"},{code:"da",name:"Danish",native:"Dansk",flag:"🇩🇰"},{code:"fi",name:"Finnish",native:"Suomi",flag:"🇫🇮"},{code:"cs",name:"Czech",native:"Čeština",flag:"🇨🇿"},{code:"hu",name:"Hungarian",native:"Magyar",flag:"🇭🇺"},{code:"el",name:"Greek",native:"Ελληνικά",flag:"🇬🇷"},{code:"uk",name:"Ukrainian",native:"Українська",flag:"🇺🇦"},{code:"ro",name:"Romanian",native:"Română",flag:"🇷🇴"}];let k="en",fe=new Map,G={};const K=new Set;function e(i,t){return k==="en"?t:G[i]??t}function Ze(){return k}async function et(i){if(i===k)return;if(i==="en"){k="en",G={},Y();return}const t=fe.get(i);if(t){k=i,G=t.translations,Y();return}try{const a=await fetch(`./locales/${encodeURIComponent(i)}.json`);if(!a.ok){console.warn(`[i18n] Locale file not found for "${i}" (HTTP ${a.status}). Using English.`);return}const s=await a.json(),r={locale:i,translations:s,loadedAt:Date.now()};fe.set(i,r),k=i,G=s,Y()}catch(a){console.warn(`[i18n] Failed to load locale "${i}":`,a)}}function Se(i){return K.add(i),()=>{K.delete(i)}}function Y(){for(const i of K)try{i()}catch{}window.dispatchEvent(new CustomEvent("cgs-locale-changed",{detail:{locale:k}}))}var tt=Object.defineProperty,w=(i,t,a,s)=>{for(var r=void 0,o=i.length-1,n;o>=0;o--)(n=i[o])&&(r=n(t,a,r)||r);return r&&tt(t,a,r),r};const it="13.0, 12.9, 12.8, 12.7, 12.6, 12.5, 12.4, 12.3, 12.2, 12.1, 12.0",X=[{tier:"8 GB VRAM"},{tier:"12 GB+ VRAM"},{tier:"23 GB+ VRAM"}];class x extends z{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.startTab="about",this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:7,eula:5,"third-party":5,safety:5,disclaimers:5},this._touchStartX=0,this._touchStartY=0,this._nextCard=()=>{this.currentCardIndex=(this.currentCardIndex+1)%this._currentTabCardCount},this._prevCard=()=>{this.currentCardIndex=(this.currentCardIndex-1+this._currentTabCardCount)%this._currentTabCardCount},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY},this._onTouchEnd=t=>{if(!this.fullPage)return;const a=t.changedTouches[0].clientX-this._touchStartX,s=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,Math.abs(a)>Math.abs(s)&&Math.abs(a)>this.cardDragThreshold&&(a<0?this._nextCard():this._prevCard())},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const a=this.position||this._defaultPosition();this.dragStartPosX=a.x,this.dragStartPosY=a.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const a=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,r={x:this.dragStartPosX+a,y:this.dragStartPosY+s};this.position=r,this.dispatchEvent(new CustomEvent("position-changed",{detail:r}))}if(this.isResizing){const a=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,r={width:Math.max(500,this.resizeStartWidth+a),height:Math.max(400,this.resizeStartHeight+s)};this.size=r,this.dispatchEvent(new CustomEvent("size-changed",{detail:r}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1}}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}static{this.styles=xe`
+ */function b(a){return C({...a,state:!0,attribute:!1})}const V=[{code:"en",name:"English",native:"English",flag:"🇬🇧"},{code:"tr",name:"Turkish",native:"Türkçe",flag:"🇹🇷"},{code:"de",name:"German",native:"Deutsch",flag:"🇩🇪"},{code:"fr",name:"French",native:"Français",flag:"🇫🇷"},{code:"es",name:"Spanish",native:"Español",flag:"🇪🇸"},{code:"it",name:"Italian",native:"Italiano",flag:"🇮🇹"},{code:"pt",name:"Portuguese",native:"Português",flag:"🇵🇹"},{code:"nl",name:"Dutch",native:"Nederlands",flag:"🇳🇱"},{code:"pl",name:"Polish",native:"Polski",flag:"🇵🇱"},{code:"ru",name:"Russian",native:"Русский",flag:"🇷🇺"},{code:"zh",name:"Chinese",native:"中文",flag:"🇨🇳"},{code:"ja",name:"Japanese",native:"日本語",flag:"🇯🇵"},{code:"ko",name:"Korean",native:"한국어",flag:"🇰🇷"},{code:"ar",name:"Arabic",native:"العربية",flag:"🇸🇦"},{code:"hi",name:"Hindi",native:"हिन्दी",flag:"🇮🇳"},{code:"sv",name:"Swedish",native:"Svenska",flag:"🇸🇪"},{code:"da",name:"Danish",native:"Dansk",flag:"🇩🇰"},{code:"fi",name:"Finnish",native:"Suomi",flag:"🇫🇮"},{code:"cs",name:"Czech",native:"Čeština",flag:"🇨🇿"},{code:"hu",name:"Hungarian",native:"Magyar",flag:"🇭🇺"},{code:"el",name:"Greek",native:"Ελληνικά",flag:"🇬🇷"},{code:"uk",name:"Ukrainian",native:"Українська",flag:"🇺🇦"},{code:"ro",name:"Romanian",native:"Română",flag:"🇷🇴"}];let k="en",be=new Map,G={};const X=new Set;function e(a,t){return k==="en"?t:G[a]??t}function Je(){return k}async function Ze(a){if(a===k)return;if(a==="en"){k="en",G={},Q();return}const t=be.get(a);if(t){k=a,G=t.translations,Q();return}try{const i=await fetch(`./locales/${encodeURIComponent(a)}.json`);if(!i.ok){console.warn(`[i18n] Locale file not found for "${a}" (HTTP ${i.status}). Using English.`);return}const s=await i.json(),o={locale:a,translations:s,loadedAt:Date.now()};be.set(a,o),k=a,G=s,Q()}catch(i){console.warn(`[i18n] Failed to load locale "${a}":`,i)}}function Ae(a){return X.add(a),()=>{X.delete(a)}}function Q(){for(const a of X)try{a()}catch{}window.dispatchEvent(new CustomEvent("cgs-locale-changed",{detail:{locale:k}}))}var et=Object.defineProperty,w=(a,t,i,s)=>{for(var o=void 0,r=a.length-1,n;r>=0;r--)(n=a[r])&&(o=n(t,i,o)||o);return o&&et(t,i,o),o};const tt="13.0, 12.9, 12.8, 12.7, 12.6, 12.5, 12.4, 12.3, 12.2, 12.1, 12.0",Y=[{tier:"8 GB VRAM"},{tier:"12 GB+ VRAM"},{tier:"23 GB+ VRAM"}];class x extends z{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.startTab="about",this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:7,eula:5,"third-party":5,safety:5,disclaimers:5},this._touchStartX=0,this._touchStartY=0,this._nextCard=()=>{this.currentCardIndex=(this.currentCardIndex+1)%this._currentTabCardCount},this._prevCard=()=>{this.currentCardIndex=(this.currentCardIndex-1+this._currentTabCardCount)%this._currentTabCardCount},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY},this._onTouchEnd=t=>{if(!this.fullPage)return;const i=t.changedTouches[0].clientX-this._touchStartX,s=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,Math.abs(i)>Math.abs(s)&&Math.abs(i)>this.cardDragThreshold&&(i<0?this._nextCard():this._prevCard())},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const i=this.position||this._defaultPosition();this.dragStartPosX=i.x,this.dragStartPosY=i.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const i=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,o={x:this.dragStartPosX+i,y:this.dragStartPosY+s};this.position=o,this.dispatchEvent(new CustomEvent("position-changed",{detail:o}))}if(this.isResizing){const i=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,o={width:Math.max(500,this.resizeStartWidth+i),height:Math.max(400,this.resizeStartHeight+s)};this.size=o,this.dispatchEvent(new CustomEvent("size-changed",{detail:o}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1}}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}static{this.styles=ye`
     :host {
       display: block;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -1341,19 +1341,19 @@
       font-size: 11px;
       line-height: 1.6;
     }
-  `}connectedCallback(){super.connectedCallback(),this.activeTab=this.startTab,this._unlistenI18n=Se(()=>this.requestUpdate()),globalThis.addEventListener("mousemove",this._onMouseMove),globalThis.addEventListener("mouseup",this._onMouseUp),globalThis.addEventListener("keydown",this._onKeyDown),globalThis.addEventListener("touchstart",this._onTouchStart,{passive:!0}),globalThis.addEventListener("touchend",this._onTouchEnd,{passive:!0})}disconnectedCallback(){super.disconnectedCallback(),this._unlistenI18n?.(),globalThis.removeEventListener("mousemove",this._onMouseMove),globalThis.removeEventListener("mouseup",this._onMouseUp),globalThis.removeEventListener("keydown",this._onKeyDown),globalThis.removeEventListener("touchstart",this._onTouchStart),globalThis.removeEventListener("touchend",this._onTouchEnd)}willUpdate(t){t.has("activeTab")&&(this.currentCardIndex=0)}_effectiveSize(){const t=Math.max(500,globalThis.innerWidth*.94),a=Math.max(400,globalThis.innerHeight*.92);return{width:Math.min(this.size.width,t),height:Math.min(this.size.height,a)}}_defaultPosition(){const{width:t,height:a}=this._effectiveSize();return{x:Math.max(20,(globalThis.innerWidth-t)/2),y:Math.max(20,(globalThis.innerHeight-a)/2)}}get BENCHMARK_TIERS(){return[{label:e("about.sysreq.tier1.label","Minimum Local Benchmark"),tier:X[0].tier,summary:e("about.sysreq.tier1.summary","Bootable local Orus for phi4-mini, Memory RAG, quiet queue work, and low-visual professional use."),fit:e("about.sysreq.tier1.fit","Best for solo admin, overnight categorization, validation, and text-first workflows.")},{label:e("about.sysreq.tier2.label","Professional Multimodal Baseline"),tier:X[1].tier,summary:e("about.sysreq.tier2.summary","Balanced tier for multimodal Orus with live vision, Orpheus TTS on tuned profiles, and practical day-to-day throughput."),fit:e("about.sysreq.tier2.fit","Best for legal, marketing, HR, business operations, research, and meeting-heavy roles.")},{label:e("about.sysreq.tier3.label","Prime Visual Studio Tier"),tier:X[2].tier,summary:e("about.sysreq.tier3.summary","Full Windows-native Orus stack including Orpheus, Whisper Large, SF3D, advanced visual workflows, and higher concurrency headroom."),fit:e("about.sysreq.tier3.fit","Best for creative direction, advanced 3D ideation, labs, enterprise demos, and high-concurrency sessions.")}]}get WORKLOAD_ARCHETYPES(){return[{icon:"📚",title:e("about.sysreq.arch1.title","Legal, Admin, HR, and Back-Office Operations"),audience:e("about.sysreq.arch1.audience","Contracts, policy review, spreadsheets, task extraction, outputs, and memory-backed casework."),activities:e("about.sysreq.arch1.activities","TaskChat, Categorizer, Processor, Validator, Outputs, Spreadsheet editing, Memory Lab, and overnight queue runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10 build 17763+ or Windows 11",fit:e("about.sysreq.arch1.min.fit","Text-first document work, quiet voice use, slower batch throughput."),notes:e("about.sysreq.arch1.min.notes","Use the text-focused or low-visual path. The 3D shell is optional for this workload.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch1.rec.fit","Comfortable multimodal document handling with Orpheus TTS and better queue depth."),notes:e("about.sysreq.arch1.rec.notes","This is the best all-round professional floor if you want voice, live vision, and document tools together.")}},{icon:"📈",title:e("about.sysreq.arch2.title","Business, Finance, Marketing, and Social Media"),audience:e("about.sysreq.arch2.audience","Research synthesis, meeting prep, campaign drafts, CRM-style memory recall, and multi-window guidance."),activities:e("about.sysreq.arch2.activities","Webber, Presenter, BrainStorm, Discord, Outputs, Voice Profiles, and live multimodal chat."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch2.min.fit","Capable of multimodal work, but with tighter concurrency and shorter comfortable sessions."),notes:e("about.sysreq.arch2.min.notes","Suitable if you want Orpheus voice and live vision, but not the heaviest 3D or advanced visual stacks.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch2.rec.fit","Smooth daily use across voice, research, planning, and client-facing flows."),notes:e("about.sysreq.arch2.rec.notes","A higher-VRAM card gives more room for simultaneous speech, vision, and retrieval without comfort drops.")}},{icon:"🔬",title:e("about.sysreq.arch3.title","Science, Audit, Research, and High-Context Knowledge Work"),audience:e("about.sysreq.arch3.audience","Long-form reading, evidence review, reasoning, synthesis, and structured retrieval against large source sets."),activities:e("about.sysreq.arch3.activities","High-context engine profiles, Defrag, Memory Lab, Webber, Presenter, and reasoning-heavy sessions."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch3.min.fit","Usable for careful high-context work with conservative concurrency."),notes:e("about.sysreq.arch3.min.notes","Expect tighter token budgets when voice and long-document reasoning are active together.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch3.rec.fit","Best for sustained high-context reasoning, deeper queues, and fewer context-trim compromises."),notes:e("about.sysreq.arch3.rec.notes","Prime-class hardware is where long-context work starts to feel comfortably professional instead of merely possible.")}},{icon:"🎨",title:e("about.sysreq.arch4.title","Creative Direction, Visual Design, and 3D Ideation"),audience:e("about.sysreq.arch4.audience","Visual command workflows, OBB, Living Machine, scene experimentation, and design-oriented narration."),activities:e("about.sysreq.arch4.activities","Visual command workflows, Boltzmann Brain, Living Machine, Webcam, Face Capture, visual themes, and scene-driven presentation."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch4.min.fit","Basic visual workflows and scene experimentation without the heaviest generation modules."),notes:e("about.sysreq.arch4.min.notes","Good for visual assistance and lighter 3D use. It is not the right floor for SF3D or video-heavy iteration.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch4.rec.fit","Comfortable visual command work, richer 3D scenes, and headroom for advanced visual modules."),notes:e("about.sysreq.arch4.rec.notes","Use Prime-class hardware if Orus is part of a real creative pipeline rather than occasional visual support.")}},{icon:"🎤",title:e("about.sysreq.arch5.title","Meetings, Teaching, Support, and Community Operations"),audience:e("about.sysreq.arch5.audience","Presenter sessions, meeting transcription, Teams or Discord support, multi-speaker capture, and guided walkthroughs."),activities:e("about.sysreq.arch5.activities","Meeting Mode, Presenter, Voice Profiles, per-app audio capture, Discord, and system dialogue."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch5.min.fit","Functional voice-centric workflows with moderate simultaneous capture and response pressure."),notes:e("about.sysreq.arch5.min.notes","This tier is viable, but real-time comfort improves materially as VRAM and RAM rise.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch5.rec.fit","Better for long meeting runs, cleaner voice overlap handling, and more resilient STT plus TTS coexistence."),notes:e("about.sysreq.arch5.rec.notes","Orpheus throughput is benchmarked at session start, so stronger GPUs usually translate directly into smoother live voice UX.")}},{icon:"🌙",title:e("about.sysreq.arch6.title","Solo Professionals and Overnight Batch Processing"),audience:e("about.sysreq.arch6.audience","Users who prefer slower unattended work over real-time presentation and can leave the machine running for queues."),activities:e("about.sysreq.arch6.activities","Categorizer, Processor, Validator, Output export, memory cleanup, and long unattended text-first runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch6.min.fit","The minimum local benchmark for patient, text-focused processing."),notes:e("about.sysreq.arch6.min.notes","This is the right bracket if you do not need the 3D shell and can tolerate slower TTS or lower concurrency.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch6.rec.fit","Much better queue throughput and fewer stalls once memory retrieval, voice, and exports overlap."),notes:e("about.sysreq.arch6.rec.notes","If Orus is running while you sleep or process long backlogs, extra VRAM buys predictability more than flashiness.")}},{icon:"🧪",title:e("about.sysreq.arch7.title","Full Orus Lab, Demo, and Studio Configuration"),audience:e("about.sysreq.arch7.audience","Users who want the widest feature envelope: multimodal, Orpheus, live vision, advanced visual workflows, and SF3D."),activities:e("about.sysreq.arch7.activities","Prime-tier end-to-end Orus with heavy voice, visuals, generation, and concurrent sessions."),minimum:{gpu:"23 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"Windows 11 on x64 preferred",fit:e("about.sysreq.arch7.min.fit","The practical floor for calling Orus a full-stack local studio rather than a trimmed workstation."),notes:e("about.sysreq.arch7.min.notes","This is where the heaviest visual and generation modules stop feeling compromised.")},recommended:{gpu:"24 GB to 32 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch7.rec.fit","Best for enterprise demos, creative labs, and all-feature usage with minimal negotiation between subsystems."),notes:e("about.sysreq.arch7.rec.notes","RTX 4090 and RTX 5090 class machines are the right target when Orus is being used as a primary workstation layer.")}}]}_renderRequirementSpecCard(t,a,s=!1){return c`
+  `}connectedCallback(){super.connectedCallback(),this.activeTab=this.startTab,this._unlistenI18n=Ae(()=>this.requestUpdate()),globalThis.addEventListener("mousemove",this._onMouseMove),globalThis.addEventListener("mouseup",this._onMouseUp),globalThis.addEventListener("keydown",this._onKeyDown),globalThis.addEventListener("touchstart",this._onTouchStart,{passive:!0}),globalThis.addEventListener("touchend",this._onTouchEnd,{passive:!0})}disconnectedCallback(){super.disconnectedCallback(),this._unlistenI18n?.(),globalThis.removeEventListener("mousemove",this._onMouseMove),globalThis.removeEventListener("mouseup",this._onMouseUp),globalThis.removeEventListener("keydown",this._onKeyDown),globalThis.removeEventListener("touchstart",this._onTouchStart),globalThis.removeEventListener("touchend",this._onTouchEnd)}willUpdate(t){t.has("activeTab")&&(this.currentCardIndex=0)}_effectiveSize(){const t=Math.max(500,globalThis.innerWidth*.94),i=Math.max(400,globalThis.innerHeight*.92);return{width:Math.min(this.size.width,t),height:Math.min(this.size.height,i)}}_defaultPosition(){const{width:t,height:i}=this._effectiveSize();return{x:Math.max(20,(globalThis.innerWidth-t)/2),y:Math.max(20,(globalThis.innerHeight-i)/2)}}get BENCHMARK_TIERS(){return[{label:e("about.sysreq.tier1.label","Minimum Local Benchmark"),tier:Y[0].tier,summary:e("about.sysreq.tier1.summary","Bootable local Orus for phi4-mini, Memory RAG, quiet queue work, and low-visual professional use."),fit:e("about.sysreq.tier1.fit","Best for solo admin, overnight categorization, validation, and text-first workflows.")},{label:e("about.sysreq.tier2.label","Professional Multimodal Baseline"),tier:Y[1].tier,summary:e("about.sysreq.tier2.summary","Balanced tier for multimodal Orus with live vision, Orpheus TTS on tuned profiles, and practical day-to-day throughput."),fit:e("about.sysreq.tier2.fit","Best for legal, marketing, HR, business operations, research, and meeting-heavy roles.")},{label:e("about.sysreq.tier3.label","Prime Visual Studio Tier"),tier:Y[2].tier,summary:e("about.sysreq.tier3.summary","Full Windows-native Orus stack including Orpheus, Whisper Large, SF3D, advanced visual workflows, and higher concurrency headroom."),fit:e("about.sysreq.tier3.fit","Best for creative direction, advanced 3D ideation, labs, enterprise demos, and high-concurrency sessions.")}]}get WORKLOAD_ARCHETYPES(){return[{icon:"📚",title:e("about.sysreq.arch1.title","Legal, Admin, HR, and Back-Office Operations"),audience:e("about.sysreq.arch1.audience","Contracts, policy review, spreadsheets, task extraction, outputs, and memory-backed casework."),activities:e("about.sysreq.arch1.activities","TaskChat, Categorizer, Processor, Validator, Outputs, Spreadsheet editing, Memory Lab, and overnight queue runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10 build 17763+ or Windows 11",fit:e("about.sysreq.arch1.min.fit","Text-first document work, quiet voice use, slower batch throughput."),notes:e("about.sysreq.arch1.min.notes","Use the text-focused or low-visual path. The 3D shell is optional for this workload.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch1.rec.fit","Comfortable multimodal document handling with Orpheus TTS and better queue depth."),notes:e("about.sysreq.arch1.rec.notes","This is the best all-round professional floor if you want voice, live vision, and document tools together.")}},{icon:"📈",title:e("about.sysreq.arch2.title","Business, Finance, Marketing, and Social Media"),audience:e("about.sysreq.arch2.audience","Research synthesis, meeting prep, campaign drafts, CRM-style memory recall, and multi-window guidance."),activities:e("about.sysreq.arch2.activities","Webber, Presenter, BrainStorm, Discord, Outputs, Voice Profiles, and live multimodal chat."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch2.min.fit","Capable of multimodal work, but with tighter concurrency and shorter comfortable sessions."),notes:e("about.sysreq.arch2.min.notes","Suitable if you want Orpheus voice and live vision, but not the heaviest 3D or advanced visual stacks.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch2.rec.fit","Smooth daily use across voice, research, planning, and client-facing flows."),notes:e("about.sysreq.arch2.rec.notes","A higher-VRAM card gives more room for simultaneous speech, vision, and retrieval without comfort drops.")}},{icon:"🔬",title:e("about.sysreq.arch3.title","Science, Audit, Research, and High-Context Knowledge Work"),audience:e("about.sysreq.arch3.audience","Long-form reading, evidence review, reasoning, synthesis, and structured retrieval against large source sets."),activities:e("about.sysreq.arch3.activities","High-context engine profiles, Defrag, Memory Lab, Webber, Presenter, and reasoning-heavy sessions."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch3.min.fit","Usable for careful high-context work with conservative concurrency."),notes:e("about.sysreq.arch3.min.notes","Expect tighter token budgets when voice and long-document reasoning are active together.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch3.rec.fit","Best for sustained high-context reasoning, deeper queues, and fewer context-trim compromises."),notes:e("about.sysreq.arch3.rec.notes","Prime-class hardware is where long-context work starts to feel comfortably professional instead of merely possible.")}},{icon:"🎨",title:e("about.sysreq.arch4.title","Creative Direction, Visual Design, and 3D Ideation"),audience:e("about.sysreq.arch4.audience","Visual command workflows, OBB, Living Machine, scene experimentation, and design-oriented narration."),activities:e("about.sysreq.arch4.activities","Visual command workflows, Boltzmann Brain, Living Machine, Webcam, Face Capture, visual themes, and scene-driven presentation."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch4.min.fit","Basic visual workflows and scene experimentation without the heaviest generation modules."),notes:e("about.sysreq.arch4.min.notes","Good for visual assistance and lighter 3D use. It is not the right floor for SF3D or video-heavy iteration.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch4.rec.fit","Comfortable visual command work, richer 3D scenes, and headroom for advanced visual modules."),notes:e("about.sysreq.arch4.rec.notes","Use Prime-class hardware if Orus is part of a real creative pipeline rather than occasional visual support.")}},{icon:"🎤",title:e("about.sysreq.arch5.title","Meetings, Teaching, Support, and Community Operations"),audience:e("about.sysreq.arch5.audience","Presenter sessions, meeting transcription, Teams or Discord support, multi-speaker capture, and guided walkthroughs."),activities:e("about.sysreq.arch5.activities","Meeting Mode, Presenter, Voice Profiles, per-app audio capture, Discord, and system dialogue."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch5.min.fit","Functional voice-centric workflows with moderate simultaneous capture and response pressure."),notes:e("about.sysreq.arch5.min.notes","This tier is viable, but real-time comfort improves materially as VRAM and RAM rise.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch5.rec.fit","Better for long meeting runs, cleaner voice overlap handling, and more resilient STT plus TTS coexistence."),notes:e("about.sysreq.arch5.rec.notes","Orpheus throughput is benchmarked at session start, so stronger GPUs usually translate directly into smoother live voice UX.")}},{icon:"🌙",title:e("about.sysreq.arch6.title","Solo Professionals and Overnight Batch Processing"),audience:e("about.sysreq.arch6.audience","Users who prefer slower unattended work over real-time presentation and can leave the machine running for queues."),activities:e("about.sysreq.arch6.activities","Categorizer, Processor, Validator, Output export, memory cleanup, and long unattended text-first runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch6.min.fit","The minimum local benchmark for patient, text-focused processing."),notes:e("about.sysreq.arch6.min.notes","This is the right bracket if you do not need the 3D shell and can tolerate slower TTS or lower concurrency.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch6.rec.fit","Much better queue throughput and fewer stalls once memory retrieval, voice, and exports overlap."),notes:e("about.sysreq.arch6.rec.notes","If Orus is running while you sleep or process long backlogs, extra VRAM buys predictability more than flashiness.")}},{icon:"🧪",title:e("about.sysreq.arch7.title","Full Orus Lab, Demo, and Studio Configuration"),audience:e("about.sysreq.arch7.audience","Users who want the widest feature envelope: multimodal, Orpheus, live vision, advanced visual workflows, and SF3D."),activities:e("about.sysreq.arch7.activities","Prime-tier end-to-end Orus with heavy voice, visuals, generation, and concurrent sessions."),minimum:{gpu:"23 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"Windows 11 on x64 preferred",fit:e("about.sysreq.arch7.min.fit","The practical floor for calling Orus a full-stack local studio rather than a trimmed workstation."),notes:e("about.sysreq.arch7.min.notes","This is where the heaviest visual and generation modules stop feeling compromised.")},recommended:{gpu:"24 GB to 32 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch7.rec.fit","Best for enterprise demos, creative labs, and all-feature usage with minimal negotiation between subsystems."),notes:e("about.sysreq.arch7.rec.notes","RTX 4090 and RTX 5090 class machines are the right target when Orus is being used as a primary workstation layer.")}}]}_renderRequirementSpecCard(t,i,s=!1){return l`
       <div class="requirements-spec-card ${s?"recommended":""}">
         <div class="requirements-spec-label">${t}</div>
         <ul>
-          <li><strong>${e("about.sysreq.spec.gpu","GPU")}:</strong> ${a.gpu}</li>
-          <li><strong>${e("about.sysreq.spec.ram","RAM")}:</strong> ${a.ram}</li>
-          <li><strong>${e("about.sysreq.spec.storage","Storage")}:</strong> ${a.storage}</li>
-          <li><strong>${e("about.sysreq.spec.os","OS")}:</strong> ${a.os}</li>
-          <li><strong>${e("about.sysreq.spec.best_for","Best For")}:</strong> ${a.fit}</li>
+          <li><strong>${e("about.sysreq.spec.gpu","GPU")}:</strong> ${i.gpu}</li>
+          <li><strong>${e("about.sysreq.spec.ram","RAM")}:</strong> ${i.ram}</li>
+          <li><strong>${e("about.sysreq.spec.storage","Storage")}:</strong> ${i.storage}</li>
+          <li><strong>${e("about.sysreq.spec.os","OS")}:</strong> ${i.os}</li>
+          <li><strong>${e("about.sysreq.spec.best_for","Best For")}:</strong> ${i.fit}</li>
         </ul>
-        <p class="requirements-spec-note">${a.notes}</p>
+        <p class="requirements-spec-note">${i.notes}</p>
       </div>
-    `}_renderSystemRequirementsSection(){return c`
+    `}_renderSystemRequirementsSection(){return l`
       <div class="requirements-shell">
         <p class="requirements-intro">
           ${e("about.sysreq.intro","Orus has two practical requirement layers: the platform minimum that can run the current Windows-native architecture, and the professional baseline where multimodal work, Orpheus TTS, and retrieval-heavy sessions start to feel smooth instead of merely possible.")}
@@ -1366,7 +1366,7 @@
         </div>
 
         <div class="requirements-tier-grid">
-          ${this.BENCHMARK_TIERS.map(t=>c`
+          ${this.BENCHMARK_TIERS.map(t=>l`
             <div class="requirements-tier-card">
               <div class="requirements-tier-label">${t.label}</div>
               <div class="requirements-tier-vram">${t.tier}</div>
@@ -1379,11 +1379,11 @@
         <div class="requirements-meta">
           <div class="requirements-meta-row"><strong>${e("about.sysreq.meta.platform_floor_label","Platform floor")}:</strong> ${e("about.sysreq.meta.platform_floor","x64 Windows 10 build 17763+ or Windows 11, DirectX 12, 8 GB VRAM, 16 GB RAM, and 15 GB free disk space. The installer currently warns when free space falls below 15 GB and is more comfortable at 25 GB+.")}</div>
           <div class="requirements-meta-row"><strong>${e("about.sysreq.meta.ai_stack_label","Windows-native AI stack")}:</strong> ${e("about.sysreq.meta.ai_stack","Orus runs through vLLM on Windows with SageAttention on supported RTX hardware and SDPA fallback elsewhere. Orpheus TTS is GPU-profiled at session start so smaller cards remain usable, but voice smoothness scales directly with measured throughput.")}</div>
-          <div class="requirements-meta-row"><strong>${e("about.sysreq.meta.cuda_label","CUDA toolkits")}:</strong> ${e("about.sysreq.meta.cuda","Supported toolkit range is")} ${it}. ${e("about.sysreq.meta.cuda_suffix","Orus auto-detects installed CUDA toolkits and registers DLL directories at startup; packaged builds also ship their own CUDA-aligned runtime dependencies.")}</div>
+          <div class="requirements-meta-row"><strong>${e("about.sysreq.meta.cuda_label","CUDA toolkits")}:</strong> ${e("about.sysreq.meta.cuda","Supported toolkit range is")} ${tt}. ${e("about.sysreq.meta.cuda_suffix","Orus auto-detects installed CUDA toolkits and registers DLL directories at startup; packaged builds also ship their own CUDA-aligned runtime dependencies.")}</div>
         </div>
 
         <div class="requirements-archetypes">
-          ${this.WORKLOAD_ARCHETYPES.map(t=>c`
+          ${this.WORKLOAD_ARCHETYPES.map(t=>l`
             <details class="requirements-details">
               <summary>
                 <div class="requirements-summary-copy">
@@ -1403,7 +1403,7 @@
           `)}
         </div>
       </div>
-    `}get TAB_ITEMS(){return[{id:"about",icon:"📇",label:e("about_dialog.tab.about","About")},{id:"privacy",icon:"🔒",label:e("about_dialog.tab.privacy","Privacy Policy")},{id:"eula",icon:"📜",label:e("about_dialog.tab.eula","EULA")},{id:"third-party",icon:"📦",label:e("about_dialog.tab.third_party","Third Party Notice")},{id:"safety",icon:"🛡️",label:e("about_dialog.tab.safety","Safety")},{id:"disclaimers",icon:"⚠️",label:e("about_dialog.tab.disclaimers","Disclaimers")}]}render(){if(!this.open&&!this.fullPage)return c``;const t=c`
+    `}get TAB_ITEMS(){return[{id:"about",icon:"📇",label:e("about_dialog.tab.about","About")},{id:"privacy",icon:"🔒",label:e("about_dialog.tab.privacy","Privacy Policy")},{id:"eula",icon:"📜",label:e("about_dialog.tab.eula","EULA")},{id:"third-party",icon:"📦",label:e("about_dialog.tab.third_party","Third Party Notice")},{id:"safety",icon:"🛡️",label:e("about_dialog.tab.safety","Safety")},{id:"disclaimers",icon:"⚠️",label:e("about_dialog.tab.disclaimers","Disclaimers")}]}render(){if(!this.open&&!this.fullPage)return l``;const t=l`
       <div
         class="about-panel ${this.fullPage?"full-page":""} ${this.isDragging?"dragging":""} ${this.isResizing?"resizing":""}"
         style="${this.fullPage?"":`left: ${(this.position||this._defaultPosition()).x}px; top: ${(this.position||this._defaultPosition()).y}px; width: ${this._effectiveSize().width}px; height: ${this._effectiveSize().height}px;`}"
@@ -1415,13 +1415,13 @@
             <span class="about-logo-text">Orus</span>
           </div>
           <div class="about-nav">
-            ${this.TAB_ITEMS.map(a=>c`
+            ${this.TAB_ITEMS.map(i=>l`
               <button
-                class="about-nav-btn ${this.activeTab===a.id?"active":""}"
-                @click=${()=>{this.activeTab=a.id}}
+                class="about-nav-btn ${this.activeTab===i.id?"active":""}"
+                @click=${()=>{this.activeTab=i.id}}
               >
-                <span class="about-nav-icon">${a.icon}</span>
-                <span class="about-nav-label">${a.label}</span>
+                <span class="about-nav-icon">${i.icon}</span>
+                <span class="about-nav-label">${i.label}</span>
               </button>
             `)}
           </div>
@@ -1438,7 +1438,7 @@
         <!-- Main content area -->
         <div class="about-main">
           <div class="about-header" @mousedown=${this.fullPage?void 0:this._onDragStart}>
-            <span class="about-header-title">${this.TAB_ITEMS.find(a=>a.id===this.activeTab)?.label??e("about_dialog.tab.about","About")}</span>
+            <span class="about-header-title">${this.TAB_ITEMS.find(i=>i.id===this.activeTab)?.label??e("about_dialog.tab.about","About")}</span>
             <button
               class="about-home-btn-header"
               @click=${()=>this.dispatchEvent(new CustomEvent("navigate-home",{bubbles:!0,composed:!0}))}
@@ -1447,7 +1447,7 @@
               <span style="font-size:14px;">🏠</span>
               ${e("about_dialog.home","Home")}
             </button>
-            ${this.fullPage?"":c`
+            ${this.fullPage?"":l`
               <button class="about-close-btn" @click=${()=>this.dispatchEvent(new CustomEvent("close"))} title="Close">✕</button>
             `}
           </div>
@@ -1467,13 +1467,13 @@
           </div>
         </div>
 
-        ${this.fullPage?"":c`<div class="resize-handle" @mousedown=${this._onResizeStart}></div>`}
+        ${this.fullPage?"":l`<div class="resize-handle" @mousedown=${this._onResizeStart}></div>`}
       </div>
-    `;return this.fullPage?t:c`
-      <div class="about-overlay" @mousedown=${a=>{a.target.classList.contains("about-overlay")&&this.dispatchEvent(new CustomEvent("close"))}}>
+    `;return this.fullPage?t:l`
+      <div class="about-overlay" @mousedown=${i=>{i.target.classList.contains("about-overlay")&&this.dispatchEvent(new CustomEvent("close"))}}>
         ${t}
       </div>
-    `}_renderAbout(){return c`
+    `}_renderAbout(){return l`
       <div class="about-hero">
         <div class="about-hero-logo">◉</div>
         <h1>Orus <span class="version-badge">${e("about.popup.version","v1.0.1 — March 2026")}</span></h1>
@@ -1652,7 +1652,7 @@
       <p style="color: #64748b; font-size: 11px; margin-top: 20px; text-align: center;">
         ${e("about.popup.footer","© 2026 Comet Game Studio Ltd. All rights reserved. Powered by the Microsoft Phi-4 model family. 40+ integrated features.")}
       </p>
-    `}_renderAboutCarousel(){return c`
+    `}_renderAboutCarousel(){return l`
       <div class="about-content-carousel">
         <!-- Card 0: Hero -->
         <div class="about-card hero ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
@@ -1862,11 +1862,11 @@
         <!-- Navigation: side arrows + bottom dots -->
         ${this._renderCarouselDots(this._tabCardCounts.about)}
       </div>
-    `}_cardClass(t){return this.currentCardIndex===t?"active":this.currentCardIndex>t?"prev":"next"}_renderCarouselDots(t){return c`
+    `}_cardClass(t){return this.currentCardIndex===t?"active":this.currentCardIndex>t?"prev":"next"}_renderCarouselDots(t){return l`
       <div class="about-arrow-row" role="navigation" aria-label="Slide navigation">
         <button
           class="about-nav-side-arrow"
-          @click=${a=>{a.stopPropagation(),this._prevCard()}}
+          @click=${i=>{i.stopPropagation(),this._prevCard()}}
           title="Previous slide"
           aria-label="Previous slide"
           tabindex="0"
@@ -1874,14 +1874,14 @@
         <div class="about-arrow-spacer" aria-hidden="true"></div>
         <button
           class="about-nav-side-arrow"
-          @click=${a=>{a.stopPropagation(),this._nextCard()}}
+          @click=${i=>{i.stopPropagation(),this._nextCard()}}
           title="Next slide"
           aria-label="Next slide"
           tabindex="0"
         >▶</button>
       </div>
       <div class="about-carousel-dots" role="tablist" aria-label="Slide indicator">
-        ${Array.from({length:t},(a,s)=>c`
+        ${Array.from({length:t},(i,s)=>l`
           <button
             class="about-carousel-dot ${s===this.currentCardIndex?"active":""}"
             @click=${()=>this._goToCard(s)}
@@ -1893,7 +1893,7 @@
           ></button>
         `)}
       </div>
-    `}_renderPrivacyCarousel(){return c`
+    `}_renderPrivacyCarousel(){return l`
       <div class="about-content-carousel">
         <!-- Card 0: Index -->
         <div class="about-card hero ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
@@ -1984,7 +1984,7 @@
 
         ${this._renderCarouselDots(7)}
       </div>
-    `}_renderEULACarousel(){return c`
+    `}_renderEULACarousel(){return l`
       <div class="about-content-carousel">
         <!-- Card 0: Index -->
         <div class="about-card hero ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
@@ -2082,7 +2082,7 @@
 
         ${this._renderCarouselDots(5)}
       </div>
-    `}_renderThirdPartyCarousel(){return c`
+    `}_renderThirdPartyCarousel(){return l`
       <div class="about-content-carousel">
         <!-- Card 0: Index -->
         <div class="about-card hero ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
@@ -2241,7 +2241,7 @@
 
         ${this._renderCarouselDots(5)}
       </div>
-    `}_renderSafetyCarousel(){return c`
+    `}_renderSafetyCarousel(){return l`
       <div class="about-content-carousel">
         <!-- Card 0: Index -->
         <div class="about-card hero ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
@@ -2359,7 +2359,7 @@
 
         ${this._renderCarouselDots(5)}
       </div>
-    `}_renderDisclaimersCarousel(){return c`
+    `}_renderDisclaimersCarousel(){return l`
       <div class="about-content-carousel">
         <!-- Card 0: Index -->
         <div class="about-card hero ${this._cardClass(0)} ${this.isCardDragging?"dragging":""}">
@@ -2466,7 +2466,7 @@
 
         ${this._renderCarouselDots(5)}
       </div>
-    `}_renderEULA(){return c`
+    `}_renderEULA(){return l`
       <h2>${e("eula.popup.heading","End-User Licence Agreement")}</h2>
       <div class="legal-effective-date">${e("eula.popup.effective_date","Effective Date: March 24, 2026")}</div>
 
@@ -2583,7 +2583,7 @@
           ${e("eula.popup.s11.desc","For questions regarding this Agreement, contact Comet Game Studio Ltd at the support channels provided within the Software or at the Licensor's official website.")}
         </p>
       </div>
-    `}_renderThirdParty(){return c`
+    `}_renderThirdParty(){return l`
       <h2>${e("thirdparty.popup.heading","Third Party Notices")}</h2>
       <p>
         ${e("thirdparty.popup.intro","Orus incorporates third-party open source software components. The following is a summary of those components and their respective licenses. Full license texts are available in each package's repository or distribution.")}
@@ -3058,7 +3058,7 @@
       <p style="color: #64748b; font-size: 11px; margin-top: 20px; text-align: center;">
         ${e("thirdparty.popup.footer","Attributions last verified: March 2026. This section satisfies Apache-2.0 §4.4, BSD-3-Clause §1, and MIT license attribution requirements.")}
       </p>
-    `}_renderSafety(){return c`
+    `}_renderSafety(){return l`
       <h2>${e("safety.popup.heading","Safety & Content Governance")}</h2>
       <p style="font-size: 11px; color: #64748b; margin-bottom: 20px;">
         ${e("safety.popup.updated","Last Updated: March 24, 2026")}
@@ -3209,7 +3209,7 @@
       <p style="color: #64748b; font-size: 11px; margin-top: 20px; text-align: center;">
         ${e("safety.popup.footer","Safety architecture last updated March 2026. For concerns about Orus safety measures, contact Comet Game Studio Ltd at: cometgamestudio.com")}
       </p>
-    `}_renderDisclaimers(){return c`
+    `}_renderDisclaimers(){return l`
       <h2>${e("disclaimers.popup.heading","Disclaimers")}</h2>
       <p>
         ${e("disclaimers.popup.intro","Orus is a local-first personal assistant with memory and operational assistance features. AI outputs may be inaccurate. Users remain responsible for verifying important outputs, obtaining consent where required, and securing the host device and local network.")}
@@ -3337,7 +3337,7 @@
       <p style="color: #64748b; font-size: 11px; margin-top: 20px; text-align: center;">
         ${e("disclaimers.popup.footer","Last updated: March 24, 2026. These disclaimers are subject to change. Continued use of the Software constitutes acceptance of any updates.")}
       </p>
-    `}_renderPrivacy(){return c`
+    `}_renderPrivacy(){return l`
       <h2>${e("privacy.popup.heading","Privacy Policy")}</h2>
       <p style="font-size: 11px; color: #64748b; margin-bottom: 20px;">
         ${e("privacy.popup.updated","Last Updated: March 24, 2026")}
@@ -3405,9 +3405,72 @@
            ${e("privacy.popup.contact_desc","For any questions regarding this privacy policy or to exercise your privacy rights, please contact Comet Game Studio Ltd at the support channels provided within the Software or at: cometgamestudio.com")}
          </p>
       </div>
-    `}}w([C({type:Boolean})],x.prototype,"open");w([C({type:Boolean,attribute:"full-page"})],x.prototype,"fullPage");w([C({type:Object})],x.prototype,"position");w([C({type:Object})],x.prototype,"size");w([C({type:String})],x.prototype,"startTab");w([m()],x.prototype,"activeTab");w([m()],x.prototype,"isDragging");w([m()],x.prototype,"isResizing");w([m()],x.prototype,"currentCardIndex");w([m()],x.prototype,"isCardDragging");customElements.get("orus-about-dialog")||customElements.define("orus-about-dialog",x);var at=Object.defineProperty,st=Object.getOwnPropertyDescriptor,v=(i,t,a,s)=>{for(var r=s>1?void 0:s?st(t,a):t,o=i.length-1,n;o>=0;o--)(n=i[o])&&(r=(s?n(t,a,r):n(r))||r);return s&&r&&at(t,a,r),r};const rt=!0,ot=!0,nt=!0,ct=!0;globalThis.WEBSITE_MODE=rt;globalThis.PRODUCTION_MODE=ot;globalThis.NO_INFERENCE_MODE=nt;globalThis.NO_AUTH_REQUIRED=ct;const dt=6800,A=[{thinker:"Plato",work:"Laws",period:"Classical Greece",compactQuote:'"Man is made to be the plaything of God ... the noblest of pastimes."',fullQuote:'"Man is made to be the plaything of God," and humans should "pass life in the noblest of pastimes," while "sacrificing, singing, and dancing."',reflection:"The classical root: play is treated as ritual, order, and noble participation.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/2/21/Plato_Silanion_Musei_Capitolini_MC1377.png",portraitAlt:"Bust of Plato",monogram:"PL",accent:"#f59e0b"},{thinker:"Heraclitus",work:"Fragment 52",period:"Pre-Socratic Greece",compactQuote:'"Time is a child ... playing draughts."',fullQuote:'"Time is a child playing draughts."',reflection:"Reality itself is cast as motion, play, and unstable cosmic order.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/2/24/Heraclitus_b_4_compressed.jpg",portraitAlt:"Bust of Heraclitus",monogram:"HE",accent:"#38bdf8"},{thinker:"Shakespeare",work:"As You Like It",period:"Elizabethan theatre",compactQuote:`"All the world's a stage ... merely players."`,fullQuote:`"All the world's a stage, and all the men and women merely players."`,reflection:"The game becomes theatre: roles, entrances, exits, and performance.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/2/21/William_Shakespeare_by_John_Taylor%2C_edited.jpg",portraitAlt:"Portrait of William Shakespeare",monogram:"WS",accent:"#f97316"},{thinker:"Schiller",work:"Aesthetical and Philosophical Essays",period:"German idealism",compactQuote:'"Man only plays ... when he plays."',fullQuote:'"Man only plays when in the full meaning of the word he is a man, and he is only completely a man when he plays."',reflection:"Play is elevated into a condition of full human flourishing.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/c/c6/Anton_Graff_-_Friedrich_Schiller.jpg",portraitAlt:"Portrait of Friedrich Schiller",monogram:"FS",accent:"#fb7185"},{thinker:"Nietzsche",work:"Thus Spoke Zarathustra",period:"Modern philosophy",compactQuote:'"Innocence is the child ... a self-rolling wheel."',fullQuote:'"Innocence is the child ... a game, a self-rolling wheel."',reflection:"Play becomes renewal, self-creation, and an image of becoming.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/1/1b/Nietzsche187a.jpg",portraitAlt:"Portrait of Friedrich Nietzsche",monogram:"FN",accent:"#a78bfa"},{thinker:"Schopenhauer",work:"The Essays of Arthur Schopenhauer",period:"19th century pessimism",compactQuote:'"On the stage of the world ... their little part."',fullQuote:'"On the stage of the world, most men play their little part."',reflection:"The stage metaphor stays, but the tone turns detached and severe.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/b/bc/Arthur_Schopenhauer_by_J_Sch%C3%A4fer%2C_1859b.jpg",portraitAlt:"Portrait of Arthur Schopenhauer",monogram:"AS",accent:"#22c55e"},{thinker:"Sartre",work:"Existentialism Is a Humanism",period:"Existentialism",compactQuote:'"Life is nothing until it is lived ... make sense of."',fullQuote:'"Life is nothing until it is lived; but it is yours to make sense of."',reflection:"Meaning is not handed down; it is authored through lived action.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/e/e9/Jean_Paul_Sartre_1965.jpg",portraitAlt:"Portrait of Jean-Paul Sartre",monogram:"JS",accent:"#14b8a6"},{thinker:"Huizinga",work:"Homo Ludens",period:"Cultural theory",compactQuote:'"Play is older than culture."',fullQuote:'"Play is older than culture."',reflection:"Play stops being decorative and becomes foundational to civilization itself.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/2/21/Johan-huizinga1.jpg",portraitAlt:"Portrait of Johan Huizinga",monogram:"JH",accent:"#60a5fa"},{thinker:"Alan Watts",work:"The Taboo Against Knowing Who You Are",period:"Systems-era philosophy",compactQuote:'"The life-game has to be purged ... rules."',fullQuote:'"The life-game has to be purged of self-contradictory rules."',reflection:"The game is not just played; it can be rebalanced when its rules fail.",portraitUrl:"https://commons.wikimedia.org/wiki/Special:FilePath/Alan%20Watts%20painted%20on%20mural.jpg",portraitAlt:"Alan Watts painted on a mural",monogram:"AW",accent:"#facc15"},{thinker:"James P. Carse",work:"Finite and Infinite Games",period:"Contemporary philosophy",compactQuote:'"The only purpose of the game ... keep everyone in play."',fullQuote:'"The only purpose of the game is to prevent it from coming to an end, to keep everyone in play."',reflection:"The highest strategy is continuity: sustain the conditions for creative participation.",portraitUrl:null,portraitAlt:"Monogram for James P. Carse",monogram:"JPC",accent:"#c084fc"}],N=[{title:"Orus the Living Machine",kicker:"Flagship product",summary:"A privacy-first multimodal AI assistant running locally on your hardware.",detail:"Powered by the Phi-4 model architecture, Orus lets you speak, share your screen, or type to interact. It keeps memory persistent, drives a 3D audio-reactive Orb, and ships with Orpheus TTS plus 40+ productivity tools including Categorizer, Processor, Memory Lab, and Training Lab.",accent:"#60a5fa",imageAsset:"Orus.avif",imageAlt:"Orus the Living Machine",monogram:"OR",mediaUrl:null},{title:"Orus the Living Machine",kicker:"Introduction film",summary:"A short guided look at the flagship system in motion.",detail:"Meet Orus as a local-first multimodal system that blends voice, screen, and document workflows into one responsive assistant. The video introduces the design intent behind the product and the feel of the interface.",accent:"#38bdf8",imageAsset:null,imageAlt:"Orus introduction preview",monogram:"OX",mediaUrl:"https://www.youtube.com/embed/GA5QfkVvVlw?start=2&rel=0&modestbranding=1"},{title:"Islands of Life",kicker:"VR adventure",summary:"A cinematic VR journey through alien landscapes and buried mysteries.",detail:"Take on the role of Denid, an explorer and miner answering a distress signal from Veni. Traverse strange worlds, uncover a cosmic storyline, and experience an original score composed exclusively for the game. Designed for players aged 12+.",accent:"#f97316",imageAsset:"IOL.avif",imageAlt:"Islands of Life",monogram:"IO",mediaUrl:null},{title:"Islands of Life",kicker:"VR trailer",summary:"A visual preview of the voyage, its scale, and its atmosphere.",detail:"The trailer distills the motion, lighting, and tone of Islands of Life into a compact preview. It is the quickest way to feel the tempo of the world before playing.",accent:"#fb7185",imageAsset:null,imageAlt:"Islands of Life trailer preview",monogram:"VR",mediaUrl:"https://www.youtube.com/embed/9D_ARBMGh9A?rel=0&modestbranding=1"},{title:"Original Soundtracks",kicker:"Music layer",summary:"Atmospheric orchestral compositions and immersive soundscapes.",detail:"The soundtrack work is built to support gaming and AI experiences with layered mood, pacing, and texture. This card represents the studio's in-house audio identity and the connective tissue between the projects.",accent:"#c084fc",imageAsset:null,imageAlt:"Original Soundtracks monogram",monogram:"OST",mediaUrl:null},{title:"Original Soundtracks",kicker:"Preview mix",summary:"A concise listen into the Islands of Life score.",detail:"Every note of the Islands of Life original soundtrack is written to echo the emotional arc of Denid's journey. The preview showcases the palette that ties the game's spaces together.",accent:"#facc15",imageAsset:null,imageAlt:"Original soundtrack preview",monogram:"MX",mediaUrl:"https://www.youtube.com/embed/qJRQyZk3m8g?rel=0&modestbranding=1"}];let b=class extends z{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this._editorOpen=!1,this._editorError=null,this._currentLocale="en",this._langDropdownOpen=!1,this._activeHeroQuoteIndex=0,this._activeRootCardIndex=0,this._quoteDeckHovered=!1,this._quoteDeckExpanded=!1,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._animationFrameId=0,this._editorModuleLoaded=!1,this._unlistenI18n=null,this._heroQuoteRotationTimer=null,this._onPopState=i=>{const t=i.state;this._activeSection=t?.section??this._pathToSection(location.pathname)},this._onHeroQuoteDeckFocusOut=i=>{const t=i.currentTarget,a=i.relatedTarget;t instanceof HTMLElement&&a instanceof Node&&t.contains(a)||(this._quoteDeckHovered=!1)},this._onHeroQuoteCardKeyDown=i=>{i.key!=="Enter"&&i.key!==" "||(i.preventDefault(),this._toggleHeroQuoteExpanded())}}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._activeSection=this._pathToSection(location.pathname),globalThis.addEventListener("popstate",this._onPopState),this._startHeroQuoteRotation(),this._bootSequence(),this._unlistenI18n=Se(()=>{this._currentLocale=Ze(),this.requestUpdate()})}disconnectedCallback(){super.disconnectedCallback(),globalThis.removeEventListener("popstate",this._onPopState),this._stopHeroQuoteRotation(),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId),this._unlistenI18n?.()}firstUpdated(){}updated(i){super.updated(i),i.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(i){this._errorMessage=`Failed to load: ${i instanceof Error?i.message:String(i)}`,this._loading=!1}}async _initThreeScene(){try{const i=this.shadowRoot?.querySelector("#cgs-canvas");if(!i)return;const t=await re(()=>import("./three.module-CIzvuMnW.js"),[]),a=new t.Scene,s=new t.PerspectiveCamera(60,i.clientWidth/i.clientHeight,.1,1e3);s.position.set(0,0,8);const r=new t.WebGLRenderer({canvas:i,antialias:!0,alpha:!0});r.setSize(i.clientWidth,i.clientHeight),r.setPixelRatio(Math.min(globalThis.devicePixelRatio,2)),r.setClearColor(657935,1);const o=new t.IcosahedronGeometry(2,15),n=new t.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),d=new t.Mesh(o,n);a.add(d);const l=new t.AmbientLight(16777215,.3);a.add(l);const p=new t.PointLight(6333946,1.5,20);p.position.set(5,5,5),a.add(p),this._threeRenderer=r,this._threeCanvasReady=!0;const g=()=>{this._animationFrameId=requestAnimationFrame(g),!document.hidden&&(d.rotation.y+=.003,d.rotation.x+=.001,r.render(a,s))};g(),new ResizeObserver(()=>{if(!i.parentElement)return;const h=i.clientWidth,y=i.clientHeight;s.aspect=h/y,s.updateProjectionMatrix(),r.setSize(h,y)}).observe(i)}catch{this._threeCanvasReady=!1}}_navigateTo(i){this._activeSection!==i&&(this._activeSection=i,history.pushState({section:i},"",this._sectionToPath(i)))}_sectionToPath(i){const t="/cgs-public/",s={privacy:"privacy-policy",products:"products",about:"about",safety:"safety",terms:"terms",notices:"notices","orus-ai":"orus-ai"}[i];return s?`${t}${s}`:t}_pathToSection(i){const t="/cgs-public/".replace(/\/$/,"");switch(i.startsWith(t)?i.slice(t.length):i){case"/privacy-policy":return"privacy";case"/products":return"products";case"/about":return"about";case"/safety":return"safety";case"/terms":return"terms";case"/notices":return"notices";case"/orus-ai":return"orus-ai";default:return"home"}}async _switchLanguage(i){this._langDropdownOpen=!1,await et(i)}async _openEditor(){this._editorError=null;try{this._editorModuleLoaded||(await re(()=>import("./orus-web-editor-6a_JC34i.js"),[]),this._editorModuleLoaded=!0),this._editorOpen=!0}catch(i){console.error("[CGS] Failed to load Orus editor:",i),this._editorError=i instanceof Error?i.message:String(i)}}get _activeHeroQuote(){return A[this._activeHeroQuoteIndex]??A[0]}get _activeRootFeature(){return N[this._activeRootCardIndex]??N[0]}_startHeroQuoteRotation(){this._heroQuoteRotationTimer===null&&(this._heroQuoteRotationTimer=globalThis.setInterval(()=>{document.hidden||this._quoteDeckHovered||this._quoteDeckExpanded||(this._activeHeroQuoteIndex=(this._activeHeroQuoteIndex+1)%A.length)},dt))}_stopHeroQuoteRotation(){this._heroQuoteRotationTimer!==null&&(globalThis.clearInterval(this._heroQuoteRotationTimer),this._heroQuoteRotationTimer=null)}_restartHeroQuoteRotation(){this._stopHeroQuoteRotation(),this._startHeroQuoteRotation()}_selectHeroQuote(i){i<0||i>=A.length||(this._activeHeroQuoteIndex=i,!this._quoteDeckHovered&&!this._quoteDeckExpanded&&this._restartHeroQuoteRotation())}_selectRootFeature(i){i<0||i>=N.length||(this._activeRootCardIndex=i)}_setHeroQuoteHovered(i){this._quoteDeckHovered=i}_toggleHeroQuoteExpanded(){this._quoteDeckExpanded=!this._quoteDeckExpanded}_renderHeroQuoteDeck(){const i=this._activeHeroQuote,t=this._quoteDeckHovered||this._quoteDeckExpanded;let a=e("hero.quote.status.auto","Auto sequence");this._quoteDeckExpanded?a=e("hero.quote.status.pinned","Pinned"):this._quoteDeckHovered&&(a=e("hero.quote.status.reading","Reading"));let s=e("hero.quote.mode.compact","Compacted line");this._quoteDeckExpanded?s=e("hero.quote.mode.pinned","Pinned open"):t&&(s=e("hero.quote.mode.full","Full line"));const r=t?i.reflection:e("hero.quote.helper","Hover the panel to reveal the full line. Tap the quote to pin it open on touch screens.");return c`
-            <section class="cgs-quote-stage"
-                     style=${`--quote-accent: ${i.accent};`}
+    `}}w([C({type:Boolean})],x.prototype,"open");w([C({type:Boolean,attribute:"full-page"})],x.prototype,"fullPage");w([C({type:Object})],x.prototype,"position");w([C({type:Object})],x.prototype,"size");w([C({type:String})],x.prototype,"startTab");w([b()],x.prototype,"activeTab");w([b()],x.prototype,"isDragging");w([b()],x.prototype,"isResizing");w([b()],x.prototype,"currentCardIndex");w([b()],x.prototype,"isCardDragging");customElements.get("orus-about-dialog")||customElements.define("orus-about-dialog",x);var it=Object.defineProperty,at=Object.getOwnPropertyDescriptor,v=(a,t,i,s)=>{for(var o=s>1?void 0:s?at(t,i):t,r=a.length-1,n;r>=0;r--)(n=a[r])&&(o=(s?n(t,i,o):n(o))||o);return s&&o&&it(t,i,o),o};const st=!0,ot=!0,rt=!0,nt=!0;globalThis.WEBSITE_MODE=st;globalThis.PRODUCTION_MODE=ot;globalThis.NO_INFERENCE_MODE=rt;globalThis.NO_AUTH_REQUIRED=nt;const ct=6800,A=[{thinker:"Plato",work:"Laws",period:"Classical Greece",compactQuote:'"Man is made to be the plaything of God ... the noblest of pastimes."',fullQuote:'"Man is made to be the plaything of God," and humans should "pass life in the noblest of pastimes," while "sacrificing, singing, and dancing."',reflection:"The classical root: play is treated as ritual, order, and noble participation.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/2/21/Plato_Silanion_Musei_Capitolini_MC1377.png",portraitAlt:"Bust of Plato",monogram:"PL",accent:"#f59e0b"},{thinker:"Heraclitus",work:"Fragment 52",period:"Pre-Socratic Greece",compactQuote:'"Time is a child ... playing draughts."',fullQuote:'"Time is a child playing draughts."',reflection:"Reality itself is cast as motion, play, and unstable cosmic order.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/2/24/Heraclitus_b_4_compressed.jpg",portraitAlt:"Bust of Heraclitus",monogram:"HE",accent:"#38bdf8"},{thinker:"Shakespeare",work:"As You Like It",period:"Elizabethan theatre",compactQuote:`"All the world's a stage ... merely players."`,fullQuote:`"All the world's a stage, and all the men and women merely players."`,reflection:"The game becomes theatre: roles, entrances, exits, and performance.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/2/21/William_Shakespeare_by_John_Taylor%2C_edited.jpg",portraitAlt:"Portrait of William Shakespeare",monogram:"WS",accent:"#f97316"},{thinker:"Schiller",work:"Aesthetical and Philosophical Essays",period:"German idealism",compactQuote:'"Man only plays ... when he plays."',fullQuote:'"Man only plays when in the full meaning of the word he is a man, and he is only completely a man when he plays."',reflection:"Play is elevated into a condition of full human flourishing.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/c/c6/Anton_Graff_-_Friedrich_Schiller.jpg",portraitAlt:"Portrait of Friedrich Schiller",monogram:"FS",accent:"#fb7185"},{thinker:"Nietzsche",work:"Thus Spoke Zarathustra",period:"Modern philosophy",compactQuote:'"Innocence is the child ... a self-rolling wheel."',fullQuote:'"Innocence is the child ... a game, a self-rolling wheel."',reflection:"Play becomes renewal, self-creation, and an image of becoming.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/1/1b/Nietzsche187a.jpg",portraitAlt:"Portrait of Friedrich Nietzsche",monogram:"FN",accent:"#a78bfa"},{thinker:"Schopenhauer",work:"The Essays of Arthur Schopenhauer",period:"19th century pessimism",compactQuote:'"On the stage of the world ... their little part."',fullQuote:'"On the stage of the world, most men play their little part."',reflection:"The stage metaphor stays, but the tone turns detached and severe.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/b/bc/Arthur_Schopenhauer_by_J_Sch%C3%A4fer%2C_1859b.jpg",portraitAlt:"Portrait of Arthur Schopenhauer",monogram:"AS",accent:"#22c55e"},{thinker:"Sartre",work:"Existentialism Is a Humanism",period:"Existentialism",compactQuote:'"Life is nothing until it is lived ... make sense of."',fullQuote:'"Life is nothing until it is lived; but it is yours to make sense of."',reflection:"Meaning is not handed down; it is authored through lived action.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/e/e9/Jean_Paul_Sartre_1965.jpg",portraitAlt:"Portrait of Jean-Paul Sartre",monogram:"JS",accent:"#14b8a6"},{thinker:"Huizinga",work:"Homo Ludens",period:"Cultural theory",compactQuote:'"Play is older than culture."',fullQuote:'"Play is older than culture."',reflection:"Play stops being decorative and becomes foundational to civilization itself.",portraitUrl:"https://upload.wikimedia.org/wikipedia/commons/2/21/Johan-huizinga1.jpg",portraitAlt:"Portrait of Johan Huizinga",monogram:"JH",accent:"#60a5fa"},{thinker:"Alan Watts",work:"The Taboo Against Knowing Who You Are",period:"Systems-era philosophy",compactQuote:'"The life-game has to be purged ... rules."',fullQuote:'"The life-game has to be purged of self-contradictory rules."',reflection:"The game is not just played; it can be rebalanced when its rules fail.",portraitUrl:"https://commons.wikimedia.org/wiki/Special:FilePath/Alan%20Watts%20painted%20on%20mural.jpg",portraitAlt:"Alan Watts painted on a mural",monogram:"AW",accent:"#facc15"},{thinker:"James P. Carse",work:"Finite and Infinite Games",period:"Contemporary philosophy",compactQuote:'"The only purpose of the game ... keep everyone in play."',fullQuote:'"The only purpose of the game is to prevent it from coming to an end, to keep everyone in play."',reflection:"The highest strategy is continuity: sustain the conditions for creative participation.",portraitUrl:null,portraitAlt:"Monogram for James P. Carse",monogram:"JPC",accent:"#c084fc"}];let f=class extends z{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this._editorOpen=!1,this._editorError=null,this._currentLocale="en",this._langDropdownOpen=!1,this._activeHeroQuoteIndex=0,this._quoteDeckHovered=!1,this._quoteDeckExpanded=!1,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._animationFrameId=0,this._editorModuleLoaded=!1,this._unlistenI18n=null,this._heroQuoteRotationTimer=null,this._onPopState=a=>{const t=a.state;this._activeSection=t?.section??this._pathToSection(location.pathname)},this._onHeroQuoteDeckFocusOut=a=>{const t=a.currentTarget,i=a.relatedTarget;t instanceof HTMLElement&&i instanceof Node&&t.contains(i)||(this._quoteDeckHovered=!1)},this._onHeroQuoteCardKeyDown=a=>{a.key!=="Enter"&&a.key!==" "||(a.preventDefault(),this._toggleHeroQuoteExpanded())}}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._activeSection=this._pathToSection(location.pathname),globalThis.addEventListener("popstate",this._onPopState),this._startHeroQuoteRotation(),this._bootSequence(),this._unlistenI18n=Ae(()=>{this._currentLocale=Je(),this.requestUpdate()})}disconnectedCallback(){super.disconnectedCallback(),globalThis.removeEventListener("popstate",this._onPopState),this._stopHeroQuoteRotation(),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId),this._unlistenI18n?.()}firstUpdated(){}updated(a){super.updated(a),a.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(a){this._errorMessage=`Failed to load: ${a instanceof Error?a.message:String(a)}`,this._loading=!1}}async _initThreeScene(){try{const a=this.shadowRoot?.querySelector("#cgs-canvas");if(!a)return;const t=await se(()=>import("./three.module-CIzvuMnW.js"),[]),i=new t.Scene,s=new t.PerspectiveCamera(60,a.clientWidth/a.clientHeight,.1,1e3);s.position.set(0,0,8);const o=new t.WebGLRenderer({canvas:a,antialias:!0,alpha:!0});o.setSize(a.clientWidth,a.clientHeight),o.setPixelRatio(Math.min(globalThis.devicePixelRatio,2)),o.setClearColor(657935,1);const r=new t.IcosahedronGeometry(2,15),n=new t.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),c=new t.Mesh(r,n);i.add(c);const d=new t.AmbientLight(16777215,.3);i.add(d);const p=new t.PointLight(6333946,1.5,20);p.position.set(5,5,5),i.add(p),this._threeRenderer=o,this._threeCanvasReady=!0;const g=()=>{this._animationFrameId=requestAnimationFrame(g),!document.hidden&&(c.rotation.y+=.003,c.rotation.x+=.001,o.render(i,s))};g(),new ResizeObserver(()=>{if(!a.parentElement)return;const h=a.clientWidth,y=a.clientHeight;s.aspect=h/y,s.updateProjectionMatrix(),o.setSize(h,y)}).observe(a)}catch{this._threeCanvasReady=!1}}_navigateTo(a){this._activeSection!==a&&(this._activeSection=a,history.pushState({section:a},"",this._sectionToPath(a)))}_sectionToPath(a){const t="/cgs-public/",s={privacy:"privacy-policy",products:"products",about:"about",safety:"safety",terms:"terms",notices:"notices","orus-ai":"orus-ai"}[a];return s?`${t}${s}`:t}_pathToSection(a){const t="/cgs-public/".replace(/\/$/,"");switch(a.startsWith(t)?a.slice(t.length):a){case"/privacy-policy":return"privacy";case"/products":return"products";case"/about":return"about";case"/safety":return"safety";case"/terms":return"terms";case"/notices":return"notices";case"/orus-ai":return"orus-ai";default:return"home"}}async _switchLanguage(a){this._langDropdownOpen=!1,await Ze(a)}async _openEditor(){this._editorError=null;try{this._editorModuleLoaded||(await se(()=>import("./orus-web-editor-6a_JC34i.js"),[]),this._editorModuleLoaded=!0),this._editorOpen=!0}catch(a){console.error("[CGS] Failed to load Orus editor:",a),this._editorError=a instanceof Error?a.message:String(a)}}_renderSiteChrome(a){const t=this._activeSection==="home"||this._activeSection==="products",i=this._activeSection==="orus-ai",s=this._activeSection==="about",o=t?"cgs-nav-link active":"cgs-nav-link",r=i?"cgs-nav-link active":"cgs-nav-link",n=s?"cgs-nav-link active":"cgs-nav-link",c=t?"page":void 0,d=i?"page":void 0,p=s?"page":void 0,g=this._langDropdownOpen?"true":"false",u=this._langDropdownOpen?l`
+                            <div id="cgs-lang-dropdown" class="cgs-lang-dropdown" role="menu" aria-label="${e("nav.language_menu","Language selection")}">
+                                ${V.map(h=>l`
+                                    <button class="cgs-lang-option ${this._currentLocale===h.code?"active":""}"
+                                            type="button"
+                                            aria-pressed=${this._currentLocale===h.code?"true":"false"}
+                                            @click=${()=>void this._switchLanguage(h.code)}>
+                                        <span class="cgs-lang-flag">${h.flag}</span>
+                                        <span class="cgs-lang-native">${h.native}</span>
+                                        <span class="cgs-lang-code">${h.code}</span>
+                                    </button>
+                                `)}
+                            </div>
+                        `:m;return l`
+            <nav class="cgs-nav">
+                <button class="cgs-logo" type="button" @click=${()=>this._navigateTo("home")}>
+                    ${e("nav.logo","Comet Game Studio")}
+                </button>
+                <div class="cgs-nav-links">
+                    <button class="${o}"
+                            type="button"
+                            aria-current=${c}
+                            @click=${()=>this._navigateTo("home")}>${e("nav.home","Home")}</button>
+                    <button class="${r}"
+                            type="button"
+                            aria-current=${d}
+                            @click=${()=>this._navigateTo("orus-ai")}>${e("nav.orus_ai","ORUS AI System")}</button>
+                    <button class="${n}"
+                            type="button"
+                            aria-current=${p}
+                            @click=${()=>this._navigateTo("about")}>${e("nav.about","About")}</button>
+                </div>
+
+                <!-- Language Selector (centered) -->
+                <div class="cgs-lang-selector">
+                    <button class="cgs-lang-btn" type="button" aria-haspopup="menu" aria-expanded=${g} aria-controls="cgs-lang-dropdown" @click=${()=>{this._langDropdownOpen=!this._langDropdownOpen}}>
+                        ${a.flag}
+                        ${a.code.toUpperCase()}
+                        ▾
+                    </button>
+                    ${u}
+                </div>
+            </nav>
+        `}_renderSiteFooter(){return l`
+            <footer class="cgs-footer">
+                <div class="cgs-footer-links">
+                    <button class="cgs-footer-link" type="button" @click=${()=>this._navigateTo("privacy")}>${e("footer.privacy","Privacy Policy")}</button>
+                    <span class="cgs-footer-sep">·</span>
+                    <button class="cgs-footer-link" type="button" @click=${()=>this._navigateTo("terms")}>${e("footer.terms","Terms of Use")}</button>
+                    <span class="cgs-footer-sep">·</span>
+                    <button class="cgs-footer-link" type="button" @click=${()=>this._navigateTo("safety")}>${e("footer.safety","Safety")}</button>
+                    <span class="cgs-footer-sep">·</span>
+                    <button class="cgs-footer-link" type="button" @click=${()=>this._navigateTo("notices")}>${e("footer.notices","Third-Party Notices")}</button>
+                    <span class="cgs-footer-sep">·</span>
+                    <a class="cgs-footer-link" href="mailto:support@cometgamestudio.com">${e("footer.contact","Contact")}</a>
+                </div>
+                <div style="margin-top: 8px;">
+                    &copy; ${new Date().getFullYear()} ${e("footer.copyright","Comet Game Studio Ltd. All rights reserved.")}
+                </div>
+                <div class="cgs-footer-disclaimer">
+                    ${e("footer.disclaimer","AI outputs may be inaccurate — always verify important information independently. Governing law: England and Wales.")}
+                </div>
+            </footer>
+        `}get _activeHeroQuote(){return A[this._activeHeroQuoteIndex]??A[0]}_startHeroQuoteRotation(){this._heroQuoteRotationTimer===null&&(this._heroQuoteRotationTimer=globalThis.setInterval(()=>{document.hidden||this._quoteDeckHovered||this._quoteDeckExpanded||(this._activeHeroQuoteIndex=(this._activeHeroQuoteIndex+1)%A.length)},ct))}_stopHeroQuoteRotation(){this._heroQuoteRotationTimer!==null&&(globalThis.clearInterval(this._heroQuoteRotationTimer),this._heroQuoteRotationTimer=null)}_restartHeroQuoteRotation(){this._stopHeroQuoteRotation(),this._startHeroQuoteRotation()}_selectHeroQuote(a){a<0||a>=A.length||(this._activeHeroQuoteIndex=a,!this._quoteDeckHovered&&!this._quoteDeckExpanded&&this._restartHeroQuoteRotation())}_setHeroQuoteHovered(a){this._quoteDeckHovered=a}_toggleHeroQuoteExpanded(){this._quoteDeckExpanded=!this._quoteDeckExpanded}_renderHeroQuoteDeck(){const a=this._activeHeroQuote,t=this._quoteDeckHovered||this._quoteDeckExpanded;let i=e("hero.quote.status.auto","Auto sequence");this._quoteDeckExpanded?i=e("hero.quote.status.pinned","Pinned"):this._quoteDeckHovered&&(i=e("hero.quote.status.reading","Reading"));let s=e("hero.quote.mode.compact","Compacted line");this._quoteDeckExpanded?s=e("hero.quote.mode.pinned","Pinned open"):t&&(s=e("hero.quote.mode.full","Full line"));const o=t?a.reflection:e("hero.quote.helper","Hover the panel to reveal the full line. Tap the quote to pin it open on touch screens."),r=this._quoteDeckExpanded?186:164;return l`
+            <section class="cgs-quote-stage cgs-quote-stage--radial"
+                     style=${`--quote-accent: ${a.accent};`}
                      @mouseenter=${()=>{this._setHeroQuoteHovered(!0)}}
                      @mouseleave=${()=>{this._setHeroQuoteHovered(!1)}}
                      @focusin=${()=>{this._setHeroQuoteHovered(!0)}}
@@ -3415,7 +3478,7 @@
                 <div class="cgs-quote-stage-head">
                     <div class="cgs-quote-kicker">${e("hero.quote.kicker","Philosophical roots")}</div>
                     <div class="cgs-quote-stage-meta">
-                        <span class="cgs-quote-status">${a}</span>
+                        <span class="cgs-quote-status">${i}</span>
                         <span class="cgs-quote-counter">${String(this._activeHeroQuoteIndex+1).padStart(2,"0")} / ${String(A.length).padStart(2,"0")}</span>
                     </div>
                 </div>
@@ -3425,121 +3488,45 @@
                     ${e("hero.quote.summary","A timed gallery of voices behind play, ritual, theatre, and infinite games.")}
                 </p>
 
-                <div class="cgs-quote-card"
-                     role="button"
-                     tabindex="0"
-                     aria-label=${t?e("hero.quote.collapse","Collapse full quote"):e("hero.quote.expand","Reveal full quote")}
-                     @click=${()=>{this._toggleHeroQuoteExpanded()}}
-                     @keydown=${this._onHeroQuoteCardKeyDown}>
-                    <div class="cgs-quote-meta">
-                        <div>
-                            <div class="cgs-quote-thinker">${i.thinker}</div>
-                            <div class="cgs-quote-source">${i.work} · ${i.period}</div>
-                        </div>
-                        <div class="cgs-quote-mode">${s}</div>
+                <div class="cgs-quote-radial-shell">
+                    <div class="cgs-quote-orbit">
+                        ${A.map((n,c)=>{const d=-90+360/A.length*c,p=c===this._activeHeroQuoteIndex;return l`
+                                <button class="cgs-quote-orbit-chip ${p?"active":""}"
+                                        type="button"
+                                        aria-pressed=${p?"true":"false"}
+                                        style=${`--orbit-angle: ${d}deg; --orbit-radius: ${r}px; --orbit-accent: ${n.accent}; --orbit-scale: ${p?1.05:1};`}
+                                        @mouseenter=${()=>{this._setHeroQuoteHovered(!0),this._selectHeroQuote(c)}}
+                                        @focus=${()=>{this._setHeroQuoteHovered(!0),this._selectHeroQuote(c)}}
+                                        @click=${()=>{this._selectHeroQuote(c)}}>
+                                    <span class="cgs-quote-orbit-chip-name">${n.thinker}</span>
+                                    <span class="cgs-quote-orbit-chip-source">${n.work}</span>
+                                    <span class="cgs-quote-orbit-chip-snippet">${n.compactQuote}</span>
+                                </button>
+                            `})}
                     </div>
 
-                    <div class="cgs-quote-body${t?" is-expanded":""}">
-                        ${t?i.fullQuote:i.compactQuote}
-                    </div>
-
-                    <div class="cgs-quote-helper">${r}</div>
-
-                    <div class="cgs-quote-progress" aria-hidden="true">
-                        ${A.map((o,n)=>c`
-                            <span class="cgs-quote-progress-segment ${n===this._activeHeroQuoteIndex?"active":""}"
-                                  style=${n===this._activeHeroQuoteIndex?`--segment-accent: ${o.accent};`:""}></span>
-                        `)}
-                    </div>
-
-                    <div class="cgs-quote-portrait-shell" aria-hidden="true">
-                        ${i.portraitUrl?c`
-                            <img class="cgs-quote-portrait"
-                                 src=${i.portraitUrl}
-                                 alt=${i.portraitAlt}
-                                 referrerpolicy="no-referrer"
-                                 decoding="async">
-                        `:c`
-                            <div class="cgs-quote-portrait-fallback">
-                                <span class="cgs-quote-portrait-monogram">${i.monogram}</span>
-                            </div>
-                        `}
-
-                        <div class="cgs-quote-portrait-caption">
-                            <span>${i.thinker}</span>
-                            <span>${i.work}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cgs-quote-chip-grid">
-                    ${A.map((o,n)=>c`
-                        <button class="cgs-quote-chip ${n===this._activeHeroQuoteIndex?"active":""}"
-                                type="button"
-                                aria-pressed=${n===this._activeHeroQuoteIndex?"true":"false"}
-                                @mouseenter=${()=>{this._setHeroQuoteHovered(!0),this._selectHeroQuote(n)}}
-                                @focus=${()=>{this._setHeroQuoteHovered(!0),this._selectHeroQuote(n)}}
-                                @click=${()=>{this._selectHeroQuote(n)}}>
-                            <span class="cgs-quote-chip-head">
-                                <span class="cgs-quote-chip-index">${String(n+1).padStart(2,"0")}</span>
-                                <span class="cgs-quote-chip-name">${o.thinker}</span>
-                            </span>
-                            <span class="cgs-quote-chip-snippet">${o.compactQuote}</span>
-                        </button>
-                    `)}
-                </div>
-            </section>
-        `}_renderRootFeaturePanel(){const i=this._activeRootFeature;return c`
-            <section class="cgs-root-panel" style=${`--feature-accent: ${i.accent};`}>
-                <div class="cgs-root-panel-copy">
-                    <div class="cgs-root-panel-kicker">${i.kicker}</div>
-                    <h2 class="cgs-root-panel-title">${i.title}</h2>
-                    <p class="cgs-root-panel-summary">${i.summary}</p>
-                    <p class="cgs-root-panel-detail">${i.detail}</p>
-                </div>
-
-                <div class="cgs-root-panel-media">
-                    ${i.mediaUrl?c`
-                        <iframe
-                            src=${i.mediaUrl}
-                            title=${i.title}
-                            loading="lazy"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    `:i.imageAsset?c`
-                        <img class="cgs-root-panel-image"
-                             src="${this._imgBase}/${i.imageAsset}"
-                             alt=${i.imageAlt}
-                             loading="lazy"
-                             decoding="async">
-                    `:c`
-                        <div class="cgs-root-panel-fallback">
-                            <span class="cgs-root-panel-monogram">${i.monogram}</span>
-                        </div>
-                    `}
-                </div>
-            </section>
-        `}_renderRootFeatureCards(){return c`
-            <div class="cgs-root-card-grid">
-                ${N.map((i,t)=>c`
-                    <button class="cgs-root-card ${t===this._activeRootCardIndex?"active":""}"
+                    <button class="cgs-quote-core"
                             type="button"
-                            style=${`--card-accent: ${i.accent};`}
-                            aria-pressed=${t===this._activeRootCardIndex?"true":"false"}
-                            @mouseenter=${()=>this._selectRootFeature(t)}
-                            @focus=${()=>this._selectRootFeature(t)}
-                            @click=${()=>this._selectRootFeature(t)}>
-                        <div class="cgs-root-card-top">
-                            <span class="cgs-root-card-kicker">${i.kicker}</span>
-                            <span class="cgs-root-card-index">${String(t+1).padStart(2,"0")}</span>
-                        </div>
-                        <div class="cgs-root-card-title">${i.title}</div>
-                        <p class="cgs-root-card-summary">${i.summary}</p>
+                            aria-label=${t?e("hero.quote.collapse","Collapse full quote"):e("hero.quote.expand","Reveal full quote")}
+                            style=${`--quote-accent: ${a.accent};`}
+                            @click=${()=>{this._toggleHeroQuoteExpanded()}}
+                            @keydown=${this._onHeroQuoteCardKeyDown}>
+                        <span class="cgs-quote-core-kicker">${a.period}</span>
+                        <span class="cgs-quote-core-thinker">${a.thinker}</span>
+                        <span class="cgs-quote-core-source">${a.work}</span>
+                        <span class="cgs-quote-core-line${t?" is-expanded":""}">
+                            ${t?a.fullQuote:a.compactQuote}
+                        </span>
+                        <span class="cgs-quote-core-helper">${o}</span>
                     </button>
-                `)}
-            </div>
-        `}render(){return this._loading?c`
+                </div>
+
+                <div class="cgs-quote-stage-footer">
+                    <span class="cgs-quote-stage-reflection">${a.reflection}</span>
+                    <span class="cgs-quote-mode">${s}</span>
+                </div>
+            </section>
+        `}render(){const a=this._activeSection==="orus-ai",t=!a,i=V.find(r=>r.code===this._currentLocale)??V[0],s=t?this._renderSiteChrome(i):m,o=t?this._renderSiteFooter():m;return this._loading?l`
                 <div class="loading-overlay">
                     <div class="loading-spinner"></div>
                     <div class="loading-text">${this._loadingMessage}</div>
@@ -3547,84 +3534,31 @@
                         <div class="loading-bar-fill" style="width: ${this._loadingProgress}%"></div>
                     </div>
                 </div>
-            `:this._errorMessage?c`
+            `:this._errorMessage?l`
                 <div class="error-overlay">
                     <div class="error-icon">⚠️</div>
                     <div class="error-text">${this._errorMessage}</div>
                 </div>
-            `:c`
-            <div class="cgs-main${this._activeSection==="orus-ai"?" cgs-main--fullscreen":""}">
+            `:l`
+            <div class="cgs-main${a?" cgs-main--fullscreen":""}">
                 <!-- 3D Background Canvas — canvas is always rendered once ready; Three.js init fires via updated() -->
                 <div class="cgs-canvas-container">
-                    ${this._threeCanvasReady?c`<canvas id="cgs-canvas"></canvas>`:c`
+                    ${this._threeCanvasReady?l`<canvas id="cgs-canvas"></canvas>`:l`
                             <canvas id="cgs-canvas"></canvas>
                             <div class="css-fallback-bg" style="position:absolute;inset:0;z-index:-1"></div>
                         `}
                 </div>
 
                 <!-- Top Navigation — hidden in full-page orus-ai mode -->
-                ${this._activeSection!=="orus-ai"?c`
-                <nav class="cgs-nav">
-                    <div class="cgs-logo" @click=${()=>this._navigateTo("home")}>
-                        ${e("nav.logo","Comet Game Studio")}
-                    </div>
-                    <div class="cgs-nav-links">
-                        <button class="cgs-nav-link ${this._activeSection==="home"||this._activeSection==="products"?"active":""}"
-                                @click=${()=>this._navigateTo("home")}>${e("nav.home","Home")}</button>
-                        <button class="cgs-nav-link"
-                                @click=${()=>this._navigateTo("orus-ai")}>${e("nav.orus_ai","ORUS AI System")}</button>
-                        <button class="cgs-nav-link ${this._activeSection==="about"?"active":""}"
-                                @click=${()=>this._navigateTo("about")}>${e("nav.about","About")}</button>
-                    </div>
-
-                    <!-- Language Selector (centered) -->
-                    <div class="cgs-lang-selector">
-                        <button class="cgs-lang-btn" @click=${()=>{this._langDropdownOpen=!this._langDropdownOpen}}>
-                            ${Q.find(i=>i.code===this._currentLocale)?.flag??"🌐"}
-                            ${Q.find(i=>i.code===this._currentLocale)?.code.toUpperCase()??"EN"}
-                            ▾
-                        </button>
-                        ${this._langDropdownOpen?c`
-                            <div class="cgs-lang-dropdown">
-                                ${Q.map(i=>c`
-                                    <button class="cgs-lang-option ${this._currentLocale===i.code?"active":""}"
-                                            @click=${()=>void this._switchLanguage(i.code)}>
-                                        <span class="cgs-lang-flag">${i.flag}</span>
-                                        <span class="cgs-lang-native">${i.native}</span>
-                                        <span class="cgs-lang-code">${i.code}</span>
-                                    </button>
-                                `)}
-                            </div>
-                        `:""}
-                    </div>
-                </nav>`:""}
+                ${s}
 
                 <!-- Content Area -->
-                <div class="cgs-content${this._activeSection==="orus-ai"?" cgs-content--full":""}">
+                <div class="cgs-content${a?" cgs-content--full":""}">
                     ${this._renderActiveSection()}
                 </div>
 
                 <!-- Footer — hidden in full-page orus-ai mode -->
-                ${this._activeSection!=="orus-ai"?c`
-                <footer class="cgs-footer">
-                    <div class="cgs-footer-links">
-                        <button class="cgs-footer-link" @click=${()=>this._navigateTo("privacy")}>${e("footer.privacy","Privacy Policy")}</button>
-                        <span class="cgs-footer-sep">·</span>
-                        <button class="cgs-footer-link" @click=${()=>this._navigateTo("terms")}>${e("footer.terms","Terms of Use")}</button>
-                        <span class="cgs-footer-sep">·</span>
-                        <button class="cgs-footer-link" @click=${()=>this._navigateTo("safety")}>${e("footer.safety","Safety")}</button>
-                        <span class="cgs-footer-sep">·</span>
-                        <button class="cgs-footer-link" @click=${()=>this._navigateTo("notices")}>${e("footer.notices","Third-Party Notices")}</button>
-                        <span class="cgs-footer-sep">·</span>
-                        <a class="cgs-footer-link" href="mailto:support@cometgamestudio.com">${e("footer.contact","Contact")}</a>
-                    </div>
-                    <div style="margin-top: 8px;">
-                        &copy; ${new Date().getFullYear()} ${e("footer.copyright","Comet Game Studio Ltd. All rights reserved.")}
-                    </div>
-                    <div class="cgs-footer-disclaimer">
-                        ${e("footer.disclaimer","AI outputs may be inaccurate — always verify important information independently. Governing law: England and Wales.")}
-                    </div>
-                </footer>`:""}
+                ${o}
 
                 <!-- About Orus Dialog -->
                 <orus-about-dialog
@@ -3634,12 +3568,13 @@
                 ></orus-about-dialog>
 
                 <!-- Orus Editor Popup (Website Demo) -->
-                ${this._editorOpen?c`
-                <div class="cgs-editor-overlay" @click=${i=>{i.target.classList.contains("cgs-editor-overlay")&&(this._editorOpen=!1)}}>
+                ${this._editorOpen?l`
+                <div class="cgs-editor-overlay" @click=${r=>{r.target.classList.contains("cgs-editor-overlay")&&(this._editorOpen=!1)}}>
                     <div class="cgs-editor-window">
                         <div class="cgs-editor-titlebar">
                             <span class="cgs-editor-win-title">◎ Orus Editor — Web Demo</span>
                             <button class="cgs-editor-close"
+                                    type="button"
                                     @click=${()=>{this._editorOpen=!1}}
                                     title="Close editor">✕</button>
                         </div>
@@ -3652,20 +3587,18 @@
             </div>
 
 
-        `}_renderActiveSection(){switch(this._activeSection){case"home":case"products":return this._renderHome();case"about":return this._renderAbout();case"privacy":return c`
+        `}_renderActiveSection(){switch(this._activeSection){case"home":case"products":return this._renderHome();case"about":return this._renderAbout();case"privacy":return l`
                     <orus-about-dialog
                         ?full-page=${!0}
                         .startTab=${"privacy"}
                         @navigate-home=${()=>this._navigateTo("home")}
                     ></orus-about-dialog>
-                `;case"terms":return this._renderTerms();case"safety":return this._renderSafety();case"notices":return this._renderNotices();case"orus-ai":return this._renderOrusAiPage();default:return this._renderHome()}}_renderHome(){return c`
+                `;case"terms":return this._renderTerms();case"safety":return this._renderSafety();case"notices":return this._renderNotices();case"orus-ai":return this._renderOrusAiPage();default:return this._renderHome()}}_renderHome(){return l`
             <div class="cgs-hero">
                 <div class="cgs-hero-tagline">${e("hero.tagline","AI · VR · Music")}</div>
                 <section class="cgs-roots-widget" aria-label="Philosophical roots and studio features">
                     <div class="cgs-roots-mist" aria-hidden="true"></div>
                     ${this._renderHeroQuoteDeck()}
-                    ${this._renderRootFeaturePanel()}
-                    ${this._renderRootFeatureCards()}
 
                     <div class="cgs-roots-actions">
                         <a class="cgs-store-btn disabled"
@@ -3679,7 +3612,7 @@
                         </button>
                     </div>
 
-                    ${this._editorError?c`
+                    ${this._editorError?l`
                         <p class="cgs-roots-error">
                             ⚠️ ${e("hero.editor_error","Editor failed to load. Please try again or use the desktop app.")}
                             <span>${this._editorError}</span>
@@ -3687,11 +3620,11 @@
                     `:""}
                 </section>
             </div>
-        `}_renderOrusAiPage(){return c`
+        `}_renderOrusAiPage(){return l`
             <orus-about-dialog full-page
                 @navigate-home=${()=>this._navigateTo("home")}
             ></orus-about-dialog>
-        `}_renderAbout(){return c`
+        `}_renderAbout(){return l`
             <div class="cgs-about-section">
                 <div class="cgs-about-icon">
                     <img src="${this._imgBase}/Orus.avif" alt="Orus the Living Machine"
@@ -3755,7 +3688,7 @@
                     </a>
                 </div>
             </div>
-        `}_renderTerms(){return c`
+        `}_renderTerms(){return l`
             <div class="cgs-legal-section">
                 <button class="cgs-legal-back" @click=${()=>this._navigateTo("home")}>${e("legal.back","← Back to Home")}</button>
                 <h2>${e("terms.title","Terms of Use")}</h2>
@@ -3790,7 +3723,7 @@
                 <p>${e("terms.contact.body","Comet Game Studio Ltd")} \u00b7
                 <a class="cgs-legal-link" href="mailto:support@cometgamestudio.com">support@cometgamestudio.com</a></p>
             </div>
-        `}_renderSafety(){return c`
+        `}_renderSafety(){return l`
             <div class="cgs-legal-section">
                 <button class="cgs-legal-back" @click=${()=>this._navigateTo("home")}>${e("legal.back","← Back to Home")}</button>
                 <h2>${e("safety.title","Safety & Responsible Use")}</h2>
@@ -3815,7 +3748,7 @@
                 <p>${e("safety.contact.body","To report safety concerns, contact us at")}
                 <a class="cgs-legal-link" href="mailto:support@cometgamestudio.com">support@cometgamestudio.com</a>.</p>
             </div>
-        `}_renderNotices(){return c`
+        `}_renderNotices(){return l`
             <div class="cgs-legal-section">
                 <button class="cgs-legal-back" @click=${()=>this._navigateTo("home")}>${e("legal.back","← Back to Home")}</button>
                 <h2>${e("notices.title","Third-Party Notices")}</h2>
@@ -3852,11 +3785,12 @@
 
                 <p class="cgs-legal-note">${e("notices.summary_note","This list is a summary. For the complete and authoritative list of dependencies and their licences, refer to the NOTICE file included in your Orus installation, or run pip-licenses and npm ls in your Orus installation environment.")}</p>
             </div>
-        `}};b.styles=xe`
+        `}};f.styles=ye`
         :host {
             display: block;
             width: 100%;
             height: 100%;
+            min-height: 100dvh;
             margin: 0;
             padding: 0;
             overflow: hidden;
@@ -3865,6 +3799,10 @@
             color: #e2e8f0;
             -webkit-user-select: none;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            overscroll-behavior: none;
+            scrollbar-gutter: stable both-edges;
         }
 
         /* Fixed top nav layout variables */
@@ -3951,6 +3889,7 @@
             position: relative;
             width: 100%;
             height: 100%;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             padding-top: var(--cgs-nav-height);
@@ -3985,10 +3924,10 @@
             right: 0;
             height: var(--cgs-nav-height);
             z-index: 40;
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            justify-content: space-between;
-            padding: 16px 32px;
+            padding: calc(16px + env(safe-area-inset-top)) calc(32px + env(safe-area-inset-right)) 16px calc(32px + env(safe-area-inset-left));
             background: rgba(10, 10, 15, 0.9);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(99, 102, 241, 0.15);
@@ -4003,16 +3942,30 @@
             text-transform: uppercase;
             cursor: pointer;
             flex-shrink: 0;
+            justify-self: start;
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0;
+            margin: 0;
+            border: none;
+            background: none;
+            appearance: none;
+            -webkit-appearance: none;
+            font: inherit;
+            touch-action: manipulation;
         }
 
         .cgs-nav-links {
             display: flex;
             gap: 24px;
+            justify-self: end;
         }
 
         .cgs-lang-selector {
             position: relative;
             flex-shrink: 0;
+            justify-self: center;
         }
 
         .cgs-nav-link {
@@ -4027,6 +3980,7 @@
             transition: all 0.2s ease;
             border: none;
             background: none;
+            touch-action: manipulation;
         }
 
         .cgs-nav-link:hover {
@@ -4054,6 +4008,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-family: inherit;
+            touch-action: manipulation;
         }
 
         .cgs-lang-btn:hover {
@@ -4092,6 +4047,7 @@
             text-align: left;
             transition: all 0.15s ease;
             font-family: inherit;
+            touch-action: manipulation;
         }
 
         .cgs-lang-option:hover {
@@ -4119,8 +4075,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 40px 32px;
+            padding: 40px calc(32px + env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) calc(32px + env(safe-area-inset-left));
             overflow-y: auto;
+            overscroll-behavior-y: contain;
         }
 
         /* ── Hero Section ──────────────────────────────────── */
@@ -4564,6 +4521,284 @@
             overflow: hidden;
         }
 
+        .cgs-quote-stage.cgs-quote-stage--radial {
+            max-width: 980px;
+            padding: 20px 20px 18px;
+            border-radius: 30px;
+        }
+
+        .cgs-quote-stage--radial .cgs-quote-title {
+            font-size: clamp(34px, 4.6vw, 58px);
+            margin-bottom: 6px;
+        }
+
+        .cgs-quote-stage--radial .cgs-quote-summary {
+            max-width: 760px;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        .cgs-quote-radial-shell {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 360px;
+            margin-top: 4px;
+        }
+
+        .cgs-quote-orbit {
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+        }
+
+        .cgs-quote-orbit-chip {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: min(184px, 32vw);
+            min-height: 88px;
+            padding: 12px 13px 11px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            background: rgba(8, 12, 23, 0.62);
+            color: #dbe4f0;
+            text-align: left;
+            cursor: pointer;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) rotate(var(--orbit-angle)) translateX(var(--orbit-radius)) rotate(calc(-1 * var(--orbit-angle))) scale(var(--orbit-scale, 1));
+            transform-origin: center;
+            transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+            font-family: inherit;
+            box-shadow: 0 10px 22px rgba(1, 4, 14, 0.18);
+        }
+
+        .cgs-quote-orbit-chip:hover,
+        .cgs-quote-orbit-chip:focus-visible {
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(12, 20, 34, 0.84);
+            outline: none;
+            box-shadow: 0 14px 26px rgba(1, 4, 14, 0.26);
+        }
+
+        .cgs-quote-orbit-chip.active {
+            border-color: var(--orbit-accent, #6366f1);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(9, 14, 25, 0.94));
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 16px 28px rgba(15, 23, 42, 0.22);
+        }
+
+        .cgs-quote-orbit-chip-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #f8fafc;
+        }
+
+        .cgs-quote-orbit-chip-source {
+            font-size: 10px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #94a3b8;
+        }
+
+        .cgs-quote-orbit-chip-snippet {
+            font-size: 11px;
+            line-height: 1.45;
+            color: #aebcd0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .cgs-quote-core {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: min(430px, 82%);
+            min-height: 250px;
+            padding: 24px 26px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 999px;
+            background:
+                radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.12), transparent 22%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.06), transparent 46%),
+                linear-gradient(180deg, rgba(7, 12, 22, 0.88), rgba(5, 10, 18, 0.94));
+            color: inherit;
+            text-align: center;
+            cursor: pointer;
+            box-shadow:
+                0 24px 60px rgba(1, 4, 14, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                inset 0 -18px 36px rgba(0, 0, 0, 0.24);
+            overflow: hidden;
+        }
+
+        .cgs-quote-core::before {
+            content: '';
+            position: absolute;
+            inset: 11px 16px;
+            border-radius: inherit;
+            background:
+                radial-gradient(circle at 50% 18%, var(--quote-accent), transparent 34%),
+                radial-gradient(circle at 50% 84%, rgba(255, 255, 255, 0.06), transparent 30%);
+            filter: blur(18px);
+            opacity: 0.22;
+            pointer-events: none;
+        }
+
+        .cgs-quote-core:hover,
+        .cgs-quote-core:focus-visible {
+            border-color: rgba(255, 255, 255, 0.18);
+            outline: none;
+            transform: translateY(-1px);
+        }
+
+        .cgs-quote-core-kicker,
+        .cgs-quote-core-thinker,
+        .cgs-quote-core-source,
+        .cgs-quote-core-helper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cgs-quote-core-kicker {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: #cbd5e1;
+            opacity: 0.9;
+        }
+
+        .cgs-quote-core-thinker {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #f8fafc;
+        }
+
+        .cgs-quote-core-source {
+            font-size: 11px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--quote-accent, #94a3b8);
+        }
+
+        .cgs-quote-core-line {
+            max-width: 330px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(26px, 3.6vw, 40px);
+            line-height: 1.06;
+            color: #f8fafc;
+            text-wrap: balance;
+        }
+
+        .cgs-quote-core-line.is-expanded {
+            color: #ffffff;
+        }
+
+        .cgs-quote-core-helper {
+            max-width: 300px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #a9b7cb;
+        }
+
+        .cgs-quote-stage-footer {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .cgs-quote-stage-reflection {
+            max-width: 680px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #9fb0c9;
+        }
+
+        .cgs-quote-stage--radial .cgs-quote-mode {
+            white-space: nowrap;
+            align-self: flex-start;
+        }
+
+        .cgs-roots-widget {
+            position: relative;
+            width: 100%;
+            max-width: 980px;
+            padding: 20px;
+            border-radius: 32px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.10), transparent 28%),
+                radial-gradient(circle at 20% 14%, rgba(56, 189, 248, 0.12), transparent 24%),
+                radial-gradient(circle at 82% 76%, rgba(192, 132, 252, 0.10), transparent 28%),
+                linear-gradient(180deg, rgba(6, 10, 20, 0.92), rgba(8, 11, 19, 0.88));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 32px 96px rgba(1, 4, 14, 0.54),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            isolation: isolate;
+        }
+
+        .cgs-roots-widget::before {
+            content: '';
+            position: absolute;
+            inset: -16% -8% auto;
+            height: 62%;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.10), transparent 28%),
+                radial-gradient(circle at 50% 44%, rgba(99, 102, 241, 0.16), transparent 44%);
+            filter: blur(24px);
+            opacity: 0.64;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .cgs-roots-widget .cgs-quote-stage {
+            margin-bottom: 0;
+        }
+
+        .cgs-roots-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .cgs-roots-error {
+            margin: 12px auto 0;
+            max-width: 520px;
+            color: #fca5a5;
+            font-size: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .cgs-roots-error span {
+            display: block;
+            margin-top: 4px;
+            opacity: 0.72;
+            font-size: 11px;
+        }
+
         .cgs-root-panel {
             display: grid;
             grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
@@ -4963,7 +5198,7 @@
             position: relative;
             z-index: 10;
             text-align: center;
-            padding: 16px 32px;
+            padding: 16px calc(32px + env(safe-area-inset-right)) calc(16px + env(safe-area-inset-bottom)) calc(32px + env(safe-area-inset-left));
             font-size: 11px;
             color: #475569;
             background: rgba(10, 10, 15, 0.8);
@@ -4990,6 +5225,13 @@
             text-decoration: none;
             transition: color 0.2s ease;
             font-family: inherit;
+            touch-action: manipulation;
+        }
+
+        :where(.cgs-logo, .cgs-nav-link, .cgs-lang-btn, .cgs-lang-option, .cgs-footer-link, .cgs-store-btn, .cgs-about-link, .cgs-contact-link, .cgs-editor-btn, .cgs-editor-close, .cgs-legal-back):focus-visible {
+            outline: 2px solid #a78bfa;
+            outline-offset: 3px;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
         }
 
         .cgs-footer-link:hover {
@@ -5116,33 +5358,51 @@
 
         @media (max-width: 768px) {
             :host {
-                --cgs-nav-height: 56px;
+                --cgs-nav-height: 96px;
             }
 
             /* Nav — shrink logo & links so nothing overflows */
             .cgs-nav {
-                padding: 10px 14px;
-                gap: 8px;
+                height: auto;
+                min-height: var(--cgs-nav-height);
+                padding: calc(10px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) 12px calc(14px + env(safe-area-inset-left));
+                gap: 6px;
+                grid-template-columns: 1fr auto;
+                grid-template-areas:
+                    'logo lang'
+                    'links links';
+                align-items: start;
             }
             .cgs-logo {
+                grid-area: logo;
                 font-size: 15px;
                 letter-spacing: 1px;
                 flex-shrink: 0;
+                justify-self: start;
             }
             .cgs-nav-links {
+                grid-area: links;
                 gap: 4px;
+                justify-self: center;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
             }
             .cgs-nav-link {
                 font-size: 11px;
                 padding: 5px 8px;
                 letter-spacing: 0.5px;
+                min-height: 36px;
             }
             .cgs-lang-selector {
+                grid-area: lang;
                 flex-shrink: 0;
+                justify-self: end;
             }
             .cgs-lang-btn {
                 padding: 4px 8px;
                 font-size: 11px;
+                min-height: 36px;
             }
 
             /* Hero */
@@ -5158,53 +5418,82 @@
             .cgs-hero-subtitle {
                 font-size: 16px;
                 margin-bottom: 20px;
+                line-height: 1.5;
             }
             .cgs-hero-tagline {
                 font-size: 18px;
                 letter-spacing: 4px;
             }
             .cgs-roots-widget {
-                padding: 18px;
-                border-radius: 28px;
+                padding: 16px;
+                border-radius: 24px;
+            }
+            .cgs-quote-stage.cgs-quote-stage--radial {
+                padding: 16px 14px 14px;
+                border-radius: 22px;
+            }
+            .cgs-quote-stage--radial .cgs-quote-title {
+                font-size: 28px;
+            }
+            .cgs-quote-stage--radial .cgs-quote-summary {
+                font-size: 13px;
+                margin-bottom: 14px;
+            }
+            .cgs-quote-radial-shell {
+                min-height: 0;
+                display: grid;
+                gap: 12px;
+            }
+            .cgs-quote-orbit {
+                position: relative;
+                inset: auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 8px;
+                pointer-events: auto;
+            }
+            .cgs-quote-orbit-chip {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                min-height: 82px;
+                padding: 10px 11px 10px;
+                transform: none !important;
+            }
+            .cgs-quote-core {
+                width: 100%;
+                min-height: 0;
+                border-radius: 26px;
+                padding: 18px 16px 16px;
+            }
+            .cgs-quote-core-line {
+                max-width: none;
+                font-size: 24px;
+            }
+            .cgs-quote-stage-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .cgs-quote-stage-reflection {
+                font-size: 12px;
+                max-width: none;
             }
             .cgs-roots-actions {
                 gap: 10px;
                 margin-top: 14px;
+                width: 100%;
+                flex-direction: column;
+            }
+            .cgs-store-btn,
+            .cgs-editor-btn {
+                width: 100%;
+                justify-content: center;
+                min-height: 44px;
             }
             .cgs-roots-error {
                 margin-top: 12px;
-            }
-            .cgs-root-panel {
-                grid-template-columns: 1fr;
-                gap: 14px;
-                padding: 16px;
-                border-radius: 22px;
-                margin-top: 14px;
-            }
-            .cgs-root-panel-title {
-                font-size: 28px;
-            }
-            .cgs-root-panel-summary {
-                font-size: 14px;
-            }
-            .cgs-root-panel-detail {
-                font-size: 12px;
-            }
-            .cgs-root-panel-media,
-            .cgs-root-panel-media iframe,
-            .cgs-root-panel-image,
-            .cgs-root-panel-fallback {
-                min-height: 200px;
-            }
-            .cgs-root-card-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-                margin-top: 14px;
-            }
-            .cgs-quote-stage {
-                padding: 18px;
-                margin-bottom: 22px;
-                border-radius: 22px;
             }
             .cgs-quote-stage-head {
                 flex-direction: column;
@@ -5213,49 +5502,10 @@
             .cgs-quote-stage-meta {
                 justify-content: flex-start;
             }
-            .cgs-quote-title {
-                font-size: 40px;
-            }
-            .cgs-quote-summary {
-                font-size: 14px;
-                margin-bottom: 18px;
-            }
-            .cgs-quote-card {
-                padding: 18px;
-                border-radius: 20px;
-            }
-            .cgs-quote-meta {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .cgs-quote-body {
-                font-size: 30px;
-                margin-top: 16px;
-            }
-            .cgs-quote-helper {
-                font-size: 12px;
-            }
-            .cgs-quote-portrait-shell,
-            .cgs-quote-portrait,
-            .cgs-quote-portrait-fallback {
-                min-height: 180px;
-                height: 180px;
-            }
-            .cgs-quote-portrait-caption {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 4px;
-            }
-            .cgs-quote-chip-grid {
-                grid-template-columns: 1fr;
-            }
-            .cgs-quote-chip {
-                min-height: 76px;
-            }
 
             /* Content area */
             .cgs-content {
-                padding: 20px 14px;
+                padding: 18px 14px calc(24px + env(safe-area-inset-bottom));
             }
 
             /* Products */
@@ -5265,6 +5515,7 @@
             }
             .cgs-product-card {
                 padding: 20px 16px;
+                border-radius: 16px;
             }
             .cgs-product-img {
                 height: 130px;
@@ -5289,6 +5540,12 @@
                 gap: 16px;
                 margin-top: 24px;
             }
+            .cgs-media-card {
+                border-radius: 16px;
+            }
+            .cgs-media-embed {
+                padding-top: 56.25%;
+            }
             .cgs-media-info {
                 padding: 14px 16px;
             }
@@ -5305,12 +5562,14 @@
             /* About section */
             .cgs-about-section {
                 max-width: 100%;
+                text-align: left;
             }
             .cgs-about-section h2 {
                 font-size: 22px;
             }
             .cgs-about-section p {
                 font-size: 13px;
+                line-height: 1.75;
             }
             .cgs-about-links {
                 gap: 10px;
@@ -5337,11 +5596,12 @@
             .cgs-legal-section p,
             .cgs-legal-section li {
                 font-size: 12px;
+                line-height: 1.75;
             }
 
             /* Footer — collapse separators so links wrap readably */
             .cgs-footer {
-                padding: 10px 14px;
+                padding: 10px 14px calc(12px + env(safe-area-inset-bottom));
             }
             .cgs-footer-links {
                 gap: 2px;
@@ -5363,28 +5623,41 @@
 
         @media (max-width: 480px) {
             :host {
-                --cgs-nav-height: 50px;
+                --cgs-nav-height: 112px;
             }
 
             .cgs-nav {
-                padding: 8px 10px;
-                gap: 4px;
+                padding: calc(10px + env(safe-area-inset-top)) 10px 12px;
+                gap: 6px;
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    'logo'
+                    'lang'
+                    'links';
+                justify-items: center;
             }
             .cgs-logo {
                 font-size: 12px;
                 letter-spacing: 0.3px;
+                justify-self: center;
             }
             .cgs-nav-links {
-                gap: 2px;
+                gap: 4px;
+                justify-self: center;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
             }
             .cgs-nav-link {
                 font-size: 10px;
                 padding: 4px 6px;
                 letter-spacing: 0;
+                min-height: 34px;
             }
             .cgs-lang-btn {
                 padding: 3px 6px;
                 font-size: 10px;
+                min-height: 34px;
             }
 
             .cgs-hero-title {
@@ -5401,54 +5674,44 @@
                 padding: 14px;
                 border-radius: 22px;
             }
-            .cgs-root-panel {
-                padding: 14px;
-                border-radius: 18px;
+            .cgs-quote-stage.cgs-quote-stage--radial {
+                padding: 14px 12px 12px;
+                border-radius: 20px;
             }
-            .cgs-root-panel-title {
-                font-size: 24px;
+            .cgs-quote-stage--radial .cgs-quote-title {
+                font-size: 26px;
             }
-            .cgs-root-panel-summary {
-                font-size: 13px;
+            .cgs-quote-stage--radial .cgs-quote-summary {
+                font-size: 12px;
+                line-height: 1.5;
             }
-            .cgs-root-panel-detail {
+            .cgs-quote-radial-shell {
+                gap: 10px;
+            }
+            .cgs-quote-orbit {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .cgs-quote-orbit-chip {
+                min-height: 74px;
+            }
+            .cgs-quote-core {
+                padding: 16px 14px;
+                border-radius: 24px;
+            }
+            .cgs-quote-core-line {
+                font-size: 22px;
+            }
+            .cgs-quote-core-helper {
+                max-width: none;
                 font-size: 11px;
             }
-            .cgs-root-panel-media,
-            .cgs-root-panel-media iframe,
-            .cgs-root-panel-image,
-            .cgs-root-panel-fallback {
-                min-height: 180px;
-            }
-            .cgs-root-card {
-                min-height: 136px;
-                padding: 14px;
-            }
-            .cgs-root-card-title {
+            .cgs-quote-stage-reflection {
                 font-size: 11px;
-            }
-            .cgs-root-card-summary {
-                font-size: 11px;
-            }
-            .cgs-quote-title {
-                font-size: 34px;
-            }
-            .cgs-quote-body {
-                font-size: 25px;
-            }
-            .cgs-quote-progress {
-                gap: 5px;
-            }
-            .cgs-quote-chip-snippet {
-                font-size: 11px;
-            }
-            .cgs-quote-portrait-caption {
-                font-size: 10px;
-                letter-spacing: 1.2px;
             }
 
             .cgs-content {
-                padding: 14px 10px;
+                padding: 14px 10px calc(18px + env(safe-area-inset-bottom));
             }
 
             .cgs-about-section h2 {
@@ -5462,6 +5725,32 @@
                 font-size: 11px;
                 padding: 9px 14px;
                 gap: 6px;
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .cgs-nav-link:hover,
+            .cgs-lang-btn:hover,
+            .cgs-store-btn:hover,
+            .cgs-editor-btn:hover,
+            .cgs-about-link:hover,
+            .cgs-quote-orbit-chip:hover,
+            .cgs-quote-core:hover,
+            .cgs-product-card:hover,
+            .cgs-media-card:hover {
+                transform: none;
+                box-shadow: inherit;
+            }
+
+            .cgs-nav-link,
+            .cgs-lang-btn,
+            .cgs-store-btn,
+            .cgs-editor-btn,
+            .cgs-about-link,
+            .cgs-footer-link,
+            .cgs-quote-orbit-chip,
+            .cgs-quote-core {
+                min-height: 44px;
             }
         }
 
@@ -5651,6 +5940,15 @@
             color: #ef4444;
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
         .cgs-editor-frame {
             flex: 1;
             overflow: hidden;
@@ -5676,4 +5974,4 @@
                 border-radius: 0;
             }
         }
-    `;v([m()],b.prototype,"_loading",2);v([m()],b.prototype,"_loadingMessage",2);v([m()],b.prototype,"_loadingProgress",2);v([m()],b.prototype,"_ready",2);v([m()],b.prototype,"_errorMessage",2);v([m()],b.prototype,"_activeSection",2);v([m()],b.prototype,"_threeCanvasReady",2);v([m()],b.prototype,"_aboutOpen",2);v([m()],b.prototype,"_editorOpen",2);v([m()],b.prototype,"_editorError",2);v([m()],b.prototype,"_currentLocale",2);v([m()],b.prototype,"_langDropdownOpen",2);v([m()],b.prototype,"_activeHeroQuoteIndex",2);v([m()],b.prototype,"_activeRootCardIndex",2);v([m()],b.prototype,"_quoteDeckHovered",2);v([m()],b.prototype,"_quoteDeckExpanded",2);v([C({type:String,attribute:"site-url"})],b.prototype,"siteUrl",2);b=v([Xe("orus-cgs-home")],b);const ve={log:console.log.bind(console),warn:console.warn.bind(console),error:console.error.bind(console)};function lt(){const i=()=>{};console.debug=i,console.trace=i,console.dir=i,console.dirxml=i,console.table=i;try{console.clear()}catch{}ve.log("%c Comet Game Studio %c Orus AI System %c","background: #6366f1; color: #fff; padding: 4px 8px; border-radius: 4px 0 0 4px; font-weight: 700;","background: #1e1b4b; color: #c4b5fd; padding: 4px 8px; border-radius: 0 4px 4px 0;",""),ve.log("%chttps://www.cometgamestudio.com","color: #94a3b8; font-size: 11px;")}function pt(){document.addEventListener("keydown",i=>{i.ctrlKey&&!i.shiftKey&&(i.key==="u"||i.key==="U")&&i.preventDefault()},!0),document.addEventListener("contextmenu",i=>(i.preventDefault(),!1))}function ut(){typeof performance<"u"&&performance.clearResourceTimings&&setInterval(()=>{try{performance.clearResourceTimings()}catch{}},1e4)}lt();pt();ut();
+    `;v([b()],f.prototype,"_loading",2);v([b()],f.prototype,"_loadingMessage",2);v([b()],f.prototype,"_loadingProgress",2);v([b()],f.prototype,"_ready",2);v([b()],f.prototype,"_errorMessage",2);v([b()],f.prototype,"_activeSection",2);v([b()],f.prototype,"_threeCanvasReady",2);v([b()],f.prototype,"_aboutOpen",2);v([b()],f.prototype,"_editorOpen",2);v([b()],f.prototype,"_editorError",2);v([b()],f.prototype,"_currentLocale",2);v([b()],f.prototype,"_langDropdownOpen",2);v([b()],f.prototype,"_activeHeroQuoteIndex",2);v([b()],f.prototype,"_quoteDeckHovered",2);v([b()],f.prototype,"_quoteDeckExpanded",2);v([C({type:String,attribute:"site-url"})],f.prototype,"siteUrl",2);f=v([Ye("orus-cgs-home")],f);const fe={log:console.log.bind(console),warn:console.warn.bind(console),error:console.error.bind(console)};function dt(){const a=()=>{};console.debug=a,console.trace=a,console.dir=a,console.dirxml=a,console.table=a;try{console.clear()}catch{}fe.log("%c Comet Game Studio %c Orus AI System %c","background: #6366f1; color: #fff; padding: 4px 8px; border-radius: 4px 0 0 4px; font-weight: 700;","background: #1e1b4b; color: #c4b5fd; padding: 4px 8px; border-radius: 0 4px 4px 0;",""),fe.log("%chttps://www.cometgamestudio.com","color: #94a3b8; font-size: 11px;")}function lt(){document.addEventListener("keydown",a=>{a.ctrlKey&&!a.shiftKey&&(a.key==="u"||a.key==="U")&&a.preventDefault()},!0),document.addEventListener("contextmenu",a=>(a.preventDefault(),!1))}function pt(){typeof performance<"u"&&performance.clearResourceTimings&&setInterval(()=>{try{performance.clearResourceTimings()}catch{}},1e4)}dt();lt();pt();
