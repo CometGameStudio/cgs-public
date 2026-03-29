@@ -3550,14 +3550,7 @@
         `}_renderPhilosophicalQuotes(){const a=m._QUOTES[this._currentQuoteIndex],t=m._QUOTES.length;return c`
             <section class="cgs-quote-stage cgs-quote-stage--philosophy"
                      style="--quote-accent: #f59e0b;"
-                     aria-label="Philosophical roots and animated quotes">
-                <div class="cgs-quote-stage-head">
-                    <div class="cgs-quote-kicker">${e("hero.roots.kicker","Philosophical roots")}</div>
-                    <div class="cgs-quote-stage-meta">
-                        <span class="cgs-quote-status">${e("hero.philosophy.status","Design principles")}</span>
-                        <span class="cgs-quote-counter">${String(this._currentQuoteIndex+1).padStart(2,"0")} / ${String(t).padStart(2,"0")}</span>
-                    </div>
-                </div>
+                     aria-label="Animated philosophical quotes">
 
                 <!-- Animated Quote -->
                 <div class="cgs-quote-animated ${this._quoteFading?"fading":""}" aria-live="polite">
@@ -3579,43 +3572,6 @@
                     `)}
                 </div>
 
-                <!-- Design Principles -->
-                <h2 class="cgs-quote-title" style="margin-top: 24px;">${e("hero.philosophy.title","Local-First. Privacy-First. User-Centric.")}</h2>
-                <p class="cgs-quote-summary">
-                    ${e("hero.philosophy.summary","At Comet Game Studio, we believe AI should empower, not exploit. Every design decision puts your autonomy, data, and creative potential first.")}
-                </p>
-
-                <div class="cgs-quote-chip-grid">
-                    <article class="cgs-quote-chip" style="--quote-accent: #60a5fa;">
-                        <div class="cgs-quote-chip-head">
-                            <span class="cgs-quote-chip-index">01</span>
-                            <span class="cgs-quote-chip-name">${e("hero.philosophy.local","Local Processing")}</span>
-                        </div>
-                        <p class="cgs-quote-chip-snippet">
-                            ${e("hero.philosophy.local_desc","Your voice, camera, and documents process on your device. No cloud required. No telemetry.")}
-                        </p>
-                    </article>
-
-                    <article class="cgs-quote-chip" style="--quote-accent: #a78bfa;">
-                        <div class="cgs-quote-chip-head">
-                            <span class="cgs-quote-chip-index">02</span>
-                            <span class="cgs-quote-chip-name">${e("hero.philosophy.control","You Control")}</span>
-                        </div>
-                        <p class="cgs-quote-chip-snippet">
-                            ${e("hero.philosophy.control_desc","Decide when Orus listens. Modify system prompts. Delete everything. Your machine, your rules.")}
-                        </p>
-                    </article>
-
-                    <article class="cgs-quote-chip" style="--quote-accent: #ec4899;">
-                        <div class="cgs-quote-chip-head">
-                            <span class="cgs-quote-chip-index">03</span>
-                            <span class="cgs-quote-chip-name">${e("hero.philosophy.creative","Unfettered Creative")}</span>
-                        </div>
-                        <p class="cgs-quote-chip-snippet">
-                            ${e("hero.philosophy.creative_desc","No arbitrary content filters. Create art, music, code, stories without corporate oversight.")}
-                        </p>
-                    </article>
-                </div>
             </section>
         `}_renderStudioPlate(){return c`
             <section class="cgs-quote-stage cgs-quote-stage--studio"
@@ -4480,6 +4436,10 @@
 
         .cgs-quote-animated.fading {
             opacity: 0;
+        }
+
+        .cgs-quote-stage--philosophy {
+            border-radius: 28px;
         }
 
         .cgs-quote-stage.cgs-quote-stage--studio {
@@ -5740,6 +5700,9 @@
                 border-radius: 42px;
                 padding: 22px 18px;
             }
+            .cgs-quote-stage--philosophy {
+                border-radius: 24px;
+            }
             .cgs-quote-stage::after {
                 border-radius: 36px;
             }
@@ -6009,6 +5972,10 @@
             .cgs-quote-stage {
                 border-radius: 36px;
                 padding: 18px 14px;
+            }
+            .cgs-quote-stage--philosophy {
+                border-radius: 20px;
+                padding: 20px 16px;
             }
             .cgs-quote-stage::after {
                 border-radius: 30px;
