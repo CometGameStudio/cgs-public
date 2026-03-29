@@ -4214,7 +4214,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            max-width: 1180px;
+            max-width: 1440px;
             width: 100%;
             padding-top: 36px;
             gap: 18px;
@@ -4249,7 +4249,7 @@
         .cgs-roots-widget {
             position: relative;
             width: 100%;
-            max-width: 1180px;
+            max-width: 1400px;
             padding: 28px;
             border-radius: 40px;
             overflow: hidden;
@@ -4440,7 +4440,10 @@
 
         .cgs-quote-stage--philosophy {
             border-radius: 28px;
-            height: 260px;
+            height: 200px;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -4912,7 +4915,7 @@
         .cgs-roots-widget {
             position: relative;
             width: 100%;
-            max-width: 980px;
+            max-width: 1400px;
             padding: 20px;
             border-radius: 32px;
             overflow: hidden;
@@ -5715,7 +5718,7 @@
             }
             .cgs-quote-stage--philosophy {
                 border-radius: 24px;
-                height: 240px;
+                height: 185px;
             }
             .cgs-quote-stage::after {
                 border-radius: 36px;
@@ -5990,7 +5993,7 @@
             .cgs-quote-stage--philosophy {
                 border-radius: 20px;
                 padding: 20px 16px;
-                height: 220px;
+                height: 175px;
             }
             .cgs-quote-stage::after {
                 border-radius: 30px;
