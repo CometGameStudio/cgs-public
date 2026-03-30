@@ -3659,6 +3659,11 @@
                     ${e("hero.studio.summary","A local-first studio building privacy-first AI systems, immersive VR worlds, and original music-led experiences.")}
                 </p>
 
+                <!-- Visual preview — above the two-column panel -->
+                <div class="cgs-root-panel-media cgs-root-panel-media--showcase cgs-root-panel-media--above">
+                    ${this._renderVideoShowcase()}
+                </div>
+
                 <div class="cgs-root-panel" style="--feature-accent: #22c55e;">
                     <div class="cgs-root-panel-copy">
                         <div class="cgs-root-panel-kicker">${e("about.orus_product_title","Orus the Living Machine")}</div>
@@ -3707,10 +3712,6 @@
 
                         <!-- Showcase navigation tabs (left side) -->
                         ${this._renderShowcaseNav()}
-                    </div>
-
-                    <div class="cgs-root-panel-media cgs-root-panel-media--showcase">
-                        ${this._renderVideoShowcase()}
                     </div>
                 </div>
             </section>
@@ -5298,7 +5299,7 @@
 
         .cgs-root-panel {
             display: grid;
-            grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+            grid-template-columns: minmax(0, 1fr);
             gap: 18px;
             align-items: stretch;
             margin-top: 18px;
@@ -5519,6 +5520,11 @@
             overflow: visible;
         }
 
+        /* When rendered above the two-column panel, span full width */
+        .cgs-root-panel-media--above {
+            width: 100%;
+            margin-bottom: 18px;
+        }
         .cgs-showcase {
             display: flex;
             flex-direction: column;
