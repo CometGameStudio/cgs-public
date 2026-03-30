@@ -1,18 +1,18 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))s(o);new MutationObserver(o=>{for(const r of o)if(r.type==="childList")for(const n of r.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&s(n)}).observe(document,{childList:!0,subtree:!0});function i(o){const r={};return o.integrity&&(r.integrity=o.integrity),o.referrerPolicy&&(r.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?r.credentials="include":o.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function s(o){if(o.ep)return;o.ep=!0;const r=i(o);fetch(o.href,r)}})();const Ae="modulepreload",Se=function(a){return"/cgs-public/"+a},ie={},ae=function(t,i,s){let o=Promise.resolve();if(i&&i.length>0){let n=function(p){return Promise.all(p.map(g=>Promise.resolve(g).then(u=>({status:"fulfilled",value:u}),u=>({status:"rejected",reason:u}))))};document.getElementsByTagName("link");const d=document.querySelector("meta[property=csp-nonce]"),l=d?.nonce||d?.getAttribute("nonce");o=n(i.map(p=>{if(p=Se(p),p in ie)return;ie[p]=!0;const g=p.endsWith(".css"),u=g?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${p}"]${u}`))return;const h=document.createElement("link");if(h.rel=g?"stylesheet":Ae,g||(h.as="script"),h.crossOrigin="",h.href=p,l&&h.setAttribute("nonce",l),document.head.appendChild(h),g)return new Promise((y,C)=>{h.addEventListener("load",y),h.addEventListener("error",()=>C(new Error(`Unable to preload CSS for ${p}`)))})}))}function r(n){const d=new Event("vite:preloadError",{cancelable:!0});if(d.payload=n,window.dispatchEvent(d),!d.defaultPrevented)throw n}return o.then(n=>{for(const d of n||[])d.status==="rejected"&&r(d.reason);return t().catch(r)})};/**
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))s(r);new MutationObserver(r=>{for(const o of r)if(o.type==="childList")for(const n of o.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&s(n)}).observe(document,{childList:!0,subtree:!0});function i(r){const o={};return r.integrity&&(o.integrity=r.integrity),r.referrerPolicy&&(o.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?o.credentials="include":r.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function s(r){if(r.ep)return;r.ep=!0;const o=i(r);fetch(r.href,o)}})();const Ae="modulepreload",ke=function(a){return"/cgs-public/"+a},ie={},ae=function(t,i,s){let r=Promise.resolve();if(i&&i.length>0){let n=function(p){return Promise.all(p.map(g=>Promise.resolve(g).then(u=>({status:"fulfilled",value:u}),u=>({status:"rejected",reason:u}))))};document.getElementsByTagName("link");const d=document.querySelector("meta[property=csp-nonce]"),l=d?.nonce||d?.getAttribute("nonce");r=n(i.map(p=>{if(p=ke(p),p in ie)return;ie[p]=!0;const g=p.endsWith(".css"),u=g?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${p}"]${u}`))return;const h=document.createElement("link");if(h.rel=g?"stylesheet":Ae,g||(h.as="script"),h.crossOrigin="",h.href=p,l&&h.setAttribute("nonce",l),document.head.appendChild(h),g)return new Promise((y,C)=>{h.addEventListener("load",y),h.addEventListener("error",()=>C(new Error(`Unable to preload CSS for ${p}`)))})}))}function o(n){const d=new Event("vite:preloadError",{cancelable:!0});if(d.payload=n,window.dispatchEvent(d),!d.defaultPrevented)throw n}return r.then(n=>{for(const d of n||[])d.status==="rejected"&&o(d.reason);return t().catch(o)})};/**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const N=globalThis,Q=N.ShadowRoot&&(N.ShadyCSS===void 0||N.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,K=Symbol(),se=new WeakMap;let fe=class{constructor(t,i,s){if(this._$cssResult$=!0,s!==K)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=i}get styleSheet(){let t=this.o;const i=this.t;if(Q&&t===void 0){const s=i!==void 0&&i.length===1;s&&(t=se.get(i)),t===void 0&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),s&&se.set(i,t))}return t}toString(){return this.cssText}};const ke=a=>new fe(typeof a=="string"?a:a+"",void 0,K),ve=(a,...t)=>{const i=a.length===1?a[0]:t.reduce((s,o,r)=>s+(n=>{if(n._$cssResult$===!0)return n.cssText;if(typeof n=="number")return n;throw Error("Value passed to 'css' function must be a 'css' function result: "+n+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(o)+a[r+1],a[0]);return new fe(i,a,K)},Te=(a,t)=>{if(Q)a.adoptedStyleSheets=t.map(i=>i instanceof CSSStyleSheet?i:i.styleSheet);else for(const i of t){const s=document.createElement("style"),o=N.litNonce;o!==void 0&&s.setAttribute("nonce",o),s.textContent=i.cssText,a.appendChild(s)}},oe=Q?a=>a:a=>a instanceof CSSStyleSheet?(t=>{let i="";for(const s of t.cssRules)i+=s.cssText;return ke(i)})(a):a;/**
+ */const N=globalThis,K=N.ShadowRoot&&(N.ShadyCSS===void 0||N.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,Q=Symbol(),se=new WeakMap;let fe=class{constructor(t,i,s){if(this._$cssResult$=!0,s!==Q)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=i}get styleSheet(){let t=this.o;const i=this.t;if(K&&t===void 0){const s=i!==void 0&&i.length===1;s&&(t=se.get(i)),t===void 0&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),s&&se.set(i,t))}return t}toString(){return this.cssText}};const Se=a=>new fe(typeof a=="string"?a:a+"",void 0,Q),ve=(a,...t)=>{const i=a.length===1?a[0]:t.reduce((s,r,o)=>s+(n=>{if(n._$cssResult$===!0)return n.cssText;if(typeof n=="number")return n;throw Error("Value passed to 'css' function must be a 'css' function result: "+n+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(r)+a[o+1],a[0]);return new fe(i,a,Q)},Te=(a,t)=>{if(K)a.adoptedStyleSheets=t.map(i=>i instanceof CSSStyleSheet?i:i.styleSheet);else for(const i of t){const s=document.createElement("style"),r=N.litNonce;r!==void 0&&s.setAttribute("nonce",r),s.textContent=i.cssText,a.appendChild(s)}},re=K?a=>a:a=>a instanceof CSSStyleSheet?(t=>{let i="";for(const s of t.cssRules)i+=s.cssText;return Se(i)})(a):a;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:Ce,defineProperty:Ie,getOwnPropertyDescriptor:ze,getOwnPropertyNames:Pe,getOwnPropertySymbols:Me,getPrototypeOf:Oe}=Object,F=globalThis,re=F.trustedTypes,Le=re?re.emptyScript:"",De=F.reactiveElementPolyfillSupport,L=(a,t)=>a,B={toAttribute(a,t){switch(t){case Boolean:a=a?Le:null;break;case Object:case Array:a=a==null?a:JSON.stringify(a)}return a},fromAttribute(a,t){let i=a;switch(t){case Boolean:i=a!==null;break;case Number:i=a===null?null:Number(a);break;case Object:case Array:try{i=JSON.parse(a)}catch{i=null}}return i}},J=(a,t)=>!Ce(a,t),ne={attribute:!0,type:String,converter:B,reflect:!1,useDefault:!1,hasChanged:J};Symbol.metadata??=Symbol("metadata"),F.litPropertyMetadata??=new WeakMap;let I=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,i=ne){if(i.state&&(i.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((i=Object.create(i)).wrapped=!0),this.elementProperties.set(t,i),!i.noAccessor){const s=Symbol(),o=this.getPropertyDescriptor(t,s,i);o!==void 0&&Ie(this.prototype,t,o)}}static getPropertyDescriptor(t,i,s){const{get:o,set:r}=ze(this.prototype,t)??{get(){return this[i]},set(n){this[i]=n}};return{get:o,set(n){const d=o?.call(this);r?.call(this,n),this.requestUpdate(t,d,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??ne}static _$Ei(){if(this.hasOwnProperty(L("elementProperties")))return;const t=Oe(this);t.finalize(),t.l!==void 0&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(L("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(L("properties"))){const i=this.properties,s=[...Pe(i),...Me(i)];for(const o of s)this.createProperty(o,i[o])}const t=this[Symbol.metadata];if(t!==null){const i=litPropertyMetadata.get(t);if(i!==void 0)for(const[s,o]of i)this.elementProperties.set(s,o)}this._$Eh=new Map;for(const[i,s]of this.elementProperties){const o=this._$Eu(i,s);o!==void 0&&this._$Eh.set(o,i)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const i=[];if(Array.isArray(t)){const s=new Set(t.flat(1/0).reverse());for(const o of s)i.unshift(oe(o))}else t!==void 0&&i.push(oe(t));return i}static _$Eu(t,i){const s=i.attribute;return s===!1?void 0:typeof s=="string"?s:typeof t=="string"?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),this.renderRoot!==void 0&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,i=this.constructor.elementProperties;for(const s of i.keys())this.hasOwnProperty(s)&&(t.set(s,this[s]),delete this[s]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return Te(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,i,s){this._$AK(t,s)}_$ET(t,i){const s=this.constructor.elementProperties.get(t),o=this.constructor._$Eu(t,s);if(o!==void 0&&s.reflect===!0){const r=(s.converter?.toAttribute!==void 0?s.converter:B).toAttribute(i,s.type);this._$Em=t,r==null?this.removeAttribute(o):this.setAttribute(o,r),this._$Em=null}}_$AK(t,i){const s=this.constructor,o=s._$Eh.get(t);if(o!==void 0&&this._$Em!==o){const r=s.getPropertyOptions(o),n=typeof r.converter=="function"?{fromAttribute:r.converter}:r.converter?.fromAttribute!==void 0?r.converter:B;this._$Em=o;const d=n.fromAttribute(i,r.type);this[o]=d??this._$Ej?.get(o)??d,this._$Em=null}}requestUpdate(t,i,s,o=!1,r){if(t!==void 0){const n=this.constructor;if(o===!1&&(r=this[t]),s??=n.getPropertyOptions(t),!((s.hasChanged??J)(r,i)||s.useDefault&&s.reflect&&r===this._$Ej?.get(t)&&!this.hasAttribute(n._$Eu(t,s))))return;this.C(t,i,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(t,i,{useDefault:s,reflect:o,wrapped:r},n){s&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,n??i??this[t]),r!==!0||n!==void 0)||(this._$AL.has(t)||(this.hasUpdated||s||(i=void 0),this._$AL.set(t,i)),o===!0&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(i){Promise.reject(i)}const t=this.scheduleUpdate();return t!=null&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[o,r]of this._$Ep)this[o]=r;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[o,r]of s){const{wrapped:n}=r,d=this[o];n!==!0||this._$AL.has(o)||d===void 0||this.C(o,void 0,r,d)}}let t=!1;const i=this._$AL;try{t=this.shouldUpdate(i),t?(this.willUpdate(i),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(i)):this._$EM()}catch(s){throw t=!1,this._$EM(),s}t&&this._$AE(i)}willUpdate(t){}_$AE(t){this._$EO?.forEach(i=>i.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(i=>this._$ET(i,this[i])),this._$EM()}updated(t){}firstUpdated(t){}};I.elementStyles=[],I.shadowRootOptions={mode:"open"},I[L("elementProperties")]=new Map,I[L("finalized")]=new Map,De?.({ReactiveElement:I}),(F.reactiveElementVersions??=[]).push("2.1.2");/**
+ */const{is:Ce,defineProperty:Ie,getOwnPropertyDescriptor:ze,getOwnPropertyNames:Pe,getOwnPropertySymbols:Oe,getPrototypeOf:Me}=Object,F=globalThis,oe=F.trustedTypes,Le=oe?oe.emptyScript:"",De=F.reactiveElementPolyfillSupport,L=(a,t)=>a,G={toAttribute(a,t){switch(t){case Boolean:a=a?Le:null;break;case Object:case Array:a=a==null?a:JSON.stringify(a)}return a},fromAttribute(a,t){let i=a;switch(t){case Boolean:i=a!==null;break;case Number:i=a===null?null:Number(a);break;case Object:case Array:try{i=JSON.parse(a)}catch{i=null}}return i}},J=(a,t)=>!Ce(a,t),ne={attribute:!0,type:String,converter:G,reflect:!1,useDefault:!1,hasChanged:J};Symbol.metadata??=Symbol("metadata"),F.litPropertyMetadata??=new WeakMap;let I=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,i=ne){if(i.state&&(i.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((i=Object.create(i)).wrapped=!0),this.elementProperties.set(t,i),!i.noAccessor){const s=Symbol(),r=this.getPropertyDescriptor(t,s,i);r!==void 0&&Ie(this.prototype,t,r)}}static getPropertyDescriptor(t,i,s){const{get:r,set:o}=ze(this.prototype,t)??{get(){return this[i]},set(n){this[i]=n}};return{get:r,set(n){const d=r?.call(this);o?.call(this,n),this.requestUpdate(t,d,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??ne}static _$Ei(){if(this.hasOwnProperty(L("elementProperties")))return;const t=Me(this);t.finalize(),t.l!==void 0&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(L("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(L("properties"))){const i=this.properties,s=[...Pe(i),...Oe(i)];for(const r of s)this.createProperty(r,i[r])}const t=this[Symbol.metadata];if(t!==null){const i=litPropertyMetadata.get(t);if(i!==void 0)for(const[s,r]of i)this.elementProperties.set(s,r)}this._$Eh=new Map;for(const[i,s]of this.elementProperties){const r=this._$Eu(i,s);r!==void 0&&this._$Eh.set(r,i)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const i=[];if(Array.isArray(t)){const s=new Set(t.flat(1/0).reverse());for(const r of s)i.unshift(re(r))}else t!==void 0&&i.push(re(t));return i}static _$Eu(t,i){const s=i.attribute;return s===!1?void 0:typeof s=="string"?s:typeof t=="string"?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),this.renderRoot!==void 0&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,i=this.constructor.elementProperties;for(const s of i.keys())this.hasOwnProperty(s)&&(t.set(s,this[s]),delete this[s]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return Te(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,i,s){this._$AK(t,s)}_$ET(t,i){const s=this.constructor.elementProperties.get(t),r=this.constructor._$Eu(t,s);if(r!==void 0&&s.reflect===!0){const o=(s.converter?.toAttribute!==void 0?s.converter:G).toAttribute(i,s.type);this._$Em=t,o==null?this.removeAttribute(r):this.setAttribute(r,o),this._$Em=null}}_$AK(t,i){const s=this.constructor,r=s._$Eh.get(t);if(r!==void 0&&this._$Em!==r){const o=s.getPropertyOptions(r),n=typeof o.converter=="function"?{fromAttribute:o.converter}:o.converter?.fromAttribute!==void 0?o.converter:G;this._$Em=r;const d=n.fromAttribute(i,o.type);this[r]=d??this._$Ej?.get(r)??d,this._$Em=null}}requestUpdate(t,i,s,r=!1,o){if(t!==void 0){const n=this.constructor;if(r===!1&&(o=this[t]),s??=n.getPropertyOptions(t),!((s.hasChanged??J)(o,i)||s.useDefault&&s.reflect&&o===this._$Ej?.get(t)&&!this.hasAttribute(n._$Eu(t,s))))return;this.C(t,i,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(t,i,{useDefault:s,reflect:r,wrapped:o},n){s&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,n??i??this[t]),o!==!0||n!==void 0)||(this._$AL.has(t)||(this.hasUpdated||s||(i=void 0),this._$AL.set(t,i)),r===!0&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(i){Promise.reject(i)}const t=this.scheduleUpdate();return t!=null&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[r,o]of this._$Ep)this[r]=o;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[r,o]of s){const{wrapped:n}=o,d=this[r];n!==!0||this._$AL.has(r)||d===void 0||this.C(r,void 0,o,d)}}let t=!1;const i=this._$AL;try{t=this.shouldUpdate(i),t?(this.willUpdate(i),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(i)):this._$EM()}catch(s){throw t=!1,this._$EM(),s}t&&this._$AE(i)}willUpdate(t){}_$AE(t){this._$EO?.forEach(i=>i.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(i=>this._$ET(i,this[i])),this._$EM()}updated(t){}firstUpdated(t){}};I.elementStyles=[],I.shadowRootOptions={mode:"open"},I[L("elementProperties")]=new Map,I[L("finalized")]=new Map,De?.({ReactiveElement:I}),(F.reactiveElementVersions??=[]).push("2.1.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Z=globalThis,ce=a=>a,G=Z.trustedTypes,de=G?G.createPolicy("lit-html",{createHTML:a=>a}):void 0,ye="$lit$",_=`lit$${Math.random().toFixed(9).slice(2)}$`,xe="?"+_,Ee=`<${xe}>`,k=document,D=()=>k.createComment(""),E=a=>a===null||typeof a!="object"&&typeof a!="function",ee=Array.isArray,qe=a=>ee(a)||typeof a?.[Symbol.iterator]=="function",W=`[ 	
-\f\r]`,O=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,le=/-->/g,pe=/>/g,$=RegExp(`>|${W}(?:([^\\s"'>=/]+)(${W}*=${W}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),ue=/'/g,ge=/"/g,we=/^(?:script|style|textarea|title)$/i,Re=a=>(t,...i)=>({_$litType$:a,strings:t,values:i}),c=Re(1),P=Symbol.for("lit-noChange"),b=Symbol.for("lit-nothing"),he=new WeakMap,A=k.createTreeWalker(k,129);function _e(a,t){if(!ee(a)||!a.hasOwnProperty("raw"))throw Error("invalid template strings array");return de!==void 0?de.createHTML(t):t}const Ne=(a,t)=>{const i=a.length-1,s=[];let o,r=t===2?"<svg>":t===3?"<math>":"",n=O;for(let d=0;d<i;d++){const l=a[d];let p,g,u=-1,h=0;for(;h<l.length&&(n.lastIndex=h,g=n.exec(l),g!==null);)h=n.lastIndex,n===O?g[1]==="!--"?n=le:g[1]!==void 0?n=pe:g[2]!==void 0?(we.test(g[2])&&(o=RegExp("</"+g[2],"g")),n=$):g[3]!==void 0&&(n=$):n===$?g[0]===">"?(n=o??O,u=-1):g[1]===void 0?u=-2:(u=n.lastIndex-g[2].length,p=g[1],n=g[3]===void 0?$:g[3]==='"'?ge:ue):n===ge||n===ue?n=$:n===le||n===pe?n=O:(n=$,o=void 0);const y=n===$&&a[d+1].startsWith("/>")?" ":"";r+=n===O?l+Ee:u>=0?(s.push(p),l.slice(0,u)+ye+l.slice(u)+_+y):l+_+(u===-2?d:y)}return[_e(a,r+(a[i]||"<?>")+(t===2?"</svg>":t===3?"</math>":"")),s]};class q{constructor({strings:t,_$litType$:i},s){let o;this.parts=[];let r=0,n=0;const d=t.length-1,l=this.parts,[p,g]=Ne(t,i);if(this.el=q.createElement(p,s),A.currentNode=this.el.content,i===2||i===3){const u=this.el.content.firstChild;u.replaceWith(...u.childNodes)}for(;(o=A.nextNode())!==null&&l.length<d;){if(o.nodeType===1){if(o.hasAttributes())for(const u of o.getAttributeNames())if(u.endsWith(ye)){const h=g[n++],y=o.getAttribute(u).split(_),C=/([.?@])?(.*)/.exec(h);l.push({type:1,index:r,name:C[2],strings:y,ctor:C[1]==="."?Be:C[1]==="?"?Ge:C[1]==="@"?Fe:H}),o.removeAttribute(u)}else u.startsWith(_)&&(l.push({type:6,index:r}),o.removeAttribute(u));if(we.test(o.tagName)){const u=o.textContent.split(_),h=u.length-1;if(h>0){o.textContent=G?G.emptyScript:"";for(let y=0;y<h;y++)o.append(u[y],D()),A.nextNode(),l.push({type:2,index:++r});o.append(u[h],D())}}}else if(o.nodeType===8)if(o.data===xe)l.push({type:2,index:r});else{let u=-1;for(;(u=o.data.indexOf(_,u+1))!==-1;)l.push({type:7,index:r}),u+=_.length-1}r++}}static createElement(t,i){const s=k.createElement("template");return s.innerHTML=t,s}}function M(a,t,i=a,s){if(t===P)return t;let o=s!==void 0?i._$Co?.[s]:i._$Cl;const r=E(t)?void 0:t._$litDirective$;return o?.constructor!==r&&(o?._$AO?.(!1),r===void 0?o=void 0:(o=new r(a),o._$AT(a,i,s)),s!==void 0?(i._$Co??=[])[s]=o:i._$Cl=o),o!==void 0&&(t=M(a,o._$AS(a,t.values),o,s)),t}class Ue{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,o=(t?.creationScope??k).importNode(i,!0);A.currentNode=o;let r=A.nextNode(),n=0,d=0,l=s[0];for(;l!==void 0;){if(n===l.index){let p;l.type===2?p=new R(r,r.nextSibling,this,t):l.type===1?p=new l.ctor(r,l.name,l.strings,this,t):l.type===6&&(p=new He(r,this,t)),this._$AV.push(p),l=s[++d]}n!==l?.index&&(r=A.nextNode(),n++)}return A.currentNode=k,o}p(t){let i=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++}}class R{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,o){this.type=2,this._$AH=b,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return i!==void 0&&t?.nodeType===11&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),E(t)?t===b||t==null||t===""?(this._$AH!==b&&this._$AR(),this._$AH=b):t!==this._$AH&&t!==P&&this._(t):t._$litType$!==void 0?this.$(t):t.nodeType!==void 0?this.T(t):qe(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==b&&E(this._$AH)?this._$AA.nextSibling.data=t:this.T(k.createTextNode(t)),this._$AH=t}$(t){const{values:i,_$litType$:s}=t,o=typeof s=="number"?this._$AC(t):(s.el===void 0&&(s.el=q.createElement(_e(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===o)this._$AH.p(i);else{const r=new Ue(o,this),n=r.u(this.options);r.p(i),this.T(n),this._$AH=r}}_$AC(t){let i=he.get(t.strings);return i===void 0&&he.set(t.strings,i=new q(t)),i}k(t){ee(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,o=0;for(const r of t)o===i.length?i.push(s=new R(this.O(D()),this.O(D()),this,this.options)):s=i[o],s._$AI(r),o++;o<i.length&&(this._$AR(s&&s._$AB.nextSibling,o),i.length=o)}_$AR(t=this._$AA.nextSibling,i){for(this._$AP?.(!1,!0,i);t!==this._$AB;){const s=ce(t).nextSibling;ce(t).remove(),t=s}}setConnected(t){this._$AM===void 0&&(this._$Cv=t,this._$AP?.(t))}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,o,r){this.type=1,this._$AH=b,this._$AN=void 0,this.element=t,this.name=i,this._$AM=o,this.options=r,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=b}_$AI(t,i=this,s,o){const r=this.strings;let n=!1;if(r===void 0)t=M(this,t,i,0),n=!E(t)||t!==this._$AH&&t!==P,n&&(this._$AH=t);else{const d=t;let l,p;for(t=r[0],l=0;l<r.length-1;l++)p=M(this,d[s+l],i,l),p===P&&(p=this._$AH[l]),n||=!E(p)||p!==this._$AH[l],p===b?t=b:t!==b&&(t+=(p??"")+r[l+1]),this._$AH[l]=p}n&&!o&&this.j(t)}j(t){t===b?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class Be extends H{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===b?void 0:t}}class Ge extends H{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==b)}}class Fe extends H{constructor(t,i,s,o,r){super(t,i,s,o,r),this.type=5}_$AI(t,i=this){if((t=M(this,t,i,0)??b)===P)return;const s=this._$AH,o=t===b&&s!==b||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,r=t!==b&&(s===b||o);o&&this.element.removeEventListener(this.name,this,s),r&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class He{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t)}}const We=Z.litHtmlPolyfillSupport;We?.(q,R),(Z.litHtmlVersions??=[]).push("3.3.2");const je=(a,t,i)=>{const s=i?.renderBefore??t;let o=s._$litPart$;if(o===void 0){const r=i?.renderBefore??null;s._$litPart$=o=new R(t.insertBefore(D(),r),r,void 0,i??{})}return o._$AI(a),o};/**
+ */const Z=globalThis,ce=a=>a,B=Z.trustedTypes,de=B?B.createPolicy("lit-html",{createHTML:a=>a}):void 0,ye="$lit$",$=`lit$${Math.random().toFixed(9).slice(2)}$`,xe="?"+$,Ee=`<${xe}>`,S=document,D=()=>S.createComment(""),E=a=>a===null||typeof a!="object"&&typeof a!="function",ee=Array.isArray,qe=a=>ee(a)||typeof a?.[Symbol.iterator]=="function",W=`[ 	
+\f\r]`,M=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,le=/-->/g,pe=/>/g,_=RegExp(`>|${W}(?:([^\\s"'>=/]+)(${W}*=${W}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`,"g"),ue=/'/g,ge=/"/g,we=/^(?:script|style|textarea|title)$/i,Re=a=>(t,...i)=>({_$litType$:a,strings:t,values:i}),c=Re(1),P=Symbol.for("lit-noChange"),b=Symbol.for("lit-nothing"),he=new WeakMap,A=S.createTreeWalker(S,129);function $e(a,t){if(!ee(a)||!a.hasOwnProperty("raw"))throw Error("invalid template strings array");return de!==void 0?de.createHTML(t):t}const Ne=(a,t)=>{const i=a.length-1,s=[];let r,o=t===2?"<svg>":t===3?"<math>":"",n=M;for(let d=0;d<i;d++){const l=a[d];let p,g,u=-1,h=0;for(;h<l.length&&(n.lastIndex=h,g=n.exec(l),g!==null);)h=n.lastIndex,n===M?g[1]==="!--"?n=le:g[1]!==void 0?n=pe:g[2]!==void 0?(we.test(g[2])&&(r=RegExp("</"+g[2],"g")),n=_):g[3]!==void 0&&(n=_):n===_?g[0]===">"?(n=r??M,u=-1):g[1]===void 0?u=-2:(u=n.lastIndex-g[2].length,p=g[1],n=g[3]===void 0?_:g[3]==='"'?ge:ue):n===ge||n===ue?n=_:n===le||n===pe?n=M:(n=_,r=void 0);const y=n===_&&a[d+1].startsWith("/>")?" ":"";o+=n===M?l+Ee:u>=0?(s.push(p),l.slice(0,u)+ye+l.slice(u)+$+y):l+$+(u===-2?d:y)}return[$e(a,o+(a[i]||"<?>")+(t===2?"</svg>":t===3?"</math>":"")),s]};class q{constructor({strings:t,_$litType$:i},s){let r;this.parts=[];let o=0,n=0;const d=t.length-1,l=this.parts,[p,g]=Ne(t,i);if(this.el=q.createElement(p,s),A.currentNode=this.el.content,i===2||i===3){const u=this.el.content.firstChild;u.replaceWith(...u.childNodes)}for(;(r=A.nextNode())!==null&&l.length<d;){if(r.nodeType===1){if(r.hasAttributes())for(const u of r.getAttributeNames())if(u.endsWith(ye)){const h=g[n++],y=r.getAttribute(u).split($),C=/([.?@])?(.*)/.exec(h);l.push({type:1,index:o,name:C[2],strings:y,ctor:C[1]==="."?Ge:C[1]==="?"?Be:C[1]==="@"?Fe:H}),r.removeAttribute(u)}else u.startsWith($)&&(l.push({type:6,index:o}),r.removeAttribute(u));if(we.test(r.tagName)){const u=r.textContent.split($),h=u.length-1;if(h>0){r.textContent=B?B.emptyScript:"";for(let y=0;y<h;y++)r.append(u[y],D()),A.nextNode(),l.push({type:2,index:++o});r.append(u[h],D())}}}else if(r.nodeType===8)if(r.data===xe)l.push({type:2,index:o});else{let u=-1;for(;(u=r.data.indexOf($,u+1))!==-1;)l.push({type:7,index:o}),u+=$.length-1}o++}}static createElement(t,i){const s=S.createElement("template");return s.innerHTML=t,s}}function O(a,t,i=a,s){if(t===P)return t;let r=s!==void 0?i._$Co?.[s]:i._$Cl;const o=E(t)?void 0:t._$litDirective$;return r?.constructor!==o&&(r?._$AO?.(!1),o===void 0?r=void 0:(r=new o(a),r._$AT(a,i,s)),s!==void 0?(i._$Co??=[])[s]=r:i._$Cl=r),r!==void 0&&(t=O(a,r._$AS(a,t.values),r,s)),t}class Ue{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,r=(t?.creationScope??S).importNode(i,!0);A.currentNode=r;let o=A.nextNode(),n=0,d=0,l=s[0];for(;l!==void 0;){if(n===l.index){let p;l.type===2?p=new R(o,o.nextSibling,this,t):l.type===1?p=new l.ctor(o,l.name,l.strings,this,t):l.type===6&&(p=new He(o,this,t)),this._$AV.push(p),l=s[++d]}n!==l?.index&&(o=A.nextNode(),n++)}return A.currentNode=S,r}p(t){let i=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++}}class R{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,r){this.type=2,this._$AH=b,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return i!==void 0&&t?.nodeType===11&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=O(this,t,i),E(t)?t===b||t==null||t===""?(this._$AH!==b&&this._$AR(),this._$AH=b):t!==this._$AH&&t!==P&&this._(t):t._$litType$!==void 0?this.$(t):t.nodeType!==void 0?this.T(t):qe(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==b&&E(this._$AH)?this._$AA.nextSibling.data=t:this.T(S.createTextNode(t)),this._$AH=t}$(t){const{values:i,_$litType$:s}=t,r=typeof s=="number"?this._$AC(t):(s.el===void 0&&(s.el=q.createElement($e(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===r)this._$AH.p(i);else{const o=new Ue(r,this),n=o.u(this.options);o.p(i),this.T(n),this._$AH=o}}_$AC(t){let i=he.get(t.strings);return i===void 0&&he.set(t.strings,i=new q(t)),i}k(t){ee(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,r=0;for(const o of t)r===i.length?i.push(s=new R(this.O(D()),this.O(D()),this,this.options)):s=i[r],s._$AI(o),r++;r<i.length&&(this._$AR(s&&s._$AB.nextSibling,r),i.length=r)}_$AR(t=this._$AA.nextSibling,i){for(this._$AP?.(!1,!0,i);t!==this._$AB;){const s=ce(t).nextSibling;ce(t).remove(),t=s}}setConnected(t){this._$AM===void 0&&(this._$Cv=t,this._$AP?.(t))}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,r,o){this.type=1,this._$AH=b,this._$AN=void 0,this.element=t,this.name=i,this._$AM=r,this.options=o,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=b}_$AI(t,i=this,s,r){const o=this.strings;let n=!1;if(o===void 0)t=O(this,t,i,0),n=!E(t)||t!==this._$AH&&t!==P,n&&(this._$AH=t);else{const d=t;let l,p;for(t=o[0],l=0;l<o.length-1;l++)p=O(this,d[s+l],i,l),p===P&&(p=this._$AH[l]),n||=!E(p)||p!==this._$AH[l],p===b?t=b:t!==b&&(t+=(p??"")+o[l+1]),this._$AH[l]=p}n&&!r&&this.j(t)}j(t){t===b?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class Ge extends H{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===b?void 0:t}}class Be extends H{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==b)}}class Fe extends H{constructor(t,i,s,r,o){super(t,i,s,r,o),this.type=5}_$AI(t,i=this){if((t=O(this,t,i,0)??b)===P)return;const s=this._$AH,r=t===b&&s!==b||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,o=t!==b&&(s===b||r);r&&this.element.removeEventListener(this.name,this,s),o&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class He{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(t){O(this,t)}}const We=Z.litHtmlPolyfillSupport;We?.(q,R),(Z.litHtmlVersions??=[]).push("3.3.2");const je=(a,t,i)=>{const s=i?.renderBefore??t;let r=s._$litPart$;if(r===void 0){const o=i?.renderBefore??null;s._$litPart$=r=new R(t.insertBefore(D(),o),o,void 0,i??{})}return r._$AI(a),r};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
@@ -24,11 +24,11 @@
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Xe={attribute:!0,type:String,converter:B,reflect:!1,hasChanged:J},Qe=(a=Xe,t,i)=>{const{kind:s,metadata:o}=i;let r=globalThis.litPropertyMetadata.get(o);if(r===void 0&&globalThis.litPropertyMetadata.set(o,r=new Map),s==="setter"&&((a=Object.create(a)).wrapped=!0),r.set(i.name,a),s==="accessor"){const{name:n}=i;return{set(d){const l=t.get.call(this);t.set.call(this,d),this.requestUpdate(n,l,a,!0,d)},init(d){return d!==void 0&&this.C(n,void 0,a,d),d}}}if(s==="setter"){const{name:n}=i;return function(d){const l=this[n];t.call(this,d),this.requestUpdate(n,l,a,!0,d)}}throw Error("Unsupported decorator location: "+s)};function T(a){return(t,i)=>typeof i=="object"?Qe(a,t,i):((s,o,r)=>{const n=o.hasOwnProperty(r);return o.constructor.createProperty(r,s),n?Object.getOwnPropertyDescriptor(o,r):void 0})(a,t,i)}/**
+ */const Xe={attribute:!0,type:String,converter:G,reflect:!1,hasChanged:J},Ke=(a=Xe,t,i)=>{const{kind:s,metadata:r}=i;let o=globalThis.litPropertyMetadata.get(r);if(o===void 0&&globalThis.litPropertyMetadata.set(r,o=new Map),s==="setter"&&((a=Object.create(a)).wrapped=!0),o.set(i.name,a),s==="accessor"){const{name:n}=i;return{set(d){const l=t.get.call(this);t.set.call(this,d),this.requestUpdate(n,l,a,!0,d)},init(d){return d!==void 0&&this.C(n,void 0,a,d),d}}}if(s==="setter"){const{name:n}=i;return function(d){const l=this[n];t.call(this,d),this.requestUpdate(n,l,a,!0,d)}}throw Error("Unsupported decorator location: "+s)};function T(a){return(t,i)=>typeof i=="object"?Ke(a,t,i):((s,r,o)=>{const n=r.hasOwnProperty(o);return r.constructor.createProperty(o,s),n?Object.getOwnPropertyDescriptor(r,o):void 0})(a,t,i)}/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function f(a){return T({...a,state:!0,attribute:!1})}const j=[{code:"en",name:"English",native:"English",flag:"🇬🇧"},{code:"tr",name:"Turkish",native:"Türkçe",flag:"🇹🇷"},{code:"de",name:"German",native:"Deutsch",flag:"🇩🇪"},{code:"fr",name:"French",native:"Français",flag:"🇫🇷"},{code:"es",name:"Spanish",native:"Español",flag:"🇪🇸"},{code:"it",name:"Italian",native:"Italiano",flag:"🇮🇹"},{code:"pt",name:"Portuguese",native:"Português",flag:"🇵🇹"},{code:"nl",name:"Dutch",native:"Nederlands",flag:"🇳🇱"},{code:"pl",name:"Polish",native:"Polski",flag:"🇵🇱"},{code:"ru",name:"Russian",native:"Русский",flag:"🇷🇺"},{code:"zh",name:"Chinese",native:"中文",flag:"🇨🇳"},{code:"ja",name:"Japanese",native:"日本語",flag:"🇯🇵"},{code:"ko",name:"Korean",native:"한국어",flag:"🇰🇷"},{code:"ar",name:"Arabic",native:"العربية",flag:"🇸🇦"},{code:"hi",name:"Hindi",native:"हिन्दी",flag:"🇮🇳"},{code:"sv",name:"Swedish",native:"Svenska",flag:"🇸🇪"},{code:"da",name:"Danish",native:"Dansk",flag:"🇩🇰"},{code:"fi",name:"Finnish",native:"Suomi",flag:"🇫🇮"},{code:"cs",name:"Czech",native:"Čeština",flag:"🇨🇿"},{code:"hu",name:"Hungarian",native:"Magyar",flag:"🇭🇺"},{code:"el",name:"Greek",native:"Ελληνικά",flag:"🇬🇷"},{code:"uk",name:"Ukrainian",native:"Українська",flag:"🇺🇦"},{code:"ro",name:"Romanian",native:"Română",flag:"🇷🇴"}];let S="en",me=new Map,U={};const X=new Set;function e(a,t){return S==="en"?t:U[a]??t}function Ke(){return S}async function Je(a){if(a===S)return;if(a==="en"){S="en",U={},V();return}const t=me.get(a);if(t){S=a,U=t.translations,V();return}try{const i=await fetch(`./locales/${encodeURIComponent(a)}.json`);if(!i.ok){console.warn(`[i18n] Locale file not found for "${a}" (HTTP ${i.status}). Using English.`);return}const s=await i.json(),o={locale:a,translations:s,loadedAt:Date.now()};me.set(a,o),S=a,U=s,V()}catch(i){console.warn(`[i18n] Failed to load locale "${a}":`,i)}}function $e(a){return X.add(a),()=>{X.delete(a)}}function V(){for(const a of X)try{a()}catch{}window.dispatchEvent(new CustomEvent("cgs-locale-changed",{detail:{locale:S}}))}var Ze=Object.defineProperty,w=(a,t,i,s)=>{for(var o=void 0,r=a.length-1,n;r>=0;r--)(n=a[r])&&(o=n(t,i,o)||o);return o&&Ze(t,i,o),o};const et="13.0, 12.9, 12.8, 12.7, 12.6, 12.5, 12.4, 12.3, 12.2, 12.1, 12.0",Y=[{tier:"8 GB VRAM"},{tier:"12 GB+ VRAM"},{tier:"23 GB+ VRAM"}];class x extends z{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.startTab="about",this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:7,eula:5,"third-party":5,safety:5,disclaimers:5},this._touchStartX=0,this._touchStartY=0,this._touchSwipeCandidate=!1,this._nextCard=()=>{if(this.currentCardIndex<this._currentTabCardCount-1)this.currentCardIndex=this.currentCardIndex+1;else{const t=this.TAB_ITEMS,i=t.findIndex(s=>s.id===this.activeTab);i<t.length-1&&(this.activeTab=t[i+1].id,this.currentCardIndex=0)}},this._prevCard=()=>{if(this.currentCardIndex>0)this.currentCardIndex=this.currentCardIndex-1;else{const t=this.TAB_ITEMS,i=t.findIndex(s=>s.id===this.activeTab);i>0&&(this.activeTab=t[i-1].id,this.currentCardIndex=this._tabCardCounts[this.activeTab]-1)}},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{if(this._touchSwipeCandidate=!1,!this.fullPage||t.touches.length!==1)return;const i=t.composedPath()[0]??t.target;!this._isCarouselTouchTarget(i)||this._isInteractiveTouchTarget(i)||(this._touchSwipeCandidate=!0,this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY)},this._onTouchEnd=t=>{if(!this.fullPage||!this._touchSwipeCandidate||t.changedTouches.length===0){this.isCardDragging=!1,this._touchSwipeCandidate=!1;return}const i=t.changedTouches[0].clientX-this._touchStartX,s=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,this._touchSwipeCandidate=!1,Math.abs(i)>Math.abs(s)&&Math.abs(i)>this.cardDragThreshold&&(i<0?this._nextCard():this._prevCard())},this._onTouchCancel=()=>{this.isCardDragging=!1,this._touchSwipeCandidate=!1},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const i=this.position||this._defaultPosition();this.dragStartPosX=i.x,this.dragStartPosY=i.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const i=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,o={x:this.dragStartPosX+i,y:this.dragStartPosY+s};this.position=o,this.dispatchEvent(new CustomEvent("position-changed",{detail:o}))}if(this.isResizing){const i=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,o={width:Math.max(500,this.resizeStartWidth+i),height:Math.max(400,this.resizeStartHeight+s)};this.size=o,this.dispatchEvent(new CustomEvent("size-changed",{detail:o}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1}}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}static{this.styles=ve`
+ */function f(a){return T({...a,state:!0,attribute:!1})}const j=[{code:"en",name:"English",native:"English",flag:"🇬🇧"},{code:"tr",name:"Turkish",native:"Türkçe",flag:"🇹🇷"},{code:"de",name:"German",native:"Deutsch",flag:"🇩🇪"},{code:"fr",name:"French",native:"Français",flag:"🇫🇷"},{code:"es",name:"Spanish",native:"Español",flag:"🇪🇸"},{code:"it",name:"Italian",native:"Italiano",flag:"🇮🇹"},{code:"pt",name:"Portuguese",native:"Português",flag:"🇵🇹"},{code:"nl",name:"Dutch",native:"Nederlands",flag:"🇳🇱"},{code:"pl",name:"Polish",native:"Polski",flag:"🇵🇱"},{code:"ru",name:"Russian",native:"Русский",flag:"🇷🇺"},{code:"zh",name:"Chinese",native:"中文",flag:"🇨🇳"},{code:"ja",name:"Japanese",native:"日本語",flag:"🇯🇵"},{code:"ko",name:"Korean",native:"한국어",flag:"🇰🇷"},{code:"ar",name:"Arabic",native:"العربية",flag:"🇸🇦"},{code:"hi",name:"Hindi",native:"हिन्दी",flag:"🇮🇳"},{code:"sv",name:"Swedish",native:"Svenska",flag:"🇸🇪"},{code:"da",name:"Danish",native:"Dansk",flag:"🇩🇰"},{code:"fi",name:"Finnish",native:"Suomi",flag:"🇫🇮"},{code:"cs",name:"Czech",native:"Čeština",flag:"🇨🇿"},{code:"hu",name:"Hungarian",native:"Magyar",flag:"🇭🇺"},{code:"el",name:"Greek",native:"Ελληνικά",flag:"🇬🇷"},{code:"uk",name:"Ukrainian",native:"Українська",flag:"🇺🇦"},{code:"ro",name:"Romanian",native:"Română",flag:"🇷🇴"}];let k="en",me=new Map,U={};const X=new Set;function e(a,t){return k==="en"?t:U[a]??t}function Qe(){return k}async function Je(a){if(a===k)return;if(a==="en"){k="en",U={},V();return}const t=me.get(a);if(t){k=a,U=t.translations,V();return}try{const i=await fetch(`./locales/${encodeURIComponent(a)}.json`);if(!i.ok){console.warn(`[i18n] Locale file not found for "${a}" (HTTP ${i.status}). Using English.`);return}const s=await i.json(),r={locale:a,translations:s,loadedAt:Date.now()};me.set(a,r),k=a,U=s,V()}catch(i){console.warn(`[i18n] Failed to load locale "${a}":`,i)}}function _e(a){return X.add(a),()=>{X.delete(a)}}function V(){for(const a of X)try{a()}catch{}window.dispatchEvent(new CustomEvent("cgs-locale-changed",{detail:{locale:k}}))}var Ze=Object.defineProperty,w=(a,t,i,s)=>{for(var r=void 0,o=a.length-1,n;o>=0;o--)(n=a[o])&&(r=n(t,i,r)||r);return r&&Ze(t,i,r),r};const et="13.0, 12.9, 12.8, 12.7, 12.6, 12.5, 12.4, 12.3, 12.2, 12.1, 12.0",Y=[{tier:"8 GB VRAM"},{tier:"12 GB+ VRAM"},{tier:"23 GB+ VRAM"}];class x extends z{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.startTab="about",this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:7,eula:5,"third-party":5,safety:5,disclaimers:5},this._touchStartX=0,this._touchStartY=0,this._touchSwipeCandidate=!1,this._nextCard=()=>{if(this.currentCardIndex<this._currentTabCardCount-1)this.currentCardIndex=this.currentCardIndex+1;else{const t=this.TAB_ITEMS,i=t.findIndex(s=>s.id===this.activeTab);i<t.length-1&&(this.activeTab=t[i+1].id,this.currentCardIndex=0)}},this._prevCard=()=>{if(this.currentCardIndex>0)this.currentCardIndex=this.currentCardIndex-1;else{const t=this.TAB_ITEMS,i=t.findIndex(s=>s.id===this.activeTab);i>0&&(this.activeTab=t[i-1].id,this.currentCardIndex=this._tabCardCounts[this.activeTab]-1)}},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{if(this._touchSwipeCandidate=!1,!this.fullPage||t.touches.length!==1)return;const i=t.composedPath()[0]??t.target;!this._isCarouselTouchTarget(i)||this._isInteractiveTouchTarget(i)||(this._touchSwipeCandidate=!0,this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY)},this._onTouchEnd=t=>{if(!this.fullPage||!this._touchSwipeCandidate||t.changedTouches.length===0){this.isCardDragging=!1,this._touchSwipeCandidate=!1;return}const i=t.changedTouches[0].clientX-this._touchStartX,s=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,this._touchSwipeCandidate=!1,Math.abs(i)>Math.abs(s)&&Math.abs(i)>this.cardDragThreshold&&(i<0?this._nextCard():this._prevCard())},this._onTouchCancel=()=>{this.isCardDragging=!1,this._touchSwipeCandidate=!1},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const i=this.position||this._defaultPosition();this.dragStartPosX=i.x,this.dragStartPosY=i.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const i=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,r={x:this.dragStartPosX+i,y:this.dragStartPosY+s};this.position=r,this.dispatchEvent(new CustomEvent("position-changed",{detail:r}))}if(this.isResizing){const i=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,r={width:Math.max(500,this.resizeStartWidth+i),height:Math.max(400,this.resizeStartHeight+s)};this.size=r,this.dispatchEvent(new CustomEvent("size-changed",{detail:r}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1}}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}static{this.styles=ve`
     :host {
       display: block;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -1457,7 +1457,7 @@
       font-size: 11px;
       line-height: 1.6;
     }
-  `}connectedCallback(){super.connectedCallback(),this.activeTab=this.startTab,this._unlistenI18n=$e(()=>this.requestUpdate()),globalThis.addEventListener("mousemove",this._onMouseMove),globalThis.addEventListener("mouseup",this._onMouseUp),globalThis.addEventListener("keydown",this._onKeyDown)}disconnectedCallback(){super.disconnectedCallback(),this._unlistenI18n?.(),globalThis.removeEventListener("mousemove",this._onMouseMove),globalThis.removeEventListener("mouseup",this._onMouseUp),globalThis.removeEventListener("keydown",this._onKeyDown)}willUpdate(t){t.has("activeTab")&&(this.currentCardIndex=0)}_eventElement(t){return t instanceof HTMLElement?t:t instanceof Node?t.parentElement:null}_isCarouselTouchTarget(t){return!!this._eventElement(t)?.closest(".about-content-carousel")}_isInteractiveTouchTarget(t){return!!this._eventElement(t)?.closest('button, a, details, summary, [role="tab"], [role="button"]')}_effectiveSize(){const t=Math.max(500,globalThis.innerWidth*.94),i=Math.max(400,globalThis.innerHeight*.92);return{width:Math.min(this.size.width,t),height:Math.min(this.size.height,i)}}_defaultPosition(){const{width:t,height:i}=this._effectiveSize();return{x:Math.max(20,(globalThis.innerWidth-t)/2),y:Math.max(20,(globalThis.innerHeight-i)/2)}}get BENCHMARK_TIERS(){return[{label:e("about.sysreq.tier1.label","Minimum Local Benchmark"),tier:Y[0].tier,summary:e("about.sysreq.tier1.summary","Bootable local Orus for phi4-mini, Memory RAG, quiet queue work, and low-visual professional use."),fit:e("about.sysreq.tier1.fit","Best for solo admin, overnight categorization, validation, and text-first workflows.")},{label:e("about.sysreq.tier2.label","Professional Multimodal Baseline"),tier:Y[1].tier,summary:e("about.sysreq.tier2.summary","Balanced tier for multimodal Orus with live vision, Orpheus TTS on tuned profiles, and practical day-to-day throughput."),fit:e("about.sysreq.tier2.fit","Best for legal, marketing, HR, business operations, research, and meeting-heavy roles.")},{label:e("about.sysreq.tier3.label","Prime Visual Studio Tier"),tier:Y[2].tier,summary:e("about.sysreq.tier3.summary","Full Windows-native Orus stack including Orpheus, Whisper Large, SF3D, advanced visual workflows, and higher concurrency headroom."),fit:e("about.sysreq.tier3.fit","Best for creative direction, advanced 3D ideation, labs, enterprise demos, and high-concurrency sessions.")}]}get WORKLOAD_ARCHETYPES(){return[{icon:"📚",title:e("about.sysreq.arch1.title","Legal, Admin, HR, and Back-Office Operations"),audience:e("about.sysreq.arch1.audience","Contracts, policy review, spreadsheets, task extraction, outputs, and memory-backed casework."),activities:e("about.sysreq.arch1.activities","TaskChat, Categorizer, Processor, Validator, Outputs, Spreadsheet editing, Memory Lab, and overnight queue runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10 build 17763+ or Windows 11",fit:e("about.sysreq.arch1.min.fit","Text-first document work, quiet voice use, slower batch throughput."),notes:e("about.sysreq.arch1.min.notes","Use the text-focused or low-visual path. The 3D shell is optional for this workload.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch1.rec.fit","Comfortable multimodal document handling with Orpheus TTS and better queue depth."),notes:e("about.sysreq.arch1.rec.notes","This is the best all-round professional floor if you want voice, live vision, and document tools together.")}},{icon:"📈",title:e("about.sysreq.arch2.title","Business, Finance, Marketing, and Social Media"),audience:e("about.sysreq.arch2.audience","Research synthesis, meeting prep, campaign drafts, CRM-style memory recall, and multi-window guidance."),activities:e("about.sysreq.arch2.activities","Webber, Presenter, BrainStorm, Discord, Outputs, Voice Profiles, and live multimodal chat."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch2.min.fit","Capable of multimodal work, but with tighter concurrency and shorter comfortable sessions."),notes:e("about.sysreq.arch2.min.notes","Suitable if you want Orpheus voice and live vision, but not the heaviest 3D or advanced visual stacks.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch2.rec.fit","Smooth daily use across voice, research, planning, and client-facing flows."),notes:e("about.sysreq.arch2.rec.notes","A higher-VRAM card gives more room for simultaneous speech, vision, and retrieval without comfort drops.")}},{icon:"🔬",title:e("about.sysreq.arch3.title","Science, Audit, Research, and High-Context Knowledge Work"),audience:e("about.sysreq.arch3.audience","Long-form reading, evidence review, reasoning, synthesis, and structured retrieval against large source sets."),activities:e("about.sysreq.arch3.activities","High-context engine profiles, Defrag, Memory Lab, Webber, Presenter, and reasoning-heavy sessions."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch3.min.fit","Usable for careful high-context work with conservative concurrency."),notes:e("about.sysreq.arch3.min.notes","Expect tighter token budgets when voice and long-document reasoning are active together.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch3.rec.fit","Best for sustained high-context reasoning, deeper queues, and fewer context-trim compromises."),notes:e("about.sysreq.arch3.rec.notes","Prime-class hardware is where long-context work starts to feel comfortably professional instead of merely possible.")}},{icon:"🎨",title:e("about.sysreq.arch4.title","Creative Direction, Visual Design, and 3D Ideation"),audience:e("about.sysreq.arch4.audience","Visual command workflows, OBB, Living Machine, scene experimentation, and design-oriented narration."),activities:e("about.sysreq.arch4.activities","Visual command workflows, Boltzmann Brain, Living Machine, Webcam, Face Capture, visual themes, and scene-driven presentation."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch4.min.fit","Basic visual workflows and scene experimentation without the heaviest generation modules."),notes:e("about.sysreq.arch4.min.notes","Good for visual assistance and lighter 3D use. It is not the right floor for SF3D or video-heavy iteration.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch4.rec.fit","Comfortable visual command work, richer 3D scenes, and headroom for advanced visual modules."),notes:e("about.sysreq.arch4.rec.notes","Use Prime-class hardware if Orus is part of a real creative pipeline rather than occasional visual support.")}},{icon:"🎤",title:e("about.sysreq.arch5.title","Meetings, Teaching, Support, and Community Operations"),audience:e("about.sysreq.arch5.audience","Presenter sessions, meeting transcription, Teams or Discord support, multi-speaker capture, and guided walkthroughs."),activities:e("about.sysreq.arch5.activities","Meeting Mode, Presenter, Voice Profiles, per-app audio capture, Discord, and system dialogue."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch5.min.fit","Functional voice-centric workflows with moderate simultaneous capture and response pressure."),notes:e("about.sysreq.arch5.min.notes","This tier is viable, but real-time comfort improves materially as VRAM and RAM rise.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch5.rec.fit","Better for long meeting runs, cleaner voice overlap handling, and more resilient STT plus TTS coexistence."),notes:e("about.sysreq.arch5.rec.notes","Orpheus throughput is benchmarked at session start, so stronger GPUs usually translate directly into smoother live voice UX.")}},{icon:"🌙",title:e("about.sysreq.arch6.title","Solo Professionals and Overnight Batch Processing"),audience:e("about.sysreq.arch6.audience","Users who prefer slower unattended work over real-time presentation and can leave the machine running for queues."),activities:e("about.sysreq.arch6.activities","Categorizer, Processor, Validator, Output export, memory cleanup, and long unattended text-first runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch6.min.fit","The minimum local benchmark for patient, text-focused processing."),notes:e("about.sysreq.arch6.min.notes","This is the right bracket if you do not need the 3D shell and can tolerate slower TTS or lower concurrency.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch6.rec.fit","Much better queue throughput and fewer stalls once memory retrieval, voice, and exports overlap."),notes:e("about.sysreq.arch6.rec.notes","If Orus is running while you sleep or process long backlogs, extra VRAM buys predictability more than flashiness.")}},{icon:"🧪",title:e("about.sysreq.arch7.title","Full Orus Lab, Demo, and Studio Configuration"),audience:e("about.sysreq.arch7.audience","Users who want the widest feature envelope: multimodal, Orpheus, live vision, advanced visual workflows, and SF3D."),activities:e("about.sysreq.arch7.activities","Prime-tier end-to-end Orus with heavy voice, visuals, generation, and concurrent sessions."),minimum:{gpu:"23 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"Windows 11 on x64 preferred",fit:e("about.sysreq.arch7.min.fit","The practical floor for calling Orus a full-stack local studio rather than a trimmed workstation."),notes:e("about.sysreq.arch7.min.notes","This is where the heaviest visual and generation modules stop feeling compromised.")},recommended:{gpu:"24 GB to 32 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch7.rec.fit","Best for enterprise demos, creative labs, and all-feature usage with minimal negotiation between subsystems."),notes:e("about.sysreq.arch7.rec.notes","RTX 4090 and RTX 5090 class machines are the right target when Orus is being used as a primary workstation layer.")}}]}_renderRequirementSpecCard(t,i,s=!1){return c`
+  `}connectedCallback(){super.connectedCallback(),this.activeTab=this.startTab,this._unlistenI18n=_e(()=>this.requestUpdate()),globalThis.addEventListener("mousemove",this._onMouseMove),globalThis.addEventListener("mouseup",this._onMouseUp),globalThis.addEventListener("keydown",this._onKeyDown)}disconnectedCallback(){super.disconnectedCallback(),this._unlistenI18n?.(),globalThis.removeEventListener("mousemove",this._onMouseMove),globalThis.removeEventListener("mouseup",this._onMouseUp),globalThis.removeEventListener("keydown",this._onKeyDown)}willUpdate(t){t.has("activeTab")&&(this.currentCardIndex=0)}_eventElement(t){return t instanceof HTMLElement?t:t instanceof Node?t.parentElement:null}_isCarouselTouchTarget(t){return!!this._eventElement(t)?.closest(".about-content-carousel")}_isInteractiveTouchTarget(t){return!!this._eventElement(t)?.closest('button, a, details, summary, [role="tab"], [role="button"]')}_effectiveSize(){const t=Math.max(500,globalThis.innerWidth*.94),i=Math.max(400,globalThis.innerHeight*.92);return{width:Math.min(this.size.width,t),height:Math.min(this.size.height,i)}}_defaultPosition(){const{width:t,height:i}=this._effectiveSize();return{x:Math.max(20,(globalThis.innerWidth-t)/2),y:Math.max(20,(globalThis.innerHeight-i)/2)}}get BENCHMARK_TIERS(){return[{label:e("about.sysreq.tier1.label","Minimum Local Benchmark"),tier:Y[0].tier,summary:e("about.sysreq.tier1.summary","Bootable local Orus for phi4-mini, Memory RAG, quiet queue work, and low-visual professional use."),fit:e("about.sysreq.tier1.fit","Best for solo admin, overnight categorization, validation, and text-first workflows.")},{label:e("about.sysreq.tier2.label","Professional Multimodal Baseline"),tier:Y[1].tier,summary:e("about.sysreq.tier2.summary","Balanced tier for multimodal Orus with live vision, Orpheus TTS on tuned profiles, and practical day-to-day throughput."),fit:e("about.sysreq.tier2.fit","Best for legal, marketing, HR, business operations, research, and meeting-heavy roles.")},{label:e("about.sysreq.tier3.label","Prime Visual Studio Tier"),tier:Y[2].tier,summary:e("about.sysreq.tier3.summary","Full Windows-native Orus stack including Orpheus, Whisper Large, SF3D, advanced visual workflows, and higher concurrency headroom."),fit:e("about.sysreq.tier3.fit","Best for creative direction, advanced 3D ideation, labs, enterprise demos, and high-concurrency sessions.")}]}get WORKLOAD_ARCHETYPES(){return[{icon:"📚",title:e("about.sysreq.arch1.title","Legal, Admin, HR, and Back-Office Operations"),audience:e("about.sysreq.arch1.audience","Contracts, policy review, spreadsheets, task extraction, outputs, and memory-backed casework."),activities:e("about.sysreq.arch1.activities","TaskChat, Categorizer, Processor, Validator, Outputs, Spreadsheet editing, Memory Lab, and overnight queue runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10 build 17763+ or Windows 11",fit:e("about.sysreq.arch1.min.fit","Text-first document work, quiet voice use, slower batch throughput."),notes:e("about.sysreq.arch1.min.notes","Use the text-focused or low-visual path. The 3D shell is optional for this workload.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch1.rec.fit","Comfortable multimodal document handling with Orpheus TTS and better queue depth."),notes:e("about.sysreq.arch1.rec.notes","This is the best all-round professional floor if you want voice, live vision, and document tools together.")}},{icon:"📈",title:e("about.sysreq.arch2.title","Business, Finance, Marketing, and Social Media"),audience:e("about.sysreq.arch2.audience","Research synthesis, meeting prep, campaign drafts, CRM-style memory recall, and multi-window guidance."),activities:e("about.sysreq.arch2.activities","Webber, Presenter, BrainStorm, Discord, Outputs, Voice Profiles, and live multimodal chat."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch2.min.fit","Capable of multimodal work, but with tighter concurrency and shorter comfortable sessions."),notes:e("about.sysreq.arch2.min.notes","Suitable if you want Orpheus voice and live vision, but not the heaviest 3D or advanced visual stacks.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch2.rec.fit","Smooth daily use across voice, research, planning, and client-facing flows."),notes:e("about.sysreq.arch2.rec.notes","A higher-VRAM card gives more room for simultaneous speech, vision, and retrieval without comfort drops.")}},{icon:"🔬",title:e("about.sysreq.arch3.title","Science, Audit, Research, and High-Context Knowledge Work"),audience:e("about.sysreq.arch3.audience","Long-form reading, evidence review, reasoning, synthesis, and structured retrieval against large source sets."),activities:e("about.sysreq.arch3.activities","High-context engine profiles, Defrag, Memory Lab, Webber, Presenter, and reasoning-heavy sessions."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch3.min.fit","Usable for careful high-context work with conservative concurrency."),notes:e("about.sysreq.arch3.min.notes","Expect tighter token budgets when voice and long-document reasoning are active together.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch3.rec.fit","Best for sustained high-context reasoning, deeper queues, and fewer context-trim compromises."),notes:e("about.sysreq.arch3.rec.notes","Prime-class hardware is where long-context work starts to feel comfortably professional instead of merely possible.")}},{icon:"🎨",title:e("about.sysreq.arch4.title","Creative Direction, Visual Design, and 3D Ideation"),audience:e("about.sysreq.arch4.audience","Visual command workflows, OBB, Living Machine, scene experimentation, and design-oriented narration."),activities:e("about.sysreq.arch4.activities","Visual command workflows, Boltzmann Brain, Living Machine, Webcam, Face Capture, visual themes, and scene-driven presentation."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch4.min.fit","Basic visual workflows and scene experimentation without the heaviest generation modules."),notes:e("about.sysreq.arch4.min.notes","Good for visual assistance and lighter 3D use. It is not the right floor for SF3D or video-heavy iteration.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch4.rec.fit","Comfortable visual command work, richer 3D scenes, and headroom for advanced visual modules."),notes:e("about.sysreq.arch4.rec.notes","Use Prime-class hardware if Orus is part of a real creative pipeline rather than occasional visual support.")}},{icon:"🎤",title:e("about.sysreq.arch5.title","Meetings, Teaching, Support, and Community Operations"),audience:e("about.sysreq.arch5.audience","Presenter sessions, meeting transcription, Teams or Discord support, multi-speaker capture, and guided walkthroughs."),activities:e("about.sysreq.arch5.activities","Meeting Mode, Presenter, Voice Profiles, per-app audio capture, Discord, and system dialogue."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch5.min.fit","Functional voice-centric workflows with moderate simultaneous capture and response pressure."),notes:e("about.sysreq.arch5.min.notes","This tier is viable, but real-time comfort improves materially as VRAM and RAM rise.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch5.rec.fit","Better for long meeting runs, cleaner voice overlap handling, and more resilient STT plus TTS coexistence."),notes:e("about.sysreq.arch5.rec.notes","Orpheus throughput is benchmarked at session start, so stronger GPUs usually translate directly into smoother live voice UX.")}},{icon:"🌙",title:e("about.sysreq.arch6.title","Solo Professionals and Overnight Batch Processing"),audience:e("about.sysreq.arch6.audience","Users who prefer slower unattended work over real-time presentation and can leave the machine running for queues."),activities:e("about.sysreq.arch6.activities","Categorizer, Processor, Validator, Output export, memory cleanup, and long unattended text-first runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch6.min.fit","The minimum local benchmark for patient, text-focused processing."),notes:e("about.sysreq.arch6.min.notes","This is the right bracket if you do not need the 3D shell and can tolerate slower TTS or lower concurrency.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch6.rec.fit","Much better queue throughput and fewer stalls once memory retrieval, voice, and exports overlap."),notes:e("about.sysreq.arch6.rec.notes","If Orus is running while you sleep or process long backlogs, extra VRAM buys predictability more than flashiness.")}},{icon:"🧪",title:e("about.sysreq.arch7.title","Full Orus Lab, Demo, and Studio Configuration"),audience:e("about.sysreq.arch7.audience","Users who want the widest feature envelope: multimodal, Orpheus, live vision, advanced visual workflows, and SF3D."),activities:e("about.sysreq.arch7.activities","Prime-tier end-to-end Orus with heavy voice, visuals, generation, and concurrent sessions."),minimum:{gpu:"23 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"Windows 11 on x64 preferred",fit:e("about.sysreq.arch7.min.fit","The practical floor for calling Orus a full-stack local studio rather than a trimmed workstation."),notes:e("about.sysreq.arch7.min.notes","This is where the heaviest visual and generation modules stop feeling compromised.")},recommended:{gpu:"24 GB to 32 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch7.rec.fit","Best for enterprise demos, creative labs, and all-feature usage with minimal negotiation between subsystems."),notes:e("about.sysreq.arch7.rec.notes","RTX 4090 and RTX 5090 class machines are the right target when Orus is being used as a primary workstation layer.")}}]}_renderRequirementSpecCard(t,i,s=!1){return c`
       <div class="requirements-spec-card ${s?"recommended":""}">
         <div class="requirements-spec-label">${t}</div>
         <ul>
@@ -3530,7 +3530,7 @@
            ${e("privacy.popup.contact_desc","For any questions regarding this privacy policy or to exercise your privacy rights, please contact Comet Game Studio Ltd at the support channels provided within the Software or at: cometgamestudio.com")}
          </p>
       </div>
-    `}}w([T({type:Boolean})],x.prototype,"open");w([T({type:Boolean,attribute:"full-page"})],x.prototype,"fullPage");w([T({type:Object})],x.prototype,"position");w([T({type:Object})],x.prototype,"size");w([T({type:String})],x.prototype,"startTab");w([f()],x.prototype,"activeTab");w([f()],x.prototype,"isDragging");w([f()],x.prototype,"isResizing");w([f()],x.prototype,"currentCardIndex");w([f()],x.prototype,"isCardDragging");customElements.get("orus-about-dialog")||customElements.define("orus-about-dialog",x);var tt=Object.defineProperty,it=Object.getOwnPropertyDescriptor,v=(a,t,i,s)=>{for(var o=s>1?void 0:s?it(t,i):t,r=a.length-1,n;r>=0;r--)(n=a[r])&&(o=(s?n(t,i,o):n(o))||o);return s&&o&&tt(t,i,o),o};const at=!0,st=!0,ot=!0,rt=!0;globalThis.WEBSITE_MODE=at;globalThis.PRODUCTION_MODE=st;globalThis.NO_INFERENCE_MODE=ot;globalThis.NO_AUTH_REQUIRED=rt;let m=class extends z{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this._editorOpen=!1,this._editorError=null,this._currentLocale="en",this._langDropdownOpen=!1,this._currentQuoteIndex=0,this._quoteFading=!1,this._activeVideoIndex=0,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._animationFrameId=0,this._editorModuleLoaded=!1,this._unlistenI18n=null,this._quoteTimer=null,this._navResizeObserver=null,this._observedNav=null,this._onPopState=a=>{const t=a.state;this._activeSection=t?.section??this._pathToSection(location.pathname)}}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._activeSection=this._pathToSection(location.pathname),globalThis.addEventListener("popstate",this._onPopState),this._bootSequence(),this._unlistenI18n=$e(()=>{this._currentLocale=Ke(),this.requestUpdate()}),this._startQuoteRotation()}disconnectedCallback(){super.disconnectedCallback(),globalThis.removeEventListener("popstate",this._onPopState),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId),this._unlistenI18n?.(),this._stopQuoteRotation(),this._navResizeObserver?.disconnect(),this._navResizeObserver=null,this._observedNav=null}firstUpdated(){this.updateComplete.then(()=>{this._observeNavHeight(),this._syncNavHeight(),this._fitQuoteBody()})}updated(a){super.updated(a),this._observeNavHeight(),this._syncNavHeight(),a.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene(),(a.has("_currentQuoteIndex")||a.has("_ready")&&this._ready)&&this._fitQuoteBody()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(a){this._errorMessage=`Failed to load: ${a instanceof Error?a.message:String(a)}`,this._loading=!1}}async _initThreeScene(){try{const a=this.shadowRoot?.querySelector("#cgs-canvas");if(!a)return;const t=await ae(()=>import("./three.module-CIzvuMnW.js"),[]),i=new t.Scene,s=new t.PerspectiveCamera(60,a.clientWidth/a.clientHeight,.1,1e3);s.position.set(0,0,8);const o=new t.WebGLRenderer({canvas:a,antialias:!0,alpha:!0});o.setSize(a.clientWidth,a.clientHeight),o.setPixelRatio(Math.min(globalThis.devicePixelRatio,2)),o.setClearColor(657935,1);const r=new t.IcosahedronGeometry(2,15),n=new t.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),d=new t.Mesh(r,n);i.add(d);const l=new t.AmbientLight(16777215,.3);i.add(l);const p=new t.PointLight(6333946,1.5,20);p.position.set(5,5,5),i.add(p),this._threeRenderer=o,this._threeCanvasReady=!0;const g=()=>{this._animationFrameId=requestAnimationFrame(g),!document.hidden&&(d.rotation.y+=.003,d.rotation.x+=.001,o.render(i,s))};g(),new ResizeObserver(()=>{if(!a.parentElement)return;const h=a.clientWidth,y=a.clientHeight;s.aspect=h/y,s.updateProjectionMatrix(),o.setSize(h,y)}).observe(a)}catch{this._threeCanvasReady=!1}}_navigateTo(a){this._activeSection!==a&&(this._activeSection=a,history.pushState({section:a},"",this._sectionToPath(a)))}_startQuoteRotation(){this._stopQuoteRotation(),this._quoteTimer=setInterval(()=>this._advanceQuote(),8e3)}_stopQuoteRotation(){this._quoteTimer!==null&&(clearInterval(this._quoteTimer),this._quoteTimer=null)}_advanceQuote(){this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=(this._currentQuoteIndex+1)%m._QUOTES.length,this._quoteFading=!1},400)}_goToQuote(a){a!==this._currentQuoteIndex&&(this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=a,this._quoteFading=!1,this._startQuoteRotation()},400))}_fitQuoteBody(){const a=this.shadowRoot?.querySelector(".cgs-quote-body");if(!a)return;const t=1.08;let i=14,s=34,o=14;for(;i<=s;){const r=Math.floor((i+s)/2);a.style.fontSize=`${r}px`;const n=Math.ceil(r*t*2)+4;a.scrollHeight<=n?(o=r,i=r+1):s=r-1}a.style.fontSize=`${o}px`}_observeNavHeight(){const a=this.renderRoot.querySelector(".cgs-nav");if(!a){this._navResizeObserver?.disconnect(),this._observedNav=null;return}this._observedNav!==a&&(this._navResizeObserver??=new ResizeObserver(()=>this._syncNavHeight()),this._navResizeObserver.disconnect(),this._navResizeObserver.observe(a),this._observedNav=a)}_syncNavHeight(){const a=this.renderRoot.querySelector(".cgs-nav");if(!a)return;const t=Math.ceil(a.getBoundingClientRect().height);t>0&&this.style.setProperty("--cgs-nav-height",`${t}px`)}_sectionToPath(a){const t="/cgs-public/",s={privacy:"privacy-policy",products:"products",about:"about",safety:"safety",terms:"terms",notices:"notices","orus-ai":"orus-ai"}[a];return s?`${t}${s}`:t}_pathToSection(a){const t="/cgs-public/".replace(/\/$/,"");switch(a.startsWith(t)?a.slice(t.length):a){case"/privacy-policy":return"privacy";case"/products":return"products";case"/about":return"about";case"/safety":return"safety";case"/terms":return"terms";case"/notices":return"notices";case"/orus-ai":return"orus-ai";default:return"home"}}async _switchLanguage(a){this._langDropdownOpen=!1,await Je(a)}async _openEditor(){this._editorError=null;try{this._editorModuleLoaded||(await ae(()=>import("./orus-web-editor-6a_JC34i.js"),[]),this._editorModuleLoaded=!0),this._editorOpen=!0}catch(a){console.error("[CGS] Failed to load Orus editor:",a),this._editorError=a instanceof Error?a.message:String(a)}}_renderSiteChrome(a){const t=this._activeSection==="home"||this._activeSection==="products",i=this._activeSection==="orus-ai",s=this._activeSection==="about",o=t?"cgs-nav-link active":"cgs-nav-link",r=i?"cgs-nav-link active":"cgs-nav-link",n=s?"cgs-nav-link active":"cgs-nav-link",d=t?"page":void 0,l=i?"page":void 0,p=s?"page":void 0,g=this._langDropdownOpen?"true":"false",u=this._langDropdownOpen?c`
+    `}}w([T({type:Boolean})],x.prototype,"open");w([T({type:Boolean,attribute:"full-page"})],x.prototype,"fullPage");w([T({type:Object})],x.prototype,"position");w([T({type:Object})],x.prototype,"size");w([T({type:String})],x.prototype,"startTab");w([f()],x.prototype,"activeTab");w([f()],x.prototype,"isDragging");w([f()],x.prototype,"isResizing");w([f()],x.prototype,"currentCardIndex");w([f()],x.prototype,"isCardDragging");customElements.get("orus-about-dialog")||customElements.define("orus-about-dialog",x);var tt=Object.defineProperty,it=Object.getOwnPropertyDescriptor,v=(a,t,i,s)=>{for(var r=s>1?void 0:s?it(t,i):t,o=a.length-1,n;o>=0;o--)(n=a[o])&&(r=(s?n(t,i,r):n(r))||r);return s&&r&&tt(t,i,r),r};const at=!0,st=!0,rt=!0,ot=!0;globalThis.WEBSITE_MODE=at;globalThis.PRODUCTION_MODE=st;globalThis.NO_INFERENCE_MODE=rt;globalThis.NO_AUTH_REQUIRED=ot;let m=class extends z{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this._editorOpen=!1,this._editorError=null,this._currentLocale="en",this._langDropdownOpen=!1,this._currentQuoteIndex=0,this._quoteFading=!1,this._activeVideoIndex=0,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._animationFrameId=0,this._editorModuleLoaded=!1,this._unlistenI18n=null,this._quoteTimer=null,this._navResizeObserver=null,this._observedNav=null,this._onPopState=a=>{const t=a.state;this._activeSection=t?.section??this._pathToSection(location.pathname)}}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._activeSection=this._pathToSection(location.pathname),globalThis.addEventListener("popstate",this._onPopState),this._bootSequence(),this._unlistenI18n=_e(()=>{this._currentLocale=Qe(),this.requestUpdate()}),this._startQuoteRotation()}disconnectedCallback(){super.disconnectedCallback(),globalThis.removeEventListener("popstate",this._onPopState),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId),this._unlistenI18n?.(),this._stopQuoteRotation(),this._navResizeObserver?.disconnect(),this._navResizeObserver=null,this._observedNav=null}firstUpdated(){this.updateComplete.then(()=>{this._observeNavHeight(),this._syncNavHeight(),this._fitQuoteBody()})}updated(a){super.updated(a),this._observeNavHeight(),this._syncNavHeight(),a.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene(),(a.has("_currentQuoteIndex")||a.has("_ready")&&this._ready)&&this._fitQuoteBody()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(a){this._errorMessage=`Failed to load: ${a instanceof Error?a.message:String(a)}`,this._loading=!1}}async _initThreeScene(){try{const a=this.shadowRoot?.querySelector("#cgs-canvas");if(!a)return;const t=await ae(()=>import("./three.module-CIzvuMnW.js"),[]),i=new t.Scene,s=new t.PerspectiveCamera(60,a.clientWidth/a.clientHeight,.1,1e3);s.position.set(0,0,8);const r=new t.WebGLRenderer({canvas:a,antialias:!0,alpha:!0});r.setSize(a.clientWidth,a.clientHeight),r.setPixelRatio(Math.min(globalThis.devicePixelRatio,2)),r.setClearColor(657935,1);const o=new t.IcosahedronGeometry(2,15),n=new t.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),d=new t.Mesh(o,n);i.add(d);const l=new t.AmbientLight(16777215,.3);i.add(l);const p=new t.PointLight(6333946,1.5,20);p.position.set(5,5,5),i.add(p),this._threeRenderer=r,this._threeCanvasReady=!0;const g=()=>{this._animationFrameId=requestAnimationFrame(g),!document.hidden&&(d.rotation.y+=.003,d.rotation.x+=.001,r.render(i,s))};g(),new ResizeObserver(()=>{if(!a.parentElement)return;const h=a.clientWidth,y=a.clientHeight;s.aspect=h/y,s.updateProjectionMatrix(),r.setSize(h,y)}).observe(a)}catch{this._threeCanvasReady=!1}}_navigateTo(a){this._activeSection!==a&&(this._activeSection=a,history.pushState({section:a},"",this._sectionToPath(a)))}_startQuoteRotation(){this._stopQuoteRotation(),this._quoteTimer=setInterval(()=>this._advanceQuote(),8e3)}_stopQuoteRotation(){this._quoteTimer!==null&&(clearInterval(this._quoteTimer),this._quoteTimer=null)}_advanceQuote(){this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=(this._currentQuoteIndex+1)%m._QUOTES.length,this._quoteFading=!1},400)}_goToQuote(a){a!==this._currentQuoteIndex&&(this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=a,this._quoteFading=!1,this._startQuoteRotation()},400))}_fitQuoteBody(){const a=this.shadowRoot?.querySelector(".cgs-quote-body");if(!a)return;const t=1.08;let i=14,s=34,r=14;for(;i<=s;){const o=Math.floor((i+s)/2);a.style.fontSize=`${o}px`;const n=Math.ceil(o*t*2)+4;a.scrollHeight<=n?(r=o,i=o+1):s=o-1}a.style.fontSize=`${r}px`}_observeNavHeight(){const a=this.renderRoot.querySelector(".cgs-nav");if(!a){this._navResizeObserver?.disconnect(),this._observedNav=null;return}this._observedNav!==a&&(this._navResizeObserver??=new ResizeObserver(()=>this._syncNavHeight()),this._navResizeObserver.disconnect(),this._navResizeObserver.observe(a),this._observedNav=a)}_syncNavHeight(){const a=this.renderRoot.querySelector(".cgs-nav");if(!a)return;const t=Math.ceil(a.getBoundingClientRect().height);t>0&&this.style.setProperty("--cgs-nav-height",`${t}px`)}_sectionToPath(a){const t="/cgs-public/",s={privacy:"privacy-policy",products:"products",about:"about",safety:"safety",terms:"terms",notices:"notices","orus-ai":"orus-ai",enterprise:"enterprise"}[a];return s?`${t}${s}`:t}_pathToSection(a){const t="/cgs-public/".replace(/\/$/,"");switch(a.startsWith(t)?a.slice(t.length):a){case"/privacy-policy":return"privacy";case"/products":return"products";case"/about":return"about";case"/safety":return"safety";case"/terms":return"terms";case"/notices":return"notices";case"/orus-ai":return"orus-ai";case"/enterprise":return"enterprise";default:return"home"}}async _switchLanguage(a){this._langDropdownOpen=!1,await Je(a)}async _openEditor(){this._editorError=null;try{this._editorModuleLoaded||(await ae(()=>import("./orus-web-editor-6a_JC34i.js"),[]),this._editorModuleLoaded=!0),this._editorOpen=!0}catch(a){console.error("[CGS] Failed to load Orus editor:",a),this._editorError=a instanceof Error?a.message:String(a)}}_renderSiteChrome(a){const t=this._activeSection==="home"||this._activeSection==="products",i=this._activeSection==="orus-ai",s=this._activeSection==="about",r=t?"cgs-nav-link active":"cgs-nav-link",o=i?"cgs-nav-link active":"cgs-nav-link",n=s?"cgs-nav-link active":"cgs-nav-link",d=t?"page":void 0,l=i?"page":void 0,p=s?"page":void 0,g=this._langDropdownOpen?"true":"false",u=this._langDropdownOpen?c`
                             <div id="cgs-lang-dropdown" class="cgs-lang-dropdown" role="menu" aria-label="${e("nav.language_menu","Language selection")}">
                                 ${j.map(h=>c`
                                     <button class="cgs-lang-option ${this._currentLocale===h.code?"active":""}"
@@ -3549,11 +3549,11 @@
                     ${e("nav.logo","Comet Game Studio")}
                 </button>
                 <div class="cgs-nav-links">
-                    <button class="${o}"
+                    <button class="${r}"
                             type="button"
                             aria-current=${d}
                             @click=${()=>this._navigateTo("home")}>${e("nav.home","Home")}</button>
-                    <button class="${r}"
+                    <button class="${o}"
                             type="button"
                             aria-current=${l}
                             @click=${()=>this._navigateTo("orus-ai")}>${e("nav.orus_ai","ORUS AI System")}</button>
@@ -3647,10 +3647,10 @@
                         </div>
                     </div>
                     <div class="cgs-quote-progress">
-                        ${Array.from({length:t},(s,o)=>c`
-                            <div class="cgs-quote-progress-segment ${o===this._currentQuoteIndex?"active":""}"
-                                 style="--segment-accent: ${o===this._currentQuoteIndex?"#f59e0b":"#6366f1"}; cursor: pointer;"
-                                 @click=${()=>this._goToQuote(o)}></div>
+                        ${Array.from({length:t},(s,r)=>c`
+                            <div class="cgs-quote-progress-segment ${r===this._currentQuoteIndex?"active":""}"
+                                 style="--segment-accent: ${r===this._currentQuoteIndex?"#f59e0b":"#6366f1"}; cursor: pointer;"
+                                 @click=${()=>this._goToQuote(r)}></div>
                         `)}
                     </div>
                 </div>
@@ -3714,7 +3714,7 @@
                     </div>
                 </div>
             </section>
-        `}render(){const a=this._activeSection==="orus-ai",t=!a,i=j.find(r=>r.code===this._currentLocale)??j[0],s=t?this._renderSiteChrome(i):b,o=t?this._renderSiteFooter():b;return this._loading?c`
+        `}render(){const a=this._activeSection==="orus-ai",t=!a,i=j.find(o=>o.code===this._currentLocale)??j[0],s=t?this._renderSiteChrome(i):b,r=t?this._renderSiteFooter():b;return this._loading?c`
                 <div class="loading-overlay">
                     <div class="loading-spinner"></div>
                     <div class="loading-text">${this._loadingMessage}</div>
@@ -3746,7 +3746,7 @@
                 </div>
 
                 <!-- Footer — hidden in full-page orus-ai mode -->
-                ${o}
+                ${r}
 
                 <!-- About Orus Dialog -->
                 <orus-about-dialog
@@ -3757,7 +3757,7 @@
 
                 <!-- Orus Editor Popup (Website Demo) -->
                 ${this._editorOpen?c`
-                <div class="cgs-editor-overlay" @click=${r=>{r.target.classList.contains("cgs-editor-overlay")&&(this._editorOpen=!1)}}>
+                <div class="cgs-editor-overlay" @click=${o=>{o.target.classList.contains("cgs-editor-overlay")&&(this._editorOpen=!1)}}>
                     <div class="cgs-editor-window">
                         <div class="cgs-editor-titlebar">
                             <span class="cgs-editor-win-title">◎ Orus Editor — Web Demo</span>
@@ -3781,7 +3781,7 @@
                         .startTab=${"privacy"}
                         @navigate-home=${()=>this._navigateTo("home")}
                     ></orus-about-dialog>
-                `;case"terms":return this._renderTerms();case"safety":return this._renderSafety();case"notices":return this._renderNotices();case"orus-ai":return this._renderOrusAiPage();default:return this._renderHome()}}_renderHome(){return c`
+                `;case"terms":return this._renderTerms();case"safety":return this._renderSafety();case"notices":return this._renderNotices();case"orus-ai":return this._renderOrusAiPage();case"enterprise":return this._renderEnterprise();default:return this._renderHome()}}_renderHome(){return c`
             <div class="cgs-hero">
                 <div class="cgs-hero-tagline">${e("hero.tagline","AI · XR · Music")}</div>
                 
@@ -3800,6 +3800,9 @@
                         <button class="cgs-editor-btn" @click=${()=>this._openEditor()}>
                             ✨ ${e("hero.try_editor","Try the Orus Editor")}
                         </button>
+                        <button class="cgs-enterprise-btn" @click=${()=>this._navigateTo("enterprise")}>
+                            🏢 ${e("hero.enterprise_btn","Enterprise Solutions")}
+                        </button>
                     </div>
 
                     ${this._editorError?c`
@@ -3814,6 +3817,190 @@
             <orus-about-dialog full-page
                 @navigate-home=${()=>this._navigateTo("home")}
             ></orus-about-dialog>
+        `}_renderEnterprise(){return c`
+            <div class="cgs-enterprise-page">
+                <button class="cgs-legal-back" @click=${()=>this._navigateTo("home")}>${e("legal.back","← Back to Home")}</button>
+
+                <!-- Hero -->
+                <div class="cgs-ent-hero">
+                    <div class="cgs-ent-badge">${e("enterprise.badge","Coming Soon")}</div>
+                    <h1 class="cgs-ent-title">${e("enterprise.title","Orus for Enterprise")}</h1>
+                    <p class="cgs-ent-subtitle">${e("enterprise.subtitle","Local-first AI that keeps your data, models, and intelligence entirely within your infrastructure. No cloud dependency. No data leaving your premises.")}</p>
+                </div>
+
+                <!-- What is Orus -->
+                <section class="cgs-ent-section">
+                    <h2>${e("enterprise.what.title","What Is Orus?")}</h2>
+                    <p>${e("enterprise.what.body","Orus is a multimodal AI system built by Comet Game Studio Ltd. It combines voice, text, vision, OCR, and desktop automation into a single locally-hosted agent. Unlike cloud-dependent AI assistants, Orus runs entirely on your hardware — your data never leaves your network.")}</p>
+                    <p>${e("enterprise.what.body2","Powered by the Phi-4 multimodal model architecture and the vLLM inference engine, Orus delivers enterprise-grade performance on standard NVIDIA RTX workstations. No specialised data-centre infrastructure required.")}</p>
+                </section>
+
+                <!-- Key Differentiators -->
+                <section class="cgs-ent-section">
+                    <h2>${e("enterprise.diff.title","Why Orus for Enterprise?")}</h2>
+                    <div class="cgs-ent-grid">
+                        <article class="cgs-ent-card" style="--ent-accent: #6366f1;">
+                            <div class="cgs-ent-card-icon">\ud83d\udd12</div>
+                            <h3>${e("enterprise.diff.sovereignty.title","Complete Data Sovereignty")}</h3>
+                            <p>${e("enterprise.diff.sovereignty.body","All inference, transcription, vision analysis, and memory storage runs locally. Zero telemetry originating from Orus. Your intellectual property, client conversations, and sensitive documents stay within your premises at all times.")}</p>
+                        </article>
+                        <article class="cgs-ent-card" style="--ent-accent: #22c55e;">
+                            <div class="cgs-ent-card-icon">\ud83d\udcbb</div>
+                            <h3>${e("enterprise.diff.airgap.title","Air-Gapped & Offline Operation")}</h3>
+                            <p>${e("enterprise.diff.airgap.body","Orus supports fully air-gapped deployment for classified environments. Models load from local storage with no internet required. A 30-day offline licence ledger ensures uninterrupted operation without connectivity. Purpose-built for defence, legal, healthcare, and financial institutions.")}</p>
+                        </article>
+                        <article class="cgs-ent-card" style="--ent-accent: #f59e0b;">
+                            <div class="cgs-ent-card-icon">\ud83d\udc65</div>
+                            <h3>${e("enterprise.diff.multiuser.title","Multi-User Local Database")}</h3>
+                            <p>${e("enterprise.diff.multiuser.body","Multiple team members can share a single licensed workstation with full user isolation. Each user has separate memory, conversation history, preferences, and storage. Role-based access control (Admin, Editor, Viewer) with structured audit logging for compliance.")}</p>
+                        </article>
+                        <article class="cgs-ent-card" style="--ent-accent: #ec4899;">
+                            <div class="cgs-ent-card-icon">\ud83c\udfaf</div>
+                            <h3>${e("enterprise.diff.multimodal.title","True Multimodal Intelligence")}</h3>
+                            <p>${e("enterprise.diff.multimodal.body","Voice commands with emotive text-to-speech. Real-time vision and screen analysis. Document OCR and form processing. Desktop automation and keyboard injection into Windows applications. One agent handling all modalities — no separate tools required.")}</p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Licensing & Deployment -->
+                <section class="cgs-ent-section">
+                    <h2>${e("enterprise.licensing.title","Licensing & Deployment")}</h2>
+                    <div class="cgs-ent-grid">
+                        <article class="cgs-ent-card" style="--ent-accent: #a78bfa;">
+                            <div class="cgs-ent-card-icon">\ud83d\udcdc</div>
+                            <h3>${e("enterprise.licensing.hwid.title","Hardware-Locked Licensing")}</h3>
+                            <p>${e("enterprise.licensing.hwid.body","Licences are cryptographically bound to specific devices using SHA-256 hardware fingerprinting compiled into a native Rust binary. HMAC-SHA256 tamper detection on tier and expiry fields prevents unauthorised modifications. Enterprise-grade licence integrity across your fleet.")}</p>
+                        </article>
+                        <article class="cgs-ent-card" style="--ent-accent: #60a5fa;">
+                            <div class="cgs-ent-card-icon">\ud83d\udee1\ufe0f</div>
+                            <h3>${e("enterprise.licensing.tiers.title","Enterprise Tier")}</h3>
+                            <p>${e("enterprise.licensing.tiers.body","The Enterprise licence tier provides 32K context windows, full vision and OCR capabilities, up to 5 concurrent inference seats per workstation, and access to all modules. Subscription options from monthly to annual, with a 30-day offline grace period for disconnected environments.")}</p>
+                        </article>
+                        <article class="cgs-ent-card" style="--ent-accent: #2dd4bf;">
+                            <div class="cgs-ent-card-icon">\ud83c\udf10</div>
+                            <h3>${e("enterprise.licensing.lan.title","LAN Browser Access")}</h3>
+                            <p>${e("enterprise.licensing.lan.body","Other devices on the same local network connect to Orus through a browser without additional licences. A single GPU workstation can serve your entire team over Wi-Fi with no cloud relay. All processing remains on your licensed host device.")}</p>
+                        </article>
+                        <article class="cgs-ent-card" style="--ent-accent: #fb923c;">
+                            <div class="cgs-ent-card-icon">\u2699\ufe0f</div>
+                            <h3>${e("enterprise.licensing.msix.title","Windows MSIX Deployment")}</h3>
+                            <p>${e("enterprise.licensing.msix.body","Delivered as a signed MSIX package for Windows. AppContainer sandboxing, automatic updates via Microsoft Store or sideloaded enterprise distribution. Native .NET Desktop Companion for always-on availability. No manual Python setup for end users.")}</p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Capabilities -->
+                <section class="cgs-ent-section">
+                    <h2>${e("enterprise.capabilities.title","Platform Capabilities")}</h2>
+
+                    <div class="cgs-ent-feature-list">
+                        <div class="cgs-ent-feature">
+                            <div class="cgs-ent-feature-marker" style="background: #6366f1;"></div>
+                            <div>
+                                <strong>${e("enterprise.cap.voice.title","Voice Interaction & Meeting Transcription")}</strong>
+                                <p>${e("enterprise.cap.voice.body","Emotive text-to-speech via the Orpheus TTS engine with 11 emotion tags. Real-time speech-to-text with Whisper supporting 90+ languages. Speaker diarisation for multi-participant meeting transcription with per-app audio capture (Discord, Teams, WhatsApp). Pre-ASR speaker gating rejects unauthorised speakers before transcription begins.")}</p>
+                            </div>
+                        </div>
+                        <div class="cgs-ent-feature">
+                            <div class="cgs-ent-feature-marker" style="background: #22c55e;"></div>
+                            <div>
+                                <strong>${e("enterprise.cap.memory.title","Persistent Memory & Semantic Search")}</strong>
+                                <p>${e("enterprise.cap.memory.body","Vector-database-backed semantic memory with BGE-small-en-v1.5 embeddings. Per-user memory isolation with guest-mode privacy controls. Auto-summarisation of session history prevents context bloat. Real-time memory synthesis for coherent long-term knowledge retention.")}</p>
+                            </div>
+                        </div>
+                        <div class="cgs-ent-feature">
+                            <div class="cgs-ent-feature-marker" style="background: #f59e0b;"></div>
+                            <div>
+                                <strong>${e("enterprise.cap.vision.title","Vision, OCR & Document Processing")}</strong>
+                                <p>${e("enterprise.cap.vision.body","Live screen and webcam analysis with smart frame delta detection. Neural OCR (Nemotron) for document processing including checkbox detection and form analysis. Image-to-3D generation pipeline for product visualisation. All processing runs locally on your GPU.")}</p>
+                            </div>
+                        </div>
+                        <div class="cgs-ent-feature">
+                            <div class="cgs-ent-feature-marker" style="background: #ec4899;"></div>
+                            <div>
+                                <strong>${e("enterprise.cap.desktop.title","Desktop Automation & Keyboard Injection")}</strong>
+                                <p>${e("enterprise.cap.desktop.body","Orus can type directly into Windows applications via keyboard injection. UI Automation controller for precision text selection and editing. Screenshot capture with 4K composite support. Window focus control and application guidance — a hands-free enterprise workflow assistant.")}</p>
+                            </div>
+                        </div>
+                        <div class="cgs-ent-feature">
+                            <div class="cgs-ent-feature-marker" style="background: #a78bfa;"></div>
+                            <div>
+                                <strong>${e("enterprise.cap.gpu.title","VRAM Management & GPU Optimisation")}</strong>
+                                <p>${e("enterprise.cap.gpu.body","Dynamic token budget calculation from real-time VRAM. Five engine profiles (low VRAM to power user) with per-component permission gating. VRAM watchdog with automatic garbage collection cascade at 85%% and emergency hard block at 95%%. Workstation Wizard for activity-oriented GPU allocation.")}</p>
+                            </div>
+                        </div>
+                        <div class="cgs-ent-feature">
+                            <div class="cgs-ent-feature-marker" style="background: #2dd4bf;"></div>
+                            <div>
+                                <strong>${e("enterprise.cap.security.title","Security, Governance & Audit")}</strong>
+                                <p>${e("enterprise.cap.security.body","Proprietary system prompts compiled into a native Rust binary vault — unreadable and unmodifiable in deployment. Role-based access control with structured audit logging (login, user creation, permission changes, password resets). Forced password change on first login. WebAuthn and Windows Hello passwordless authentication support.")}</p>
+                            </div>
+                        </div>
+                        <div class="cgs-ent-feature">
+                            <div class="cgs-ent-feature-marker" style="background: #60a5fa;"></div>
+                            <div>
+                                <strong>${e("enterprise.cap.perception.title","Fast Perception Engine")}</strong>
+                                <p>${e("enterprise.cap.perception.body","Non-LLM event detection with sub-50ms latency using regex, thresholds, and hash lookups. Pre-cached TTS reactions for common triggers. Multi-channel watchers monitoring speech, logs, visual frames, and model output simultaneously. Priority-based audio preemption for critical system alerts.")}</p>
+                            </div>
+                        </div>
+                        <div class="cgs-ent-feature">
+                            <div class="cgs-ent-feature-marker" style="background: #fb923c;"></div>
+                            <div>
+                                <strong>${e("enterprise.cap.companion.title","Always-On Desktop Companion")}</strong>
+                                <p>${e("enterprise.cap.companion.body","A persistent .NET 8 WPF floating assistant stays available across all Windows activities. 30 transitional activities from brainstorming to task management, accessible via voice or the 29-item ring menu. Living Machine visual transitions with procedural shader effects. Sleep mode to free GPU while keeping the session alive.")}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Target Industries -->
+                <section class="cgs-ent-section">
+                    <h2>${e("enterprise.industries.title","Designed For")}</h2>
+                    <div class="cgs-ent-grid cgs-ent-grid--compact">
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\ud83c\udfe6</span>
+                            <strong>${e("enterprise.ind.finance","Financial Services")}</strong>
+                            <p>${e("enterprise.ind.finance.body","Offline-capable with audit-logged RBAC for regulatory compliance.")}</p>
+                        </div>
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\ud83c\udfe5</span>
+                            <strong>${e("enterprise.ind.healthcare","Healthcare")}</strong>
+                            <p>${e("enterprise.ind.healthcare.body","Local processing keeps patient data on premises. No PHI sent to cloud.")}</p>
+                        </div>
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\ud83d\udee1\ufe0f</span>
+                            <strong>${e("enterprise.ind.defence","Defence & Government")}</strong>
+                            <p>${e("enterprise.ind.defence.body","Air-gapped deployment with Rust-compiled IP protection.")}</p>
+                        </div>
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\u2696\ufe0f</span>
+                            <strong>${e("enterprise.ind.legal","Legal")}</strong>
+                            <p>${e("enterprise.ind.legal.body","Client confidentiality assured. Document OCR and meeting transcription stay local.")}</p>
+                        </div>
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\ud83c\udfec</span>
+                            <strong>${e("enterprise.ind.corporate","Corporate Teams")}</strong>
+                            <p>${e("enterprise.ind.corporate.body","One GPU workstation serving your team over LAN. No per-seat cloud fees.")}</p>
+                        </div>
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\ud83c\udf0d</span>
+                            <strong>${e("enterprise.ind.remote","Remote & International")}</strong>
+                            <p>${e("enterprise.ind.remote.body","Timezone-agnostic. No latency to cloud. 90+ language speech support.")}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CTA -->
+                <section class="cgs-ent-section cgs-ent-cta">
+                    <div class="cgs-ent-cta-box">
+                        <h2>${e("enterprise.cta.title","Enterprise Interest Registration Opening Soon")}</h2>
+                        <p>${e("enterprise.cta.body","We are preparing the Orus Enterprise programme for organisations that require data-sovereign, locally-hosted AI. Interest registration will open shortly — details on pricing, deployment support, and volume licensing will be available at that time.")}</p>
+                        <p class="cgs-ent-cta-contact">${e("enterprise.cta.contact","For early enquiries, reach us at")}
+                            <a class="cgs-legal-link" href="mailto:enterprise@cometgamestudio.com">enterprise@cometgamestudio.com</a>
+                        </p>
+                    </div>
+                </section>
+            </div>
         `}_renderAbout(){return c`
             <div class="cgs-about-section">
                 <div class="cgs-about-icon">
@@ -5693,7 +5880,7 @@
             touch-action: manipulation;
         }
 
-        :where(.cgs-logo, .cgs-nav-link, .cgs-lang-btn, .cgs-lang-option, .cgs-footer-link, .cgs-store-btn, .cgs-about-link, .cgs-contact-link, .cgs-editor-btn, .cgs-editor-close, .cgs-legal-back):focus-visible {
+        :where(.cgs-logo, .cgs-nav-link, .cgs-lang-btn, .cgs-lang-option, .cgs-footer-link, .cgs-store-btn, .cgs-about-link, .cgs-contact-link, .cgs-editor-btn, .cgs-enterprise-btn, .cgs-editor-close, .cgs-legal-back):focus-visible {
             outline: 2px solid #a78bfa;
             outline-offset: 3px;
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
@@ -5963,7 +6150,8 @@
                 flex-direction: column;
             }
             .cgs-store-btn,
-            .cgs-editor-btn {
+            .cgs-editor-btn,
+            .cgs-enterprise-btn {
                 width: 100%;
                 justify-content: center;
                 min-height: 44px;
@@ -6354,6 +6542,7 @@
             .cgs-lang-btn:hover,
             .cgs-store-btn:hover,
             .cgs-editor-btn:hover,
+            .cgs-enterprise-btn:hover,
             .cgs-about-link:hover,
             .cgs-quote-orbit-chip:hover,
             .cgs-quote-core:hover,
@@ -6367,6 +6556,7 @@
             .cgs-lang-btn,
             .cgs-store-btn,
             .cgs-editor-btn,
+            .cgs-enterprise-btn,
             .cgs-about-link,
             .cgs-footer-link,
             .cgs-quote-orbit-chip,
@@ -6454,6 +6644,256 @@
             font-size: 13px;
             color: #94a3b8;
             line-height: 1.7;
+        }
+
+        /* ── Enterprise Solutions Button (Banner) ──────────── */
+
+        .cgs-enterprise-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #059669, #10b981);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+            font-family: inherit;
+            letter-spacing: 0.5px;
+            transition: all 0.25s ease;
+        }
+        .cgs-enterprise-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+            background: linear-gradient(135deg, #047857, #059669);
+        }
+        .cgs-enterprise-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ── Enterprise Page ───────────────────────────────── */
+
+        .cgs-enterprise-page {
+            max-width: 960px;
+            width: 100%;
+            text-align: left;
+            padding-bottom: 64px;
+        }
+
+        .cgs-ent-hero {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .cgs-ent-badge {
+            display: inline-block;
+            padding: 4px 16px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #34d399;
+            margin-bottom: 20px;
+        }
+
+        .cgs-ent-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            color: #e0d9ff;
+            margin: 0 0 16px;
+            line-height: 1.2;
+        }
+
+        .cgs-ent-subtitle {
+            font-size: 15px;
+            color: #94a3b8;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .cgs-ent-section {
+            margin-bottom: 48px;
+        }
+
+        .cgs-ent-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: #c4b5fd;
+            margin: 0 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+        }
+
+        .cgs-ent-section > p {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        /* Feature cards grid */
+        .cgs-ent-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .cgs-ent-grid--compact {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .cgs-ent-card {
+            --ent-accent: #6366f1;
+            background: rgba(15, 15, 25, 0.7);
+            border: 1px solid rgba(99, 102, 241, 0.12);
+            border-radius: 14px;
+            padding: 24px;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .cgs-ent-card:hover {
+            border-color: var(--ent-accent);
+            transform: translateY(-2px);
+        }
+
+        .cgs-ent-card-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .cgs-ent-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            color: #e0d9ff;
+            margin: 0 0 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .cgs-ent-card p {
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Feature list (vertical) */
+        .cgs-ent-feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .cgs-ent-feature {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 20px;
+            background: rgba(15, 15, 25, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.08);
+            border-radius: 12px;
+            transition: border-color 0.25s ease;
+        }
+        .cgs-ent-feature:hover {
+            border-color: rgba(99, 102, 241, 0.25);
+        }
+
+        .cgs-ent-feature-marker {
+            flex-shrink: 0;
+            width: 4px;
+            height: 100%;
+            min-height: 48px;
+            border-radius: 2px;
+        }
+
+        .cgs-ent-feature strong {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            color: #e0d9ff;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .cgs-ent-feature p {
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Industry tiles */
+        .cgs-ent-industry {
+            background: rgba(15, 15, 25, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .cgs-ent-industry:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .cgs-ent-industry-icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .cgs-ent-industry strong {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            color: #e0d9ff;
+            margin-bottom: 6px;
+        }
+
+        .cgs-ent-industry p {
+            font-size: 11px;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* CTA box */
+        .cgs-ent-cta-box {
+            text-align: center;
+            padding: 40px 32px;
+            background: rgba(15, 15, 25, 0.85);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 18px;
+        }
+
+        .cgs-ent-cta-box h2 {
+            border: none !important;
+            padding-bottom: 0 !important;
+            color: #34d399 !important;
+        }
+
+        .cgs-ent-cta-box p {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 16px;
+        }
+
+        .cgs-ent-cta-contact {
+            font-size: 14px !important;
+            color: #c4b5fd !important;
+        }
+
+        .cgs-ent-cta-contact a {
+            color: #34d399;
+            text-decoration: underline;
+            text-underline-offset: 3px;
         }
 
         /* ── Try Orus Editor Button ────────────────────────── */
@@ -6583,7 +7023,8 @@
         }
 
         @media (max-width: 768px) {
-            .cgs-editor-btn {
+            .cgs-editor-btn,
+            .cgs-enterprise-btn {
                 font-size: 12px;
                 padding: 10px 18px;
             }
@@ -6593,6 +7034,25 @@
                 max-width: none;
                 max-height: none;
                 border-radius: 0;
+            }
+            .cgs-ent-title {
+                font-size: 24px;
+            }
+            .cgs-ent-grid {
+                grid-template-columns: 1fr;
+            }
+            .cgs-ent-grid--compact {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .cgs-enterprise-page {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cgs-ent-grid--compact {
+                grid-template-columns: 1fr;
             }
         }
     `;v([f()],m.prototype,"_loading",2);v([f()],m.prototype,"_loadingMessage",2);v([f()],m.prototype,"_loadingProgress",2);v([f()],m.prototype,"_ready",2);v([f()],m.prototype,"_errorMessage",2);v([f()],m.prototype,"_activeSection",2);v([f()],m.prototype,"_threeCanvasReady",2);v([f()],m.prototype,"_aboutOpen",2);v([f()],m.prototype,"_editorOpen",2);v([f()],m.prototype,"_editorError",2);v([f()],m.prototype,"_currentLocale",2);v([f()],m.prototype,"_langDropdownOpen",2);v([f()],m.prototype,"_currentQuoteIndex",2);v([f()],m.prototype,"_quoteFading",2);v([f()],m.prototype,"_activeVideoIndex",2);v([T({type:String,attribute:"site-url"})],m.prototype,"siteUrl",2);m=v([Ye("orus-cgs-home")],m);const be={log:console.log.bind(console),warn:console.warn.bind(console),error:console.error.bind(console)};function nt(){const a=()=>{};console.debug=a,console.trace=a,console.dir=a,console.dirxml=a,console.table=a;try{console.clear()}catch{}be.log("%c Comet Game Studio %c Orus AI System %c","background: #6366f1; color: #fff; padding: 4px 8px; border-radius: 4px 0 0 4px; font-weight: 700;","background: #1e1b4b; color: #c4b5fd; padding: 4px 8px; border-radius: 0 4px 4px 0;",""),be.log("%chttps://www.cometgamestudio.com","color: #94a3b8; font-size: 11px;")}function ct(){document.addEventListener("keydown",a=>{a.ctrlKey&&!a.shiftKey&&(a.key==="u"||a.key==="U")&&a.preventDefault()},!0),document.addEventListener("contextmenu",a=>(a.preventDefault(),!1))}function dt(){typeof performance<"u"&&performance.clearResourceTimings&&setInterval(()=>{try{performance.clearResourceTimings()}catch{}},1e4)}nt();ct();dt();
