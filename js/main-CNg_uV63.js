@@ -1,34 +1,34 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))s(r);new MutationObserver(r=>{for(const n of r)if(n.type==="childList")for(const o of n.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&s(o)}).observe(document,{childList:!0,subtree:!0});function a(r){const n={};return r.integrity&&(n.integrity=r.integrity),r.referrerPolicy&&(n.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?n.credentials="include":r.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function s(r){if(r.ep)return;r.ep=!0;const n=a(r);fetch(r.href,n)}})();const Oe="modulepreload",Me=function(i){return"/cgs-public/"+i},ne={},ce=function(t,a,s){let r=Promise.resolve();if(a&&a.length>0){let o=function(u){return Promise.all(u.map(m=>Promise.resolve(m).then(g=>({status:"fulfilled",value:g}),g=>({status:"rejected",reason:g}))))};document.getElementsByTagName("link");const d=document.querySelector("meta[property=csp-nonce]"),l=d?.nonce||d?.getAttribute("nonce");r=o(a.map(u=>{if(u=Me(u),u in ne)return;ne[u]=!0;const m=u.endsWith(".css"),g=m?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${u}"]${g}`))return;const b=document.createElement("link");if(b.rel=m?"stylesheet":Oe,m||(b.as="script"),b.crossOrigin="",b.href=u,l&&b.setAttribute("nonce",l),document.head.appendChild(b),m)return new Promise((x,_)=>{b.addEventListener("load",x),b.addEventListener("error",()=>_(new Error(`Unable to preload CSS for ${u}`)))})}))}function n(o){const d=new Event("vite:preloadError",{cancelable:!0});if(d.payload=o,window.dispatchEvent(d),!d.defaultPrevented)throw o}return r.then(o=>{for(const d of o||[])d.status==="rejected"&&n(d.reason);return t().catch(n)})};/**
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))s(o);new MutationObserver(o=>{for(const n of o)if(n.type==="childList")for(const r of n.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&s(r)}).observe(document,{childList:!0,subtree:!0});function i(o){const n={};return o.integrity&&(n.integrity=o.integrity),o.referrerPolicy&&(n.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?n.credentials="include":o.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function s(o){if(o.ep)return;o.ep=!0;const n=i(o);fetch(o.href,n)}})();const Le="modulepreload",De=function(a){return"/cgs-public/"+a},ge={},ie=function(t,i,s){let o=Promise.resolve();if(i&&i.length>0){let r=function(p){return Promise.all(p.map(h=>Promise.resolve(h).then(u=>({status:"fulfilled",value:u}),u=>({status:"rejected",reason:u}))))};document.getElementsByTagName("link");const l=document.querySelector("meta[property=csp-nonce]"),d=l?.nonce||l?.getAttribute("nonce");o=r(i.map(p=>{if(p=De(p),p in ge)return;ge[p]=!0;const h=p.endsWith(".css"),u=h?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${p}"]${u}`))return;const b=document.createElement("link");if(b.rel=h?"stylesheet":Le,h||(b.as="script"),b.crossOrigin="",b.href=p,d&&b.setAttribute("nonce",d),document.head.appendChild(b),h)return new Promise((x,_)=>{b.addEventListener("load",x),b.addEventListener("error",()=>_(new Error(`Unable to preload CSS for ${p}`)))})}))}function n(r){const l=new Event("vite:preloadError",{cancelable:!0});if(l.payload=r,window.dispatchEvent(l),!l.defaultPrevented)throw r}return o.then(r=>{for(const l of r||[])l.status==="rejected"&&n(l.reason);return t().catch(n)})};/**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const G=globalThis,Z=G.ShadowRoot&&(G.ShadyCSS===void 0||G.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,ee=Symbol(),le=new WeakMap;let $e=class{constructor(t,a,s){if(this._$cssResult$=!0,s!==ee)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=a}get styleSheet(){let t=this.o;const a=this.t;if(Z&&t===void 0){const s=a!==void 0&&a.length===1;s&&(t=le.get(a)),t===void 0&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),s&&le.set(a,t))}return t}toString(){return this.cssText}};const Ee=i=>new $e(typeof i=="string"?i:i+"",void 0,ee),te=(i,...t)=>{const a=i.length===1?i[0]:t.reduce((s,r,n)=>s+(o=>{if(o._$cssResult$===!0)return o.cssText;if(typeof o=="number")return o;throw Error("Value passed to 'css' function must be a 'css' function result: "+o+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(r)+i[n+1],i[0]);return new $e(a,i,ee)},Le=(i,t)=>{if(Z)i.adoptedStyleSheets=t.map(a=>a instanceof CSSStyleSheet?a:a.styleSheet);else for(const a of t){const s=document.createElement("style"),r=G.litNonce;r!==void 0&&s.setAttribute("nonce",r),s.textContent=a.cssText,i.appendChild(s)}},de=Z?i=>i:i=>i instanceof CSSStyleSheet?(t=>{let a="";for(const s of t.cssRules)a+=s.cssText;return Ee(a)})(i):i;/**
+ */const W=globalThis,se=W.ShadowRoot&&(W.ShadyCSS===void 0||W.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,oe=Symbol(),he=new WeakMap;let Ce=class{constructor(t,i,s){if(this._$cssResult$=!0,s!==oe)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=i}get styleSheet(){let t=this.o;const i=this.t;if(se&&t===void 0){const s=i!==void 0&&i.length===1;s&&(t=he.get(i)),t===void 0&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),s&&he.set(i,t))}return t}toString(){return this.cssText}};const Re=a=>new Ce(typeof a=="string"?a:a+"",void 0,oe),re=(a,...t)=>{const i=a.length===1?a[0]:t.reduce((s,o,n)=>s+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(o)+a[n+1],a[0]);return new Ce(i,a,oe)},qe=(a,t)=>{if(se)a.adoptedStyleSheets=t.map(i=>i instanceof CSSStyleSheet?i:i.styleSheet);else for(const i of t){const s=document.createElement("style"),o=W.litNonce;o!==void 0&&s.setAttribute("nonce",o),s.textContent=i.cssText,a.appendChild(s)}},me=se?a=>a:a=>a instanceof CSSStyleSheet?(t=>{let i="";for(const s of t.cssRules)i+=s.cssText;return Re(i)})(a):a;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:De,defineProperty:Re,getOwnPropertyDescriptor:qe,getOwnPropertyNames:Ne,getOwnPropertySymbols:Ue,getPrototypeOf:Be}=Object,W=globalThis,pe=W.trustedTypes,Ge=pe?pe.emptyScript:"",Fe=W.reactiveElementPolyfillSupport,D=(i,t)=>i,H={toAttribute(i,t){switch(t){case Boolean:i=i?Ge:null;break;case Object:case Array:i=i==null?i:JSON.stringify(i)}return i},fromAttribute(i,t){let a=i;switch(t){case Boolean:a=i!==null;break;case Number:a=i===null?null:Number(i);break;case Object:case Array:try{a=JSON.parse(i)}catch{a=null}}return a}},ie=(i,t)=>!De(i,t),ue={attribute:!0,type:String,converter:H,reflect:!1,useDefault:!1,hasChanged:ie};Symbol.metadata??=Symbol("metadata"),W.litPropertyMetadata??=new WeakMap;let O=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,a=ue){if(a.state&&(a.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((a=Object.create(a)).wrapped=!0),this.elementProperties.set(t,a),!a.noAccessor){const s=Symbol(),r=this.getPropertyDescriptor(t,s,a);r!==void 0&&Re(this.prototype,t,r)}}static getPropertyDescriptor(t,a,s){const{get:r,set:n}=qe(this.prototype,t)??{get(){return this[a]},set(o){this[a]=o}};return{get:r,set(o){const d=r?.call(this);n?.call(this,o),this.requestUpdate(t,d,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??ue}static _$Ei(){if(this.hasOwnProperty(D("elementProperties")))return;const t=Be(this);t.finalize(),t.l!==void 0&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(D("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(D("properties"))){const a=this.properties,s=[...Ne(a),...Ue(a)];for(const r of s)this.createProperty(r,a[r])}const t=this[Symbol.metadata];if(t!==null){const a=litPropertyMetadata.get(t);if(a!==void 0)for(const[s,r]of a)this.elementProperties.set(s,r)}this._$Eh=new Map;for(const[a,s]of this.elementProperties){const r=this._$Eu(a,s);r!==void 0&&this._$Eh.set(r,a)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const a=[];if(Array.isArray(t)){const s=new Set(t.flat(1/0).reverse());for(const r of s)a.unshift(de(r))}else t!==void 0&&a.push(de(t));return a}static _$Eu(t,a){const s=a.attribute;return s===!1?void 0:typeof s=="string"?s:typeof t=="string"?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),this.renderRoot!==void 0&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,a=this.constructor.elementProperties;for(const s of a.keys())this.hasOwnProperty(s)&&(t.set(s,this[s]),delete this[s]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return Le(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,a,s){this._$AK(t,s)}_$ET(t,a){const s=this.constructor.elementProperties.get(t),r=this.constructor._$Eu(t,s);if(r!==void 0&&s.reflect===!0){const n=(s.converter?.toAttribute!==void 0?s.converter:H).toAttribute(a,s.type);this._$Em=t,n==null?this.removeAttribute(r):this.setAttribute(r,n),this._$Em=null}}_$AK(t,a){const s=this.constructor,r=s._$Eh.get(t);if(r!==void 0&&this._$Em!==r){const n=s.getPropertyOptions(r),o=typeof n.converter=="function"?{fromAttribute:n.converter}:n.converter?.fromAttribute!==void 0?n.converter:H;this._$Em=r;const d=o.fromAttribute(a,n.type);this[r]=d??this._$Ej?.get(r)??d,this._$Em=null}}requestUpdate(t,a,s,r=!1,n){if(t!==void 0){const o=this.constructor;if(r===!1&&(n=this[t]),s??=o.getPropertyOptions(t),!((s.hasChanged??ie)(n,a)||s.useDefault&&s.reflect&&n===this._$Ej?.get(t)&&!this.hasAttribute(o._$Eu(t,s))))return;this.C(t,a,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(t,a,{useDefault:s,reflect:r,wrapped:n},o){s&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,o??a??this[t]),n!==!0||o!==void 0)||(this._$AL.has(t)||(this.hasUpdated||s||(a=void 0),this._$AL.set(t,a)),r===!0&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(a){Promise.reject(a)}const t=this.scheduleUpdate();return t!=null&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[r,n]of this._$Ep)this[r]=n;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[r,n]of s){const{wrapped:o}=n,d=this[r];o!==!0||this._$AL.has(r)||d===void 0||this.C(r,void 0,n,d)}}let t=!1;const a=this._$AL;try{t=this.shouldUpdate(a),t?(this.willUpdate(a),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(a)):this._$EM()}catch(s){throw t=!1,this._$EM(),s}t&&this._$AE(a)}willUpdate(t){}_$AE(t){this._$EO?.forEach(a=>a.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(a=>this._$ET(a,this[a])),this._$EM()}updated(t){}firstUpdated(t){}};O.elementStyles=[],O.shadowRootOptions={mode:"open"},O[D("elementProperties")]=new Map,O[D("finalized")]=new Map,Fe?.({ReactiveElement:O}),(W.reactiveElementVersions??=[]).push("2.1.2");/**
+ */const{is:Ne,defineProperty:Ue,getOwnPropertyDescriptor:Ge,getOwnPropertyNames:Be,getOwnPropertySymbols:He,getPrototypeOf:Fe}=Object,Q=globalThis,be=Q.trustedTypes,je=be?be.emptyScript:"",We=Q.reactiveElementPolyfillSupport,q=(a,t)=>a,Y={toAttribute(a,t){switch(t){case Boolean:a=a?je:null;break;case Object:case Array:a=a==null?a:JSON.stringify(a)}return a},fromAttribute(a,t){let i=a;switch(t){case Boolean:i=a!==null;break;case Number:i=a===null?null:Number(a);break;case Object:case Array:try{i=JSON.parse(a)}catch{i=null}}return i}},ne=(a,t)=>!Ne(a,t),fe={attribute:!0,type:String,converter:Y,reflect:!1,useDefault:!1,hasChanged:ne};Symbol.metadata??=Symbol("metadata"),Q.litPropertyMetadata??=new WeakMap;let E=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,i=fe){if(i.state&&(i.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((i=Object.create(i)).wrapped=!0),this.elementProperties.set(t,i),!i.noAccessor){const s=Symbol(),o=this.getPropertyDescriptor(t,s,i);o!==void 0&&Ue(this.prototype,t,o)}}static getPropertyDescriptor(t,i,s){const{get:o,set:n}=Ge(this.prototype,t)??{get(){return this[i]},set(r){this[i]=r}};return{get:o,set(r){const l=o?.call(this);n?.call(this,r),this.requestUpdate(t,l,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??fe}static _$Ei(){if(this.hasOwnProperty(q("elementProperties")))return;const t=Fe(this);t.finalize(),t.l!==void 0&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(q("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(q("properties"))){const i=this.properties,s=[...Be(i),...He(i)];for(const o of s)this.createProperty(o,i[o])}const t=this[Symbol.metadata];if(t!==null){const i=litPropertyMetadata.get(t);if(i!==void 0)for(const[s,o]of i)this.elementProperties.set(s,o)}this._$Eh=new Map;for(const[i,s]of this.elementProperties){const o=this._$Eu(i,s);o!==void 0&&this._$Eh.set(o,i)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const i=[];if(Array.isArray(t)){const s=new Set(t.flat(1/0).reverse());for(const o of s)i.unshift(me(o))}else t!==void 0&&i.push(me(t));return i}static _$Eu(t,i){const s=i.attribute;return s===!1?void 0:typeof s=="string"?s:typeof t=="string"?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),this.renderRoot!==void 0&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,i=this.constructor.elementProperties;for(const s of i.keys())this.hasOwnProperty(s)&&(t.set(s,this[s]),delete this[s]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return qe(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,i,s){this._$AK(t,s)}_$ET(t,i){const s=this.constructor.elementProperties.get(t),o=this.constructor._$Eu(t,s);if(o!==void 0&&s.reflect===!0){const n=(s.converter?.toAttribute!==void 0?s.converter:Y).toAttribute(i,s.type);this._$Em=t,n==null?this.removeAttribute(o):this.setAttribute(o,n),this._$Em=null}}_$AK(t,i){const s=this.constructor,o=s._$Eh.get(t);if(o!==void 0&&this._$Em!==o){const n=s.getPropertyOptions(o),r=typeof n.converter=="function"?{fromAttribute:n.converter}:n.converter?.fromAttribute!==void 0?n.converter:Y;this._$Em=o;const l=r.fromAttribute(i,n.type);this[o]=l??this._$Ej?.get(o)??l,this._$Em=null}}requestUpdate(t,i,s,o=!1,n){if(t!==void 0){const r=this.constructor;if(o===!1&&(n=this[t]),s??=r.getPropertyOptions(t),!((s.hasChanged??ne)(n,i)||s.useDefault&&s.reflect&&n===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,s))))return;this.C(t,i,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(t,i,{useDefault:s,reflect:o,wrapped:n},r){s&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??i??this[t]),n!==!0||r!==void 0)||(this._$AL.has(t)||(this.hasUpdated||s||(i=void 0),this._$AL.set(t,i)),o===!0&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(i){Promise.reject(i)}const t=this.scheduleUpdate();return t!=null&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[o,n]of this._$Ep)this[o]=n;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[o,n]of s){const{wrapped:r}=n,l=this[o];r!==!0||this._$AL.has(o)||l===void 0||this.C(o,void 0,n,l)}}let t=!1;const i=this._$AL;try{t=this.shouldUpdate(i),t?(this.willUpdate(i),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(i)):this._$EM()}catch(s){throw t=!1,this._$EM(),s}t&&this._$AE(i)}willUpdate(t){}_$AE(t){this._$EO?.forEach(i=>i.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(i=>this._$ET(i,this[i])),this._$EM()}updated(t){}firstUpdated(t){}};E.elementStyles=[],E.shadowRootOptions={mode:"open"},E[q("elementProperties")]=new Map,E[q("finalized")]=new Map,We?.({ReactiveElement:E}),(Q.reactiveElementVersions??=[]).push("2.1.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const ae=globalThis,ge=i=>i,j=ae.trustedTypes,he=j?j.createPolicy("lit-html",{createHTML:i=>i}):void 0,_e="$lit$",k=`lit$${Math.random().toFixed(9).slice(2)}$`,ke="?"+k,He=`<${ke}>`,z=document,R=()=>z.createComment(""),q=i=>i===null||typeof i!="object"&&typeof i!="function",se=Array.isArray,je=i=>se(i)||typeof i?.[Symbol.iterator]=="function",Y=`[ 	
-\f\r]`,L=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,me=/-->/g,be=/>/g,S=RegExp(`>|${Y}(?:([^\\s"'>=/]+)(${Y}*=${Y}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),fe=/'/g,ve=/"/g,Ae=/^(?:script|style|textarea|title)$/i,We=i=>(t,...a)=>({_$litType$:i,strings:t,values:a}),c=We(1),M=Symbol.for("lit-noChange"),v=Symbol.for("lit-nothing"),ye=new WeakMap,T=z.createTreeWalker(z,129);function Se(i,t){if(!se(i)||!i.hasOwnProperty("raw"))throw Error("invalid template strings array");return he!==void 0?he.createHTML(t):t}const Ve=(i,t)=>{const a=i.length-1,s=[];let r,n=t===2?"<svg>":t===3?"<math>":"",o=L;for(let d=0;d<a;d++){const l=i[d];let u,m,g=-1,b=0;for(;b<l.length&&(o.lastIndex=b,m=o.exec(l),m!==null);)b=o.lastIndex,o===L?m[1]==="!--"?o=me:m[1]!==void 0?o=be:m[2]!==void 0?(Ae.test(m[2])&&(r=RegExp("</"+m[2],"g")),o=S):m[3]!==void 0&&(o=S):o===S?m[0]===">"?(o=r??L,g=-1):m[1]===void 0?g=-2:(g=o.lastIndex-m[2].length,u=m[1],o=m[3]===void 0?S:m[3]==='"'?ve:fe):o===ve||o===fe?o=S:o===me||o===be?o=L:(o=S,r=void 0);const x=o===S&&i[d+1].startsWith("/>")?" ":"";n+=o===L?l+He:g>=0?(s.push(u),l.slice(0,g)+_e+l.slice(g)+k+x):l+k+(g===-2?d:x)}return[Se(i,n+(i[a]||"<?>")+(t===2?"</svg>":t===3?"</math>":"")),s]};class N{constructor({strings:t,_$litType$:a},s){let r;this.parts=[];let n=0,o=0;const d=t.length-1,l=this.parts,[u,m]=Ve(t,a);if(this.el=N.createElement(u,s),T.currentNode=this.el.content,a===2||a===3){const g=this.el.content.firstChild;g.replaceWith(...g.childNodes)}for(;(r=T.nextNode())!==null&&l.length<d;){if(r.nodeType===1){if(r.hasAttributes())for(const g of r.getAttributeNames())if(g.endsWith(_e)){const b=m[o++],x=r.getAttribute(g).split(k),_=/([.?@])?(.*)/.exec(b);l.push({type:1,index:n,name:_[2],strings:x,ctor:_[1]==="."?Xe:_[1]==="?"?Qe:_[1]==="@"?Ke:V}),r.removeAttribute(g)}else g.startsWith(k)&&(l.push({type:6,index:n}),r.removeAttribute(g));if(Ae.test(r.tagName)){const g=r.textContent.split(k),b=g.length-1;if(b>0){r.textContent=j?j.emptyScript:"";for(let x=0;x<b;x++)r.append(g[x],R()),T.nextNode(),l.push({type:2,index:++n});r.append(g[b],R())}}}else if(r.nodeType===8)if(r.data===ke)l.push({type:2,index:n});else{let g=-1;for(;(g=r.data.indexOf(k,g+1))!==-1;)l.push({type:7,index:n}),g+=k.length-1}n++}}static createElement(t,a){const s=z.createElement("template");return s.innerHTML=t,s}}function E(i,t,a=i,s){if(t===M)return t;let r=s!==void 0?a._$Co?.[s]:a._$Cl;const n=q(t)?void 0:t._$litDirective$;return r?.constructor!==n&&(r?._$AO?.(!1),n===void 0?r=void 0:(r=new n(i),r._$AT(i,a,s)),s!==void 0?(a._$Co??=[])[s]=r:a._$Cl=r),r!==void 0&&(t=E(i,r._$AS(i,t.values),r,s)),t}class Ye{constructor(t,a){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=a}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:a},parts:s}=this._$AD,r=(t?.creationScope??z).importNode(a,!0);T.currentNode=r;let n=T.nextNode(),o=0,d=0,l=s[0];for(;l!==void 0;){if(o===l.index){let u;l.type===2?u=new B(n,n.nextSibling,this,t):l.type===1?u=new l.ctor(n,l.name,l.strings,this,t):l.type===6&&(u=new Je(n,this,t)),this._$AV.push(u),l=s[++d]}o!==l?.index&&(n=T.nextNode(),o++)}return T.currentNode=z,r}p(t){let a=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(t,s,a),a+=s.strings.length-2):s._$AI(t[a])),a++}}class B{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,a,s,r){this.type=2,this._$AH=v,this._$AN=void 0,this._$AA=t,this._$AB=a,this._$AM=s,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const a=this._$AM;return a!==void 0&&t?.nodeType===11&&(t=a.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,a=this){t=E(this,t,a),q(t)?t===v||t==null||t===""?(this._$AH!==v&&this._$AR(),this._$AH=v):t!==this._$AH&&t!==M&&this._(t):t._$litType$!==void 0?this.$(t):t.nodeType!==void 0?this.T(t):je(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==v&&q(this._$AH)?this._$AA.nextSibling.data=t:this.T(z.createTextNode(t)),this._$AH=t}$(t){const{values:a,_$litType$:s}=t,r=typeof s=="number"?this._$AC(t):(s.el===void 0&&(s.el=N.createElement(Se(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===r)this._$AH.p(a);else{const n=new Ye(r,this),o=n.u(this.options);n.p(a),this.T(o),this._$AH=n}}_$AC(t){let a=ye.get(t.strings);return a===void 0&&ye.set(t.strings,a=new N(t)),a}k(t){se(this._$AH)||(this._$AH=[],this._$AR());const a=this._$AH;let s,r=0;for(const n of t)r===a.length?a.push(s=new B(this.O(R()),this.O(R()),this,this.options)):s=a[r],s._$AI(n),r++;r<a.length&&(this._$AR(s&&s._$AB.nextSibling,r),a.length=r)}_$AR(t=this._$AA.nextSibling,a){for(this._$AP?.(!1,!0,a);t!==this._$AB;){const s=ge(t).nextSibling;ge(t).remove(),t=s}}setConnected(t){this._$AM===void 0&&(this._$Cv=t,this._$AP?.(t))}}class V{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,a,s,r,n){this.type=1,this._$AH=v,this._$AN=void 0,this.element=t,this.name=a,this._$AM=r,this.options=n,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=v}_$AI(t,a=this,s,r){const n=this.strings;let o=!1;if(n===void 0)t=E(this,t,a,0),o=!q(t)||t!==this._$AH&&t!==M,o&&(this._$AH=t);else{const d=t;let l,u;for(t=n[0],l=0;l<n.length-1;l++)u=E(this,d[s+l],a,l),u===M&&(u=this._$AH[l]),o||=!q(u)||u!==this._$AH[l],u===v?t=v:t!==v&&(t+=(u??"")+n[l+1]),this._$AH[l]=u}o&&!r&&this.j(t)}j(t){t===v?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class Xe extends V{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===v?void 0:t}}class Qe extends V{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==v)}}class Ke extends V{constructor(t,a,s,r,n){super(t,a,s,r,n),this.type=5}_$AI(t,a=this){if((t=E(this,t,a,0)??v)===M)return;const s=this._$AH,r=t===v&&s!==v||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,n=t!==v&&(s===v||r);r&&this.element.removeEventListener(this.name,this,s),n&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class Je{constructor(t,a,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=a,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(t){E(this,t)}}const Ze=ae.litHtmlPolyfillSupport;Ze?.(N,B),(ae.litHtmlVersions??=[]).push("3.3.2");const et=(i,t,a)=>{const s=a?.renderBefore??t;let r=s._$litPart$;if(r===void 0){const n=a?.renderBefore??null;s._$litPart$=r=new B(t.insertBefore(R(),n),n,void 0,a??{})}return r._$AI(i),r};/**
+ */const ce=globalThis,ve=a=>a,X=ce.trustedTypes,ye=X?X.createPolicy("lit-html",{createHTML:a=>a}):void 0,Te="$lit$",A=`lit$${Math.random().toFixed(9).slice(2)}$`,Ie="?"+A,Ve=`<${Ie}>`,M=document,N=()=>M.createComment(""),U=a=>a===null||typeof a!="object"&&typeof a!="function",le=Array.isArray,Ye=a=>le(a)||typeof a?.[Symbol.iterator]=="function",J=`[ 	
+\f\r]`,R=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,xe=/-->/g,we=/>/g,I=RegExp(`>|${J}(?:([^\\s"'>=/]+)(${J}*=${J}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`,"g"),$e=/'/g,_e=/"/g,ze=/^(?:script|style|textarea|title)$/i,Xe=a=>(t,...i)=>({_$litType$:a,strings:t,values:i}),c=Xe(1),L=Symbol.for("lit-noChange"),v=Symbol.for("lit-nothing"),ke=new WeakMap,z=M.createTreeWalker(M,129);function Pe(a,t){if(!le(a)||!a.hasOwnProperty("raw"))throw Error("invalid template strings array");return ye!==void 0?ye.createHTML(t):t}const Qe=(a,t)=>{const i=a.length-1,s=[];let o,n=t===2?"<svg>":t===3?"<math>":"",r=R;for(let l=0;l<i;l++){const d=a[l];let p,h,u=-1,b=0;for(;b<d.length&&(r.lastIndex=b,h=r.exec(d),h!==null);)b=r.lastIndex,r===R?h[1]==="!--"?r=xe:h[1]!==void 0?r=we:h[2]!==void 0?(ze.test(h[2])&&(o=RegExp("</"+h[2],"g")),r=I):h[3]!==void 0&&(r=I):r===I?h[0]===">"?(r=o??R,u=-1):h[1]===void 0?u=-2:(u=r.lastIndex-h[2].length,p=h[1],r=h[3]===void 0?I:h[3]==='"'?_e:$e):r===_e||r===$e?r=I:r===xe||r===we?r=R:(r=I,o=void 0);const x=r===I&&a[l+1].startsWith("/>")?" ":"";n+=r===R?d+Ve:u>=0?(s.push(p),d.slice(0,u)+Te+d.slice(u)+A+x):d+A+(u===-2?l:x)}return[Pe(a,n+(a[i]||"<?>")+(t===2?"</svg>":t===3?"</math>":"")),s]};class G{constructor({strings:t,_$litType$:i},s){let o;this.parts=[];let n=0,r=0;const l=t.length-1,d=this.parts,[p,h]=Qe(t,i);if(this.el=G.createElement(p,s),z.currentNode=this.el.content,i===2||i===3){const u=this.el.content.firstChild;u.replaceWith(...u.childNodes)}for(;(o=z.nextNode())!==null&&d.length<l;){if(o.nodeType===1){if(o.hasAttributes())for(const u of o.getAttributeNames())if(u.endsWith(Te)){const b=h[r++],x=o.getAttribute(u).split(A),_=/([.?@])?(.*)/.exec(b);d.push({type:1,index:n,name:_[2],strings:x,ctor:_[1]==="."?Je:_[1]==="?"?Ze:_[1]==="@"?et:K}),o.removeAttribute(u)}else u.startsWith(A)&&(d.push({type:6,index:n}),o.removeAttribute(u));if(ze.test(o.tagName)){const u=o.textContent.split(A),b=u.length-1;if(b>0){o.textContent=X?X.emptyScript:"";for(let x=0;x<b;x++)o.append(u[x],N()),z.nextNode(),d.push({type:2,index:++n});o.append(u[b],N())}}}else if(o.nodeType===8)if(o.data===Ie)d.push({type:2,index:n});else{let u=-1;for(;(u=o.data.indexOf(A,u+1))!==-1;)d.push({type:7,index:n}),u+=A.length-1}n++}}static createElement(t,i){const s=M.createElement("template");return s.innerHTML=t,s}}function D(a,t,i=a,s){if(t===L)return t;let o=s!==void 0?i._$Co?.[s]:i._$Cl;const n=U(t)?void 0:t._$litDirective$;return o?.constructor!==n&&(o?._$AO?.(!1),n===void 0?o=void 0:(o=new n(a),o._$AT(a,i,s)),s!==void 0?(i._$Co??=[])[s]=o:i._$Cl=o),o!==void 0&&(t=D(a,o._$AS(a,t.values),o,s)),t}class Ke{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,o=(t?.creationScope??M).importNode(i,!0);z.currentNode=o;let n=z.nextNode(),r=0,l=0,d=s[0];for(;d!==void 0;){if(r===d.index){let p;d.type===2?p=new H(n,n.nextSibling,this,t):d.type===1?p=new d.ctor(n,d.name,d.strings,this,t):d.type===6&&(p=new tt(n,this,t)),this._$AV.push(p),d=s[++l]}r!==d?.index&&(n=z.nextNode(),r++)}return z.currentNode=M,o}p(t){let i=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++}}class H{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,o){this.type=2,this._$AH=v,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return i!==void 0&&t?.nodeType===11&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=D(this,t,i),U(t)?t===v||t==null||t===""?(this._$AH!==v&&this._$AR(),this._$AH=v):t!==this._$AH&&t!==L&&this._(t):t._$litType$!==void 0?this.$(t):t.nodeType!==void 0?this.T(t):Ye(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==v&&U(this._$AH)?this._$AA.nextSibling.data=t:this.T(M.createTextNode(t)),this._$AH=t}$(t){const{values:i,_$litType$:s}=t,o=typeof s=="number"?this._$AC(t):(s.el===void 0&&(s.el=G.createElement(Pe(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===o)this._$AH.p(i);else{const n=new Ke(o,this),r=n.u(this.options);n.p(i),this.T(r),this._$AH=n}}_$AC(t){let i=ke.get(t.strings);return i===void 0&&ke.set(t.strings,i=new G(t)),i}k(t){le(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,o=0;for(const n of t)o===i.length?i.push(s=new H(this.O(N()),this.O(N()),this,this.options)):s=i[o],s._$AI(n),o++;o<i.length&&(this._$AR(s&&s._$AB.nextSibling,o),i.length=o)}_$AR(t=this._$AA.nextSibling,i){for(this._$AP?.(!1,!0,i);t!==this._$AB;){const s=ve(t).nextSibling;ve(t).remove(),t=s}}setConnected(t){this._$AM===void 0&&(this._$Cv=t,this._$AP?.(t))}}class K{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,o,n){this.type=1,this._$AH=v,this._$AN=void 0,this.element=t,this.name=i,this._$AM=o,this.options=n,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=v}_$AI(t,i=this,s,o){const n=this.strings;let r=!1;if(n===void 0)t=D(this,t,i,0),r=!U(t)||t!==this._$AH&&t!==L,r&&(this._$AH=t);else{const l=t;let d,p;for(t=n[0],d=0;d<n.length-1;d++)p=D(this,l[s+d],i,d),p===L&&(p=this._$AH[d]),r||=!U(p)||p!==this._$AH[d],p===v?t=v:t!==v&&(t+=(p??"")+n[d+1]),this._$AH[d]=p}r&&!o&&this.j(t)}j(t){t===v?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class Je extends K{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===v?void 0:t}}class Ze extends K{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==v)}}class et extends K{constructor(t,i,s,o,n){super(t,i,s,o,n),this.type=5}_$AI(t,i=this){if((t=D(this,t,i,0)??v)===L)return;const s=this._$AH,o=t===v&&s!==v||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,n=t!==v&&(s===v||o);o&&this.element.removeEventListener(this.name,this,s),n&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class tt{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(t){D(this,t)}}const it=ce.litHtmlPolyfillSupport;it?.(G,H),(ce.litHtmlVersions??=[]).push("3.3.2");const at=(a,t,i)=>{const s=i?.renderBefore??t;let o=s._$litPart$;if(o===void 0){const n=i?.renderBefore??null;s._$litPart$=o=new H(t.insertBefore(N(),n),n,void 0,i??{})}return o._$AI(a),o};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const re=globalThis;class I extends O{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const a=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=et(a,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return M}}I._$litElement$=!0,I.finalized=!0,re.litElementHydrateSupport?.({LitElement:I});const tt=re.litElementPolyfillSupport;tt?.({LitElement:I});(re.litElementVersions??=[]).push("4.2.2");/**
+ */const de=globalThis;class O extends E{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const i=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=at(i,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return L}}O._$litElement$=!0,O.finalized=!0,de.litElementHydrateSupport?.({LitElement:O});const st=de.litElementPolyfillSupport;st?.({LitElement:O});(de.litElementVersions??=[]).push("4.2.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Te=i=>(t,a)=>{a!==void 0?a.addInitializer(()=>{customElements.define(i,t)}):customElements.define(i,t)};/**
+ */const Oe=a=>(t,i)=>{i!==void 0?i.addInitializer(()=>{customElements.define(a,t)}):customElements.define(a,t)};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const it={attribute:!0,type:String,converter:H,reflect:!1,hasChanged:ie},at=(i=it,t,a)=>{const{kind:s,metadata:r}=a;let n=globalThis.litPropertyMetadata.get(r);if(n===void 0&&globalThis.litPropertyMetadata.set(r,n=new Map),s==="setter"&&((i=Object.create(i)).wrapped=!0),n.set(a.name,i),s==="accessor"){const{name:o}=a;return{set(d){const l=t.get.call(this);t.set.call(this,d),this.requestUpdate(o,l,i,!0,d)},init(d){return d!==void 0&&this.C(o,void 0,i,d),d}}}if(s==="setter"){const{name:o}=a;return function(d){const l=this[o];t.call(this,d),this.requestUpdate(o,l,i,!0,d)}}throw Error("Unsupported decorator location: "+s)};function A(i){return(t,a)=>typeof a=="object"?at(i,t,a):((s,r,n)=>{const o=r.hasOwnProperty(n);return r.constructor.createProperty(n,s),o?Object.getOwnPropertyDescriptor(r,n):void 0})(i,t,a)}/**
+ */const ot={attribute:!0,type:String,converter:Y,reflect:!1,hasChanged:ne},rt=(a=ot,t,i)=>{const{kind:s,metadata:o}=i;let n=globalThis.litPropertyMetadata.get(o);if(n===void 0&&globalThis.litPropertyMetadata.set(o,n=new Map),s==="setter"&&((a=Object.create(a)).wrapped=!0),n.set(i.name,a),s==="accessor"){const{name:r}=i;return{set(l){const d=t.get.call(this);t.set.call(this,l),this.requestUpdate(r,d,a,!0,l)},init(l){return l!==void 0&&this.C(r,void 0,a,l),l}}}if(s==="setter"){const{name:r}=i;return function(l){const d=this[r];t.call(this,l),this.requestUpdate(r,d,a,!0,l)}}throw Error("Unsupported decorator location: "+s)};function C(a){return(t,i)=>typeof i=="object"?rt(a,t,i):((s,o,n)=>{const r=o.hasOwnProperty(n);return o.constructor.createProperty(n,s),r?Object.getOwnPropertyDescriptor(o,n):void 0})(a,t,i)}/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function f(i){return A({...i,state:!0,attribute:!1})}const X=[{code:"en",name:"English",native:"English",flag:"🇬🇧"},{code:"tr",name:"Turkish",native:"Türkçe",flag:"🇹🇷"},{code:"de",name:"German",native:"Deutsch",flag:"🇩🇪"},{code:"fr",name:"French",native:"Français",flag:"🇫🇷"},{code:"es",name:"Spanish",native:"Español",flag:"🇪🇸"},{code:"it",name:"Italian",native:"Italiano",flag:"🇮🇹"},{code:"pt",name:"Portuguese",native:"Português",flag:"🇵🇹"},{code:"nl",name:"Dutch",native:"Nederlands",flag:"🇳🇱"},{code:"pl",name:"Polish",native:"Polski",flag:"🇵🇱"},{code:"ru",name:"Russian",native:"Русский",flag:"🇷🇺"},{code:"zh",name:"Chinese",native:"中文",flag:"🇨🇳"},{code:"ja",name:"Japanese",native:"日本語",flag:"🇯🇵"},{code:"ko",name:"Korean",native:"한국어",flag:"🇰🇷"},{code:"ar",name:"Arabic",native:"العربية",flag:"🇸🇦"},{code:"hi",name:"Hindi",native:"हिन्दी",flag:"🇮🇳"},{code:"sv",name:"Swedish",native:"Svenska",flag:"🇸🇪"},{code:"da",name:"Danish",native:"Dansk",flag:"🇩🇰"},{code:"fi",name:"Finnish",native:"Suomi",flag:"🇫🇮"},{code:"cs",name:"Czech",native:"Čeština",flag:"🇨🇿"},{code:"hu",name:"Hungarian",native:"Magyar",flag:"🇭🇺"},{code:"el",name:"Greek",native:"Ελληνικά",flag:"🇬🇷"},{code:"uk",name:"Ukrainian",native:"Українська",flag:"🇺🇦"},{code:"ro",name:"Romanian",native:"Română",flag:"🇷🇴"}];let C="en",xe=new Map,F={};const J=new Set;function e(i,t){return C==="en"?t:F[i]??t}function st(){return C}async function rt(i){if(i===C)return;if(i==="en"){C="en",F={},Q();return}const t=xe.get(i);if(t){C=i,F=t.translations,Q();return}try{const a=await fetch(`./locales/${encodeURIComponent(i)}.json`);if(!a.ok){console.warn(`[i18n] Locale file not found for "${i}" (HTTP ${a.status}). Using English.`);return}const s=await a.json(),r={locale:i,translations:s,loadedAt:Date.now()};xe.set(i,r),C=i,F=s,Q()}catch(a){console.warn(`[i18n] Failed to load locale "${i}":`,a)}}function Ce(i){return J.add(i),()=>{J.delete(i)}}function Q(){for(const i of J)try{i()}catch{}window.dispatchEvent(new CustomEvent("cgs-locale-changed",{detail:{locale:C}}))}var ot=Object.defineProperty,$=(i,t,a,s)=>{for(var r=void 0,n=i.length-1,o;n>=0;n--)(o=i[n])&&(r=o(t,a,r)||r);return r&&ot(t,a,r),r};const nt="13.0, 12.9, 12.8, 12.7, 12.6, 12.5, 12.4, 12.3, 12.2, 12.1, 12.0",K=[{tier:"8 GB VRAM"},{tier:"12 GB+ VRAM"},{tier:"23 GB+ VRAM"}];class w extends I{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.startTab="about",this.hideHomeBtn=!1,this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:7,eula:5,"third-party":5,safety:5,disclaimers:5},this._touchStartX=0,this._touchStartY=0,this._touchSwipeCandidate=!1,this._nextCard=()=>{if(this.currentCardIndex<this._currentTabCardCount-1)this.currentCardIndex=this.currentCardIndex+1;else{const t=this.TAB_ITEMS,a=t.findIndex(s=>s.id===this.activeTab);a<t.length-1&&(this.activeTab=t[a+1].id,this.currentCardIndex=0)}},this._prevCard=()=>{if(this.currentCardIndex>0)this.currentCardIndex=this.currentCardIndex-1;else{const t=this.TAB_ITEMS,a=t.findIndex(s=>s.id===this.activeTab);a>0&&(this.activeTab=t[a-1].id,this.currentCardIndex=this._tabCardCounts[this.activeTab]-1)}},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{if(this._touchSwipeCandidate=!1,!this.fullPage||t.touches.length!==1)return;const a=t.composedPath()[0]??t.target;!this._isCarouselTouchTarget(a)||this._isInteractiveTouchTarget(a)||(this._touchSwipeCandidate=!0,this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY)},this._onTouchEnd=t=>{if(!this.fullPage||!this._touchSwipeCandidate||t.changedTouches.length===0){this.isCardDragging=!1,this._touchSwipeCandidate=!1;return}const a=t.changedTouches[0].clientX-this._touchStartX,s=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,this._touchSwipeCandidate=!1,Math.abs(a)>Math.abs(s)&&Math.abs(a)>this.cardDragThreshold&&(a<0?this._nextCard():this._prevCard())},this._onTouchCancel=()=>{this.isCardDragging=!1,this._touchSwipeCandidate=!1},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const a=this.position||this._defaultPosition();this.dragStartPosX=a.x,this.dragStartPosY=a.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const a=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,r={x:this.dragStartPosX+a,y:this.dragStartPosY+s};this.position=r,this.dispatchEvent(new CustomEvent("position-changed",{detail:r}))}if(this.isResizing){const a=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,r={width:Math.max(500,this.resizeStartWidth+a),height:Math.max(400,this.resizeStartHeight+s)};this.size=r,this.dispatchEvent(new CustomEvent("size-changed",{detail:r}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1}}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}static{this.styles=te`
+ */function f(a){return C({...a,state:!0,attribute:!1})}const Z=[{code:"en",name:"English",native:"English",flag:"🇬🇧"},{code:"tr",name:"Turkish",native:"Türkçe",flag:"🇹🇷"},{code:"de",name:"German",native:"Deutsch",flag:"🇩🇪"},{code:"fr",name:"French",native:"Français",flag:"🇫🇷"},{code:"es",name:"Spanish",native:"Español",flag:"🇪🇸"},{code:"it",name:"Italian",native:"Italiano",flag:"🇮🇹"},{code:"pt",name:"Portuguese",native:"Português",flag:"🇵🇹"},{code:"nl",name:"Dutch",native:"Nederlands",flag:"🇳🇱"},{code:"pl",name:"Polish",native:"Polski",flag:"🇵🇱"},{code:"ru",name:"Russian",native:"Русский",flag:"🇷🇺"},{code:"zh",name:"Chinese",native:"中文",flag:"🇨🇳"},{code:"ja",name:"Japanese",native:"日本語",flag:"🇯🇵"},{code:"ko",name:"Korean",native:"한국어",flag:"🇰🇷"},{code:"ar",name:"Arabic",native:"العربية",flag:"🇸🇦"},{code:"hi",name:"Hindi",native:"हिन्दी",flag:"🇮🇳"},{code:"sv",name:"Swedish",native:"Svenska",flag:"🇸🇪"},{code:"da",name:"Danish",native:"Dansk",flag:"🇩🇰"},{code:"fi",name:"Finnish",native:"Suomi",flag:"🇫🇮"},{code:"cs",name:"Czech",native:"Čeština",flag:"🇨🇿"},{code:"hu",name:"Hungarian",native:"Magyar",flag:"🇭🇺"},{code:"el",name:"Greek",native:"Ελληνικά",flag:"🇬🇷"},{code:"uk",name:"Ukrainian",native:"Українська",flag:"🇺🇦"},{code:"ro",name:"Romanian",native:"Română",flag:"🇷🇴"}];let P="en",Se=new Map,V={};const ae=new Set;function e(a,t){return P==="en"?t:V[a]??t}function nt(){return P}async function ct(a){if(a===P)return;if(a==="en"){P="en",V={},ee();return}const t=Se.get(a);if(t){P=a,V=t.translations,ee();return}try{const i=await fetch(`./locales/${encodeURIComponent(a)}.json`);if(!i.ok){console.warn(`[i18n] Locale file not found for "${a}" (HTTP ${i.status}). Using English.`);return}const s=await i.json(),o={locale:a,translations:s,loadedAt:Date.now()};Se.set(a,o),P=a,V=s,ee()}catch(i){console.warn(`[i18n] Failed to load locale "${a}":`,i)}}function pe(a){return ae.add(a),()=>{ae.delete(a)}}function ee(){for(const a of ae)try{a()}catch{}window.dispatchEvent(new CustomEvent("cgs-locale-changed",{detail:{locale:P}}))}var lt=Object.defineProperty,S=(a,t,i,s)=>{for(var o=void 0,n=a.length-1,r;n>=0;n--)(r=a[n])&&(o=r(t,i,o)||o);return o&&lt(t,i,o),o};const dt="13.0, 12.9, 12.8, 12.7, 12.6, 12.5, 12.4, 12.3, 12.2, 12.1, 12.0",te=[{tier:"8 GB VRAM"},{tier:"12 GB+ VRAM"},{tier:"23 GB+ VRAM"}];class k extends O{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.startTab="about",this.hideHomeBtn=!1,this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:7,eula:5,"third-party":5,safety:5,disclaimers:5},this._touchStartX=0,this._touchStartY=0,this._touchSwipeCandidate=!1,this._nextCard=()=>{if(this.currentCardIndex<this._currentTabCardCount-1)this.currentCardIndex=this.currentCardIndex+1;else{const t=this.TAB_ITEMS,i=t.findIndex(s=>s.id===this.activeTab);i<t.length-1&&(this.activeTab=t[i+1].id,this.currentCardIndex=0)}},this._prevCard=()=>{if(this.currentCardIndex>0)this.currentCardIndex=this.currentCardIndex-1;else{const t=this.TAB_ITEMS,i=t.findIndex(s=>s.id===this.activeTab);i>0&&(this.activeTab=t[i-1].id,this.currentCardIndex=this._tabCardCounts[this.activeTab]-1)}},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{if(this._touchSwipeCandidate=!1,!this.fullPage||t.touches.length!==1)return;const i=t.composedPath()[0]??t.target;!this._isCarouselTouchTarget(i)||this._isInteractiveTouchTarget(i)||(this._touchSwipeCandidate=!0,this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY)},this._onTouchEnd=t=>{if(!this.fullPage||!this._touchSwipeCandidate||t.changedTouches.length===0){this.isCardDragging=!1,this._touchSwipeCandidate=!1;return}const i=t.changedTouches[0].clientX-this._touchStartX,s=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,this._touchSwipeCandidate=!1,Math.abs(i)>Math.abs(s)&&Math.abs(i)>this.cardDragThreshold&&(i<0?this._nextCard():this._prevCard())},this._onTouchCancel=()=>{this.isCardDragging=!1,this._touchSwipeCandidate=!1},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const i=this.position||this._defaultPosition();this.dragStartPosX=i.x,this.dragStartPosY=i.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const i=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,o={x:this.dragStartPosX+i,y:this.dragStartPosY+s};this.position=o,this.dispatchEvent(new CustomEvent("position-changed",{detail:o}))}if(this.isResizing){const i=t.clientX-this.dragStartX,s=t.clientY-this.dragStartY,o={width:Math.max(500,this.resizeStartWidth+i),height:Math.max(400,this.resizeStartHeight+s)};this.size=o,this.dispatchEvent(new CustomEvent("size-changed",{detail:o}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1}}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}static{this.styles=re`
     :host {
       display: block;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -1457,17 +1457,17 @@
       font-size: 11px;
       line-height: 1.6;
     }
-  `}connectedCallback(){super.connectedCallback(),this.activeTab=this.startTab,this._unlistenI18n=Ce(()=>this.requestUpdate()),globalThis.addEventListener("mousemove",this._onMouseMove),globalThis.addEventListener("mouseup",this._onMouseUp),globalThis.addEventListener("keydown",this._onKeyDown)}disconnectedCallback(){super.disconnectedCallback(),this._unlistenI18n?.(),globalThis.removeEventListener("mousemove",this._onMouseMove),globalThis.removeEventListener("mouseup",this._onMouseUp),globalThis.removeEventListener("keydown",this._onKeyDown)}willUpdate(t){t.has("activeTab")&&(this.currentCardIndex=0)}_eventElement(t){return t instanceof HTMLElement?t:t instanceof Node?t.parentElement:null}_isCarouselTouchTarget(t){return!!this._eventElement(t)?.closest(".about-content-carousel")}_isInteractiveTouchTarget(t){return!!this._eventElement(t)?.closest('button, a, details, summary, [role="tab"], [role="button"]')}_effectiveSize(){const t=Math.max(500,globalThis.innerWidth*.94),a=Math.max(400,globalThis.innerHeight*.92);return{width:Math.min(this.size.width,t),height:Math.min(this.size.height,a)}}_defaultPosition(){const{width:t,height:a}=this._effectiveSize();return{x:Math.max(20,(globalThis.innerWidth-t)/2),y:Math.max(20,(globalThis.innerHeight-a)/2)}}get BENCHMARK_TIERS(){return[{label:e("about.sysreq.tier1.label","Minimum Local Benchmark"),tier:K[0].tier,summary:e("about.sysreq.tier1.summary","Bootable local Orus for phi4-mini, Memory RAG, quiet queue work, and low-visual professional use."),fit:e("about.sysreq.tier1.fit","Best for solo admin, overnight categorization, validation, and text-first workflows.")},{label:e("about.sysreq.tier2.label","Professional Multimodal Baseline"),tier:K[1].tier,summary:e("about.sysreq.tier2.summary","Balanced tier for multimodal Orus with live vision, Orpheus TTS on tuned profiles, and practical day-to-day throughput."),fit:e("about.sysreq.tier2.fit","Best for legal, marketing, HR, business operations, research, and meeting-heavy roles.")},{label:e("about.sysreq.tier3.label","Prime Visual Studio Tier"),tier:K[2].tier,summary:e("about.sysreq.tier3.summary","Full Windows-native Orus stack including Orpheus, Whisper Large, SF3D, advanced visual workflows, and higher concurrency headroom."),fit:e("about.sysreq.tier3.fit","Best for creative direction, advanced 3D ideation, labs, enterprise demos, and high-concurrency sessions.")}]}get WORKLOAD_ARCHETYPES(){return[{icon:"📚",title:e("about.sysreq.arch1.title","Legal, Admin, HR, and Back-Office Operations"),audience:e("about.sysreq.arch1.audience","Contracts, policy review, spreadsheets, task extraction, outputs, and memory-backed casework."),activities:e("about.sysreq.arch1.activities","TaskChat, Categorizer, Processor, Validator, Outputs, Spreadsheet editing, Memory Lab, and overnight queue runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10 build 17763+ or Windows 11",fit:e("about.sysreq.arch1.min.fit","Text-first document work, quiet voice use, slower batch throughput."),notes:e("about.sysreq.arch1.min.notes","Use the text-focused or low-visual path. The 3D shell is optional for this workload.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch1.rec.fit","Comfortable multimodal document handling with Orpheus TTS and better queue depth."),notes:e("about.sysreq.arch1.rec.notes","This is the best all-round professional floor if you want voice, live vision, and document tools together.")}},{icon:"📈",title:e("about.sysreq.arch2.title","Business, Finance, Marketing, and Social Media"),audience:e("about.sysreq.arch2.audience","Research synthesis, meeting prep, campaign drafts, CRM-style memory recall, and multi-window guidance."),activities:e("about.sysreq.arch2.activities","Webber, Presenter, BrainStorm, Discord, Outputs, Voice Profiles, and live multimodal chat."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch2.min.fit","Capable of multimodal work, but with tighter concurrency and shorter comfortable sessions."),notes:e("about.sysreq.arch2.min.notes","Suitable if you want Orpheus voice and live vision, but not the heaviest 3D or advanced visual stacks.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch2.rec.fit","Smooth daily use across voice, research, planning, and client-facing flows."),notes:e("about.sysreq.arch2.rec.notes","A higher-VRAM card gives more room for simultaneous speech, vision, and retrieval without comfort drops.")}},{icon:"🔬",title:e("about.sysreq.arch3.title","Science, Audit, Research, and High-Context Knowledge Work"),audience:e("about.sysreq.arch3.audience","Long-form reading, evidence review, reasoning, synthesis, and structured retrieval against large source sets."),activities:e("about.sysreq.arch3.activities","High-context engine profiles, Defrag, Memory Lab, Webber, Presenter, and reasoning-heavy sessions."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch3.min.fit","Usable for careful high-context work with conservative concurrency."),notes:e("about.sysreq.arch3.min.notes","Expect tighter token budgets when voice and long-document reasoning are active together.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch3.rec.fit","Best for sustained high-context reasoning, deeper queues, and fewer context-trim compromises."),notes:e("about.sysreq.arch3.rec.notes","Prime-class hardware is where long-context work starts to feel comfortably professional instead of merely possible.")}},{icon:"🎨",title:e("about.sysreq.arch4.title","Creative Direction, Visual Design, and 3D Ideation"),audience:e("about.sysreq.arch4.audience","Visual command workflows, OBB, Living Machine, scene experimentation, and design-oriented narration."),activities:e("about.sysreq.arch4.activities","Visual command workflows, Boltzmann Brain, Living Machine, Webcam, Face Capture, visual themes, and scene-driven presentation."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch4.min.fit","Basic visual workflows and scene experimentation without the heaviest generation modules."),notes:e("about.sysreq.arch4.min.notes","Good for visual assistance and lighter 3D use. It is not the right floor for SF3D or video-heavy iteration.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch4.rec.fit","Comfortable visual command work, richer 3D scenes, and headroom for advanced visual modules."),notes:e("about.sysreq.arch4.rec.notes","Use Prime-class hardware if Orus is part of a real creative pipeline rather than occasional visual support.")}},{icon:"🎤",title:e("about.sysreq.arch5.title","Meetings, Teaching, Support, and Community Operations"),audience:e("about.sysreq.arch5.audience","Presenter sessions, meeting transcription, Teams or Discord support, multi-speaker capture, and guided walkthroughs."),activities:e("about.sysreq.arch5.activities","Meeting Mode, Presenter, Voice Profiles, per-app audio capture, Discord, and system dialogue."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch5.min.fit","Functional voice-centric workflows with moderate simultaneous capture and response pressure."),notes:e("about.sysreq.arch5.min.notes","This tier is viable, but real-time comfort improves materially as VRAM and RAM rise.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch5.rec.fit","Better for long meeting runs, cleaner voice overlap handling, and more resilient STT plus TTS coexistence."),notes:e("about.sysreq.arch5.rec.notes","Orpheus throughput is benchmarked at session start, so stronger GPUs usually translate directly into smoother live voice UX.")}},{icon:"🌙",title:e("about.sysreq.arch6.title","Solo Professionals and Overnight Batch Processing"),audience:e("about.sysreq.arch6.audience","Users who prefer slower unattended work over real-time presentation and can leave the machine running for queues."),activities:e("about.sysreq.arch6.activities","Categorizer, Processor, Validator, Output export, memory cleanup, and long unattended text-first runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch6.min.fit","The minimum local benchmark for patient, text-focused processing."),notes:e("about.sysreq.arch6.min.notes","This is the right bracket if you do not need the 3D shell and can tolerate slower TTS or lower concurrency.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch6.rec.fit","Much better queue throughput and fewer stalls once memory retrieval, voice, and exports overlap."),notes:e("about.sysreq.arch6.rec.notes","If Orus is running while you sleep or process long backlogs, extra VRAM buys predictability more than flashiness.")}},{icon:"🧪",title:e("about.sysreq.arch7.title","Full Orus Lab, Demo, and Studio Configuration"),audience:e("about.sysreq.arch7.audience","Users who want the widest feature envelope: multimodal, Orpheus, live vision, advanced visual workflows, and SF3D."),activities:e("about.sysreq.arch7.activities","Prime-tier end-to-end Orus with heavy voice, visuals, generation, and concurrent sessions."),minimum:{gpu:"23 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"Windows 11 on x64 preferred",fit:e("about.sysreq.arch7.min.fit","The practical floor for calling Orus a full-stack local studio rather than a trimmed workstation."),notes:e("about.sysreq.arch7.min.notes","This is where the heaviest visual and generation modules stop feeling compromised.")},recommended:{gpu:"24 GB to 32 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch7.rec.fit","Best for enterprise demos, creative labs, and all-feature usage with minimal negotiation between subsystems."),notes:e("about.sysreq.arch7.rec.notes","RTX 4090 and RTX 5090 class machines are the right target when Orus is being used as a primary workstation layer.")}}]}_renderRequirementSpecCard(t,a,s=!1){return c`
+  `}connectedCallback(){super.connectedCallback(),this.activeTab=this.startTab,this._unlistenI18n=pe(()=>this.requestUpdate()),globalThis.addEventListener("mousemove",this._onMouseMove),globalThis.addEventListener("mouseup",this._onMouseUp),globalThis.addEventListener("keydown",this._onKeyDown)}disconnectedCallback(){super.disconnectedCallback(),this._unlistenI18n?.(),globalThis.removeEventListener("mousemove",this._onMouseMove),globalThis.removeEventListener("mouseup",this._onMouseUp),globalThis.removeEventListener("keydown",this._onKeyDown)}willUpdate(t){t.has("activeTab")&&(this.currentCardIndex=0)}_eventElement(t){return t instanceof HTMLElement?t:t instanceof Node?t.parentElement:null}_isCarouselTouchTarget(t){return!!this._eventElement(t)?.closest(".about-content-carousel")}_isInteractiveTouchTarget(t){return!!this._eventElement(t)?.closest('button, a, details, summary, [role="tab"], [role="button"]')}_effectiveSize(){const t=Math.max(500,globalThis.innerWidth*.94),i=Math.max(400,globalThis.innerHeight*.92);return{width:Math.min(this.size.width,t),height:Math.min(this.size.height,i)}}_defaultPosition(){const{width:t,height:i}=this._effectiveSize();return{x:Math.max(20,(globalThis.innerWidth-t)/2),y:Math.max(20,(globalThis.innerHeight-i)/2)}}get BENCHMARK_TIERS(){return[{label:e("about.sysreq.tier1.label","Minimum Local Benchmark"),tier:te[0].tier,summary:e("about.sysreq.tier1.summary","Bootable local Orus for phi4-mini, Memory RAG, quiet queue work, and low-visual professional use."),fit:e("about.sysreq.tier1.fit","Best for solo admin, overnight categorization, validation, and text-first workflows.")},{label:e("about.sysreq.tier2.label","Professional Multimodal Baseline"),tier:te[1].tier,summary:e("about.sysreq.tier2.summary","Balanced tier for multimodal Orus with live vision, Orpheus TTS on tuned profiles, and practical day-to-day throughput."),fit:e("about.sysreq.tier2.fit","Best for legal, marketing, HR, business operations, research, and meeting-heavy roles.")},{label:e("about.sysreq.tier3.label","Prime Visual Studio Tier"),tier:te[2].tier,summary:e("about.sysreq.tier3.summary","Full Windows-native Orus stack including Orpheus, Whisper Large, SF3D, advanced visual workflows, and higher concurrency headroom."),fit:e("about.sysreq.tier3.fit","Best for creative direction, advanced 3D ideation, labs, enterprise demos, and high-concurrency sessions.")}]}get WORKLOAD_ARCHETYPES(){return[{icon:"📚",title:e("about.sysreq.arch1.title","Legal, Admin, HR, and Back-Office Operations"),audience:e("about.sysreq.arch1.audience","Contracts, policy review, spreadsheets, task extraction, outputs, and memory-backed casework."),activities:e("about.sysreq.arch1.activities","TaskChat, Categorizer, Processor, Validator, Outputs, Spreadsheet editing, Memory Lab, and overnight queue runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10 build 17763+ or Windows 11",fit:e("about.sysreq.arch1.min.fit","Text-first document work, quiet voice use, slower batch throughput."),notes:e("about.sysreq.arch1.min.notes","Use the text-focused or low-visual path. The 3D shell is optional for this workload.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch1.rec.fit","Comfortable multimodal document handling with Orpheus TTS and better queue depth."),notes:e("about.sysreq.arch1.rec.notes","This is the best all-round professional floor if you want voice, live vision, and document tools together.")}},{icon:"📈",title:e("about.sysreq.arch2.title","Business, Finance, Marketing, and Social Media"),audience:e("about.sysreq.arch2.audience","Research synthesis, meeting prep, campaign drafts, CRM-style memory recall, and multi-window guidance."),activities:e("about.sysreq.arch2.activities","Webber, Presenter, BrainStorm, Discord, Outputs, Voice Profiles, and live multimodal chat."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch2.min.fit","Capable of multimodal work, but with tighter concurrency and shorter comfortable sessions."),notes:e("about.sysreq.arch2.min.notes","Suitable if you want Orpheus voice and live vision, but not the heaviest 3D or advanced visual stacks.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch2.rec.fit","Smooth daily use across voice, research, planning, and client-facing flows."),notes:e("about.sysreq.arch2.rec.notes","A higher-VRAM card gives more room for simultaneous speech, vision, and retrieval without comfort drops.")}},{icon:"🔬",title:e("about.sysreq.arch3.title","Science, Audit, Research, and High-Context Knowledge Work"),audience:e("about.sysreq.arch3.audience","Long-form reading, evidence review, reasoning, synthesis, and structured retrieval against large source sets."),activities:e("about.sysreq.arch3.activities","High-context engine profiles, Defrag, Memory Lab, Webber, Presenter, and reasoning-heavy sessions."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch3.min.fit","Usable for careful high-context work with conservative concurrency."),notes:e("about.sysreq.arch3.min.notes","Expect tighter token budgets when voice and long-document reasoning are active together.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch3.rec.fit","Best for sustained high-context reasoning, deeper queues, and fewer context-trim compromises."),notes:e("about.sysreq.arch3.rec.notes","Prime-class hardware is where long-context work starts to feel comfortably professional instead of merely possible.")}},{icon:"🎨",title:e("about.sysreq.arch4.title","Creative Direction, Visual Design, and 3D Ideation"),audience:e("about.sysreq.arch4.audience","Visual command workflows, OBB, Living Machine, scene experimentation, and design-oriented narration."),activities:e("about.sysreq.arch4.activities","Visual command workflows, Boltzmann Brain, Living Machine, Webcam, Face Capture, visual themes, and scene-driven presentation."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch4.min.fit","Basic visual workflows and scene experimentation without the heaviest generation modules."),notes:e("about.sysreq.arch4.min.notes","Good for visual assistance and lighter 3D use. It is not the right floor for SF3D or video-heavy iteration.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch4.rec.fit","Comfortable visual command work, richer 3D scenes, and headroom for advanced visual modules."),notes:e("about.sysreq.arch4.rec.notes","Use Prime-class hardware if Orus is part of a real creative pipeline rather than occasional visual support.")}},{icon:"🎤",title:e("about.sysreq.arch5.title","Meetings, Teaching, Support, and Community Operations"),audience:e("about.sysreq.arch5.audience","Presenter sessions, meeting transcription, Teams or Discord support, multi-speaker capture, and guided walkthroughs."),activities:e("about.sysreq.arch5.activities","Meeting Mode, Presenter, Voice Profiles, per-app audio capture, Discord, and system dialogue."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch5.min.fit","Functional voice-centric workflows with moderate simultaneous capture and response pressure."),notes:e("about.sysreq.arch5.min.notes","This tier is viable, but real-time comfort improves materially as VRAM and RAM rise.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch5.rec.fit","Better for long meeting runs, cleaner voice overlap handling, and more resilient STT plus TTS coexistence."),notes:e("about.sysreq.arch5.rec.notes","Orpheus throughput is benchmarked at session start, so stronger GPUs usually translate directly into smoother live voice UX.")}},{icon:"🌙",title:e("about.sysreq.arch6.title","Solo Professionals and Overnight Batch Processing"),audience:e("about.sysreq.arch6.audience","Users who prefer slower unattended work over real-time presentation and can leave the machine running for queues."),activities:e("about.sysreq.arch6.activities","Categorizer, Processor, Validator, Output export, memory cleanup, and long unattended text-first runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch6.min.fit","The minimum local benchmark for patient, text-focused processing."),notes:e("about.sysreq.arch6.min.notes","This is the right bracket if you do not need the 3D shell and can tolerate slower TTS or lower concurrency.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch6.rec.fit","Much better queue throughput and fewer stalls once memory retrieval, voice, and exports overlap."),notes:e("about.sysreq.arch6.rec.notes","If Orus is running while you sleep or process long backlogs, extra VRAM buys predictability more than flashiness.")}},{icon:"🧪",title:e("about.sysreq.arch7.title","Full Orus Lab, Demo, and Studio Configuration"),audience:e("about.sysreq.arch7.audience","Users who want the widest feature envelope: multimodal, Orpheus, live vision, advanced visual workflows, and SF3D."),activities:e("about.sysreq.arch7.activities","Prime-tier end-to-end Orus with heavy voice, visuals, generation, and concurrent sessions."),minimum:{gpu:"23 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"Windows 11 on x64 preferred",fit:e("about.sysreq.arch7.min.fit","The practical floor for calling Orus a full-stack local studio rather than a trimmed workstation."),notes:e("about.sysreq.arch7.min.notes","This is where the heaviest visual and generation modules stop feeling compromised.")},recommended:{gpu:"24 GB to 32 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch7.rec.fit","Best for enterprise demos, creative labs, and all-feature usage with minimal negotiation between subsystems."),notes:e("about.sysreq.arch7.rec.notes","RTX 4090 and RTX 5090 class machines are the right target when Orus is being used as a primary workstation layer.")}}]}_renderRequirementSpecCard(t,i,s=!1){return c`
       <div class="requirements-spec-card ${s?"recommended":""}">
         <div class="requirements-spec-label">${t}</div>
         <ul>
-          <li><strong>${e("about.sysreq.spec.gpu","GPU")}:</strong> ${a.gpu}</li>
-          <li><strong>${e("about.sysreq.spec.ram","RAM")}:</strong> ${a.ram}</li>
-          <li><strong>${e("about.sysreq.spec.storage","Storage")}:</strong> ${a.storage}</li>
-          <li><strong>${e("about.sysreq.spec.os","OS")}:</strong> ${a.os}</li>
-          <li><strong>${e("about.sysreq.spec.best_for","Best For")}:</strong> ${a.fit}</li>
+          <li><strong>${e("about.sysreq.spec.gpu","GPU")}:</strong> ${i.gpu}</li>
+          <li><strong>${e("about.sysreq.spec.ram","RAM")}:</strong> ${i.ram}</li>
+          <li><strong>${e("about.sysreq.spec.storage","Storage")}:</strong> ${i.storage}</li>
+          <li><strong>${e("about.sysreq.spec.os","OS")}:</strong> ${i.os}</li>
+          <li><strong>${e("about.sysreq.spec.best_for","Best For")}:</strong> ${i.fit}</li>
         </ul>
-        <p class="requirements-spec-note">${a.notes}</p>
+        <p class="requirements-spec-note">${i.notes}</p>
       </div>
     `}_renderSystemRequirementsSection(){return c`
       <div class="requirements-shell">
@@ -1495,7 +1495,7 @@
         <div class="requirements-meta">
           <div class="requirements-meta-row"><strong>${e("about.sysreq.meta.platform_floor_label","Platform floor")}:</strong> ${e("about.sysreq.meta.platform_floor","x64 Windows 10 build 17763+ or Windows 11, DirectX 12, 8 GB VRAM, 16 GB RAM, and 15 GB free disk space. The installer currently warns when free space falls below 15 GB and is more comfortable at 25 GB+.")}</div>
           <div class="requirements-meta-row"><strong>${e("about.sysreq.meta.ai_stack_label","Windows-native AI stack")}:</strong> ${e("about.sysreq.meta.ai_stack","Orus runs through vLLM on Windows with SageAttention on supported RTX hardware and SDPA fallback elsewhere. Orpheus TTS is GPU-profiled at session start so smaller cards remain usable, but voice smoothness scales directly with measured throughput.")}</div>
-          <div class="requirements-meta-row"><strong>${e("about.sysreq.meta.cuda_label","CUDA toolkits")}:</strong> ${e("about.sysreq.meta.cuda","Supported toolkit range is")} ${nt}. ${e("about.sysreq.meta.cuda_suffix","Orus auto-detects installed CUDA toolkits and registers DLL directories at startup; packaged builds also ship their own CUDA-aligned runtime dependencies.")}</div>
+          <div class="requirements-meta-row"><strong>${e("about.sysreq.meta.cuda_label","CUDA toolkits")}:</strong> ${e("about.sysreq.meta.cuda","Supported toolkit range is")} ${dt}. ${e("about.sysreq.meta.cuda_suffix","Orus auto-detects installed CUDA toolkits and registers DLL directories at startup; packaged builds also ship their own CUDA-aligned runtime dependencies.")}</div>
         </div>
 
         <div class="requirements-archetypes">
@@ -1531,13 +1531,13 @@
             <span class="about-logo-text">Orus</span>
           </div>
           <div class="about-nav">
-            ${this.TAB_ITEMS.map(a=>c`
+            ${this.TAB_ITEMS.map(i=>c`
               <button
-                class="about-nav-btn ${this.activeTab===a.id?"active":""}"
-                @click=${()=>{this.activeTab=a.id}}
+                class="about-nav-btn ${this.activeTab===i.id?"active":""}"
+                @click=${()=>{this.activeTab=i.id}}
               >
-                <span class="about-nav-icon">${a.icon}</span>
-                <span class="about-nav-label">${a.label}</span>
+                <span class="about-nav-icon">${i.icon}</span>
+                <span class="about-nav-label">${i.label}</span>
               </button>
             `)}
           </div>
@@ -1554,7 +1554,7 @@
         <!-- Main content area -->
         <div class="about-main">
           <div class="about-header" @mousedown=${this.fullPage?void 0:this._onDragStart}>
-            <span class="about-header-title">${this.TAB_ITEMS.find(a=>a.id===this.activeTab)?.label??e("about_dialog.tab.about","About")}</span>
+            <span class="about-header-title">${this.TAB_ITEMS.find(i=>i.id===this.activeTab)?.label??e("about_dialog.tab.about","About")}</span>
             ${this.hideHomeBtn?"":c`<button
               class="about-home-btn-header"
               @click=${()=>this.dispatchEvent(new CustomEvent("navigate-home",{bubbles:!0,composed:!0}))}
@@ -1595,7 +1595,7 @@
         ${this.fullPage?"":c`<div class="resize-handle" @mousedown=${this._onResizeStart}></div>`}
       </div>
     `;return this.fullPage?t:c`
-      <div class="about-overlay" @click=${a=>{a.target.classList.contains("about-overlay")&&this.dispatchEvent(new CustomEvent("close"))}}>
+      <div class="about-overlay" @click=${i=>{i.target.classList.contains("about-overlay")&&this.dispatchEvent(new CustomEvent("close"))}}>
         ${t}
       </div>
     `}_renderAbout(){return c`
@@ -1991,7 +1991,7 @@
       <div class="about-arrow-row" role="navigation" aria-label="Slide navigation">
         <button
           class="about-nav-side-arrow"
-          @click=${a=>{a.stopPropagation(),this._prevCard()}}
+          @click=${i=>{i.stopPropagation(),this._prevCard()}}
           title="Previous slide"
           aria-label="Previous slide"
           tabindex="0"
@@ -1999,14 +1999,14 @@
         <div class="about-arrow-spacer" aria-hidden="true"></div>
         <button
           class="about-nav-side-arrow"
-          @click=${a=>{a.stopPropagation(),this._nextCard()}}
+          @click=${i=>{i.stopPropagation(),this._nextCard()}}
           title="Next slide"
           aria-label="Next slide"
           tabindex="0"
         >▶</button>
       </div>
       <div class="about-carousel-dots" role="tablist" aria-label="Slide indicator">
-        ${Array.from({length:t},(a,s)=>c`
+        ${Array.from({length:t},(i,s)=>c`
           <button
             class="about-carousel-dot ${s===this.currentCardIndex?"active":""}"
             @click=${()=>this._goToCard(s)}
@@ -3514,54 +3514,61 @@
            ${e("privacy.popup.contact_desc","For any questions regarding this privacy policy or to exercise your privacy rights, please contact Comet Game Studio Ltd at the support channels provided within the Software or at: cometgamestudio.com")}
          </p>
       </div>
-    `}}$([A({type:Boolean})],w.prototype,"open");$([A({type:Boolean,attribute:"full-page"})],w.prototype,"fullPage");$([A({type:Object})],w.prototype,"position");$([A({type:Object})],w.prototype,"size");$([A({type:String})],w.prototype,"startTab");$([A({type:Boolean,attribute:"hide-home-btn"})],w.prototype,"hideHomeBtn");$([f()],w.prototype,"activeTab");$([f()],w.prototype,"isDragging");$([f()],w.prototype,"isResizing");$([f()],w.prototype,"currentCardIndex");$([f()],w.prototype,"isCardDragging");customElements.get("orus-about-dialog")||customElements.define("orus-about-dialog",w);var ct=Object.defineProperty,lt=Object.getOwnPropertyDescriptor,oe=(i,t,a,s)=>{for(var r=s>1?void 0:s?lt(t,a):t,n=i.length-1,o;n>=0;n--)(o=i[n])&&(r=(s?o(t,a,r):o(r))||r);return s&&r&&ct(t,a,r),r};const p="images/iol",dt=[{id:"space",number:"01",title:"Into the Void",subtitle:"Space Exploration & Wormhole Arrival",description:"Emerge from a wormhole at the edge of known space. Scan for the rare mineral Numin, deploy extraction drones, and receive a distress message from fellow explorer Veni — setting you on an interstellar rescue mission.",image:`${p}/HighresScreenshot00034-Edit.jpg`,accent:"#60a5fa",icon:"🌌"},{id:"abola",number:"02",title:"Planet Abola",subtitle:"Yellow Barren Mountain · First Contact",description:"A planetary defence system traps you on an alien world. Discover crystal creatures that absorb seismic energy, fight hostile sentients, and forge an unexpected alliance. The crystals pulse with life — connected to something far deeper than you imagined.",image:`${p}/ScreenShot00024.png`,accent:"#f59e0b",icon:"🔶"},{id:"station",number:"03",title:"Station One",subtitle:"Orbital Recovery & Space Combat",description:"Recover at a deep-space station while alien pursuers close in. Compile intelligence for your nation, then transform mining lasers into weapons to defend against the alien threat before they can trace your homeworld.",image:`${p}/HighresScreenshot00002.png`,accent:"#ef4444",icon:"🛸"},{id:"sigar",number:"04",title:"Sigar Forest",subtitle:"Bioluminescent Wilderness · Hallucinations",description:"Track Veni's signal through a bioluminescent purple forest teeming with hostile life. Leeches poison you through your suit, triggering vivid hallucinations. A mysterious creature called Klarc guides you through the toxic haze as reality bends around you.",image:`${p}/HighresScreenshot00003.jpg`,accent:"#a78bfa",icon:"🌿"},{id:"rescue",number:"05",title:"The Rescue",subtitle:"Enemy Base Infiltration · Saving Veni",description:"Lure colossal turtle bosses toward the alien base as a distraction, then infiltrate to find Veni imprisoned and weakened. Extract her while defending against waves of returning enemies. But the mission isn't over — a light calls from the mountaintop.",image:`${p}/ScreenShot00052.png`,accent:"#22c55e",icon:"⚔️"},{id:"celestials",number:"06",title:"The Celestials",subtitle:"Timesphere · Cosmic Revelation",description:"Ascend to a mountaintop timesphere and communicate with ancient celestial beings. They reveal the cosmic connection between crystals, planets, and an alien race that threatens all life. Your mission evolves from rescue to galactic preservation.",image:`${p}/Art Pattern-18.jpg`,accent:"#e879f9",icon:"✨"},{id:"assault",number:"07",title:"The Final Assault",subtitle:"Crystal Weapon · Orbital Detonation",description:"Armed with a crystal-energy device from your nation, launch a daring orbital strike on the alien homeworld. The detonation poisons you, triggering a final communication from the celestials — they tell you to enter the black hole.",image:`${p}/Art Pattern-21.jpg`,accent:"#fb923c",icon:"💥"},{id:"islands",number:"08",title:"Islands of Life",subtitle:"Black Hole Traversal · Rebirth",description:"Traverse the Islands of Life — asteroid fields at the edge of a black hole pulsing with celestial essence. Your body dissolves but your mind persists. The celestials reconstruct you within the stream of time itself. To be continued in Islands of Time.",image:`${p}/Art Pattern-13.jpg`,accent:"#2dd4bf",icon:"🌀"}],pt=[{name:"Denid",role:"Protagonist · Space Explorer",description:"Agent 21523 of the Nation. A fearless explorer whose compassion for alien life forms sets him on a path far beyond a simple rescue mission. His connection to the celestial essence transforms him into something more than mortal.",image:`${p}/1.jpg`,accent:"#6366f1"},{name:"EYE",role:"AI Companion · Tactical Support",description:"Denid's floating AI companion — scanner, medic, pilot, and voice of reason. EYE processes alien biology, administers life-saving purifiers, and maintains ship systems. A second EYE copy accompanies planetary missions.",image:`${p}/HighresScreenshot00003.jpg`,accent:"#ef4444"},{name:"Veni",role:"Planetary Scientist · Lost Explorer",description:"A brilliant scientist who discovered the techno signature of an alien race and was captured investigating their planet. Her data and ship AI hold the keys to tracking the enemy across multiple star systems.",image:`${p}/ScreenShot00052.png`,accent:"#22c55e"},{name:"The Celestials",role:"Ancient Beings · Essence of the Planets",description:"Evolved beyond physical form, these beings exist within black holes, seeing through crystal essence spread across worlds. They communicate through visions and timespheres, seeking a mortal champion to save their offspring.",image:`${p}/Art Pattern-05.jpg`,accent:"#e879f9"}],ut=[{icon:"🥽",title:"Built for VR",description:"Full immersion with hand tracking, spatial audio, and 360° exploration across alien worlds.",accent:"#6366f1"},{icon:"🎭",title:"Cinematic Narrative",description:"Voice-acted storyline with branching decisions. Your choices shape alliances and outcomes.",accent:"#f59e0b"},{icon:"⚡",title:"Real-Time Combat",description:"Fast-paced combat with energy weapons, environmental hazards, and colossal alien creatures.",accent:"#ef4444"},{icon:"🧩",title:"Puzzle Mechanics",description:"Ship repair puzzles, crystal energy puzzles, and spatial navigation challenges in zero gravity.",accent:"#22c55e"},{icon:"🌍",title:"Multiple Worlds",description:"Explore barren deserts, bioluminescent forests, deep-space stations, and the interior of a black hole.",accent:"#a78bfa"},{icon:"🎵",title:"Original Score",description:"Cinematic soundtrack composed in-house, dynamically responding to exploration and combat intensity.",accent:"#2dd4bf"}];let U=class extends I{constructor(){super(...arguments),this._activeChapter=null,this._parallaxY=0,this._animFrameId=0}connectedCallback(){super.connectedCallback(),this._onScroll=this._onScroll.bind(this)}disconnectedCallback(){super.disconnectedCallback(),this._animFrameId&&cancelAnimationFrame(this._animFrameId)}firstUpdated(){const i=this.shadowRoot?.querySelector(".iol-scroll");i&&i.addEventListener("scroll",this._onScroll,{passive:!0}),this._initParticles()}_onScroll(i){const t=i.target;this._parallaxY=t.scrollTop*.3}async _initParticles(){const i=this.shadowRoot?.querySelector("#iol-particles");if(!i)return;const t=i.getContext("2d");if(!t)return;const a=()=>{i.width=i.clientWidth*Math.min(devicePixelRatio,2),i.height=i.clientHeight*Math.min(devicePixelRatio,2)};a(),new ResizeObserver(a).observe(i);const s=[],r=60;for(let o=0;o<r;o++)s.push({x:Math.random()*i.width,y:Math.random()*i.height,vx:(Math.random()-.5)*.4,vy:-Math.random()*.3-.1,size:Math.random()*3+1,hue:200+Math.random()*120,alpha:Math.random()*.6+.2,pulse:Math.random()*Math.PI*2});const n=()=>{if(this._animFrameId=requestAnimationFrame(n),!document.hidden){t.clearRect(0,0,i.width,i.height);for(const o of s){o.x+=o.vx,o.y+=o.vy,o.pulse+=.02;const d=o.alpha*(.5+.5*Math.sin(o.pulse));o.y<-10&&(o.y=i.height+10,o.x=Math.random()*i.width),o.x<-10&&(o.x=i.width+10),o.x>i.width+10&&(o.x=-10);const l=t.createRadialGradient(o.x,o.y,0,o.x,o.y,o.size*4);l.addColorStop(0,`hsla(${o.hue}, 80%, 70%, ${d})`),l.addColorStop(1,`hsla(${o.hue}, 80%, 70%, 0)`),t.fillStyle=l,t.beginPath(),t.arc(o.x,o.y,o.size*4,0,Math.PI*2),t.fill(),t.fillStyle=`hsla(${o.hue}, 90%, 85%, ${d*1.5})`,t.beginPath(),t.arc(o.x,o.y,o.size,0,Math.PI*2),t.fill()}}};n()}_toggleChapter(i){this._activeChapter=this._activeChapter===i?null:i}_dispatchNavigateHome(){this.dispatchEvent(new CustomEvent("navigate-home",{bubbles:!0,composed:!0}))}render(){return c`
+    `}}S([C({type:Boolean})],k.prototype,"open");S([C({type:Boolean,attribute:"full-page"})],k.prototype,"fullPage");S([C({type:Object})],k.prototype,"position");S([C({type:Object})],k.prototype,"size");S([C({type:String})],k.prototype,"startTab");S([C({type:Boolean,attribute:"hide-home-btn"})],k.prototype,"hideHomeBtn");S([f()],k.prototype,"activeTab");S([f()],k.prototype,"isDragging");S([f()],k.prototype,"isResizing");S([f()],k.prototype,"currentCardIndex");S([f()],k.prototype,"isCardDragging");customElements.get("orus-about-dialog")||customElements.define("orus-about-dialog",k);var pt=Object.defineProperty,ut=Object.getOwnPropertyDescriptor,ue=(a,t,i,s)=>{for(var o=s>1?void 0:s?ut(t,i):t,n=a.length-1,r;n>=0;n--)(r=a[n])&&(o=(s?r(t,i,o):r(o))||o);return s&&o&&pt(t,i,o),o};const g="images/iol",gt=[{id:"space",number:"01",title:"Into the Void",subtitle:"Space Exploration & Wormhole Arrival",description:"Emerge from a wormhole at the edge of known space. Scan for the rare mineral Numin, deploy extraction drones, and receive a distress message from fellow explorer Veni — setting you on an interstellar rescue mission.",image:`${g}/HighresScreenshot00034-Edit.jpg`,accent:"#60a5fa",icon:"🌌"},{id:"abola",number:"02",title:"Planet Abola",subtitle:"Yellow Barren Mountain · First Contact",description:"A planetary defence system traps you on an alien world. Discover crystal creatures that absorb seismic energy, fight hostile sentients, and forge an unexpected alliance. The crystals pulse with life — connected to something far deeper than you imagined.",image:`${g}/ScreenShot00024.png`,accent:"#f59e0b",icon:"🔶"},{id:"station",number:"03",title:"Station One",subtitle:"Orbital Recovery & Space Combat",description:"Recover at a deep-space station while alien pursuers close in. Compile intelligence for your nation, then transform mining lasers into weapons to defend against the alien threat before they can trace your homeworld.",image:`${g}/HighresScreenshot00002.png`,accent:"#ef4444",icon:"🛸"},{id:"sigar",number:"04",title:"Sigar Forest",subtitle:"Bioluminescent Wilderness · Hallucinations",description:"Track Veni's signal through a bioluminescent purple forest teeming with hostile life. Leeches poison you through your suit, triggering vivid hallucinations. A mysterious creature called Klarc guides you through the toxic haze as reality bends around you.",image:`${g}/HighresScreenshot00003.jpg`,accent:"#a78bfa",icon:"🌿"},{id:"rescue",number:"05",title:"The Rescue",subtitle:"Enemy Base Infiltration · Saving Veni",description:"Lure colossal turtle bosses toward the alien base as a distraction, then infiltrate to find Veni imprisoned and weakened. Extract her while defending against waves of returning enemies. But the mission isn't over — a light calls from the mountaintop.",image:`${g}/ScreenShot00052.png`,accent:"#22c55e",icon:"⚔️"},{id:"celestials",number:"06",title:"The Celestials",subtitle:"Timesphere · Cosmic Revelation",description:"Ascend to a mountaintop timesphere and communicate with ancient celestial beings. They reveal the cosmic connection between crystals, planets, and an alien race that threatens all life. Your mission evolves from rescue to galactic preservation.",image:`${g}/Art Pattern-18.jpg`,accent:"#e879f9",icon:"✨"},{id:"assault",number:"07",title:"The Final Assault",subtitle:"Crystal Weapon · Orbital Detonation",description:"Armed with a crystal-energy device from your nation, launch a daring orbital strike on the alien homeworld. The detonation poisons you, triggering a final communication from the celestials — they tell you to enter the black hole.",image:`${g}/Art Pattern-21.jpg`,accent:"#fb923c",icon:"💥"},{id:"islands",number:"08",title:"Islands of Life",subtitle:"Black Hole Traversal · Rebirth",description:"Traverse the Islands of Life — asteroid fields at the edge of a black hole pulsing with celestial essence. Your body dissolves but your mind persists. The celestials reconstruct you within the stream of time itself. To be continued in Islands of Time.",image:`${g}/Art Pattern-13.jpg`,accent:"#2dd4bf",icon:"🌀"}],ht=[{name:"Denid",role:"Protagonist · Space Explorer",description:"Agent 21523 of the Nation. A fearless explorer whose compassion for alien life forms sets him on a path far beyond a simple rescue mission. His connection to the celestial essence transforms him into something more than mortal.",image:`${g}/1.jpg`,accent:"#6366f1"},{name:"EYE",role:"AI Companion · Tactical Support",description:"Denid's floating AI companion — scanner, medic, pilot, and voice of reason. EYE processes alien biology, administers life-saving purifiers, and maintains ship systems. A second EYE copy accompanies planetary missions.",image:`${g}/HighresScreenshot00003.jpg`,accent:"#ef4444"},{name:"Veni",role:"Planetary Scientist · Lost Explorer",description:"A brilliant scientist who discovered the techno signature of an alien race and was captured investigating their planet. Her data and ship AI hold the keys to tracking the enemy across multiple star systems.",image:`${g}/ScreenShot00052.png`,accent:"#22c55e"},{name:"The Celestials",role:"Ancient Beings · Essence of the Planets",description:"Evolved beyond physical form, these beings exist within black holes, seeing through crystal essence spread across worlds. They communicate through visions and timespheres, seeking a mortal champion to save their offspring.",image:`${g}/Art Pattern-05.jpg`,accent:"#e879f9"}],mt=[{icon:"🥽",title:"Built for VR",description:"Full immersion with hand tracking, spatial audio, and 360° exploration across alien worlds.",accent:"#6366f1"},{icon:"🎭",title:"Cinematic Narrative",description:"Voice-acted storyline with branching decisions. Your choices shape alliances and outcomes.",accent:"#f59e0b"},{icon:"⚡",title:"Real-Time Combat",description:"Fast-paced combat with energy weapons, environmental hazards, and colossal alien creatures.",accent:"#ef4444"},{icon:"🧩",title:"Puzzle Mechanics",description:"Ship repair puzzles, crystal energy puzzles, and spatial navigation challenges in zero gravity.",accent:"#22c55e"},{icon:"🌍",title:"Multiple Worlds",description:"Explore barren deserts, bioluminescent forests, deep-space stations, and the interior of a black hole.",accent:"#a78bfa"},{icon:"🎵",title:"Original Score",description:"Cinematic soundtrack composed in-house, dynamically responding to exploration and combat intensity.",accent:"#2dd4bf"}];let B=class extends O{constructor(){super(...arguments),this._activeChapter=null,this._parallaxY=0,this._animFrameId=0,this._unlistenI18n=null,this._scrollObserver=null,this._threeCleanup=null}connectedCallback(){super.connectedCallback(),this._onScroll=this._onScroll.bind(this),this._unlistenI18n=pe(()=>this.requestUpdate())}disconnectedCallback(){super.disconnectedCallback(),this._animFrameId&&cancelAnimationFrame(this._animFrameId),this._unlistenI18n?.(),this._scrollObserver?.disconnect(),this._threeCleanup?.()}firstUpdated(){const a=this.shadowRoot?.querySelector(".iol-scroll");a&&a.addEventListener("scroll",this._onScroll,{passive:!0}),this._initCrystalScene(),this._initScrollReveal()}_onScroll(a){const t=a.target;this._parallaxY=t.scrollTop*.3}async _initCrystalScene(){const a=this.shadowRoot?.querySelector("#iol-crystal-scene");if(!a){this._initCanvasParticles();return}try{const t=await ie(()=>import("./three.module-CIzvuMnW.js"),[]),i=a.clientWidth,s=a.clientHeight,o=Math.min(devicePixelRatio,2),n=new t.Scene,r=new t.PerspectiveCamera(60,i/s,.1,100);r.position.z=20;const l=new t.WebGLRenderer({alpha:!0,antialias:!0});l.setSize(i,s),l.setPixelRatio(o),l.setClearColor(0,0),a.appendChild(l.domElement);const d=[],p=20,h=new t.OctahedronGeometry(1,0);for(let $=0;$<p;$++){const y=.6+Math.random()*.2,Me=new t.MeshPhongMaterial({color:new t.Color().setHSL(y,.7,.5),emissive:new t.Color().setHSL(y,.8,.15),shininess:100,transparent:!0,opacity:.55+Math.random()*.35}),Ee=.25+Math.random()*.65,T=new t.Mesh(h,Me);T.position.set((Math.random()-.5)*30,(Math.random()-.5)*20,(Math.random()-.5)*10),T.rotation.set(Math.random()*Math.PI,Math.random()*Math.PI,0),T.scale.setScalar(Ee),T.userData={rx:(Math.random()-.5)*.008,ry:(Math.random()-.5)*.008,floatSpd:.3+Math.random()*.5,floatOff:Math.random()*Math.PI*2,baseY:T.position.y},n.add(T),d.push(T)}n.add(new t.AmbientLight(1710654,.5));const u=new t.PointLight(6514417,1.5,40);u.position.set(-8,5,10),n.add(u);const b=new t.PointLight(10980346,1.2,40);b.position.set(8,-3,8),n.add(b);const x=new t.PointLight(3003583,.8,30);x.position.set(0,8,5),n.add(x);let _=0;const F=()=>{if(this._animFrameId=requestAnimationFrame(F),!document.hidden){_+=.016;for(const $ of d){const y=$.userData;$.rotation.x+=y.rx,$.rotation.y+=y.ry,$.position.y=y.baseY+Math.sin(_*y.floatSpd+y.floatOff)*.5}r.position.x=Math.sin(_*.1)*.5,r.position.y=Math.cos(_*.08)*.3,l.render(n,r)}};F();const j=new ResizeObserver(()=>{const $=a.clientWidth,y=a.clientHeight;$&&y&&(r.aspect=$/y,r.updateProjectionMatrix(),l.setSize($,y))});j.observe(a),this._threeCleanup=()=>{j.disconnect(),l.dispose(),h.dispose();for(const $ of d)$.material.dispose();l.domElement.parentNode&&l.domElement.parentNode.removeChild(l.domElement)}}catch{this._initCanvasParticles()}}async _initCanvasParticles(){const a=this.shadowRoot?.querySelector("#iol-crystal-scene");if(!a)return;const t=document.createElement("canvas");t.style.cssText="position:absolute;inset:0;width:100%;height:100%;",a.appendChild(t);const i=t.getContext("2d");if(!i)return;const s=()=>{t.width=t.clientWidth*Math.min(devicePixelRatio,2),t.height=t.clientHeight*Math.min(devicePixelRatio,2)};s(),new ResizeObserver(s).observe(t);const o=[];for(let r=0;r<60;r++)o.push({x:Math.random()*t.width,y:Math.random()*t.height,vx:(Math.random()-.5)*.4,vy:-Math.random()*.3-.1,size:Math.random()*3+1,hue:200+Math.random()*120,alpha:Math.random()*.6+.2,pulse:Math.random()*Math.PI*2});const n=()=>{if(this._animFrameId=requestAnimationFrame(n),!document.hidden){i.clearRect(0,0,t.width,t.height);for(const r of o){r.x+=r.vx,r.y+=r.vy,r.pulse+=.02;const l=r.alpha*(.5+.5*Math.sin(r.pulse));r.y<-10&&(r.y=t.height+10,r.x=Math.random()*t.width),r.x<-10&&(r.x=t.width+10),r.x>t.width+10&&(r.x=-10);const d=i.createRadialGradient(r.x,r.y,0,r.x,r.y,r.size*4);d.addColorStop(0,`hsla(${r.hue}, 80%, 70%, ${l})`),d.addColorStop(1,`hsla(${r.hue}, 80%, 70%, 0)`),i.fillStyle=d,i.beginPath(),i.arc(r.x,r.y,r.size*4,0,Math.PI*2),i.fill(),i.fillStyle=`hsla(${r.hue}, 90%, 85%, ${l*1.5})`,i.beginPath(),i.arc(r.x,r.y,r.size,0,Math.PI*2),i.fill()}}};n()}_initScrollReveal(){const a=this.shadowRoot?.querySelectorAll(".iol-reveal");if(a?.length){this._scrollObserver=new IntersectionObserver(t=>{for(const i of t)i.isIntersecting&&(i.target.classList.add("iol-reveal--visible"),this._scrollObserver?.unobserve(i.target))},{root:this.shadowRoot?.querySelector(".iol-scroll"),threshold:.08});for(const t of a)this._scrollObserver.observe(t)}}_toggleChapter(a){this._activeChapter=this._activeChapter===a?null:a}_dispatchNavigateHome(){this.dispatchEvent(new CustomEvent("navigate-home",{bubbles:!0,composed:!0}))}render(){return c`
             <div class="iol-scroll">
-                <!-- Particle Canvas Background -->
-                <canvas id="iol-particles" class="iol-particles" aria-hidden="true"></canvas>
+                <!-- Crystal Scene Background (Three.js + canvas fallback) -->
+                <div id="iol-crystal-scene" class="iol-crystal-scene" aria-hidden="true"></div>
 
                 <!-- Fractal art corner decorations -->
                 <div class="iol-corner-art iol-corner-art--tl" aria-hidden="true"
-                     style="background-image: url('${p}/Art Pattern-06.jpg');"></div>
+                     style="background-image: url('${g}/Art Pattern-06.jpg');"></div>
                 <div class="iol-corner-art iol-corner-art--tr" aria-hidden="true"
-                     style="background-image: url('${p}/Art Pattern-07.jpg');"></div>
+                     style="background-image: url('${g}/Art Pattern-07.jpg');"></div>
 
                 <!-- ═══════════ HERO SECTION ═══════════ -->
                 <section class="iol-hero" style="--parallax-y: ${this._parallaxY}px;">
-                    <div class="iol-hero-bg" style="background-image: url('${p}/HighresScreenshot00003.jpg');" aria-hidden="true"></div>
+                    <div class="iol-hero-bg" style="background-image: url('${g}/HighresScreenshot00003.jpg');" aria-hidden="true"></div>
                     <div class="iol-hero-overlay" aria-hidden="true"></div>
-                    <div class="iol-hero-pattern" style="background-image: url('${p}/Art Pattern-09.jpg');" aria-hidden="true"></div>
+                    <div class="iol-hero-pattern" style="background-image: url('${g}/Art Pattern-09.jpg');" aria-hidden="true"></div>
                     <div class="iol-hero-content">
-                        <div class="iol-hero-badge">Comet Game Studio Presents</div>
+                        <div class="iol-hero-badge">${e("iol.hero.badge","Comet Game Studio Presents")}</div>
                         <h1 class="iol-hero-title">
-                            <span class="iol-hero-title-main">Islands of Life</span>
-                            <span class="iol-hero-title-sub">A Cinematic VR Adventure</span>
+                            <span class="iol-hero-title-main">${e("iol.hero.title","Islands of Life")}</span>
+                            <span class="iol-hero-title-sub">${e("iol.hero.subtitle","A Cinematic VR Adventure")}</span>
                         </h1>
                         <p class="iol-hero-tagline">
-                            Across alien worlds, through bioluminescent forests and the heart of a black hole —
-                            one explorer's rescue mission becomes a cosmic odyssey.
+                            ${e("iol.hero.tagline","Across alien worlds, through bioluminescent forests and the heart of a black hole — one explorer's rescue mission becomes a cosmic odyssey.")}
                         </p>
                         <div class="iol-hero-actions">
-                            <button class="iol-btn iol-btn--primary" type="button" disabled>
-                                🥽 Coming to VR — Wishlist Soon
+                            <button class="iol-btn iol-btn--primary" type="button"
+                                    ?disabled=${!0}
+                                    @click=${()=>{}}>
+                                🥽 ${e("iol.hero.wishlist","Coming to VR — Wishlist Soon")}
                             </button>
                             <button class="iol-btn iol-btn--secondary" type="button"
                                     @click=${()=>{this.shadowRoot?.querySelector(".iol-chapters")?.scrollIntoView({behavior:"smooth"})}}>
-                                Explore the Story ↓
+                                ${e("iol.hero.explore","Explore the Story")} ↓
                             </button>
                         </div>
                         <div class="iol-hero-platforms">
-                            <span class="iol-platform-badge">Meta Quest</span>
-                            <span class="iol-platform-badge">SteamVR</span>
-                            <span class="iol-platform-badge">PlayStation VR2</span>
+                            <span class="iol-platform-badge"
+                                  @click=${()=>{}}
+                                  style="cursor:${"default"};">Meta Quest</span>
+                            <span class="iol-platform-badge"
+                                  @click=${()=>{}}
+                                  style="cursor:${"default"};">SteamVR</span>
+                            <span class="iol-platform-badge"
+                                  @click=${()=>{}}
+                                  style="cursor:${"default"};">PlayStation VR2</span>
                         </div>
                     </div>
                 </section>
 
                 <!-- ═══════════ STORY SYNOPSIS ═══════════ -->
-                <section class="iol-synopsis">
+                <section class="iol-synopsis iol-reveal">
                     <div class="iol-section-header">
-                        <span class="iol-section-kicker">The Story</span>
-                        <h2 class="iol-section-title">A Universe Connected by Crystal Essence</h2>
+                        <span class="iol-section-kicker">${e("iol.synopsis.kicker","The Story")}</span>
+                        <h2 class="iol-section-title">${e("iol.synopsis.title","A Universe Connected by Crystal Essence")}</h2>
                     </div>
                     <div class="iol-synopsis-grid">
                         <div class="iol-synopsis-text">
@@ -3582,7 +3589,7 @@
                             </p>
                         </div>
                         <div class="iol-synopsis-portrait">
-                            <img src="${p}/1.jpg" alt="Denid — Protagonist of Islands of Life" loading="lazy" />
+                            <img src="${g}/1.jpg" alt="Denid — Protagonist of Islands of Life" loading="lazy" />
                             <div class="iol-portrait-label">
                                 <strong>Denid</strong> · Agent 21523
                             </div>
@@ -3591,21 +3598,21 @@
                 </section>
 
                 <!-- ═══════════ CHARACTERS ═══════════ -->
-                <section class="iol-characters">
+                <section class="iol-characters iol-reveal">
                     <div class="iol-section-header">
-                        <span class="iol-section-kicker">Cast</span>
-                        <h2 class="iol-section-title">Meet the Characters</h2>
+                        <span class="iol-section-kicker">${e("iol.characters.kicker","Cast")}</span>
+                        <h2 class="iol-section-title">${e("iol.characters.title","Meet the Characters")}</h2>
                     </div>
                     <div class="iol-char-grid">
-                        ${pt.map(i=>c`
-                            <article class="iol-char-card" style="--char-accent: ${i.accent};">
+                        ${ht.map(a=>c`
+                            <article class="iol-char-card" style="--char-accent: ${a.accent};">
                                 <div class="iol-char-img-wrap">
-                                    <img src="${i.image}" alt="${i.name}" loading="lazy" />
+                                    <img src="${a.image}" alt="${a.name}" loading="lazy" />
                                 </div>
                                 <div class="iol-char-info">
-                                    <h3 class="iol-char-name">${i.name}</h3>
-                                    <span class="iol-char-role">${i.role}</span>
-                                    <p class="iol-char-desc">${i.description}</p>
+                                    <h3 class="iol-char-name">${a.name}</h3>
+                                    <span class="iol-char-role">${a.role}</span>
+                                    <p class="iol-char-desc">${a.description}</p>
                                 </div>
                             </article>
                         `)}
@@ -3613,37 +3620,44 @@
                 </section>
 
                 <!-- ═══════════ CHAPTERS ═══════════ -->
-                <section class="iol-chapters">
+                <section class="iol-chapters iol-reveal">
                     <div class="iol-section-header">
-                        <span class="iol-section-kicker">Journey</span>
-                        <h2 class="iol-section-title">Eight Chapters Across the Stars</h2>
-                        <p class="iol-section-subtitle">Each chapter features distinct environments, gameplay mechanics, and narrative beats. Click to explore.</p>
+                        <span class="iol-section-kicker">${e("iol.chapters.kicker","Journey")}</span>
+                        <h2 class="iol-section-title">${e("iol.chapters.title","Eight Chapters Across the Stars")}</h2>
+                        <p class="iol-section-subtitle">${e("iol.chapters.subtitle","Each chapter features distinct environments, gameplay mechanics, and narrative beats. Click to explore.")}</p>
                     </div>
                     <div class="iol-chapter-timeline">
-                        ${dt.map(i=>{const t=this._activeChapter===i.id;return c`
+                        ${gt.map(a=>{const t=this._activeChapter===a.id;return c`
                                 <article class="iol-chapter-card ${t?"expanded":""}"
-                                         style="--ch-accent: ${i.accent};"
-                                         @click=${()=>this._toggleChapter(i.id)}>
+                                         style="--ch-accent: ${a.accent};"
+                                         @click=${()=>this._toggleChapter(a.id)}>
                                     <div class="iol-chapter-head">
-                                        <span class="iol-chapter-icon">${i.icon}</span>
-                                        <div class="iol-chapter-num">${i.number}</div>
+                                        <span class="iol-chapter-icon">${a.icon}</span>
+                                        <div class="iol-chapter-num">${a.number}</div>
                                         <div class="iol-chapter-titles">
-                                            <h3 class="iol-chapter-title">${i.title}</h3>
-                                            <span class="iol-chapter-subtitle">${i.subtitle}</span>
+                                            <h3 class="iol-chapter-title">${a.title}</h3>
+                                            <span class="iol-chapter-subtitle">${a.subtitle}</span>
                                         </div>
                                         <span class="iol-chapter-toggle">${t?"▲":"▼"}</span>
                                     </div>
                                     ${t?c`
-                                        <div class="iol-chapter-body" @click=${a=>a.stopPropagation()}>
+                                        <div class="iol-chapter-body" @click=${i=>i.stopPropagation()}>
                                             <div class="iol-chapter-img-wrap">
-                                                <img src="${i.image}" alt="${i.title}" loading="lazy" />
+                                                <img src="${a.image}" alt="${a.title}" loading="lazy" />
                                             </div>
-                                            <p class="iol-chapter-desc">${i.description}</p>
+                                            <p class="iol-chapter-desc">${a.description}</p>
                                             <div class="iol-chapter-trailer-slot">
-                                                <div class="iol-trailer-placeholder">
-                                                    <span class="iol-trailer-play">▶</span>
-                                                    <span>Chapter Trailer — Coming Soon</span>
-                                                </div>
+                                                ${a.trailer?c`<div class="iol-chapter-trailer">
+                                                        <iframe
+                                                            src="https://www.youtube-nocookie.com/embed/${a.trailer}?rel=0&modestbranding=1"
+                                                            title="${a.title} — Trailer"
+                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                            allowfullscreen
+                                                            loading="lazy"></iframe>
+                                                      </div>`:c`<div class="iol-trailer-placeholder">
+                                                        <span class="iol-trailer-play">▶</span>
+                                                        <span>${e("iol.chapters.trailer_soon","Chapter Trailer — Coming Soon")}</span>
+                                                      </div>`}
                                             </div>
                                         </div>
                                     `:""}
@@ -3653,121 +3667,134 @@
                 </section>
 
                 <!-- ═══════════ VR FEATURES ═══════════ -->
-                <section class="iol-features">
-                    <div class="iol-features-pattern" style="background-image: url('${p}/Art Pattern-14.jpg');" aria-hidden="true"></div>
+                <section class="iol-features iol-reveal">
+                    <div class="iol-features-pattern" style="background-image: url('${g}/Art Pattern-14.jpg');" aria-hidden="true"></div>
                     <div class="iol-section-header">
-                        <span class="iol-section-kicker">Experience</span>
-                        <h2 class="iol-section-title">Designed for Virtual Reality</h2>
+                        <span class="iol-section-kicker">${e("iol.features.kicker","Experience")}</span>
+                        <h2 class="iol-section-title">${e("iol.features.title","Designed for Virtual Reality")}</h2>
                     </div>
                     <div class="iol-features-grid">
-                        ${ut.map(i=>c`
-                            <article class="iol-feature-card" style="--feat-accent: ${i.accent};">
-                                <div class="iol-feature-icon">${i.icon}</div>
-                                <h3 class="iol-feature-title">${i.title}</h3>
-                                <p class="iol-feature-desc">${i.description}</p>
+                        ${mt.map(a=>c`
+                            <article class="iol-feature-card" style="--feat-accent: ${a.accent};">
+                                <div class="iol-feature-icon">${a.icon}</div>
+                                <h3 class="iol-feature-title">${a.title}</h3>
+                                <p class="iol-feature-desc">${a.description}</p>
                             </article>
                         `)}
                     </div>
                 </section>
 
                 <!-- ═══════════ GALLERY ═══════════ -->
-                <section class="iol-gallery">
+                <section class="iol-gallery iol-reveal">
                     <div class="iol-section-header">
-                        <span class="iol-section-kicker">Gallery</span>
-                        <h2 class="iol-section-title">Worlds to Explore</h2>
+                        <span class="iol-section-kicker">${e("iol.gallery.kicker","Gallery")}</span>
+                        <h2 class="iol-section-title">${e("iol.gallery.title","Worlds to Explore")}</h2>
                     </div>
                     <div class="iol-gallery-grid">
                         <div class="iol-gallery-item iol-gallery-item--wide">
-                            <img src="${p}/HighresScreenshot00003.jpg" alt="Sigar Forest — bioluminescent night" loading="lazy" />
+                            <img src="${g}/HighresScreenshot00003.jpg" alt="Sigar Forest — bioluminescent night" loading="lazy" />
                             <div class="iol-gallery-caption">Sigar Forest</div>
                         </div>
                         <div class="iol-gallery-item">
-                            <img src="${p}/1.jpg" alt="Denid portrait" loading="lazy" />
+                            <img src="${g}/1.jpg" alt="Denid portrait" loading="lazy" />
                             <div class="iol-gallery-caption">Agent Denid</div>
                         </div>
                         <div class="iol-gallery-item">
-                            <img src="${p}/ScreenShot00024.png" alt="Planet Abola landscape" loading="lazy" />
+                            <img src="${g}/ScreenShot00024.png" alt="Planet Abola landscape" loading="lazy" />
                             <div class="iol-gallery-caption">Planet Abola</div>
                         </div>
                         <div class="iol-gallery-item iol-gallery-item--wide">
-                            <img src="${p}/HighresScreenshot00034-Edit.jpg" alt="Space combat sequence" loading="lazy" />
+                            <img src="${g}/HighresScreenshot00034-Edit.jpg" alt="Space combat sequence" loading="lazy" />
                             <div class="iol-gallery-caption">Deep Space</div>
                         </div>
                         <div class="iol-gallery-item">
-                            <img src="${p}/HighresScreenshot00002.png" alt="Station One interior" loading="lazy" />
+                            <img src="${g}/HighresScreenshot00002.png" alt="Station One interior" loading="lazy" />
                             <div class="iol-gallery-caption">Station One</div>
                         </div>
                         <div class="iol-gallery-item">
-                            <img src="${p}/ScreenShot00052.png" alt="Alien base infiltration" loading="lazy" />
+                            <img src="${g}/ScreenShot00052.png" alt="Alien base infiltration" loading="lazy" />
                             <div class="iol-gallery-caption">Enemy Stronghold</div>
                         </div>
                     </div>
                 </section>
 
                 <!-- ═══════════ ART PATTERNS SHOWCASE ═══════════ -->
-                <section class="iol-art">
+                <section class="iol-art iol-reveal">
                     <div class="iol-section-header">
-                        <span class="iol-section-kicker">Art Direction</span>
-                        <h2 class="iol-section-title">Crystal Essence — The Visual Language</h2>
-                        <p class="iol-section-subtitle">Fractal crystal patterns inspired by the living mineral formations found across the game's alien worlds.</p>
+                        <span class="iol-section-kicker">${e("iol.art.kicker","Art Direction")}</span>
+                        <h2 class="iol-section-title">${e("iol.art.title","Crystal Essence — The Visual Language")}</h2>
+                        <p class="iol-section-subtitle">${e("iol.art.subtitle","Fractal crystal patterns inspired by the living mineral formations found across the game's alien worlds.")}</p>
                     </div>
                     <div class="iol-art-mosaic">
-                        <div class="iol-art-tile" style="background-image: url('${p}/Art Pattern-03.jpg');"></div>
-                        <div class="iol-art-tile" style="background-image: url('${p}/Art Pattern-05.jpg');"></div>
-                        <div class="iol-art-tile" style="background-image: url('${p}/Art Pattern-06.jpg');"></div>
-                        <div class="iol-art-tile" style="background-image: url('${p}/Art Pattern-07.jpg');"></div>
-                        <div class="iol-art-tile" style="background-image: url('${p}/Art Pattern-09.jpg');"></div>
-                        <div class="iol-art-tile" style="background-image: url('${p}/Art Pattern-13.jpg');"></div>
-                        <div class="iol-art-tile" style="background-image: url('${p}/Art Pattern-14.jpg');"></div>
-                        <div class="iol-art-tile" style="background-image: url('${p}/Art Pattern-18.jpg');"></div>
-                        <div class="iol-art-tile" style="background-image: url('${p}/Art Pattern-20.jpg');"></div>
-                        <div class="iol-art-tile" style="background-image: url('${p}/Art Pattern-21.jpg');"></div>
+                        <div class="iol-art-tile" style="background-image: url('${g}/Art Pattern-03.jpg');"></div>
+                        <div class="iol-art-tile" style="background-image: url('${g}/Art Pattern-05.jpg');"></div>
+                        <div class="iol-art-tile" style="background-image: url('${g}/Art Pattern-06.jpg');"></div>
+                        <div class="iol-art-tile" style="background-image: url('${g}/Art Pattern-07.jpg');"></div>
+                        <div class="iol-art-tile" style="background-image: url('${g}/Art Pattern-09.jpg');"></div>
+                        <div class="iol-art-tile" style="background-image: url('${g}/Art Pattern-13.jpg');"></div>
+                        <div class="iol-art-tile" style="background-image: url('${g}/Art Pattern-14.jpg');"></div>
+                        <div class="iol-art-tile" style="background-image: url('${g}/Art Pattern-18.jpg');"></div>
+                        <div class="iol-art-tile" style="background-image: url('${g}/Art Pattern-20.jpg');"></div>
+                        <div class="iol-art-tile" style="background-image: url('${g}/Art Pattern-21.jpg');"></div>
                     </div>
                 </section>
 
                 <!-- ═══════════ MUSIC / OST ═══════════ -->
-                <section class="iol-music">
+                <section class="iol-music iol-reveal">
                     <div class="iol-section-header">
-                        <span class="iol-section-kicker">Soundtrack</span>
-                        <h2 class="iol-section-title">Original Score</h2>
-                        <p class="iol-section-subtitle">A cinematic soundtrack composed in-house, weaving ambient exploration with high-intensity combat themes.</p>
+                        <span class="iol-section-kicker">${e("iol.music.kicker","Soundtrack")}</span>
+                        <h2 class="iol-section-title">${e("iol.music.title","Original Score")}</h2>
+                        <p class="iol-section-subtitle">${e("iol.music.subtitle","A cinematic soundtrack composed in-house, weaving ambient exploration with high-intensity combat themes.")}</p>
                     </div>
-                    <div class="iol-music-player">
+                    <div class="iol-music-player iol-music-player--soundcloud">
                         <iframe
-                            src="https://www.youtube-nocookie.com/embed/qJRQyZk3m8g?rel=0&modestbranding=1"
-                            title="Islands of Life — Original Soundtrack"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
+                            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/cometgamestudio&color=%236366f1&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+                            title="Comet Game Studio — SoundCloud"
+                            allow="autoplay"
                             loading="lazy"></iframe>
+                    </div>
+                    <div class="iol-music-secondary">
+                        <div class="iol-music-player">
+                            <iframe
+                                src="https://www.youtube-nocookie.com/embed/qJRQyZk3m8g?rel=0&modestbranding=1"
+                                title="${e("iol.music.yt_title","Islands of Life — Soundtrack Visualiser")}"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                loading="lazy"></iframe>
+                        </div>
+                        <p class="iol-music-caption">${e("iol.music.yt_caption","Watch the official soundtrack visualiser on YouTube")}</p>
                     </div>
                 </section>
 
                 <!-- ═══════════ SEQUEL TEASE ═══════════ -->
-                <section class="iol-sequel">
-                    <div class="iol-sequel-bg" style="background-image: url('${p}/Art Pattern-20.jpg');" aria-hidden="true"></div>
+                <section class="iol-sequel iol-reveal">
+                    <div class="iol-sequel-bg" style="background-image: url('${g}/Art Pattern-20.jpg');" aria-hidden="true"></div>
                     <div class="iol-sequel-content">
-                        <span class="iol-sequel-kicker">The Journey Continues</span>
-                        <h2 class="iol-sequel-title">Islands of Time</h2>
+                        <span class="iol-sequel-kicker">${e("iol.sequel.kicker","The Journey Continues")}</span>
+                        <h2 class="iol-sequel-title">${e("iol.sequel.title","Islands of Time")}</h2>
                         <p class="iol-sequel-desc">
-                            Denid's mind persists within the stream of time itself. Navigate through Islands of Time —
-                            portals across reality — to find your way back to the universe you left behind.
-                            The celestials' gift is eternal containment. But eternity is a long time to be alone.
+                            ${e("iol.sequel.desc","Denid's mind persists within the stream of time itself. Navigate through Islands of Time — portals across reality — to find your way back to the universe you left behind. The celestials' gift is eternal containment. But eternity is a long time to be alone.")}
                         </p>
-                        <div class="iol-sequel-badge">Sequel in Development</div>
+                        <div class="iol-sequel-badge">${e("iol.sequel.badge","Sequel in Development")}</div>
                     </div>
                 </section>
 
                 <!-- ═══════════ CTA ═══════════ -->
                 <section class="iol-cta">
-                    <h2 class="iol-cta-title">Ready to Explore?</h2>
-                    <p class="iol-cta-desc">Follow Comet Game Studio for development updates, gameplay reveals, and trailer announcements.</p>
+                    <h2 class="iol-cta-title">${e("iol.cta.title","Ready to Explore?")}</h2>
+                    <p class="iol-cta-desc">${e("iol.cta.desc","Follow Comet Game Studio for development updates, gameplay reveals, and trailer announcements.")}</p>
                     <div class="iol-cta-actions">
-                        <button class="iol-btn iol-btn--primary" type="button" disabled>
-                            🥽 Wishlist Coming Soon
+                        <button class="iol-btn iol-btn--primary" type="button"
+                                ?disabled=${!0}
+                                @click=${()=>{}}>
+                            🥽 ${e("iol.cta.wishlist","Wishlist Coming Soon")}
                         </button>
+                        <a class="iol-btn iol-btn--soundcloud" href="https://soundcloud.com/cometgamestudio" target="_blank" rel="noopener">
+                            🎵 ${e("iol.cta.soundcloud","Listen on SoundCloud")}
+                        </a>
                         <button class="iol-btn iol-btn--ghost" type="button"
                                 @click=${()=>this._dispatchNavigateHome()}>
-                            ← Back to Comet Game Studio
+                            ${e("iol.cta.back","← Back to Comet Game Studio")}
                         </button>
                     </div>
                 </section>
@@ -3775,10 +3802,10 @@
                 <!-- ═══════════ FOOTER ═══════════ -->
                 <footer class="iol-footer">
                     <p>&copy; ${new Date().getFullYear()} Comet Game Studio Ltd. All rights reserved.</p>
-                    <p class="iol-footer-sub">Islands of Life is a trademark of Comet Game Studio Ltd. All game assets shown are work-in-progress.</p>
+                    <p class="iol-footer-sub">${e("iol.footer.trademark","Islands of Life is a trademark of Comet Game Studio Ltd. All game assets shown are work-in-progress.")}</p>
                 </footer>
             </div>
-        `}};U.styles=te`
+        `}};B.styles=re`
         /* ── HOST ─────────────────────────────────────────── */
         :host {
             display: block;
@@ -4009,6 +4036,20 @@
         .iol-btn--ghost:hover {
             color: #e2e8f0;
             border-color: rgba(148, 163, 184, 0.5);
+        }
+
+        .iol-btn--soundcloud {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #f50, #ff7700);
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(255, 85, 0, 0.25);
+        }
+        .iol-btn--soundcloud:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(255, 85, 0, 0.4);
         }
 
         /* ── SECTION HEADERS ──────────────────────────────── */
@@ -4292,6 +4333,18 @@
             color: var(--ch-accent, #a78bfa);
         }
 
+        .iol-chapter-trailer {
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .iol-chapter-trailer iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         /* ── FEATURES ─────────────────────────────────────── */
         .iol-features {
             position: relative;
@@ -4447,6 +4500,22 @@
             padding: 80px 24px;
             max-width: 900px;
             margin: 0 auto;
+        }
+
+        .iol-music-player--soundcloud {
+            aspect-ratio: auto;
+            height: 300px;
+            margin-bottom: 24px;
+        }
+
+        .iol-music-secondary {
+            text-align: center;
+        }
+
+        .iol-music-caption {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin: 12px 0 0;
         }
 
         .iol-music-player {
@@ -4612,16 +4681,16 @@
                 align-items: center;
             }
         }
-    `;oe([f()],U.prototype,"_activeChapter",2);oe([f()],U.prototype,"_parallaxY",2);U=oe([Te("iol-about-page")],U);var gt=Object.defineProperty,ht=Object.getOwnPropertyDescriptor,y=(i,t,a,s)=>{for(var r=s>1?void 0:s?ht(t,a):t,n=i.length-1,o;n>=0;n--)(o=i[n])&&(r=(s?o(t,a,r):o(r))||r);return s&&r&&gt(t,a,r),r};const mt=!0,bt=!0,ft=!0,vt=!0;globalThis.WEBSITE_MODE=mt;globalThis.PRODUCTION_MODE=bt;globalThis.NO_INFERENCE_MODE=ft;globalThis.NO_AUTH_REQUIRED=vt;let h=class extends I{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this._editorOpen=!1,this._editorError=null,this._currentLocale="en",this._langDropdownOpen=!1,this._currentQuoteIndex=0,this._quoteFading=!1,this._activeVideoIndex=0,this._expandedCard="ai",this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._animationFrameId=0,this._editorModuleLoaded=!1,this._unlistenI18n=null,this._quoteTimer=null,this._navResizeObserver=null,this._observedNav=null,this._onPopState=i=>{const t=i.state;this._activeSection=t?.section??this._pathToSection(location.pathname)}}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._activeSection=this._pathToSection(location.pathname),globalThis.addEventListener("popstate",this._onPopState),this._bootSequence(),this._unlistenI18n=Ce(()=>{this._currentLocale=st(),this.requestUpdate()}),this._startQuoteRotation()}disconnectedCallback(){super.disconnectedCallback(),globalThis.removeEventListener("popstate",this._onPopState),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId),this._unlistenI18n?.(),this._stopQuoteRotation(),this._navResizeObserver?.disconnect(),this._navResizeObserver=null,this._observedNav=null}firstUpdated(){this.updateComplete.then(()=>{this._observeNavHeight(),this._syncNavHeight(),this._fitQuoteBody()})}updated(i){super.updated(i),this._observeNavHeight(),this._syncNavHeight(),i.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene(),(i.has("_currentQuoteIndex")||i.has("_ready")&&this._ready)&&this._fitQuoteBody()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(i){this._errorMessage=`Failed to load: ${i instanceof Error?i.message:String(i)}`,this._loading=!1}}async _initThreeScene(){try{const i=this.shadowRoot?.querySelector("#cgs-canvas");if(!i)return;const t=await ce(()=>import("./three.module-CIzvuMnW.js"),[]),a=new t.Scene,s=new t.PerspectiveCamera(60,i.clientWidth/i.clientHeight,.1,1e3);s.position.set(0,0,8);const r=new t.WebGLRenderer({canvas:i,antialias:!0,alpha:!0});r.setSize(i.clientWidth,i.clientHeight),r.setPixelRatio(Math.min(globalThis.devicePixelRatio,2)),r.setClearColor(657935,1);const n=new t.IcosahedronGeometry(2,15),o=new t.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),d=new t.Mesh(n,o);a.add(d);const l=new t.AmbientLight(16777215,.3);a.add(l);const u=new t.PointLight(6333946,1.5,20);u.position.set(5,5,5),a.add(u),this._threeRenderer=r,this._threeCanvasReady=!0;const m=()=>{this._animationFrameId=requestAnimationFrame(m),!document.hidden&&(d.rotation.y+=.003,d.rotation.x+=.001,r.render(a,s))};m(),new ResizeObserver(()=>{if(!i.parentElement)return;const b=i.clientWidth,x=i.clientHeight;s.aspect=b/x,s.updateProjectionMatrix(),r.setSize(b,x)}).observe(i)}catch{this._threeCanvasReady=!1}}_navigateTo(i){this._activeSection!==i&&(this._activeSection=i,history.pushState({section:i},"",this._sectionToPath(i)))}_startQuoteRotation(){this._stopQuoteRotation(),this._quoteTimer=setInterval(()=>this._advanceQuote(),8e3)}_stopQuoteRotation(){this._quoteTimer!==null&&(clearInterval(this._quoteTimer),this._quoteTimer=null)}_advanceQuote(){this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=(this._currentQuoteIndex+1)%h._QUOTES.length,this._quoteFading=!1},400)}_goToQuote(i){i!==this._currentQuoteIndex&&(this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=i,this._quoteFading=!1,this._startQuoteRotation()},400))}_fitQuoteBody(){const i=this.shadowRoot?.querySelector(".cgs-quote-body");if(!i)return;const t=1.08;let a=14,s=34,r=14;for(;a<=s;){const n=Math.floor((a+s)/2);i.style.fontSize=`${n}px`;const o=Math.ceil(n*t*2)+4;i.scrollHeight<=o?(r=n,a=n+1):s=n-1}i.style.fontSize=`${r}px`}_observeNavHeight(){const i=this.renderRoot.querySelector(".cgs-nav");if(!i){this._navResizeObserver?.disconnect(),this._observedNav=null;return}this._observedNav!==i&&(this._navResizeObserver??=new ResizeObserver(()=>this._syncNavHeight()),this._navResizeObserver.disconnect(),this._navResizeObserver.observe(i),this._observedNav=i)}_syncNavHeight(){const i=this.renderRoot.querySelector(".cgs-nav");if(!i)return;const t=Math.ceil(i.getBoundingClientRect().height);t>0&&this.style.setProperty("--cgs-nav-height",`${t}px`)}_sectionToPath(i){const t="/cgs-public/",s={privacy:"privacy-policy",products:"products",about:"about",safety:"safety",terms:"terms",notices:"notices","orus-ai":"orus-ai","islands-of-life":"islands-of-life",enterprise:"enterprise"}[i];return s?`${t}${s}`:t}_pathToSection(i){const t="/cgs-public/".replace(/\/$/,"");switch(i.startsWith(t)?i.slice(t.length):i){case"/privacy-policy":return"privacy";case"/products":return"products";case"/about":return"about";case"/safety":return"safety";case"/terms":return"terms";case"/notices":return"notices";case"/orus-ai":return"orus-ai";case"/islands-of-life":return"islands-of-life";case"/enterprise":return"enterprise";default:return"home"}}async _switchLanguage(i){this._langDropdownOpen=!1,await rt(i)}async _openEditor(){this._editorError=null;try{this._editorModuleLoaded||(await ce(()=>import("./orus-web-editor-6a_JC34i.js"),[]),this._editorModuleLoaded=!0),this._editorOpen=!0}catch(i){console.error("[CGS] Failed to load Orus editor:",i),this._editorError=i instanceof Error?i.message:String(i)}}_renderSiteChrome(i){const t=this._activeSection==="home"||this._activeSection==="products",a=this._activeSection==="orus-ai",s=this._activeSection==="islands-of-life",r=this._activeSection==="about",n=this._activeSection==="enterprise",o=t?"cgs-nav-link active":"cgs-nav-link",d=a?"cgs-nav-link active":"cgs-nav-link",l=s?"cgs-nav-link active":"cgs-nav-link",u=r?"cgs-nav-link active":"cgs-nav-link",m=n?"cgs-nav-link active":"cgs-nav-link",g=t?"page":void 0,b=a?"page":void 0,x=s?"page":void 0,_=r?"page":void 0,Ie=n?"page":void 0,ze=this._langDropdownOpen?"true":"false",Pe=this._langDropdownOpen?c`
+    `;ue([f()],B.prototype,"_activeChapter",2);ue([f()],B.prototype,"_parallaxY",2);B=ue([Oe("iol-about-page")],B);var bt=Object.defineProperty,ft=Object.getOwnPropertyDescriptor,w=(a,t,i,s)=>{for(var o=s>1?void 0:s?ft(t,i):t,n=a.length-1,r;n>=0;n--)(r=a[n])&&(o=(s?r(t,i,o):r(o))||o);return s&&o&&bt(t,i,o),o};const vt=!0,yt=!0,xt=!0,wt=!0;globalThis.WEBSITE_MODE=vt;globalThis.PRODUCTION_MODE=yt;globalThis.NO_INFERENCE_MODE=xt;globalThis.NO_AUTH_REQUIRED=wt;let m=class extends O{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this._editorOpen=!1,this._editorError=null,this._currentLocale="en",this._langDropdownOpen=!1,this._currentQuoteIndex=0,this._quoteFading=!1,this._activeVideoIndex=0,this._expandedCard="ai",this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._animationFrameId=0,this._editorModuleLoaded=!1,this._unlistenI18n=null,this._quoteTimer=null,this._navResizeObserver=null,this._observedNav=null,this._onPopState=a=>{const t=a.state;this._activeSection=t?.section??this._pathToSection(location.pathname),this._updatePageMeta()}}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._activeSection=this._pathToSection(location.pathname),globalThis.addEventListener("popstate",this._onPopState),this._bootSequence(),this._updatePageMeta(),this._unlistenI18n=pe(()=>{this._currentLocale=nt(),this.requestUpdate()}),this._startQuoteRotation()}disconnectedCallback(){super.disconnectedCallback(),globalThis.removeEventListener("popstate",this._onPopState),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId),this._unlistenI18n?.(),this._stopQuoteRotation(),this._navResizeObserver?.disconnect(),this._navResizeObserver=null,this._observedNav=null}firstUpdated(){this.updateComplete.then(()=>{this._observeNavHeight(),this._syncNavHeight(),this._fitQuoteBody()})}updated(a){super.updated(a),this._observeNavHeight(),this._syncNavHeight(),a.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene(),(a.has("_currentQuoteIndex")||a.has("_ready")&&this._ready)&&this._fitQuoteBody()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(a){this._errorMessage=`Failed to load: ${a instanceof Error?a.message:String(a)}`,this._loading=!1}}async _initThreeScene(){try{const a=this.shadowRoot?.querySelector("#cgs-canvas");if(!a)return;const t=await ie(()=>import("./three.module-CIzvuMnW.js"),[]),i=new t.Scene,s=new t.PerspectiveCamera(60,a.clientWidth/a.clientHeight,.1,1e3);s.position.set(0,0,8);const o=new t.WebGLRenderer({canvas:a,antialias:!0,alpha:!0});o.setSize(a.clientWidth,a.clientHeight),o.setPixelRatio(Math.min(globalThis.devicePixelRatio,2)),o.setClearColor(657935,1);const n=new t.IcosahedronGeometry(2,15),r=new t.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),l=new t.Mesh(n,r);i.add(l);const d=new t.AmbientLight(16777215,.3);i.add(d);const p=new t.PointLight(6333946,1.5,20);p.position.set(5,5,5),i.add(p),this._threeRenderer=o,this._threeCanvasReady=!0;const h=()=>{this._animationFrameId=requestAnimationFrame(h),!document.hidden&&(l.rotation.y+=.003,l.rotation.x+=.001,o.render(i,s))};h(),new ResizeObserver(()=>{if(!a.parentElement)return;const b=a.clientWidth,x=a.clientHeight;s.aspect=b/x,s.updateProjectionMatrix(),o.setSize(b,x)}).observe(a)}catch{this._threeCanvasReady=!1}}_navigateTo(a){this._activeSection!==a&&(this._activeSection=a,history.pushState({section:a},"",this._sectionToPath(a)),this._updatePageMeta())}_startQuoteRotation(){this._stopQuoteRotation(),this._quoteTimer=setInterval(()=>this._advanceQuote(),8e3)}_updatePageMeta(){const t={"islands-of-life":{title:"Islands of Life — Cinematic VR Adventure | Comet Game Studio",desc:"Explore alien worlds in VR. A cinematic sci-fi adventure spanning five planets, orbital combat, and a journey through a black hole.",img:"https://www.cometgamestudio.com/images/iol/HighresScreenshot00003.jpg"},"orus-ai":{title:"Orus AI System — Privacy-First Local AI | Comet Game Studio",desc:"Meet Orus, the multimodal AI system that runs entirely on your local hardware. No cloud. No data collection."},about:{title:"About Comet Game Studio",desc:"We build privacy-first AI tools and immersive VR experiences."}}[this._activeSection];document.title=t?.title??"Comet Game Studio — AI · VR · Music";const i=(s,o,n)=>{const r=document.querySelector(`meta[${s}="${o}"]`);r&&r.setAttribute("content",n)};i("property","og:title",t?.title??"Comet Game Studio"),i("property","og:description",t?.desc??"AI-Powered Creative Tools — Orus Multimodal AI System"),t?.img&&i("property","og:image",t.img),i("name","twitter:title",t?.title??"Comet Game Studio"),i("name","twitter:description",t?.desc??"Privacy-first AI tools and immersive VR experiences.")}_stopQuoteRotation(){this._quoteTimer!==null&&(clearInterval(this._quoteTimer),this._quoteTimer=null)}_advanceQuote(){this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=(this._currentQuoteIndex+1)%m._QUOTES.length,this._quoteFading=!1},400)}_goToQuote(a){a!==this._currentQuoteIndex&&(this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=a,this._quoteFading=!1,this._startQuoteRotation()},400))}_fitQuoteBody(){const a=this.shadowRoot?.querySelector(".cgs-quote-body");if(!a)return;const t=1.08;let i=14,s=34,o=14;for(;i<=s;){const n=Math.floor((i+s)/2);a.style.fontSize=`${n}px`;const r=Math.ceil(n*t*2)+4;a.scrollHeight<=r?(o=n,i=n+1):s=n-1}a.style.fontSize=`${o}px`}_observeNavHeight(){const a=this.renderRoot.querySelector(".cgs-nav");if(!a){this._navResizeObserver?.disconnect(),this._observedNav=null;return}this._observedNav!==a&&(this._navResizeObserver??=new ResizeObserver(()=>this._syncNavHeight()),this._navResizeObserver.disconnect(),this._navResizeObserver.observe(a),this._observedNav=a)}_syncNavHeight(){const a=this.renderRoot.querySelector(".cgs-nav");if(!a)return;const t=Math.ceil(a.getBoundingClientRect().height);t>0&&this.style.setProperty("--cgs-nav-height",`${t}px`)}_sectionToPath(a){const t="/cgs-public/",s={privacy:"privacy-policy",products:"products",about:"about",safety:"safety",terms:"terms",notices:"notices","orus-ai":"orus-ai","islands-of-life":"islands-of-life",enterprise:"enterprise"}[a];return s?`${t}${s}`:t}_pathToSection(a){const t="/cgs-public/".replace(/\/$/,"");switch(a.startsWith(t)?a.slice(t.length):a){case"/privacy-policy":return"privacy";case"/products":return"products";case"/about":return"about";case"/safety":return"safety";case"/terms":return"terms";case"/notices":return"notices";case"/orus-ai":return"orus-ai";case"/islands-of-life":return"islands-of-life";case"/enterprise":return"enterprise";default:return"home"}}async _switchLanguage(a){this._langDropdownOpen=!1,await ct(a)}async _openEditor(){this._editorError=null;try{this._editorModuleLoaded||(await ie(()=>import("./orus-web-editor-6a_JC34i.js"),[]),this._editorModuleLoaded=!0),this._editorOpen=!0}catch(a){console.error("[CGS] Failed to load Orus editor:",a),this._editorError=a instanceof Error?a.message:String(a)}}_renderSiteChrome(a){const t=this._activeSection==="home"||this._activeSection==="products",i=this._activeSection==="orus-ai",s=this._activeSection==="islands-of-life",o=this._activeSection==="about",n=this._activeSection==="enterprise",r=t?"cgs-nav-link active":"cgs-nav-link",l=i?"cgs-nav-link active":"cgs-nav-link",d=s?"cgs-nav-link active":"cgs-nav-link",p=o?"cgs-nav-link active":"cgs-nav-link",h=n?"cgs-nav-link active":"cgs-nav-link",u=t?"page":void 0,b=i?"page":void 0,x=s?"page":void 0,_=o?"page":void 0,F=n?"page":void 0,j=this._langDropdownOpen?"true":"false",$=this._langDropdownOpen?c`
                             <div id="cgs-lang-dropdown" class="cgs-lang-dropdown" role="menu" aria-label="${e("nav.language_menu","Language selection")}">
-                                ${X.map(P=>c`
-                                    <button class="cgs-lang-option ${this._currentLocale===P.code?"active":""}"
+                                ${Z.map(y=>c`
+                                    <button class="cgs-lang-option ${this._currentLocale===y.code?"active":""}"
                                             type="button"
-                                            aria-pressed=${this._currentLocale===P.code?"true":"false"}
-                                            @click=${()=>void this._switchLanguage(P.code)}>
-                                        <span class="cgs-lang-flag">${P.flag}</span>
-                                        <span class="cgs-lang-native">${P.native}</span>
-                                        <span class="cgs-lang-code">${P.code}</span>
+                                            aria-pressed=${this._currentLocale===y.code?"true":"false"}
+                                            @click=${()=>void this._switchLanguage(y.code)}>
+                                        <span class="cgs-lang-flag">${y.flag}</span>
+                                        <span class="cgs-lang-native">${y.native}</span>
+                                        <span class="cgs-lang-code">${y.code}</span>
                                     </button>
                                 `)}
                             </div>
@@ -4631,39 +4700,36 @@
                     ${e("nav.logo","Comet Game Studio")}
                 </button>
                 <div class="cgs-nav-links">
-                    <button class="${o}"
+                    <button class="${r}"
                             type="button"
-                            aria-current=${g}
+                            aria-current=${u}
                             @click=${()=>this._navigateTo("home")}>${e("nav.home","Home")}</button>
-                    <button class="${d}"
+                    <button class="${l}"
                             type="button"
                             aria-current=${b}
                             @click=${()=>this._navigateTo("orus-ai")}>${e("nav.orus_ai","ORUS AI System")}</button>
-                    <button class="${l}"
+                    <button class="${d}"
                             type="button"
                             aria-current=${x}
                             @click=${()=>this._navigateTo("islands-of-life")}>${e("nav.iol","Islands of Life")}</button>
-                    <button class="${u}"
+                    <button class="${p}"
                             type="button"
                             aria-current=${_}
                             @click=${()=>this._navigateTo("about")}>${e("nav.about","About")}</button>
-                    <button class="${m}"
+                    <button class="${h}"
                             type="button"
-                            aria-current=${Ie}
+                            aria-current=${F}
                             @click=${()=>this._navigateTo("enterprise")}>${e("nav.enterprise","Enterprise")}</button>
-                    <button class="cgs-nav-link cgs-nav-link--accent"
-                            type="button"
-                            @click=${()=>this._openEditor()}>✨ ${e("nav.try_editor","Try Editor")}</button>
                 </div>
 
                 <!-- Language Selector (centered) -->
                 <div class="cgs-lang-selector">
-                    <button class="cgs-lang-btn" type="button" aria-haspopup="menu" aria-expanded=${ze} aria-controls="cgs-lang-dropdown" @click=${()=>{this._langDropdownOpen=!this._langDropdownOpen}}>
-                        ${i.flag}
-                        ${i.code.toUpperCase()}
+                    <button class="cgs-lang-btn" type="button" aria-haspopup="menu" aria-expanded=${j} aria-controls="cgs-lang-dropdown" @click=${()=>{this._langDropdownOpen=!this._langDropdownOpen}}>
+                        ${a.flag}
+                        ${a.code.toUpperCase()}
                         ▾
                     </button>
-                    ${Pe}
+                    ${$}
                 </div>
             </nav>
         `}_renderSiteFooter(){return c`
@@ -4686,58 +4752,47 @@
                     ${e("footer.disclaimer","AI outputs may be inaccurate — always verify important information independently. Governing law: England and Wales.")}
                 </div>
             </footer>
-        `}_renderVideoShowcase(){const t=h._SHOWCASE_ITEMS[this._activeVideoIndex],a=t.type==="video"&&t.youtubeId?c`<iframe
+        `}_renderVideoShowcase(){const t=m._SHOWCASE_ITEMS[this._activeVideoIndex],i=t.type==="video"&&t.youtubeId?c`<iframe
                 src="https://www.youtube-nocookie.com/embed/${t.youtubeId}?rel=0&modestbranding=1&autoplay=1&mute=1"
                 title="${t.title}"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
                 loading="lazy"></iframe>`:c`<img src="${this._imgBase}/Orus.avif" alt="${t.title}" />`;return c`
             <div class="cgs-showcase">
-                <div class="cgs-showcase-player">${a}</div>
+                <div class="cgs-showcase-player">${i}</div>
                 <div class="cgs-showcase-info">
                     <span class="cgs-showcase-tag" style="color: ${t.accent}">${t.tag}</span>
                     <strong class="cgs-showcase-title">${t.title}</strong>
                     <p class="cgs-showcase-desc">${t.desc}</p>
                 </div>
             </div>
-        `}_renderStudioPlate(){const i=h._QUOTES[this._currentQuoteIndex],t=h._QUOTES.length,a=i.portrait;return c`
+        `}_renderStudioPlate(){const a=m._QUOTES[this._currentQuoteIndex],t=m._QUOTES.length,i=a.portrait;return c`
             <section class="cgs-quote-stage cgs-quote-stage--studio"
                      style="--quote-accent: #22c55e;"
                      aria-label="Studio overview and Orus product">
-                <div class="cgs-quote-stage-head">
-                    <div class="cgs-quote-kicker">${e("hero.roots.kicker","Philosophical roots")}</div>
-                    <div class="cgs-quote-stage-meta">
-                        <span class="cgs-quote-status">${e("hero.roots.status","Studio overview")}</span>
-                    </div>
-                </div>
 
                 <!-- Integrated Quote Slideshow (replaces static title) -->
                 <div class="cgs-quote-hero" aria-live="polite">
-                    ${a?c`
-                        <div class="cgs-quote-portrait-bg" style="background-image: url('${a}');" aria-hidden="true"></div>
+                    ${i?c`
+                        <div class="cgs-quote-portrait-bg" style="background-image: url('${i}');" aria-hidden="true"></div>
                     `:""}
                     <div class="cgs-quote-hero-content ${this._quoteFading?"fading":""}">
-                        <div class="cgs-quote-body">${i.text}</div>
+                        <div class="cgs-quote-body">${a.text}</div>
                         <div class="cgs-quote-meta">
                             <div>
-                                <div class="cgs-quote-thinker">${i.thinker}</div>
-                                <div class="cgs-quote-source">${i.source}</div>
+                                <div class="cgs-quote-thinker">${a.thinker}</div>
+                                <div class="cgs-quote-source">${a.source}</div>
                             </div>
                         </div>
                     </div>
                     <div class="cgs-quote-progress">
-                        ${Array.from({length:t},(s,r)=>c`
-                            <div class="cgs-quote-progress-segment ${r===this._currentQuoteIndex?"active":""}"
-                                 style="--segment-accent: ${r===this._currentQuoteIndex?"#f59e0b":"#6366f1"}; cursor: pointer;"
-                                 @click=${()=>this._goToQuote(r)}></div>
+                        ${Array.from({length:t},(s,o)=>c`
+                            <div class="cgs-quote-progress-segment ${o===this._currentQuoteIndex?"active":""}"
+                                 style="--segment-accent: ${o===this._currentQuoteIndex?"#f59e0b":"#6366f1"}; cursor: pointer;"
+                                 @click=${()=>this._goToQuote(o)}></div>
                         `)}
                     </div>
                 </div>
-
-                <p class="cgs-quote-summary">
-                    ${e("hero.studio.summary","A local-first studio building privacy-first AI systems, immersive VR worlds, and original music-led experiences.")}
-                </p>
-
                 <!-- Visual preview — above the two-column panel -->
                 <div class="cgs-root-panel-media cgs-root-panel-media--showcase cgs-root-panel-media--above">
                     ${this._renderVideoShowcase()}
@@ -4759,11 +4814,11 @@
                                 <span class="cgs-root-card-toggle">${this._expandedCard==="ai"?"▲":"▼"}</span>
                                 ${this._expandedCard==="ai"?c`
                                     <div class="cgs-root-card-videos" @click=${s=>s.stopPropagation()}>
-                                        ${h._SHOWCASE_ITEMS.filter(s=>s.section==="ai").map(s=>{const r=h._SHOWCASE_ITEMS.findIndex(n=>n===s);return c`
-                                            <button class="cgs-showcase-thumb ${r===this._activeVideoIndex?"active":""}"
+                                        ${m._SHOWCASE_ITEMS.filter(s=>s.section==="ai").map(s=>{const o=m._SHOWCASE_ITEMS.findIndex(n=>n===s);return c`
+                                            <button class="cgs-showcase-thumb ${o===this._activeVideoIndex?"active":""}"
                                                     type="button"
                                                     style="--thumb-accent: ${s.accent}"
-                                                    @click=${()=>{this._activeVideoIndex=r}}>
+                                                    @click=${()=>{this._activeVideoIndex=o}}>
                                                 <span class="cgs-showcase-thumb-icon">${s.type==="video"?"▶":"◉"}</span>
                                                 <span class="cgs-showcase-thumb-label">${s.title}</span>
                                             </button>`})}
@@ -4784,11 +4839,11 @@
                                 <span class="cgs-root-card-toggle">${this._expandedCard==="vr"?"▲":"▼"}</span>
                                 ${this._expandedCard==="vr"?c`
                                     <div class="cgs-root-card-videos" @click=${s=>s.stopPropagation()}>
-                                        ${h._SHOWCASE_ITEMS.filter(s=>s.section==="vr").map(s=>{const r=h._SHOWCASE_ITEMS.findIndex(n=>n===s);return c`
-                                            <button class="cgs-showcase-thumb ${r===this._activeVideoIndex?"active":""}"
+                                        ${m._SHOWCASE_ITEMS.filter(s=>s.section==="vr").map(s=>{const o=m._SHOWCASE_ITEMS.findIndex(n=>n===s);return c`
+                                            <button class="cgs-showcase-thumb ${o===this._activeVideoIndex?"active":""}"
                                                     type="button"
                                                     style="--thumb-accent: ${s.accent}"
-                                                    @click=${()=>{this._activeVideoIndex=r}}>
+                                                    @click=${()=>{this._activeVideoIndex=o}}>
                                                 <span class="cgs-showcase-thumb-icon">${s.type==="video"?"▶":"◉"}</span>
                                                 <span class="cgs-showcase-thumb-label">${s.title}</span>
                                             </button>`})}
@@ -4809,7 +4864,7 @@
                     </div>
                 </div>
             </section>
-        `}render(){const i=this._activeSection==="orus-ai",t=!i,a=X.find(n=>n.code===this._currentLocale)??X[0],s=t?this._renderSiteChrome(a):v,r=t?this._renderSiteFooter():v;return this._loading?c`
+        `}render(){const a=this._activeSection==="orus-ai",t=!a,i=Z.find(n=>n.code===this._currentLocale)??Z[0],s=t?this._renderSiteChrome(i):v,o=t?this._renderSiteFooter():v;return this._loading?c`
                 <div class="loading-overlay">
                     <div class="loading-spinner"></div>
                     <div class="loading-text">${this._loadingMessage}</div>
@@ -4823,7 +4878,7 @@
                     <div class="error-text">${this._errorMessage}</div>
                 </div>
             `:c`
-            <div class="cgs-main${i?" cgs-main--fullscreen":""}">
+            <div class="cgs-main${a?" cgs-main--fullscreen":""}">
                 <!-- 3D Background Canvas — canvas is always rendered once ready; Three.js init fires via updated() -->
                 <div class="cgs-canvas-container">
                     ${this._threeCanvasReady?c`<canvas id="cgs-canvas"></canvas>`:c`
@@ -4836,12 +4891,12 @@
                 ${s}
 
                 <!-- Content Area -->
-                <div class="cgs-content${i?" cgs-content--full":""}">
+                <div class="cgs-content${a?" cgs-content--full":""}">
                     ${this._renderActiveSection()}
                 </div>
 
                 <!-- Footer — hidden in full-page orus-ai mode -->
-                ${r}
+                ${o}
 
                 <!-- About Orus Dialog -->
                 <orus-about-dialog
@@ -4877,10 +4932,7 @@
                         hide-home-btn
                         @navigate-home=${()=>this._navigateTo("home")}
                     ></orus-about-dialog>
-                `;case"terms":return this._renderTerms();case"safety":return this._renderSafety();case"notices":return this._renderNotices();case"orus-ai":return this._renderOrusAiPage();case"islands-of-life":return c`<iol-about-page @navigate-home=${()=>this._navigateTo("home")}></iol-about-page>`;case"enterprise":return this._renderEnterprise();default:return this._renderHome()}}_renderHome(){return c`
-            <div class="cgs-hero">
-                <div class="cgs-hero-tagline">${e("hero.tagline","AI · XR · Music")}</div>
-                
+                `;case"terms":return this._renderTerms();case"safety":return this._renderSafety();case"notices":return this._renderNotices();case"orus-ai":return this._renderOrusAiPage();case"enterprise":return this._renderEnterprise();default:return this._renderHome()}}_renderHome(){return c`
                 <!-- Studio Overview (Company & Orus Product with integrated quotes) -->
                 <section class="cgs-roots-widget" aria-label="Comet Game Studio overview">
                     <div class="cgs-roots-mist" aria-hidden="true"></div>
@@ -5239,7 +5291,7 @@
 
                 <p class="cgs-legal-note">${e("notices.summary_note","This list is a summary. For the complete and authoritative list of dependencies and their licences, refer to the NOTICE file included in your Orus installation, or run pip-licenses and npm ls in your Orus installation environment.")}</p>
             </div>
-        `}};h._QUOTES=[{text:'"Man is made to be the plaything of God ... the noblest of pastimes."',thinker:"Plato",source:"Laws",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Plato_Silanion_Musei_Capitolini_MC1377.jpg/440px-Plato_Silanion_Musei_Capitolini_MC1377.jpg"},{text:'"Time is a child ... playing draughts."',thinker:"Heraclitus",source:"Fragment 52",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Heraclitus%2C_Johannes_Moreelse.jpg/440px-Heraclitus%2C_Johannes_Moreelse.jpg"},{text:`"All the world's a stage ... merely players."`,thinker:"Shakespeare",source:"As You Like It",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Shakespeare.jpg/440px-Shakespeare.jpg"},{text:'"Man only plays ... when he plays."',thinker:"Schiller",source:"Aesthetical and Philosophical Essays",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Friedrich_schiller.jpg/440px-Friedrich_schiller.jpg"},{text:'"Innocence is the child ... a game, a self-rolling wheel."',thinker:"Nietzsche",source:"Thus Spoke Zarathustra",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/440px-Nietzsche187a.jpg"},{text:'"On the stage of the world ... their little part."',thinker:"Schopenhauer",source:"The Essays of Arthur Schopenhauer",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Arthur_Schopenhauer_by_J_Sch%C3%A4fer%2C_1859b.jpg/440px-Arthur_Schopenhauer_by_J_Sch%C3%A4fer%2C_1859b.jpg"},{text:'"Life is nothing until it is lived ... make sense of."',thinker:"Sartre",source:"Existentialism Is a Humanism",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Jean-Paul_Sartre_FP.jpg/440px-Jean-Paul_Sartre_FP.jpg"},{text:'"Play is older than culture."',thinker:"Huizinga",source:"Homo Ludens",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Johan_Huizinga.jpg/440px-Johan_Huizinga.jpg"},{text:'"The life-game has to be purged ... rules."',thinker:"Alan Watts",source:"The Taboo Against Knowing Who You Are",portrait:"https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Alan_Watts.png/440px-Alan_Watts.png"},{text:'"The only purpose of the game ... keep everyone in play."',thinker:"James P. Carse",source:"Finite and Infinite Games",portrait:""}];h._SHOWCASE_ITEMS=[{type:"video",title:"Orus Trailer",desc:"Meet Orus — privacy-first, multimodal AI running entirely on your local hardware.",tag:"AI",accent:"#60a5fa",section:"ai",youtubeId:"xSacmd2pQOw"},{type:"video",title:"Hardware Specs",desc:"Minimum hardware requirements to run Orus the Living Machine locally.",tag:"AI",accent:"#60a5fa",section:"ai",youtubeId:"GA5QfkVvVlw"},{type:"video",title:"Ring Menu",desc:"Watch Orus navigate its 3D Ring Menu with live voice interaction.",tag:"AI",accent:"#a78bfa",section:"ai",youtubeId:"4I3WJm9BObQ"},{type:"video",title:"Islands of Life OST",desc:"Official soundtrack visualiser for our cinematic VR adventure.",tag:"VR · Music",accent:"#f59e0b",section:"vr",youtubeId:"qJRQyZk3m8g"}];h.styles=te`
+        `}};m._QUOTES=[{text:'"Man is made to be the plaything of God ... the noblest of pastimes."',thinker:"Plato",source:"Laws",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Plato_Silanion_Musei_Capitolini_MC1377.jpg/440px-Plato_Silanion_Musei_Capitolini_MC1377.jpg"},{text:'"Time is a child ... playing draughts."',thinker:"Heraclitus",source:"Fragment 52",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Heraclitus%2C_Johannes_Moreelse.jpg/440px-Heraclitus%2C_Johannes_Moreelse.jpg"},{text:`"All the world's a stage ... merely players."`,thinker:"Shakespeare",source:"As You Like It",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Shakespeare.jpg/440px-Shakespeare.jpg"},{text:'"Man only plays ... when he plays."',thinker:"Schiller",source:"Aesthetical and Philosophical Essays",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Friedrich_schiller.jpg/440px-Friedrich_schiller.jpg"},{text:'"Innocence is the child ... a game, a self-rolling wheel."',thinker:"Nietzsche",source:"Thus Spoke Zarathustra",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/440px-Nietzsche187a.jpg"},{text:'"On the stage of the world ... their little part."',thinker:"Schopenhauer",source:"The Essays of Arthur Schopenhauer",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Arthur_Schopenhauer_by_J_Sch%C3%A4fer%2C_1859b.jpg/440px-Arthur_Schopenhauer_by_J_Sch%C3%A4fer%2C_1859b.jpg"},{text:'"Life is nothing until it is lived ... make sense of."',thinker:"Sartre",source:"Existentialism Is a Humanism",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Jean-Paul_Sartre_FP.jpg/440px-Jean-Paul_Sartre_FP.jpg"},{text:'"Play is older than culture."',thinker:"Huizinga",source:"Homo Ludens",portrait:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Johan_Huizinga.jpg/440px-Johan_Huizinga.jpg"},{text:'"The life-game has to be purged ... rules."',thinker:"Alan Watts",source:"The Taboo Against Knowing Who You Are",portrait:"https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Alan_Watts.png/440px-Alan_Watts.png"},{text:'"The only purpose of the game ... keep everyone in play."',thinker:"James P. Carse",source:"Finite and Infinite Games",portrait:""}];m._SHOWCASE_ITEMS=[{type:"video",title:"Orus Trailer",desc:"Meet Orus — privacy-first, multimodal AI running entirely on your local hardware.",tag:"AI",accent:"#60a5fa",section:"ai",youtubeId:"xSacmd2pQOw"},{type:"video",title:"Hardware Specs",desc:"Minimum hardware requirements to run Orus the Living Machine locally.",tag:"AI",accent:"#60a5fa",section:"ai",youtubeId:"GA5QfkVvVlw"},{type:"video",title:"Ring Menu",desc:"Watch Orus navigate its 3D Ring Menu with live voice interaction.",tag:"AI",accent:"#a78bfa",section:"ai",youtubeId:"4I3WJm9BObQ"},{type:"video",title:"Islands of Life OST",desc:"Official soundtrack visualiser for our cinematic VR adventure.",tag:"VR · Music",accent:"#f59e0b",section:"vr",youtubeId:"qJRQyZk3m8g"}];m.styles=re`
         :host {
             display: block;
             width: 100%;
@@ -8180,4 +8232,4 @@
                 grid-template-columns: 1fr;
             }
         }
-    `;y([f()],h.prototype,"_loading",2);y([f()],h.prototype,"_loadingMessage",2);y([f()],h.prototype,"_loadingProgress",2);y([f()],h.prototype,"_ready",2);y([f()],h.prototype,"_errorMessage",2);y([f()],h.prototype,"_activeSection",2);y([f()],h.prototype,"_threeCanvasReady",2);y([f()],h.prototype,"_aboutOpen",2);y([f()],h.prototype,"_editorOpen",2);y([f()],h.prototype,"_editorError",2);y([f()],h.prototype,"_currentLocale",2);y([f()],h.prototype,"_langDropdownOpen",2);y([f()],h.prototype,"_currentQuoteIndex",2);y([f()],h.prototype,"_quoteFading",2);y([f()],h.prototype,"_activeVideoIndex",2);y([f()],h.prototype,"_expandedCard",2);y([A({type:String,attribute:"site-url"})],h.prototype,"siteUrl",2);h=y([Te("orus-cgs-home")],h);const we={log:console.log.bind(console),warn:console.warn.bind(console),error:console.error.bind(console)};function yt(){const i=()=>{};console.debug=i,console.trace=i,console.dir=i,console.dirxml=i,console.table=i;try{console.clear()}catch{}we.log("%c Comet Game Studio %c Orus AI System %c","background: #6366f1; color: #fff; padding: 4px 8px; border-radius: 4px 0 0 4px; font-weight: 700;","background: #1e1b4b; color: #c4b5fd; padding: 4px 8px; border-radius: 0 4px 4px 0;",""),we.log("%chttps://www.cometgamestudio.com","color: #94a3b8; font-size: 11px;")}function xt(){document.addEventListener("keydown",i=>{i.ctrlKey&&!i.shiftKey&&(i.key==="u"||i.key==="U")&&i.preventDefault()},!0),document.addEventListener("contextmenu",i=>(i.preventDefault(),!1))}function wt(){typeof performance<"u"&&performance.clearResourceTimings&&setInterval(()=>{try{performance.clearResourceTimings()}catch{}},1e4)}yt();xt();wt();
+    `;w([f()],m.prototype,"_loading",2);w([f()],m.prototype,"_loadingMessage",2);w([f()],m.prototype,"_loadingProgress",2);w([f()],m.prototype,"_ready",2);w([f()],m.prototype,"_errorMessage",2);w([f()],m.prototype,"_activeSection",2);w([f()],m.prototype,"_threeCanvasReady",2);w([f()],m.prototype,"_aboutOpen",2);w([f()],m.prototype,"_editorOpen",2);w([f()],m.prototype,"_editorError",2);w([f()],m.prototype,"_currentLocale",2);w([f()],m.prototype,"_langDropdownOpen",2);w([f()],m.prototype,"_currentQuoteIndex",2);w([f()],m.prototype,"_quoteFading",2);w([f()],m.prototype,"_activeVideoIndex",2);w([f()],m.prototype,"_expandedCard",2);w([C({type:String,attribute:"site-url"})],m.prototype,"siteUrl",2);m=w([Oe("orus-cgs-home")],m);const Ae={log:console.log.bind(console),warn:console.warn.bind(console),error:console.error.bind(console)};function $t(){const a=()=>{};console.debug=a,console.trace=a,console.dir=a,console.dirxml=a,console.table=a;try{console.clear()}catch{}Ae.log("%c Comet Game Studio %c Orus AI System %c","background: #6366f1; color: #fff; padding: 4px 8px; border-radius: 4px 0 0 4px; font-weight: 700;","background: #1e1b4b; color: #c4b5fd; padding: 4px 8px; border-radius: 0 4px 4px 0;",""),Ae.log("%chttps://www.cometgamestudio.com","color: #94a3b8; font-size: 11px;")}function _t(){document.addEventListener("keydown",a=>{a.ctrlKey&&!a.shiftKey&&(a.key==="u"||a.key==="U")&&a.preventDefault()},!0),document.addEventListener("contextmenu",a=>(a.preventDefault(),!1))}function kt(){typeof performance<"u"&&performance.clearResourceTimings&&setInterval(()=>{try{performance.clearResourceTimings()}catch{}},1e4)}$t();_t();kt();
