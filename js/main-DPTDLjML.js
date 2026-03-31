@@ -365,7 +365,6 @@
     .about-card {
       position: absolute;
       width: 95%;
-      max-width: 960px;
       height: calc(100% - 80px);
       background: rgba(15, 15, 25, 0.95);
       border: 1px solid rgba(99, 102, 241, 0.25);
@@ -428,7 +427,6 @@
 
     .about-arrow-spacer {
       width: 95%;
-      max-width: 960px;
       flex-shrink: 1;
       pointer-events: none;
     }
@@ -3640,7 +3638,7 @@
                         <div class="cgs-showcase-specs-kicker">${e("hero.showcase.hardware.kicker","Requirement Overview")}</div>
                         <div class="cgs-showcase-specs-note">${e("hero.showcase.hardware.note","A compact copy of the system requirement guide from the About panel.")}</div>
                     </div>
-                    <div class="cgs-showcase-specs-badge">${e("hero.showcase.hardware.badge","Windows x64 · RTX Recommended")}</div>
+                    <div class="cgs-showcase-specs-badge">${e("hero.showcase.hardware.badge","Windows x64 · RTX Required · Research into AMD Graphics Cards is in progress")}</div>
                 </div>
                 <div class="cgs-showcase-spec-list">
                     ${s.map(t=>c`
@@ -4214,7 +4212,7 @@
 
         /* Fixed top nav layout variables */
         :host {
-            --cgs-nav-height: 56px;
+            --cgs-nav-height: 64px;
         }
 
         /* ── Loading Overlay ─────────────────────────────────── */
@@ -4329,12 +4327,11 @@
             top: 0;
             left: 0;
             right: 0;
-            height: var(--cgs-nav-height);
             z-index: 40;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            padding: calc(8px + env(safe-area-inset-top)) calc(32px + env(safe-area-inset-right)) 8px calc(32px + env(safe-area-inset-left));
+            padding: calc(12px + env(safe-area-inset-top)) calc(32px + env(safe-area-inset-right)) 14px calc(32px + env(safe-area-inset-left));
             background: rgba(10, 10, 15, 0.9);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(99, 102, 241, 0.15);
@@ -6051,17 +6048,21 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 28px;
+            padding: 8px 18px;
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
             border: none;
             border-radius: 10px;
             color: #fff;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.25s ease;
-            margin-top: 24px;
+            margin-top: 0;
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .cgs-store-btn:hover {
@@ -6070,13 +6071,19 @@
         }
 
         .cgs-store-btn.disabled {
-            background: linear-gradient(135deg, #6b7280, #4b5563);
-            color: #e5e7eb;
+            background: rgba(100, 100, 120, 0.25);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: rgba(148, 163, 184, 0.7);
             cursor: default;
-            opacity: 0.8;
             box-shadow: none;
             transform: none;
             pointer-events: none;
+            animation: store-btn-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes store-btn-pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.85; }
         }
 
         /* ── Full-content section (no padding, fills area) ──── */
@@ -7118,7 +7125,6 @@
         /* ── Enterprise Page ───────────────────────────────── */
 
         .cgs-enterprise-page {
-            max-width: 960px;
             width: 100%;
             text-align: left;
             padding-bottom: 64px;
