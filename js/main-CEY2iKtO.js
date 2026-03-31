@@ -3654,7 +3654,6 @@
                         </div>
                     </div>
                     <div class="cgs-quote-hover-panel" aria-hidden="true">
-                        <div class="cgs-quote-hover-kicker">Full Quote</div>
                         <div class="cgs-quote-hover-text">${s.text}</div>
                         <div class="cgs-quote-hover-meta">
                             <span class="cgs-quote-hover-thinker">${s.thinker}</span>
@@ -4313,7 +4312,7 @@
 
         .cgs-logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 22px;
+            font-size: 40px;
             font-weight: 700;
             color: #ffffff;
             letter-spacing: 3px;
