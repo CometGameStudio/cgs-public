@@ -4180,32 +4180,34 @@
                 <div class="cgs-about-icon-text">${e("about.company","Comet Game Studio Ltd")}</div>
                 <h2>${e("about.title","About Comet Game Studio Ltd")}</h2>
                 <p>
-                    ${e("about.intro","Comet Game Studio Ltd is a dedicated independent studio specialising in AI-powered creative tools and immersive virtual reality experiences. Founded with the vision of making advanced AI accessible and local-first, we prioritize user privacy and data sovereignty above all else.")}
+                    ${e("about.intro","Comet Game Studio Ltd is a dedicated independent studio specialising in immersive Virtual Reality experiences and Al-powered creative tools for real world applications. Founded with the vision of making advanced Al accessible and local-first, we prioritize responsive offline user experience.")}
                 </p>
                 <p>
-                    ${e("about.orus_desc","Our flagship product, Orus the Living Machine, is a privacy-first multimodal AI assistant running entirely on your local Windows Machine. Powered by the advanced Phi-4 model architecture, Orus is not just a chatbot — it is a persistent digital entity that evolves with you. All processing runs via the vLLM engine on your device: no cloud dependency. Orus is designed to minimise Orus-originated telemetry. Microsoft Store and Windows platform telemetry operates independently of Orus.")}
+                ${e("about.iol_desc","We are currently working on the Islands of Life - a cinematic VR adventure placing you in the role of Denid, an explorer uncovering the mysteries of alien worlds to an original orchestral soundtrack. — Rated PEGI 12.")}
+                </p>
+                <p>
+                    ${e("about.orus_desc","Orus the Living Machine, is a privacy-first multimodal Al assistant running entirely on — your local Windows Machine. Powered by the advanced Phi-4 model architecture, Orus is not just a chatbot- it is a persistent digital entity that evolves with you. All processing runs via the vLLM engine on your — device: no cloud dependency. Orus is designed to minimise Orus-originated telemetry. Microsoft Store and — Windows platform telemetry operates independently of Orus.")}
                 </p>
                 <p>
                     ${e("about.multimodal","True Multimodal Interaction naturally through voice, text, or vision. Speak to Orus using the emotive Orpheus TTS engine — it understands interruptions, tone, and context. Share your camera, screen, or drop images for instant analysis, OCR, and UI feedback. Orus can even type directly into your Windows applications based on your voice commands.")}
                 </p>
-                <p>
-                    ${e("about.iol_desc","We also craft immersive VR experiences, including Islands of Life — a cinematic VR adventure placing you in the role of Denid, an explorer uncovering the mysteries of alien worlds to an original orchestral soundtrack. Rated PEGI 12.")}
-                </p>
+
                 <p>
                     ${e("about.registered","Comet Game Studio Ltd is registered in England and Wales. Governing law: England and Wales.")}
                 </p>
 
+
                 <!-- Find us online -->
                 <div class="cgs-about-links" style="margin-top: 28px;">
                     <a class="cgs-about-link youtube"
-                       href="https://www.youtube.com/@CometGameStudio"
-                       target="_blank"
-                       rel="noopener noreferrer">
+                    href="https://www.youtube.com/@CometGameStudio"
+                    target="_blank"
+                    rel="noopener noreferrer">
                         ▶ ${e("about.youtube","YouTube Channel")}
                     </a>
                     <span class="cgs-about-link ms-store disabled"
-                          title="${e("about.store_tooltip","Coming to Microsoft Store soon")}"
-                          aria-disabled="true">
+                        title="${e("about.store_tooltip","Coming to Microsoft Store soon")}"
+                        aria-disabled="true">
                         🪟 ${e("about.store_link","Microsoft Store — Coming Soon")}
                     </span>
                 </div>
