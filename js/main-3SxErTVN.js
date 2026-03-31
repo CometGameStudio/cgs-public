@@ -28,7 +28,7 @@
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function b(s){return _({...s,state:!0,attribute:!1})}const V=[{code:"en",name:"English",native:"English",flag:"🇬🇧"},{code:"tr",name:"Turkish",native:"Türkçe",flag:"🇹🇷"},{code:"de",name:"German",native:"Deutsch",flag:"🇩🇪"},{code:"fr",name:"French",native:"Français",flag:"🇫🇷"},{code:"es",name:"Spanish",native:"Español",flag:"🇪🇸"},{code:"it",name:"Italian",native:"Italiano",flag:"🇮🇹"},{code:"pt",name:"Portuguese",native:"Português",flag:"🇵🇹"},{code:"nl",name:"Dutch",native:"Nederlands",flag:"🇳🇱"},{code:"pl",name:"Polish",native:"Polski",flag:"🇵🇱"},{code:"ru",name:"Russian",native:"Русский",flag:"🇷🇺"},{code:"zh",name:"Chinese",native:"中文",flag:"🇨🇳"},{code:"ja",name:"Japanese",native:"日本語",flag:"🇯🇵"},{code:"ko",name:"Korean",native:"한국어",flag:"🇰🇷"},{code:"ar",name:"Arabic",native:"العربية",flag:"🇸🇦"},{code:"hi",name:"Hindi",native:"हिन्दी",flag:"🇮🇳"},{code:"sv",name:"Swedish",native:"Svenska",flag:"🇸🇪"},{code:"da",name:"Danish",native:"Dansk",flag:"🇩🇰"},{code:"fi",name:"Finnish",native:"Suomi",flag:"🇫🇮"},{code:"cs",name:"Czech",native:"Čeština",flag:"🇨🇿"},{code:"hu",name:"Hungarian",native:"Magyar",flag:"🇭🇺"},{code:"el",name:"Greek",native:"Ελληνικά",flag:"🇬🇷"},{code:"uk",name:"Ukrainian",native:"Українська",flag:"🇺🇦"},{code:"ro",name:"Romanian",native:"Română",flag:"🇷🇴"}];let S="en",he=new Map,U={};const X=new Set;function e(s,t){return S==="en"?t:U[s]??t}function Ke(){return S}async function Je(s){if(s===S)return;if(s==="en"){S="en",U={},j();return}const t=he.get(s);if(t){S=s,U=t.translations,j();return}try{const i=await fetch(`./locales/${encodeURIComponent(s)}.json`);if(!i.ok){console.warn(`[i18n] Locale file not found for "${s}" (HTTP ${i.status}). Using English.`);return}const a=await i.json(),r={locale:s,translations:a,loadedAt:Date.now()};he.set(s,r),S=s,U=a,j()}catch(i){console.warn(`[i18n] Failed to load locale "${s}":`,i)}}function $e(s){return X.add(s),()=>{X.delete(s)}}function j(){for(const s of X)try{s()}catch{}window.dispatchEvent(new CustomEvent("cgs-locale-changed",{detail:{locale:S}}))}var Ze=Object.defineProperty,w=(s,t,i,a)=>{for(var r=void 0,o=s.length-1,n;o>=0;o--)(n=s[o])&&(r=n(t,i,r)||r);return r&&Ze(t,i,r),r};const et="13.0, 12.9, 12.8, 12.7, 12.6, 12.5, 12.4, 12.3, 12.2, 12.1, 12.0",Y=[{tier:"8 GB VRAM"},{tier:"12 GB+ VRAM"},{tier:"23 GB+ VRAM"}];class x extends z{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.startTab="about",this.hideHomeBtn=!1,this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:6,eula:5,"third-party":5,safety:5,disclaimers:5},this._touchStartX=0,this._touchStartY=0,this._touchSwipeCandidate=!1,this._nextCard=()=>{if(this.currentCardIndex<this._currentTabCardCount-1)this.currentCardIndex=this.currentCardIndex+1;else{const t=this.TAB_ITEMS,i=t.findIndex(a=>a.id===this.activeTab);i<t.length-1&&(this.activeTab=t[i+1].id,this.currentCardIndex=0)}},this._prevCard=()=>{if(this.currentCardIndex>0)this.currentCardIndex=this.currentCardIndex-1;else{const t=this.TAB_ITEMS,i=t.findIndex(a=>a.id===this.activeTab);i>0&&(this.activeTab=t[i-1].id,this.currentCardIndex=this._tabCardCounts[this.activeTab]-1)}},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{if(this._touchSwipeCandidate=!1,!this.fullPage||t.touches.length!==1)return;const i=t.composedPath()[0]??t.target;!this._isCarouselTouchTarget(i)||this._isInteractiveTouchTarget(i)||(this._touchSwipeCandidate=!0,this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY)},this._onTouchEnd=t=>{if(!this.fullPage||!this._touchSwipeCandidate||t.changedTouches.length===0){this.isCardDragging=!1,this._touchSwipeCandidate=!1;return}const i=t.changedTouches[0].clientX-this._touchStartX,a=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,this._touchSwipeCandidate=!1,Math.abs(i)>Math.abs(a)&&Math.abs(i)>this.cardDragThreshold&&(i<0?this._nextCard():this._prevCard())},this._onTouchCancel=()=>{this.isCardDragging=!1,this._touchSwipeCandidate=!1},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const i=this.position||this._defaultPosition();this.dragStartPosX=i.x,this.dragStartPosY=i.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const i=t.clientX-this.dragStartX,a=t.clientY-this.dragStartY,r={x:this.dragStartPosX+i,y:this.dragStartPosY+a};this.position=r,this.dispatchEvent(new CustomEvent("position-changed",{detail:r}))}if(this.isResizing){const i=t.clientX-this.dragStartX,a=t.clientY-this.dragStartY,r={width:Math.max(500,this.resizeStartWidth+i),height:Math.max(400,this.resizeStartHeight+a)};this.size=r,this.dispatchEvent(new CustomEvent("size-changed",{detail:r}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1}}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}static{this.styles=fe`
+ */function b(s){return _({...s,state:!0,attribute:!1})}const V=[{code:"en",name:"English",native:"English",flag:"🇬🇧"},{code:"tr",name:"Turkish",native:"Türkçe",flag:"🇹🇷"},{code:"de",name:"German",native:"Deutsch",flag:"🇩🇪"},{code:"fr",name:"French",native:"Français",flag:"🇫🇷"},{code:"es",name:"Spanish",native:"Español",flag:"🇪🇸"},{code:"it",name:"Italian",native:"Italiano",flag:"🇮🇹"},{code:"pt",name:"Portuguese",native:"Português",flag:"🇵🇹"},{code:"nl",name:"Dutch",native:"Nederlands",flag:"🇳🇱"},{code:"pl",name:"Polish",native:"Polski",flag:"🇵🇱"},{code:"ru",name:"Russian",native:"Русский",flag:"🇷🇺"},{code:"zh",name:"Chinese",native:"中文",flag:"🇨🇳"},{code:"ja",name:"Japanese",native:"日本語",flag:"🇯🇵"},{code:"ko",name:"Korean",native:"한국어",flag:"🇰🇷"},{code:"ar",name:"Arabic",native:"العربية",flag:"🇸🇦"},{code:"hi",name:"Hindi",native:"हिन्दी",flag:"🇮🇳"},{code:"sv",name:"Swedish",native:"Svenska",flag:"🇸🇪"},{code:"da",name:"Danish",native:"Dansk",flag:"🇩🇰"},{code:"fi",name:"Finnish",native:"Suomi",flag:"🇫🇮"},{code:"cs",name:"Czech",native:"Čeština",flag:"🇨🇿"},{code:"hu",name:"Hungarian",native:"Magyar",flag:"🇭🇺"},{code:"el",name:"Greek",native:"Ελληνικά",flag:"🇬🇷"},{code:"uk",name:"Ukrainian",native:"Українська",flag:"🇺🇦"},{code:"ro",name:"Romanian",native:"Română",flag:"🇷🇴"}];let S="en",he=new Map,U={};const X=new Set;function e(s,t){return S==="en"?t:U[s]??t}function Ke(){return S}async function Je(s){if(s===S)return;if(s==="en"){S="en",U={},j();return}const t=he.get(s);if(t){S=s,U=t.translations,j();return}try{const i=await fetch(`./locales/${encodeURIComponent(s)}.json`);if(!i.ok){console.warn(`[i18n] Locale file not found for "${s}" (HTTP ${i.status}). Using English.`);return}const a=await i.json(),r={locale:s,translations:a,loadedAt:Date.now()};he.set(s,r),S=s,U=a,j()}catch(i){console.warn(`[i18n] Failed to load locale "${s}":`,i)}}function $e(s){return X.add(s),()=>{X.delete(s)}}function j(){for(const s of X)try{s()}catch{}window.dispatchEvent(new CustomEvent("cgs-locale-changed",{detail:{locale:S}}))}var Ze=Object.defineProperty,w=(s,t,i,a)=>{for(var r=void 0,o=s.length-1,n;o>=0;o--)(n=s[o])&&(r=n(t,i,r)||r);return r&&Ze(t,i,r),r};const et="13.0, 12.9, 12.8, 12.7, 12.6, 12.5, 12.4, 12.3, 12.2, 12.1, 12.0",Y=[{tier:"8 GB VRAM"},{tier:"12 GB+ VRAM"},{tier:"23 GB+ VRAM"}];class x extends z{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.startTab="about",this.hideHomeBtn=!1,this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragThreshold=40,this._tabCardCounts={about:12,privacy:6,eula:5,"third-party":5,safety:5,disclaimers:5},this._touchStartX=0,this._touchStartY=0,this._touchSwipeCandidate=!1,this._nextCard=()=>{if(this.currentCardIndex<this._currentTabCardCount-1)this.currentCardIndex=this.currentCardIndex+1;else{const t=this.TAB_ITEMS,i=t.findIndex(a=>a.id===this.activeTab);i<t.length-1&&(this.activeTab=t[i+1].id,this.currentCardIndex=0)}},this._prevCard=()=>{if(this.currentCardIndex>0)this.currentCardIndex=this.currentCardIndex-1;else{const t=this.TAB_ITEMS,i=t.findIndex(a=>a.id===this.activeTab);i>0&&(this.activeTab=t[i-1].id,this.currentCardIndex=this._tabCardCounts[this.activeTab]-1)}},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{if(t.key==="Escape"&&!this.fullPage&&this.open){t.preventDefault(),this.dispatchEvent(new CustomEvent("close"));return}this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{if(this._touchSwipeCandidate=!1,!this.fullPage||t.touches.length!==1)return;const i=t.composedPath()[0]??t.target;!this._isCarouselTouchTarget(i)||this._isInteractiveTouchTarget(i)||(this._touchSwipeCandidate=!0,this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY)},this._onTouchEnd=t=>{if(!this.fullPage||!this._touchSwipeCandidate||t.changedTouches.length===0){this.isCardDragging=!1,this._touchSwipeCandidate=!1;return}const i=t.changedTouches[0].clientX-this._touchStartX,a=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,this._touchSwipeCandidate=!1,Math.abs(i)>Math.abs(a)&&Math.abs(i)>this.cardDragThreshold&&(i<0?this._nextCard():this._prevCard())},this._onTouchCancel=()=>{this.isCardDragging=!1,this._touchSwipeCandidate=!1},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const i=this.position||this._defaultPosition();this.dragStartPosX=i.x,this.dragStartPosY=i.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const i=t.clientX-this.dragStartX,a=t.clientY-this.dragStartY,r={x:this.dragStartPosX+i,y:this.dragStartPosY+a};this.position=r,this.dispatchEvent(new CustomEvent("position-changed",{detail:r}))}if(this.isResizing){const i=t.clientX-this.dragStartX,a=t.clientY-this.dragStartY,r={width:Math.max(500,this.resizeStartWidth+i),height:Math.max(400,this.resizeStartHeight+a)};this.size=r,this.dispatchEvent(new CustomEvent("size-changed",{detail:r}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1}}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}static{this.styles=fe`
     :host {
       display: block;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -147,6 +147,12 @@
       background: rgba(99, 102, 241, 0.15);
       color: #a5b4fc;
       font-weight: 500;
+    }
+
+    .about-nav-btn:focus-visible {
+      outline: 2px solid #a5b4fc;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
     }
 
     .about-nav-icon {
@@ -311,6 +317,23 @@
 
     .about-close-btn:hover {
       background: rgba(239, 68, 68, 0.25);
+    }
+
+    .about-close-btn:focus-visible {
+      outline: 2px solid #f87171;
+      outline-offset: 2px;
+    }
+
+    /* WCAG 2.4.11 — Focus Not Obscured: elements not hidden by fixed header */
+    .about-content :focus-visible {
+      scroll-margin-top: calc(var(--about-header-height) + 16px);
+    }
+
+    /* Global focus-visible for home/chip buttons */
+    :where(.about-home-btn, .about-home-btn-header, .about-chip-btn):focus-visible {
+      outline: 2px solid #a5b4fc;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
     }
 
     .about-content {
@@ -483,18 +506,20 @@
     }
 
     .about-carousel-dot {
-      width: 8px;
-      height: 8px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: rgba(99, 102, 241, 0.3);
       border: 1px solid rgba(99, 102, 241, 0.5);
       cursor: pointer;
       transition: all 0.3s ease;
+      /* Visual dot drawn via box-shadow; touch target stays 24px (WCAG 2.5.8) */
+      box-shadow: inset 0 0 0 7px var(--ui-popup-bg, rgba(12, 12, 22, 0.97));
     }
 
     .about-carousel-dot.active {
       background: #6366f1;
-      box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
+      box-shadow: inset 0 0 0 7px var(--ui-popup-bg, rgba(12, 12, 22, 0.97)), 0 0 12px rgba(99, 102, 241, 0.6);
     }
 
     .about-carousel-dot:hover {
@@ -1473,6 +1498,18 @@
       font-size: 11px;
       line-height: 1.6;
     }
+
+    /* WCAG 2.3.3 — Respect reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .about-card {
+        transition: none !important;
+      }
+    }
   `}connectedCallback(){super.connectedCallback(),this.activeTab=this.startTab,this._unlistenI18n=$e(()=>this.requestUpdate()),globalThis.addEventListener("mousemove",this._onMouseMove),globalThis.addEventListener("mouseup",this._onMouseUp),globalThis.addEventListener("keydown",this._onKeyDown)}disconnectedCallback(){super.disconnectedCallback(),this._unlistenI18n?.(),globalThis.removeEventListener("mousemove",this._onMouseMove),globalThis.removeEventListener("mouseup",this._onMouseUp),globalThis.removeEventListener("keydown",this._onKeyDown)}willUpdate(t){t.has("activeTab")&&(this.currentCardIndex=0)}_eventElement(t){return t instanceof HTMLElement?t:t instanceof Node?t.parentElement:null}_isCarouselTouchTarget(t){return!!this._eventElement(t)?.closest(".about-content-carousel")}_isInteractiveTouchTarget(t){return!!this._eventElement(t)?.closest('button, a, details, summary, [role="tab"], [role="button"]')}_effectiveSize(){const t=Math.max(500,globalThis.innerWidth*.94),i=Math.max(400,globalThis.innerHeight*.92);return{width:Math.min(this.size.width,t),height:Math.min(this.size.height,i)}}_defaultPosition(){const{width:t,height:i}=this._effectiveSize();return{x:Math.max(20,(globalThis.innerWidth-t)/2),y:Math.max(20,(globalThis.innerHeight-i)/2)}}get BENCHMARK_TIERS(){return[{label:e("about.sysreq.tier1.label","Minimum Local Benchmark"),tier:Y[0].tier,summary:e("about.sysreq.tier1.summary","Bootable local Orus for phi4-mini, Memory RAG, quiet queue work, and low-visual professional use."),fit:e("about.sysreq.tier1.fit","Best for solo admin, overnight categorization, validation, and text-first workflows.")},{label:e("about.sysreq.tier2.label","Professional Multimodal Baseline"),tier:Y[1].tier,summary:e("about.sysreq.tier2.summary","Balanced tier for multimodal Orus with live vision, Orpheus TTS on tuned profiles, and practical day-to-day throughput."),fit:e("about.sysreq.tier2.fit","Best for legal, marketing, HR, business operations, research, and meeting-heavy roles.")},{label:e("about.sysreq.tier3.label","Prime Visual Studio Tier"),tier:Y[2].tier,summary:e("about.sysreq.tier3.summary","Full Windows-native Orus stack including Orpheus, Whisper Large, SF3D, advanced visual workflows, and higher concurrency headroom."),fit:e("about.sysreq.tier3.fit","Best for creative direction, advanced 3D ideation, labs, enterprise demos, and high-concurrency sessions.")}]}get WORKLOAD_ARCHETYPES(){return[{icon:"📚",title:e("about.sysreq.arch1.title","Legal, Admin, HR, and Back-Office Operations"),audience:e("about.sysreq.arch1.audience","Contracts, policy review, spreadsheets, task extraction, outputs, and memory-backed casework."),activities:e("about.sysreq.arch1.activities","TaskChat, Categorizer, Processor, Validator, Outputs, Spreadsheet editing, Memory Lab, and overnight queue runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10 build 17763+ or Windows 11",fit:e("about.sysreq.arch1.min.fit","Text-first document work, quiet voice use, slower batch throughput."),notes:e("about.sysreq.arch1.min.notes","Use the text-focused or low-visual path. The 3D shell is optional for this workload.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch1.rec.fit","Comfortable multimodal document handling with Orpheus TTS and better queue depth."),notes:e("about.sysreq.arch1.rec.notes","This is the best all-round professional floor if you want voice, live vision, and document tools together.")}},{icon:"📈",title:e("about.sysreq.arch2.title","Business, Finance, Marketing, and Social Media"),audience:e("about.sysreq.arch2.audience","Research synthesis, meeting prep, campaign drafts, CRM-style memory recall, and multi-window guidance."),activities:e("about.sysreq.arch2.activities","Webber, Presenter, BrainStorm, Discord, Outputs, Voice Profiles, and live multimodal chat."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch2.min.fit","Capable of multimodal work, but with tighter concurrency and shorter comfortable sessions."),notes:e("about.sysreq.arch2.min.notes","Suitable if you want Orpheus voice and live vision, but not the heaviest 3D or advanced visual stacks.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch2.rec.fit","Smooth daily use across voice, research, planning, and client-facing flows."),notes:e("about.sysreq.arch2.rec.notes","A higher-VRAM card gives more room for simultaneous speech, vision, and retrieval without comfort drops.")}},{icon:"🔬",title:e("about.sysreq.arch3.title","Science, Audit, Research, and High-Context Knowledge Work"),audience:e("about.sysreq.arch3.audience","Long-form reading, evidence review, reasoning, synthesis, and structured retrieval against large source sets."),activities:e("about.sysreq.arch3.activities","High-context engine profiles, Defrag, Memory Lab, Webber, Presenter, and reasoning-heavy sessions."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch3.min.fit","Usable for careful high-context work with conservative concurrency."),notes:e("about.sysreq.arch3.min.notes","Expect tighter token budgets when voice and long-document reasoning are active together.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch3.rec.fit","Best for sustained high-context reasoning, deeper queues, and fewer context-trim compromises."),notes:e("about.sysreq.arch3.rec.notes","Prime-class hardware is where long-context work starts to feel comfortably professional instead of merely possible.")}},{icon:"🎨",title:e("about.sysreq.arch4.title","Creative Direction, Visual Design, and 3D Ideation"),audience:e("about.sysreq.arch4.audience","Visual command workflows, OBB, Living Machine, scene experimentation, and design-oriented narration."),activities:e("about.sysreq.arch4.activities","Visual command workflows, Boltzmann Brain, Living Machine, Webcam, Face Capture, visual themes, and scene-driven presentation."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch4.min.fit","Basic visual workflows and scene experimentation without the heaviest generation modules."),notes:e("about.sysreq.arch4.min.notes","Good for visual assistance and lighter 3D use. It is not the right floor for SF3D or video-heavy iteration.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch4.rec.fit","Comfortable visual command work, richer 3D scenes, and headroom for advanced visual modules."),notes:e("about.sysreq.arch4.rec.notes","Use Prime-class hardware if Orus is part of a real creative pipeline rather than occasional visual support.")}},{icon:"🎤",title:e("about.sysreq.arch5.title","Meetings, Teaching, Support, and Community Operations"),audience:e("about.sysreq.arch5.audience","Presenter sessions, meeting transcription, Teams or Discord support, multi-speaker capture, and guided walkthroughs."),activities:e("about.sysreq.arch5.activities","Meeting Mode, Presenter, Voice Profiles, per-app audio capture, Discord, and system dialogue."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch5.min.fit","Functional voice-centric workflows with moderate simultaneous capture and response pressure."),notes:e("about.sysreq.arch5.min.notes","This tier is viable, but real-time comfort improves materially as VRAM and RAM rise.")},recommended:{gpu:"16 GB to 24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch5.rec.fit","Better for long meeting runs, cleaner voice overlap handling, and more resilient STT plus TTS coexistence."),notes:e("about.sysreq.arch5.rec.notes","Orpheus throughput is benchmarked at session start, so stronger GPUs usually translate directly into smoother live voice UX.")}},{icon:"🌙",title:e("about.sysreq.arch6.title","Solo Professionals and Overnight Batch Processing"),audience:e("about.sysreq.arch6.audience","Users who prefer slower unattended work over real-time presentation and can leave the machine running for queues."),activities:e("about.sysreq.arch6.activities","Categorizer, Processor, Validator, Output export, memory cleanup, and long unattended text-first runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("about.sysreq.arch6.min.fit","The minimum local benchmark for patient, text-focused processing."),notes:e("about.sysreq.arch6.min.notes","This is the right bracket if you do not need the 3D shell and can tolerate slower TTS or lower concurrency.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch6.rec.fit","Much better queue throughput and fewer stalls once memory retrieval, voice, and exports overlap."),notes:e("about.sysreq.arch6.rec.notes","If Orus is running while you sleep or process long backlogs, extra VRAM buys predictability more than flashiness.")}},{icon:"🧪",title:e("about.sysreq.arch7.title","Full Orus Lab, Demo, and Studio Configuration"),audience:e("about.sysreq.arch7.audience","Users who want the widest feature envelope: multimodal, Orpheus, live vision, advanced visual workflows, and SF3D."),activities:e("about.sysreq.arch7.activities","Prime-tier end-to-end Orus with heavy voice, visuals, generation, and concurrent sessions."),minimum:{gpu:"23 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"Windows 11 on x64 preferred",fit:e("about.sysreq.arch7.min.fit","The practical floor for calling Orus a full-stack local studio rather than a trimmed workstation."),notes:e("about.sysreq.arch7.min.notes","This is where the heaviest visual and generation modules stop feeling compromised.")},recommended:{gpu:"24 GB to 32 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("about.sysreq.arch7.rec.fit","Best for enterprise demos, creative labs, and all-feature usage with minimal negotiation between subsystems."),notes:e("about.sysreq.arch7.rec.notes","RTX 4090 and RTX 5090 class machines are the right target when Orus is being used as a primary workstation layer.")}}]}_renderRequirementSpecCard(t,i,a=!1){return c`
       <div class="requirements-spec-card ${a?"recommended":""}">
         <div class="requirements-spec-label">${t}</div>
@@ -1539,11 +1576,14 @@
       <div
         class="about-panel ${this.fullPage?"full-page":""} ${this.isDragging?"dragging":""} ${this.isResizing?"resizing":""}"
         style="${this.fullPage?"":`left: ${(this.position||this._defaultPosition()).x}px; top: ${(this.position||this._defaultPosition()).y}px; width: ${this._effectiveSize().width}px; height: ${this._effectiveSize().height}px;`}"
+        role="${this.fullPage?"main":"dialog"}"
+        aria-label="${e("about_dialog.aria_label","About Orus")}"
+        aria-modal="${this.fullPage?"false":"true"}"
       >
         <!-- Left sidebar -->
         <div class="about-sidebar">
           <div class="about-sidebar-header" @mousedown=${this.fullPage?void 0:this._onDragStart}>
-            <div class="about-logo">◉</div>
+            <div class="about-logo" aria-hidden="true">◉</div>
             <span class="about-logo-text">Orus</span>
           </div>
           ${this.hideHomeBtn?"":c`<button
@@ -1551,16 +1591,20 @@
             @click=${()=>this.dispatchEvent(new CustomEvent("navigate-home",{bubbles:!0,composed:!0}))}
             title="${e("about_dialog.back_home","Back to Home")}"
           >
-            <span style="font-size:16px;">🏠</span>
+            <span style="font-size:16px;" aria-hidden="true">🏠</span>
             ${e("about_dialog.home","Home")}
           </button>`}
-          <div class="about-nav">
+          <div class="about-nav" role="tablist" aria-label="${e("about_dialog.tab_nav","About sections")}">
             ${this.TAB_ITEMS.map(i=>c`
               <button
                 class="about-nav-btn ${this.activeTab===i.id?"active":""}"
+                role="tab"
+                aria-selected="${this.activeTab===i.id}"
+                id="about-tab-${i.id}"
+                aria-controls="about-tabpanel"
                 @click=${()=>{this.activeTab=i.id}}
               >
-                <span class="about-nav-icon">${i.icon}</span>
+                <span class="about-nav-icon" aria-hidden="true">${i.icon}</span>
                 <span class="about-nav-label">${i.label}</span>
               </button>
             `)}
@@ -1576,14 +1620,17 @@
               @click=${()=>this.dispatchEvent(new CustomEvent("navigate-home",{bubbles:!0,composed:!0}))}
               title="${e("about_dialog.back_home","Back to Home")}"
             >
-              <span style="font-size:14px;">🏠</span>
+              <span style="font-size:14px;" aria-hidden="true">🏠</span>
               ${e("about_dialog.home","Home")}
             </button>`}
             ${this.fullPage?"":c`
-              <button class="about-close-btn" @click=${()=>this.dispatchEvent(new CustomEvent("close"))} title="Close">✕</button>
+              <button class="about-close-btn" @click=${()=>this.dispatchEvent(new CustomEvent("close"))} aria-label="${e("about_dialog.close","Close")}" title="Close">✕</button>
             `}
           </div>
           <div class="about-content ${this.fullPage?"":"scroll-mode"}"
+               id="about-tabpanel"
+               role="tabpanel"
+               aria-labelledby="about-tab-${this.activeTab}"
                @touchstart=${this._onTouchStart}
                @touchend=${this._onTouchEnd}
                @touchcancel=${this._onTouchCancel}>
@@ -3567,8 +3614,8 @@
                                 `)}
                             </div>
                         `,c`
-            <nav class="cgs-nav">
-                <button class="cgs-logo" type="button" @click=${()=>this._navigateTo("home")}>
+            <nav class="cgs-nav" aria-label="${e("nav.aria_label","Main navigation")}">
+                <button class="cgs-logo" type="button" @click=${()=>this._navigateTo("home")} aria-label="${e("nav.logo_aria","Comet Game Studio — Go to homepage")}">
                     ${e("nav.logo","Comet Game Studio")}
                 </button>
                 <a class="cgs-store-btn disabled"
@@ -3597,8 +3644,8 @@
                 </div>
             </nav>
         `}_renderSiteFooter(){return c`
-            <footer class="cgs-footer">
-                <div class="cgs-footer-links">
+            <footer class="cgs-footer" role="contentinfo">
+                <nav class="cgs-footer-links" aria-label="${e("footer.aria_label","Legal and policy links")}">
                     <button class="cgs-footer-link" type="button" @click=${()=>this._navigateTo("privacy")}>${e("footer.privacy","Privacy Policy")}</button>
                     <span class="cgs-footer-sep">·</span>
                     <button class="cgs-footer-link" type="button" @click=${()=>this._navigateTo("terms")}>${e("footer.terms","Terms of Use")}</button>
@@ -3608,7 +3655,7 @@
                     <button class="cgs-footer-link" type="button" @click=${()=>this._navigateTo("notices")}>${e("footer.notices","Third-Party Notices")}</button>
                     <span class="cgs-footer-sep">·</span>
                     <a class="cgs-footer-link" href="mailto:support@cometgamestudio.com">${e("footer.contact","Contact")}</a>
-                </div>
+                </nav>
                 <div style="margin-top: 8px;">
                     &copy; ${new Date().getFullYear()} ${e("footer.copyright","Comet Game Studio Ltd. All rights reserved.")}
                 </div>
@@ -3675,9 +3722,11 @@
                      aria-label="Studio overview and Orus product">
 
                 <!-- Integrated Quote Slideshow (replaces static title) -->
-                <div class="cgs-quote-hero" aria-live="polite"
+                <div class="cgs-quote-hero" aria-live="polite" aria-roledescription="carousel" aria-label="${e("hero.quote_carousel","Philosophical quotes carousel")}"
                      @mouseenter=${()=>this._pauseQuoteRotation()}
-                     @mouseleave=${()=>this._resumeQuoteRotation()}>
+                     @mouseleave=${()=>this._resumeQuoteRotation()}
+                     @focusin=${()=>this._pauseQuoteRotation()}
+                     @focusout=${()=>this._resumeQuoteRotation()}>
                     ${i?c`
                         <div class="cgs-quote-portrait-bg" style="background-image: url('${i}');" aria-hidden="true"></div>
                     `:""}
@@ -3770,22 +3819,23 @@
                 </div>
             </section>
         `}render(){const s=V.find(a=>a.code===this._currentLocale)??V[0],t=this._renderSiteChrome(s),i=this._renderSiteFooter();return this._loading?c`
-                <div class="loading-overlay">
-                    <div class="loading-spinner"></div>
+                <div class="loading-overlay" role="status" aria-live="polite" aria-label="Loading">
+                    <div class="loading-spinner" aria-hidden="true"></div>
                     <div class="loading-text">${this._loadingMessage}</div>
-                    <div class="loading-bar">
+                    <div class="loading-bar" role="progressbar" aria-valuenow=${this._loadingProgress} aria-valuemin="0" aria-valuemax="100" aria-label="Loading progress">
                         <div class="loading-bar-fill" style="width: ${this._loadingProgress}%"></div>
                     </div>
                 </div>
             `:this._errorMessage?c`
-                <div class="error-overlay">
-                    <div class="error-icon">⚠️</div>
+                <div class="error-overlay" role="alert">
+                    <div class="error-icon" aria-hidden="true">⚠️</div>
                     <div class="error-text">${this._errorMessage}</div>
                 </div>
             `:c`
+            <a class="cgs-skip-link" href="#cgs-main-content">${e("a11y.skip_nav","Skip to main content")}</a>
             <div class="cgs-main">
-                <!-- 3D Background Canvas — canvas is always rendered once ready; Three.js init fires via updated() -->
-                <div class="cgs-canvas-container">
+                <!-- 3D Background Canvas — decorative only, hidden from assistive tech -->
+                <div class="cgs-canvas-container" aria-hidden="true">
                     ${this._threeCanvasReady?c`<canvas id="cgs-canvas"></canvas>`:c`
                             <canvas id="cgs-canvas"></canvas>
                             <div class="css-fallback-bg" style="position:absolute;inset:0;z-index:-1"></div>
@@ -3796,9 +3846,9 @@
                 ${t}
 
                 <!-- Content Area -->
-                <div class="cgs-content">
+                <main id="cgs-main-content" class="cgs-content">
                     ${this._renderActiveSection()}
-                </div>
+                </main>
 
                 <!-- Footer — hidden in full-page orus-ai mode -->
                 ${i}
@@ -3812,13 +3862,14 @@
 
                 <!-- Orus Editor Popup (Website Demo) -->
                 ${this._editorOpen?c`
-                <div class="cgs-editor-overlay" @click=${a=>{a.target.classList.contains("cgs-editor-overlay")&&(this._editorOpen=!1)}}>
+                <div class="cgs-editor-overlay" role="dialog" aria-modal="true" aria-label="Orus Editor Web Demo" @click=${a=>{a.target.classList.contains("cgs-editor-overlay")&&(this._editorOpen=!1)}}>
                     <div class="cgs-editor-window">
                         <div class="cgs-editor-titlebar">
                             <span class="cgs-editor-win-title">◎ Orus Editor — Web Demo</span>
                             <button class="cgs-editor-close"
                                     type="button"
                                     @click=${()=>{this._editorOpen=!1}}
+                                    aria-label="Close editor"
                                     title="Close editor">✕</button>
                         </div>
                         <div class="cgs-editor-frame">
@@ -3863,9 +3914,20 @@
                 <!-- Hero -->
                 <div class="cgs-ent-hero">
                     <div class="cgs-ent-badge">${e("enterprise.badge","Coming Soon")}</div>
-                    <h1 class="cgs-ent-title">${e("enterprise.title","Orus for Enterprise")}</h1>
+                    <h1 class="cgs-ent-title">${e("enterprise.title","ORUS ENTERPRISE")}</h1>
                     <p class="cgs-ent-subtitle">${e("enterprise.subtitle","Local-first AI that keeps your data, models, and intelligence entirely within your infrastructure. No cloud dependency. No data leaving your premises.")}</p>
                 </div>
+
+                <!-- CTA (moved to top) -->
+                <section class="cgs-ent-section cgs-ent-cta">
+                    <div class="cgs-ent-cta-box">
+                        <h2>${e("enterprise.cta.title","Enterprise Interest Registrations are not available yet.")}</h2>
+                        <p>${e("enterprise.cta.body","As an Assistive AI, Orus is prioritizing the end-users while preparing the Orus Enterprise programme for organisations that require data-sovereign, locally-hosted AI. Interest registration will open shortly — details on pricing, deployment support, and volume licensing will be available at that time.")}</p>
+                        <p class="cgs-ent-cta-contact">${e("enterprise.cta.contact","For early enquiries, reach us at")}
+                            <a class="cgs-legal-link" href="mailto:support@cometgamestudio.com">support@cometgamestudio.com</a>
+                        </p>
+                    </div>
+                </section>
 
                 <!-- What is Orus -->
                 <section class="cgs-ent-section">
@@ -3876,24 +3938,24 @@
 
                 <!-- Key Differentiators -->
                 <section class="cgs-ent-section">
-                    <h2>${e("enterprise.diff.title","Why Orus for Enterprise?")}</h2>
+                    <h2>${e("enterprise.diff.title","Why ORUS ENTERPRISE?")}</h2>
                     <div class="cgs-ent-grid">
                         <article class="cgs-ent-card" style="--ent-accent: #6366f1;">
                             <div class="cgs-ent-card-icon">\ud83d\udd12</div>
                             <h3>${e("enterprise.diff.sovereignty.title","Complete Data Sovereignty")}</h3>
                             <p>${e("enterprise.diff.sovereignty.body","All inference, transcription, vision analysis, and memory storage runs locally. Zero telemetry originating from Orus. Your intellectual property, client conversations, and sensitive documents stay within your premises at all times.")}</p>
                         </article>
-                        <article class="cgs-ent-card" style="--ent-accent: #22c55e;">
+                        <article class="cgs-ent-card" style="--ent-accent: #10b981;">
                             <div class="cgs-ent-card-icon">\ud83d\udcbb</div>
                             <h3>${e("enterprise.diff.airgap.title","Air-Gapped & Offline Operation")}</h3>
                             <p>${e("enterprise.diff.airgap.body","Orus supports fully air-gapped deployment for classified environments. Models load from local storage with no internet required. An offline licence ledger ensures uninterrupted operation without connectivity. Purpose-built for defence, legal, healthcare, and financial institutions.")}</p>
                         </article>
-                        <article class="cgs-ent-card" style="--ent-accent: #f59e0b;">
+                        <article class="cgs-ent-card" style="--ent-accent: #f97316;">
                             <div class="cgs-ent-card-icon">\ud83d\udc65</div>
                             <h3>${e("enterprise.diff.multiuser.title","Multi-User Local Database")}</h3>
                             <p>${e("enterprise.diff.multiuser.body","Multiple team members can share a single licensed workstation with full user isolation. Each user has separate memory, conversation history, preferences, and storage. Role-based access control (Admin, Editor, Viewer) with structured audit logging for compliance.")}</p>
                         </article>
-                        <article class="cgs-ent-card" style="--ent-accent: #ec4899;">
+                        <article class="cgs-ent-card" style="--ent-accent: #e11d48;">
                             <div class="cgs-ent-card-icon">\ud83c\udfaf</div>
                             <h3>${e("enterprise.diff.multimodal.title","True Multimodal Intelligence")}</h3>
                             <p>${e("enterprise.diff.multimodal.body","Voice commands with emotive text-to-speech. Real-time vision and screen analysis. Document OCR and form processing. Desktop automation and keyboard injection into Windows applications. One agent handling all modalities — no separate tools required.")}</p>
@@ -3905,22 +3967,22 @@
                 <section class="cgs-ent-section">
                     <h2>${e("enterprise.licensing.title","Licensing & Deployment")}</h2>
                     <div class="cgs-ent-grid">
-                        <article class="cgs-ent-card" style="--ent-accent: #a78bfa;">
+                        <article class="cgs-ent-card" style="--ent-accent: #8b5cf6;">
                             <div class="cgs-ent-card-icon">\ud83d\udcdc</div>
                             <h3>${e("enterprise.licensing.hwid.title","Hardware-Locked Licensing")}</h3>
                             <p>${e("enterprise.licensing.hwid.body","Licences are cryptographically bound to specific devices using secure hardware fingerprinting. Tamper detection on tier and expiry fields prevents unauthorised modifications. Enterprise-grade licence integrity across your fleet.")}</p>
                         </article>
-                        <article class="cgs-ent-card" style="--ent-accent: #60a5fa;">
+                        <article class="cgs-ent-card" style="--ent-accent: #3b82f6;">
                             <div class="cgs-ent-card-icon">\ud83d\udee1\ufe0f</div>
                             <h3>${e("enterprise.licensing.tiers.title","Enterprise Tier")}</h3>
                             <p>${e("enterprise.licensing.tiers.body","The Enterprise licence tier provides extended context windows, full vision and OCR capabilities, concurrent inference seats per workstation, and access to all modules. Subscription options from monthly to annual, with an offline grace period for disconnected environments.")}</p>
                         </article>
-                        <article class="cgs-ent-card" style="--ent-accent: #2dd4bf;">
+                        <article class="cgs-ent-card" style="--ent-accent: #14b8a6;">
                             <div class="cgs-ent-card-icon">\ud83c\udf10</div>
                             <h3>${e("enterprise.licensing.lan.title","LAN Browser Access")}</h3>
                             <p>${e("enterprise.licensing.lan.body","Other devices on the same local network connect to Orus through a browser without additional licences. A single GPU workstation can serve your entire team over Wi-Fi with no cloud relay. All processing remains on your licensed host device.")}</p>
                         </article>
-                        <article class="cgs-ent-card" style="--ent-accent: #fb923c;">
+                        <article class="cgs-ent-card" style="--ent-accent: #ea580c;">
                             <div class="cgs-ent-card-icon">\u2699\ufe0f</div>
                             <h3>${e("enterprise.licensing.msix.title","Windows MSIX Deployment")}</h3>
                             <p>${e("enterprise.licensing.msix.body","Delivered as a signed MSIX package for Windows. AppContainer sandboxing, automatic updates via Microsoft Store or sideloaded enterprise distribution. Native .NET Desktop Companion for always-on availability. No manual Python setup for end users.")}</p>
@@ -3941,49 +4003,49 @@
                             </div>
                         </div>
                         <div class="cgs-ent-feature">
-                            <div class="cgs-ent-feature-marker" style="background: #22c55e;"></div>
+                            <div class="cgs-ent-feature-marker" style="background: #10b981;"></div>
                             <div>
                                 <strong>${e("enterprise.cap.memory.title","Persistent Memory & Semantic Search")}</strong>
                                 <p>${e("enterprise.cap.memory.body","Vector-database-backed semantic memory with per-user isolation and guest-mode privacy controls. Auto-summarisation of session history prevents context bloat. Real-time memory synthesis for coherent long-term knowledge retention.")}</p>
                             </div>
                         </div>
                         <div class="cgs-ent-feature">
-                            <div class="cgs-ent-feature-marker" style="background: #f59e0b;"></div>
+                            <div class="cgs-ent-feature-marker" style="background: #f97316;"></div>
                             <div>
                                 <strong>${e("enterprise.cap.vision.title","Vision, OCR & Document Processing")}</strong>
                                 <p>${e("enterprise.cap.vision.body","Live screen and webcam analysis with smart frame delta detection. Neural OCR for document processing including checkbox detection and form analysis. Image-to-3D generation pipeline for product visualisation. All processing runs locally on your GPU.")}</p>
                             </div>
                         </div>
                         <div class="cgs-ent-feature">
-                            <div class="cgs-ent-feature-marker" style="background: #ec4899;"></div>
+                            <div class="cgs-ent-feature-marker" style="background: #e11d48;"></div>
                             <div>
                                 <strong>${e("enterprise.cap.desktop.title","Desktop Automation & Keyboard Injection")}</strong>
                                 <p>${e("enterprise.cap.desktop.body","Orus can type directly into Windows applications via keyboard injection. UI Automation controller for precision text selection and editing. Screenshot capture with 4K composite support. Window focus control and application guidance — a hands-free enterprise workflow assistant.")}</p>
                             </div>
                         </div>
                         <div class="cgs-ent-feature">
-                            <div class="cgs-ent-feature-marker" style="background: #a78bfa;"></div>
+                            <div class="cgs-ent-feature-marker" style="background: #8b5cf6;"></div>
                             <div>
                                 <strong>${e("enterprise.cap.gpu.title","VRAM Management & GPU Optimisation")}</strong>
                                 <p>${e("enterprise.cap.gpu.body","Dynamic token budget calculation from real-time VRAM availability. Multiple engine profiles from low VRAM to power user with per-component permission gating. VRAM watchdog with automatic garbage collection and emergency safeguards. Activity-oriented GPU allocation to match your workload.")}</p>
                             </div>
                         </div>
                         <div class="cgs-ent-feature">
-                            <div class="cgs-ent-feature-marker" style="background: #2dd4bf;"></div>
+                            <div class="cgs-ent-feature-marker" style="background: #14b8a6;"></div>
                             <div>
                                 <strong>${e("enterprise.cap.security.title","Security, Governance & Audit")}</strong>
                                 <p>${e("enterprise.cap.security.body","Proprietary system prompts compiled and protected in deployment — unreadable and unmodifiable at runtime. Role-based access control with structured audit logging. Forced password change on first login. WebAuthn and Windows Hello passwordless authentication support.")}</p>
                             </div>
                         </div>
                         <div class="cgs-ent-feature">
-                            <div class="cgs-ent-feature-marker" style="background: #60a5fa;"></div>
+                            <div class="cgs-ent-feature-marker" style="background: #3b82f6;"></div>
                             <div>
                                 <strong>${e("enterprise.cap.perception.title","Fast Perception Engine")}</strong>
                                 <p>${e("enterprise.cap.perception.body","Non-LLM event detection with sub-50ms latency for instant reactions. Pre-cached speech responses for common triggers. Multi-channel watchers monitoring speech, logs, visual frames, and model output simultaneously. Priority-based audio preemption for critical system alerts.")}</p>
                             </div>
                         </div>
                         <div class="cgs-ent-feature">
-                            <div class="cgs-ent-feature-marker" style="background: #fb923c;"></div>
+                            <div class="cgs-ent-feature-marker" style="background: #ea580c;"></div>
                             <div>
                                 <strong>${e("enterprise.cap.companion.title","Always-On Desktop Companion")}</strong>
                                 <p>${e("enterprise.cap.companion.body","A persistent desktop floating assistant stays available across all Windows activities. Dozens of transitional activities from brainstorming to task management, accessible via voice or the ring menu. Living Machine visual transitions with procedural shader effects. Sleep mode to free GPU while keeping the session alive.")}</p>
@@ -3994,7 +4056,7 @@
 
                 <!-- Target Industries -->
                 <section class="cgs-ent-section">
-                    <h2>${e("enterprise.industries.title","Designed For")}</h2>
+                    <h2>${e("enterprise.industries.title","Designable for")}</h2>
                     <div class="cgs-ent-grid cgs-ent-grid--compact">
                         <div class="cgs-ent-industry">
                             <span class="cgs-ent-industry-icon">\ud83c\udfe6</span>
@@ -4029,16 +4091,6 @@
                     </div>
                 </section>
 
-                <!-- CTA -->
-                <section class="cgs-ent-section cgs-ent-cta">
-                    <div class="cgs-ent-cta-box">
-                        <h2>${e("enterprise.cta.title","Enterprise Interest Registrations are not available yet.")}</h2>
-                        <p>${e("enterprise.cta.body","As an Assistive AI, Orus is prioritizing the end-users while preparing the Orus Enterprise programme for organisations that require data-sovereign, locally-hosted AI. Interest registration will open shortly — details on pricing, deployment support, and volume licensing will be available at that time.")}</p>
-                        <p class="cgs-ent-cta-contact">${e("enterprise.cta.contact","For early enquiries, reach us at")}
-                            <a class="cgs-legal-link" href="mailto:support@cometgamestudio.com">support@cometgamestudio.com</a>
-                        </p>
-                    </div>
-                </section>
             </div>
         `}_renderAbout(){return c`
             <div class="cgs-about-section">
@@ -4213,6 +4265,33 @@
         /* Fixed top nav layout variables */
         :host {
             --cgs-nav-height: 64px;
+        }
+
+        /* ── Skip Link (WCAG 2.4.1) ──────────────────────── */
+
+        .cgs-skip-link {
+            position: absolute;
+            top: -100px;
+            left: 16px;
+            z-index: 9999;
+            padding: 12px 24px;
+            background: #6366f1;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 0 0 8px 8px;
+            text-decoration: none;
+            opacity: 0;
+            pointer-events: none;
+            transition: top 0.15s ease, opacity 0.15s ease;
+        }
+
+        .cgs-skip-link:focus {
+            top: 0;
+            opacity: 1;
+            pointer-events: auto;
+            outline: 2px solid #a78bfa;
+            outline-offset: 2px;
         }
 
         /* ── Loading Overlay ─────────────────────────────────── */
@@ -4498,6 +4577,12 @@
             min-height: 0;
             width: 100%;
             box-sizing: border-box;
+            /* WCAG 2.4.11 — focused items not obscured by fixed nav */
+            scroll-margin-top: var(--cgs-nav-height);
+        }
+
+        .cgs-content :focus-visible {
+            scroll-margin-top: calc(var(--cgs-nav-height) + 16px);
         }
 
         /* ── Hero Section ──────────────────────────────────── */
@@ -5017,6 +5102,19 @@
             overflow: hidden;
             cursor: pointer;
             transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+            /* WCAG 2.5.8 — min 24px touch target */
+            min-height: 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        .cgs-quote-progress-segment::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 3px;
+            border-radius: 999px;
+            background: inherit;
         }
 
         .cgs-quote-progress-segment:hover,
@@ -7138,28 +7236,28 @@
         .cgs-ent-badge {
             display: inline-block;
             padding: 4px 16px;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.4);
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.5);
             border-radius: 20px;
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #34d399;
+            color: #818cf8;
             margin-bottom: 20px;
         }
 
         .cgs-ent-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 36px;
-            color: #e0d9ff;
+            color: #f1f5f9;
             margin: 0 0 16px;
             line-height: 1.2;
         }
 
         .cgs-ent-subtitle {
             font-size: 15px;
-            color: #94a3b8;
+            color: #cbd5e1;
             line-height: 1.8;
             max-width: 680px;
             margin: 0 auto;
@@ -7172,15 +7270,15 @@
         .cgs-ent-section h2 {
             font-family: 'Orbitron', sans-serif;
             font-size: 20px;
-            color: #c4b5fd;
+            color: #e2e8f0;
             margin: 0 0 20px;
             padding-bottom: 12px;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+            border-bottom: 2px solid rgba(99, 102, 241, 0.3);
         }
 
         .cgs-ent-section > p {
             font-size: 13px;
-            color: #94a3b8;
+            color: #cbd5e1;
             line-height: 1.8;
             margin-bottom: 12px;
         }
@@ -7198,15 +7296,16 @@
 
         .cgs-ent-card {
             --ent-accent: #6366f1;
-            background: rgba(15, 15, 25, 0.7);
-            border: 1px solid rgba(99, 102, 241, 0.12);
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(99, 102, 241, 0.2);
             border-radius: 14px;
             padding: 24px;
-            transition: border-color 0.25s ease, transform 0.25s ease;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
         .cgs-ent-card:hover {
             border-color: var(--ent-accent);
             transform: translateY(-2px);
+            box-shadow: 0 4px 24px rgba(99, 102, 241, 0.15);
         }
 
         .cgs-ent-card-icon {
@@ -7217,14 +7316,14 @@
         .cgs-ent-card h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 13px;
-            color: #e0d9ff;
+            color: #f1f5f9;
             margin: 0 0 8px;
             letter-spacing: 0.5px;
         }
 
         .cgs-ent-card p {
             font-size: 12px;
-            color: #94a3b8;
+            color: #cbd5e1;
             line-height: 1.7;
             margin: 0;
         }
@@ -7241,13 +7340,13 @@
             gap: 16px;
             align-items: flex-start;
             padding: 20px;
-            background: rgba(15, 15, 25, 0.5);
-            border: 1px solid rgba(99, 102, 241, 0.08);
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(99, 102, 241, 0.12);
             border-radius: 12px;
             transition: border-color 0.25s ease;
         }
         .cgs-ent-feature:hover {
-            border-color: rgba(99, 102, 241, 0.25);
+            border-color: rgba(99, 102, 241, 0.35);
         }
 
         .cgs-ent-feature-marker {
@@ -7262,29 +7361,29 @@
             display: block;
             font-family: 'Orbitron', sans-serif;
             font-size: 13px;
-            color: #e0d9ff;
+            color: #f1f5f9;
             margin-bottom: 6px;
             letter-spacing: 0.5px;
         }
 
         .cgs-ent-feature p {
             font-size: 12px;
-            color: #94a3b8;
+            color: #cbd5e1;
             line-height: 1.7;
             margin: 0;
         }
 
         /* Industry tiles */
         .cgs-ent-industry {
-            background: rgba(15, 15, 25, 0.6);
-            border: 1px solid rgba(99, 102, 241, 0.1);
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(99, 102, 241, 0.15);
             border-radius: 12px;
             padding: 20px;
             text-align: center;
             transition: border-color 0.25s ease, transform 0.25s ease;
         }
         .cgs-ent-industry:hover {
-            border-color: rgba(99, 102, 241, 0.3);
+            border-color: rgba(99, 102, 241, 0.4);
             transform: translateY(-2px);
         }
 
@@ -7298,13 +7397,13 @@
             display: block;
             font-family: 'Orbitron', sans-serif;
             font-size: 12px;
-            color: #e0d9ff;
+            color: #f1f5f9;
             margin-bottom: 6px;
         }
 
         .cgs-ent-industry p {
             font-size: 11px;
-            color: #94a3b8;
+            color: #cbd5e1;
             line-height: 1.6;
             margin: 0;
         }
@@ -7313,20 +7412,21 @@
         .cgs-ent-cta-box {
             text-align: center;
             padding: 40px 32px;
-            background: rgba(15, 15, 25, 0.85);
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid rgba(99, 102, 241, 0.4);
             border-radius: 18px;
+            box-shadow: 0 0 32px rgba(99, 102, 241, 0.08);
         }
 
         .cgs-ent-cta-box h2 {
             border: none !important;
             padding-bottom: 0 !important;
-            color: #34d399 !important;
+            color: #818cf8 !important;
         }
 
         .cgs-ent-cta-box p {
             font-size: 13px;
-            color: #94a3b8;
+            color: #cbd5e1;
             line-height: 1.8;
             max-width: 600px;
             margin: 0 auto 16px;
@@ -7334,11 +7434,11 @@
 
         .cgs-ent-cta-contact {
             font-size: 14px !important;
-            color: #c4b5fd !important;
+            color: #e2e8f0 !important;
         }
 
         .cgs-ent-cta-contact a {
-            color: #34d399;
+            color: #818cf8;
             text-decoration: underline;
             text-underline-offset: 3px;
         }
