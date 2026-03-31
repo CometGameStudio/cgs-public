@@ -3697,12 +3697,6 @@
                 <button class="cgs-logo" type="button" @click=${()=>this._navigateTo("home")} aria-label="${e("nav.logo_aria","Comet Game Studio — Go to homepage")}">
                     ${e("nav.logo","Comet Game Studio")}
                 </button>
-                <a class="cgs-store-btn disabled"
-                   href="#"
-                   aria-disabled="true"
-                   tabindex="-1">
-                    ${e("hero.store_btn","Orus is not public on Microsoft Store yet")}
-                </a>
                 <div class="cgs-nav-links">
                     <button class="${o}"
                             type="button"
@@ -3888,6 +3882,7 @@
                             <p class="cgs-root-card-summary">
                                 ${e("hero.studio.card.ai.summary","Voice, text, image analysis, OCR, and application guidance designed to stay close to the user and their machine.")}
                             </p>
+                            <span class="cgs-root-card-store-mark">${e("hero.store_mark","Not yet public on Microsoft Store")}</span>
                             <span class="cgs-root-card-toggle">${this._aiExpanded?"▲":"▼"}</span>
                             ${this._aiExpanded?c`
                                 <div class="cgs-root-card-videos" @click=${a=>a.stopPropagation()}>
@@ -4541,23 +4536,43 @@
         @keyframes cgs-logo-glow {
             0%, 100% {
                 text-shadow:
-                    0 0 6px  rgba(139, 92, 246, 0.25),
-                    0 0 18px rgba(99, 102, 241, 0.15),
-                    0 0 38px rgba(139, 92, 246, 0.07);
+                    0 0 8px  rgba(139, 92, 246, 0.5),
+                    0 0 20px rgba(99, 102, 241, 0.35),
+                    0 0 40px rgba(139, 92, 246, 0.15),
+                    0 0 60px rgba(96, 165, 250, 0.08);
+                color: #e0e7ff;
             }
-            33% {
+            20% {
                 text-shadow:
-                    0 0 10px rgba(167, 139, 250, 0.45),
-                    0 0 28px rgba(139, 92, 246, 0.28),
-                    0 0 56px rgba(99, 102, 241, 0.12),
-                    0 0 90px rgba(139, 92, 246, 0.04);
+                    0 0 12px rgba(96, 165, 250, 0.7),
+                    0 0 30px rgba(99, 102, 241, 0.5),
+                    0 0 60px rgba(139, 92, 246, 0.25),
+                    0 0 100px rgba(96, 165, 250, 0.1);
+                color: #c7d2fe;
             }
-            66% {
+            40% {
                 text-shadow:
-                    0 0 8px  rgba(99, 102, 241, 0.35),
-                    0 0 22px rgba(167, 139, 250, 0.20),
-                    0 0 44px rgba(139, 92, 246, 0.10),
-                    0 0 72px rgba(99, 102, 241, 0.03);
+                    0 0 14px rgba(167, 139, 250, 0.8),
+                    0 0 35px rgba(139, 92, 246, 0.55),
+                    0 0 70px rgba(99, 102, 241, 0.3),
+                    0 0 110px rgba(167, 139, 250, 0.12);
+                color: #ffffff;
+            }
+            60% {
+                text-shadow:
+                    0 0 10px rgba(244, 114, 182, 0.6),
+                    0 0 28px rgba(167, 139, 250, 0.45),
+                    0 0 55px rgba(139, 92, 246, 0.2),
+                    0 0 90px rgba(244, 114, 182, 0.08);
+                color: #ede9fe;
+            }
+            80% {
+                text-shadow:
+                    0 0 12px rgba(99, 102, 241, 0.65),
+                    0 0 32px rgba(96, 165, 250, 0.45),
+                    0 0 65px rgba(167, 139, 250, 0.22),
+                    0 0 100px rgba(99, 102, 241, 0.08);
+                color: #ddd6fe;
             }
         }
 
@@ -4565,7 +4580,7 @@
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(13px, 1.6vw, 18px);
             font-weight: 700;
-            color: #ffffff;
+            color: #e0e7ff;
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
@@ -4582,8 +4597,21 @@
             appearance: none;
             -webkit-appearance: none;
             touch-action: manipulation;
-            animation: cgs-logo-glow 8s ease-in-out infinite;
-            will-change: text-shadow;
+            animation: cgs-logo-glow 5s ease-in-out infinite;
+            will-change: text-shadow, color;
+            transition: filter 0.3s ease;
+        }
+        .cgs-logo:hover {
+            filter: brightness(1.3);
+        }
+
+        .cgs-root-card-store-mark {
+            display: block;
+            font-size: 10px;
+            color: #6b7280;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+            font-style: italic;
         }
 
         .cgs-nav-links {
