@@ -1,18 +1,18 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))a(r);new MutationObserver(r=>{for(const o of r)if(o.type==="childList")for(const n of o.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&a(n)}).observe(document,{childList:!0,subtree:!0});function i(r){const o={};return r.integrity&&(o.integrity=r.integrity),r.referrerPolicy&&(o.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?o.credentials="include":r.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function a(r){if(r.ep)return;r.ep=!0;const o=i(r);fetch(r.href,o)}})();const ke="modulepreload",Ae=function(s){return"/cgs-public/"+s},ie={},Se=function(t,i,a){let r=Promise.resolve();if(i&&i.length>0){let n=function(p){return Promise.all(p.map(h=>Promise.resolve(h).then(u=>({status:"fulfilled",value:u}),u=>({status:"rejected",reason:u}))))};document.getElementsByTagName("link");const d=document.querySelector("meta[property=csp-nonce]"),l=d?.nonce||d?.getAttribute("nonce");r=n(i.map(p=>{if(p=Ae(p),p in ie)return;ie[p]=!0;const h=p.endsWith(".css"),u=h?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${p}"]${u}`))return;const b=document.createElement("link");if(b.rel=h?"stylesheet":ke,h||(b.as="script"),b.crossOrigin="",b.href=p,l&&b.setAttribute("nonce",l),document.head.appendChild(b),h)return new Promise((v,C)=>{b.addEventListener("load",v),b.addEventListener("error",()=>C(new Error(`Unable to preload CSS for ${p}`)))})}))}function o(n){const d=new Event("vite:preloadError",{cancelable:!0});if(d.payload=n,window.dispatchEvent(d),!d.defaultPrevented)throw n}return r.then(n=>{for(const d of n||[])d.status==="rejected"&&o(d.reason);return t().catch(o)})};/**
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))a(o);new MutationObserver(o=>{for(const r of o)if(r.type==="childList")for(const n of r.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&a(n)}).observe(document,{childList:!0,subtree:!0});function i(o){const r={};return o.integrity&&(r.integrity=o.integrity),o.referrerPolicy&&(r.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?r.credentials="include":o.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function a(o){if(o.ep)return;o.ep=!0;const r=i(o);fetch(o.href,r)}})();const ke="modulepreload",Ae=function(s){return"/cgs-public/"+s},ie={},Se=function(t,i,a){let o=Promise.resolve();if(i&&i.length>0){let n=function(p){return Promise.all(p.map(h=>Promise.resolve(h).then(u=>({status:"fulfilled",value:u}),u=>({status:"rejected",reason:u}))))};document.getElementsByTagName("link");const d=document.querySelector("meta[property=csp-nonce]"),l=d?.nonce||d?.getAttribute("nonce");o=n(i.map(p=>{if(p=Ae(p),p in ie)return;ie[p]=!0;const h=p.endsWith(".css"),u=h?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${p}"]${u}`))return;const b=document.createElement("link");if(b.rel=h?"stylesheet":ke,h||(b.as="script"),b.crossOrigin="",b.href=p,l&&b.setAttribute("nonce",l),document.head.appendChild(b),h)return new Promise((v,C)=>{b.addEventListener("load",v),b.addEventListener("error",()=>C(new Error(`Unable to preload CSS for ${p}`)))})}))}function r(n){const d=new Event("vite:preloadError",{cancelable:!0});if(d.payload=n,window.dispatchEvent(d),!d.defaultPrevented)throw n}return o.then(n=>{for(const d of n||[])d.status==="rejected"&&r(d.reason);return t().catch(r)})};/**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const G=globalThis,Q=G.ShadowRoot&&(G.ShadyCSS===void 0||G.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,K=Symbol(),ae=new WeakMap;let fe=class{constructor(t,i,a){if(this._$cssResult$=!0,a!==K)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=i}get styleSheet(){let t=this.o;const i=this.t;if(Q&&t===void 0){const a=i!==void 0&&i.length===1;a&&(t=ae.get(i)),t===void 0&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),a&&ae.set(i,t))}return t}toString(){return this.cssText}};const Te=s=>new fe(typeof s=="string"?s:s+"",void 0,K),ve=(s,...t)=>{const i=s.length===1?s[0]:t.reduce((a,r,o)=>a+(n=>{if(n._$cssResult$===!0)return n.cssText;if(typeof n=="number")return n;throw Error("Value passed to 'css' function must be a 'css' function result: "+n+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(r)+s[o+1],s[0]);return new fe(i,s,K)},Ce=(s,t)=>{if(Q)s.adoptedStyleSheets=t.map(i=>i instanceof CSSStyleSheet?i:i.styleSheet);else for(const i of t){const a=document.createElement("style"),r=G.litNonce;r!==void 0&&a.setAttribute("nonce",r),a.textContent=i.cssText,s.appendChild(a)}},se=Q?s=>s:s=>s instanceof CSSStyleSheet?(t=>{let i="";for(const a of t.cssRules)i+=a.cssText;return Te(i)})(s):s;/**
+ */const G=globalThis,Q=G.ShadowRoot&&(G.ShadyCSS===void 0||G.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,K=Symbol(),ae=new WeakMap;let fe=class{constructor(t,i,a){if(this._$cssResult$=!0,a!==K)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=i}get styleSheet(){let t=this.o;const i=this.t;if(Q&&t===void 0){const a=i!==void 0&&i.length===1;a&&(t=ae.get(i)),t===void 0&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),a&&ae.set(i,t))}return t}toString(){return this.cssText}};const Te=s=>new fe(typeof s=="string"?s:s+"",void 0,K),ve=(s,...t)=>{const i=s.length===1?s[0]:t.reduce((a,o,r)=>a+(n=>{if(n._$cssResult$===!0)return n.cssText;if(typeof n=="number")return n;throw Error("Value passed to 'css' function must be a 'css' function result: "+n+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(o)+s[r+1],s[0]);return new fe(i,s,K)},Ce=(s,t)=>{if(Q)s.adoptedStyleSheets=t.map(i=>i instanceof CSSStyleSheet?i:i.styleSheet);else for(const i of t){const a=document.createElement("style"),o=G.litNonce;o!==void 0&&a.setAttribute("nonce",o),a.textContent=i.cssText,s.appendChild(a)}},se=Q?s=>s:s=>s instanceof CSSStyleSheet?(t=>{let i="";for(const a of t.cssRules)i+=a.cssText;return Te(i)})(s):s;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:Ie,defineProperty:ze,getOwnPropertyDescriptor:Pe,getOwnPropertyNames:Me,getOwnPropertySymbols:Oe,getPrototypeOf:qe}=Object,F=globalThis,re=F.trustedTypes,De=re?re.emptyScript:"",Le=F.reactiveElementPolyfillSupport,q=(s,t)=>s,U={toAttribute(s,t){switch(t){case Boolean:s=s?De:null;break;case Object:case Array:s=s==null?s:JSON.stringify(s)}return s},fromAttribute(s,t){let i=s;switch(t){case Boolean:i=s!==null;break;case Number:i=s===null?null:Number(s);break;case Object:case Array:try{i=JSON.parse(s)}catch{i=null}}return i}},J=(s,t)=>!Ie(s,t),oe={attribute:!0,type:String,converter:U,reflect:!1,useDefault:!1,hasChanged:J};Symbol.metadata??=Symbol("metadata"),F.litPropertyMetadata??=new WeakMap;let I=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,i=oe){if(i.state&&(i.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((i=Object.create(i)).wrapped=!0),this.elementProperties.set(t,i),!i.noAccessor){const a=Symbol(),r=this.getPropertyDescriptor(t,a,i);r!==void 0&&ze(this.prototype,t,r)}}static getPropertyDescriptor(t,i,a){const{get:r,set:o}=Pe(this.prototype,t)??{get(){return this[i]},set(n){this[i]=n}};return{get:r,set(n){const d=r?.call(this);o?.call(this,n),this.requestUpdate(t,d,a)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??oe}static _$Ei(){if(this.hasOwnProperty(q("elementProperties")))return;const t=qe(this);t.finalize(),t.l!==void 0&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(q("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(q("properties"))){const i=this.properties,a=[...Me(i),...Oe(i)];for(const r of a)this.createProperty(r,i[r])}const t=this[Symbol.metadata];if(t!==null){const i=litPropertyMetadata.get(t);if(i!==void 0)for(const[a,r]of i)this.elementProperties.set(a,r)}this._$Eh=new Map;for(const[i,a]of this.elementProperties){const r=this._$Eu(i,a);r!==void 0&&this._$Eh.set(r,i)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const i=[];if(Array.isArray(t)){const a=new Set(t.flat(1/0).reverse());for(const r of a)i.unshift(se(r))}else t!==void 0&&i.push(se(t));return i}static _$Eu(t,i){const a=i.attribute;return a===!1?void 0:typeof a=="string"?a:typeof t=="string"?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),this.renderRoot!==void 0&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,i=this.constructor.elementProperties;for(const a of i.keys())this.hasOwnProperty(a)&&(t.set(a,this[a]),delete this[a]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return Ce(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,i,a){this._$AK(t,a)}_$ET(t,i){const a=this.constructor.elementProperties.get(t),r=this.constructor._$Eu(t,a);if(r!==void 0&&a.reflect===!0){const o=(a.converter?.toAttribute!==void 0?a.converter:U).toAttribute(i,a.type);this._$Em=t,o==null?this.removeAttribute(r):this.setAttribute(r,o),this._$Em=null}}_$AK(t,i){const a=this.constructor,r=a._$Eh.get(t);if(r!==void 0&&this._$Em!==r){const o=a.getPropertyOptions(r),n=typeof o.converter=="function"?{fromAttribute:o.converter}:o.converter?.fromAttribute!==void 0?o.converter:U;this._$Em=r;const d=n.fromAttribute(i,o.type);this[r]=d??this._$Ej?.get(r)??d,this._$Em=null}}requestUpdate(t,i,a,r=!1,o){if(t!==void 0){const n=this.constructor;if(r===!1&&(o=this[t]),a??=n.getPropertyOptions(t),!((a.hasChanged??J)(o,i)||a.useDefault&&a.reflect&&o===this._$Ej?.get(t)&&!this.hasAttribute(n._$Eu(t,a))))return;this.C(t,i,a)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(t,i,{useDefault:a,reflect:r,wrapped:o},n){a&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,n??i??this[t]),o!==!0||n!==void 0)||(this._$AL.has(t)||(this.hasUpdated||a||(i=void 0),this._$AL.set(t,i)),r===!0&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(i){Promise.reject(i)}const t=this.scheduleUpdate();return t!=null&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[r,o]of this._$Ep)this[r]=o;this._$Ep=void 0}const a=this.constructor.elementProperties;if(a.size>0)for(const[r,o]of a){const{wrapped:n}=o,d=this[r];n!==!0||this._$AL.has(r)||d===void 0||this.C(r,void 0,o,d)}}let t=!1;const i=this._$AL;try{t=this.shouldUpdate(i),t?(this.willUpdate(i),this._$EO?.forEach(a=>a.hostUpdate?.()),this.update(i)):this._$EM()}catch(a){throw t=!1,this._$EM(),a}t&&this._$AE(i)}willUpdate(t){}_$AE(t){this._$EO?.forEach(i=>i.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(i=>this._$ET(i,this[i])),this._$EM()}updated(t){}firstUpdated(t){}};I.elementStyles=[],I.shadowRootOptions={mode:"open"},I[q("elementProperties")]=new Map,I[q("finalized")]=new Map,Le?.({ReactiveElement:I}),(F.reactiveElementVersions??=[]).push("2.1.2");/**
+ */const{is:Ie,defineProperty:ze,getOwnPropertyDescriptor:Pe,getOwnPropertyNames:Me,getOwnPropertySymbols:Oe,getPrototypeOf:De}=Object,W=globalThis,oe=W.trustedTypes,qe=oe?oe.emptyScript:"",Re=W.reactiveElementPolyfillSupport,D=(s,t)=>s,B={toAttribute(s,t){switch(t){case Boolean:s=s?qe:null;break;case Object:case Array:s=s==null?s:JSON.stringify(s)}return s},fromAttribute(s,t){let i=s;switch(t){case Boolean:i=s!==null;break;case Number:i=s===null?null:Number(s);break;case Object:case Array:try{i=JSON.parse(s)}catch{i=null}}return i}},J=(s,t)=>!Ie(s,t),re={attribute:!0,type:String,converter:B,reflect:!1,useDefault:!1,hasChanged:J};Symbol.metadata??=Symbol("metadata"),W.litPropertyMetadata??=new WeakMap;let I=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,i=re){if(i.state&&(i.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((i=Object.create(i)).wrapped=!0),this.elementProperties.set(t,i),!i.noAccessor){const a=Symbol(),o=this.getPropertyDescriptor(t,a,i);o!==void 0&&ze(this.prototype,t,o)}}static getPropertyDescriptor(t,i,a){const{get:o,set:r}=Pe(this.prototype,t)??{get(){return this[i]},set(n){this[i]=n}};return{get:o,set(n){const d=o?.call(this);r?.call(this,n),this.requestUpdate(t,d,a)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??re}static _$Ei(){if(this.hasOwnProperty(D("elementProperties")))return;const t=De(this);t.finalize(),t.l!==void 0&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(D("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(D("properties"))){const i=this.properties,a=[...Me(i),...Oe(i)];for(const o of a)this.createProperty(o,i[o])}const t=this[Symbol.metadata];if(t!==null){const i=litPropertyMetadata.get(t);if(i!==void 0)for(const[a,o]of i)this.elementProperties.set(a,o)}this._$Eh=new Map;for(const[i,a]of this.elementProperties){const o=this._$Eu(i,a);o!==void 0&&this._$Eh.set(o,i)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const i=[];if(Array.isArray(t)){const a=new Set(t.flat(1/0).reverse());for(const o of a)i.unshift(se(o))}else t!==void 0&&i.push(se(t));return i}static _$Eu(t,i){const a=i.attribute;return a===!1?void 0:typeof a=="string"?a:typeof t=="string"?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),this.renderRoot!==void 0&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,i=this.constructor.elementProperties;for(const a of i.keys())this.hasOwnProperty(a)&&(t.set(a,this[a]),delete this[a]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return Ce(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,i,a){this._$AK(t,a)}_$ET(t,i){const a=this.constructor.elementProperties.get(t),o=this.constructor._$Eu(t,a);if(o!==void 0&&a.reflect===!0){const r=(a.converter?.toAttribute!==void 0?a.converter:B).toAttribute(i,a.type);this._$Em=t,r==null?this.removeAttribute(o):this.setAttribute(o,r),this._$Em=null}}_$AK(t,i){const a=this.constructor,o=a._$Eh.get(t);if(o!==void 0&&this._$Em!==o){const r=a.getPropertyOptions(o),n=typeof r.converter=="function"?{fromAttribute:r.converter}:r.converter?.fromAttribute!==void 0?r.converter:B;this._$Em=o;const d=n.fromAttribute(i,r.type);this[o]=d??this._$Ej?.get(o)??d,this._$Em=null}}requestUpdate(t,i,a,o=!1,r){if(t!==void 0){const n=this.constructor;if(o===!1&&(r=this[t]),a??=n.getPropertyOptions(t),!((a.hasChanged??J)(r,i)||a.useDefault&&a.reflect&&r===this._$Ej?.get(t)&&!this.hasAttribute(n._$Eu(t,a))))return;this.C(t,i,a)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(t,i,{useDefault:a,reflect:o,wrapped:r},n){a&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,n??i??this[t]),r!==!0||n!==void 0)||(this._$AL.has(t)||(this.hasUpdated||a||(i=void 0),this._$AL.set(t,i)),o===!0&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(i){Promise.reject(i)}const t=this.scheduleUpdate();return t!=null&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[o,r]of this._$Ep)this[o]=r;this._$Ep=void 0}const a=this.constructor.elementProperties;if(a.size>0)for(const[o,r]of a){const{wrapped:n}=r,d=this[o];n!==!0||this._$AL.has(o)||d===void 0||this.C(o,void 0,r,d)}}let t=!1;const i=this._$AL;try{t=this.shouldUpdate(i),t?(this.willUpdate(i),this._$EO?.forEach(a=>a.hostUpdate?.()),this.update(i)):this._$EM()}catch(a){throw t=!1,this._$EM(),a}t&&this._$AE(i)}willUpdate(t){}_$AE(t){this._$EO?.forEach(i=>i.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(i=>this._$ET(i,this[i])),this._$EM()}updated(t){}firstUpdated(t){}};I.elementStyles=[],I.shadowRootOptions={mode:"open"},I[D("elementProperties")]=new Map,I[D("finalized")]=new Map,Re?.({ReactiveElement:I}),(W.reactiveElementVersions??=[]).push("2.1.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Z=globalThis,ne=s=>s,B=Z.trustedTypes,ce=B?B.createPolicy("lit-html",{createHTML:s=>s}):void 0,ye="$lit$",_=`lit$${Math.random().toFixed(9).slice(2)}$`,xe="?"+_,Re=`<${xe}>`,T=document,D=()=>T.createComment(""),L=s=>s===null||typeof s!="object"&&typeof s!="function",ee=Array.isArray,Ee=s=>ee(s)||typeof s?.[Symbol.iterator]=="function",W=`[ 	
-\f\r]`,O=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,de=/-->/g,le=/>/g,k=RegExp(`>|${W}(?:([^\\s"'>=/]+)(${W}*=${W}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),pe=/'/g,ue=/"/g,we=/^(?:script|style|textarea|title)$/i,Ge=s=>(t,...i)=>({_$litType$:s,strings:t,values:i}),c=Ge(1),P=Symbol.for("lit-noChange"),m=Symbol.for("lit-nothing"),ge=new WeakMap,A=T.createTreeWalker(T,129);function $e(s,t){if(!ee(s)||!s.hasOwnProperty("raw"))throw Error("invalid template strings array");return ce!==void 0?ce.createHTML(t):t}const Ne=(s,t)=>{const i=s.length-1,a=[];let r,o=t===2?"<svg>":t===3?"<math>":"",n=O;for(let d=0;d<i;d++){const l=s[d];let p,h,u=-1,b=0;for(;b<l.length&&(n.lastIndex=b,h=n.exec(l),h!==null);)b=n.lastIndex,n===O?h[1]==="!--"?n=de:h[1]!==void 0?n=le:h[2]!==void 0?(we.test(h[2])&&(r=RegExp("</"+h[2],"g")),n=k):h[3]!==void 0&&(n=k):n===k?h[0]===">"?(n=r??O,u=-1):h[1]===void 0?u=-2:(u=n.lastIndex-h[2].length,p=h[1],n=h[3]===void 0?k:h[3]==='"'?ue:pe):n===ue||n===pe?n=k:n===de||n===le?n=O:(n=k,r=void 0);const v=n===k&&s[d+1].startsWith("/>")?" ":"";o+=n===O?l+Re:u>=0?(a.push(p),l.slice(0,u)+ye+l.slice(u)+_+v):l+_+(u===-2?d:v)}return[$e(s,o+(s[i]||"<?>")+(t===2?"</svg>":t===3?"</math>":"")),a]};class R{constructor({strings:t,_$litType$:i},a){let r;this.parts=[];let o=0,n=0;const d=t.length-1,l=this.parts,[p,h]=Ne(t,i);if(this.el=R.createElement(p,a),A.currentNode=this.el.content,i===2||i===3){const u=this.el.content.firstChild;u.replaceWith(...u.childNodes)}for(;(r=A.nextNode())!==null&&l.length<d;){if(r.nodeType===1){if(r.hasAttributes())for(const u of r.getAttributeNames())if(u.endsWith(ye)){const b=h[n++],v=r.getAttribute(u).split(_),C=/([.?@])?(.*)/.exec(b);l.push({type:1,index:o,name:C[2],strings:v,ctor:C[1]==="."?Be:C[1]==="?"?Fe:C[1]==="@"?He:H}),r.removeAttribute(u)}else u.startsWith(_)&&(l.push({type:6,index:o}),r.removeAttribute(u));if(we.test(r.tagName)){const u=r.textContent.split(_),b=u.length-1;if(b>0){r.textContent=B?B.emptyScript:"";for(let v=0;v<b;v++)r.append(u[v],D()),A.nextNode(),l.push({type:2,index:++o});r.append(u[b],D())}}}else if(r.nodeType===8)if(r.data===xe)l.push({type:2,index:o});else{let u=-1;for(;(u=r.data.indexOf(_,u+1))!==-1;)l.push({type:7,index:o}),u+=_.length-1}o++}}static createElement(t,i){const a=T.createElement("template");return a.innerHTML=t,a}}function M(s,t,i=s,a){if(t===P)return t;let r=a!==void 0?i._$Co?.[a]:i._$Cl;const o=L(t)?void 0:t._$litDirective$;return r?.constructor!==o&&(r?._$AO?.(!1),o===void 0?r=void 0:(r=new o(s),r._$AT(s,i,a)),a!==void 0?(i._$Co??=[])[a]=r:i._$Cl=r),r!==void 0&&(t=M(s,r._$AS(s,t.values),r,a)),t}class Ue{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:a}=this._$AD,r=(t?.creationScope??T).importNode(i,!0);A.currentNode=r;let o=A.nextNode(),n=0,d=0,l=a[0];for(;l!==void 0;){if(n===l.index){let p;l.type===2?p=new E(o,o.nextSibling,this,t):l.type===1?p=new l.ctor(o,l.name,l.strings,this,t):l.type===6&&(p=new We(o,this,t)),this._$AV.push(p),l=a[++d]}n!==l?.index&&(o=A.nextNode(),n++)}return A.currentNode=T,r}p(t){let i=0;for(const a of this._$AV)a!==void 0&&(a.strings!==void 0?(a._$AI(t,a,i),i+=a.strings.length-2):a._$AI(t[i])),i++}}class E{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,a,r){this.type=2,this._$AH=m,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=a,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return i!==void 0&&t?.nodeType===11&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),L(t)?t===m||t==null||t===""?(this._$AH!==m&&this._$AR(),this._$AH=m):t!==this._$AH&&t!==P&&this._(t):t._$litType$!==void 0?this.$(t):t.nodeType!==void 0?this.T(t):Ee(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==m&&L(this._$AH)?this._$AA.nextSibling.data=t:this.T(T.createTextNode(t)),this._$AH=t}$(t){const{values:i,_$litType$:a}=t,r=typeof a=="number"?this._$AC(t):(a.el===void 0&&(a.el=R.createElement($e(a.h,a.h[0]),this.options)),a);if(this._$AH?._$AD===r)this._$AH.p(i);else{const o=new Ue(r,this),n=o.u(this.options);o.p(i),this.T(n),this._$AH=o}}_$AC(t){let i=ge.get(t.strings);return i===void 0&&ge.set(t.strings,i=new R(t)),i}k(t){ee(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let a,r=0;for(const o of t)r===i.length?i.push(a=new E(this.O(D()),this.O(D()),this,this.options)):a=i[r],a._$AI(o),r++;r<i.length&&(this._$AR(a&&a._$AB.nextSibling,r),i.length=r)}_$AR(t=this._$AA.nextSibling,i){for(this._$AP?.(!1,!0,i);t!==this._$AB;){const a=ne(t).nextSibling;ne(t).remove(),t=a}}setConnected(t){this._$AM===void 0&&(this._$Cv=t,this._$AP?.(t))}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,a,r,o){this.type=1,this._$AH=m,this._$AN=void 0,this.element=t,this.name=i,this._$AM=r,this.options=o,a.length>2||a[0]!==""||a[1]!==""?(this._$AH=Array(a.length-1).fill(new String),this.strings=a):this._$AH=m}_$AI(t,i=this,a,r){const o=this.strings;let n=!1;if(o===void 0)t=M(this,t,i,0),n=!L(t)||t!==this._$AH&&t!==P,n&&(this._$AH=t);else{const d=t;let l,p;for(t=o[0],l=0;l<o.length-1;l++)p=M(this,d[a+l],i,l),p===P&&(p=this._$AH[l]),n||=!L(p)||p!==this._$AH[l],p===m?t=m:t!==m&&(t+=(p??"")+o[l+1]),this._$AH[l]=p}n&&!r&&this.j(t)}j(t){t===m?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class Be extends H{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===m?void 0:t}}class Fe extends H{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==m)}}class He extends H{constructor(t,i,a,r,o){super(t,i,a,r,o),this.type=5}_$AI(t,i=this){if((t=M(this,t,i,0)??m)===P)return;const a=this._$AH,r=t===m&&a!==m||t.capture!==a.capture||t.once!==a.once||t.passive!==a.passive,o=t!==m&&(a===m||r);r&&this.element.removeEventListener(this.name,this,a),o&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class We{constructor(t,i,a){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=a}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t)}}const Ve=Z.litHtmlPolyfillSupport;Ve?.(R,E),(Z.litHtmlVersions??=[]).push("3.3.2");const je=(s,t,i)=>{const a=i?.renderBefore??t;let r=a._$litPart$;if(r===void 0){const o=i?.renderBefore??null;a._$litPart$=r=new E(t.insertBefore(D(),o),o,void 0,i??{})}return r._$AI(s),r};/**
+ */const Z=globalThis,ne=s=>s,U=Z.trustedTypes,ce=U?U.createPolicy("lit-html",{createHTML:s=>s}):void 0,ye="$lit$",_=`lit$${Math.random().toFixed(9).slice(2)}$`,xe="?"+_,Le=`<${xe}>`,T=document,q=()=>T.createComment(""),R=s=>s===null||typeof s!="object"&&typeof s!="function",ee=Array.isArray,Ee=s=>ee(s)||typeof s?.[Symbol.iterator]=="function",H=`[ 	
+\f\r]`,O=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,de=/-->/g,le=/>/g,k=RegExp(`>|${H}(?:([^\\s"'>=/]+)(${H}*=${H}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`,"g"),pe=/'/g,ue=/"/g,we=/^(?:script|style|textarea|title)$/i,Ge=s=>(t,...i)=>({_$litType$:s,strings:t,values:i}),c=Ge(1),P=Symbol.for("lit-noChange"),m=Symbol.for("lit-nothing"),ge=new WeakMap,A=T.createTreeWalker(T,129);function $e(s,t){if(!ee(s)||!s.hasOwnProperty("raw"))throw Error("invalid template strings array");return ce!==void 0?ce.createHTML(t):t}const Ne=(s,t)=>{const i=s.length-1,a=[];let o,r=t===2?"<svg>":t===3?"<math>":"",n=O;for(let d=0;d<i;d++){const l=s[d];let p,h,u=-1,b=0;for(;b<l.length&&(n.lastIndex=b,h=n.exec(l),h!==null);)b=n.lastIndex,n===O?h[1]==="!--"?n=de:h[1]!==void 0?n=le:h[2]!==void 0?(we.test(h[2])&&(o=RegExp("</"+h[2],"g")),n=k):h[3]!==void 0&&(n=k):n===k?h[0]===">"?(n=o??O,u=-1):h[1]===void 0?u=-2:(u=n.lastIndex-h[2].length,p=h[1],n=h[3]===void 0?k:h[3]==='"'?ue:pe):n===ue||n===pe?n=k:n===de||n===le?n=O:(n=k,o=void 0);const v=n===k&&s[d+1].startsWith("/>")?" ":"";r+=n===O?l+Le:u>=0?(a.push(p),l.slice(0,u)+ye+l.slice(u)+_+v):l+_+(u===-2?d:v)}return[$e(s,r+(s[i]||"<?>")+(t===2?"</svg>":t===3?"</math>":"")),a]};class L{constructor({strings:t,_$litType$:i},a){let o;this.parts=[];let r=0,n=0;const d=t.length-1,l=this.parts,[p,h]=Ne(t,i);if(this.el=L.createElement(p,a),A.currentNode=this.el.content,i===2||i===3){const u=this.el.content.firstChild;u.replaceWith(...u.childNodes)}for(;(o=A.nextNode())!==null&&l.length<d;){if(o.nodeType===1){if(o.hasAttributes())for(const u of o.getAttributeNames())if(u.endsWith(ye)){const b=h[n++],v=o.getAttribute(u).split(_),C=/([.?@])?(.*)/.exec(b);l.push({type:1,index:r,name:C[2],strings:v,ctor:C[1]==="."?Ue:C[1]==="?"?We:C[1]==="@"?Fe:F}),o.removeAttribute(u)}else u.startsWith(_)&&(l.push({type:6,index:r}),o.removeAttribute(u));if(we.test(o.tagName)){const u=o.textContent.split(_),b=u.length-1;if(b>0){o.textContent=U?U.emptyScript:"";for(let v=0;v<b;v++)o.append(u[v],q()),A.nextNode(),l.push({type:2,index:++r});o.append(u[b],q())}}}else if(o.nodeType===8)if(o.data===xe)l.push({type:2,index:r});else{let u=-1;for(;(u=o.data.indexOf(_,u+1))!==-1;)l.push({type:7,index:r}),u+=_.length-1}r++}}static createElement(t,i){const a=T.createElement("template");return a.innerHTML=t,a}}function M(s,t,i=s,a){if(t===P)return t;let o=a!==void 0?i._$Co?.[a]:i._$Cl;const r=R(t)?void 0:t._$litDirective$;return o?.constructor!==r&&(o?._$AO?.(!1),r===void 0?o=void 0:(o=new r(s),o._$AT(s,i,a)),a!==void 0?(i._$Co??=[])[a]=o:i._$Cl=o),o!==void 0&&(t=M(s,o._$AS(s,t.values),o,a)),t}class Be{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:a}=this._$AD,o=(t?.creationScope??T).importNode(i,!0);A.currentNode=o;let r=A.nextNode(),n=0,d=0,l=a[0];for(;l!==void 0;){if(n===l.index){let p;l.type===2?p=new E(r,r.nextSibling,this,t):l.type===1?p=new l.ctor(r,l.name,l.strings,this,t):l.type===6&&(p=new He(r,this,t)),this._$AV.push(p),l=a[++d]}n!==l?.index&&(r=A.nextNode(),n++)}return A.currentNode=T,o}p(t){let i=0;for(const a of this._$AV)a!==void 0&&(a.strings!==void 0?(a._$AI(t,a,i),i+=a.strings.length-2):a._$AI(t[i])),i++}}class E{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,a,o){this.type=2,this._$AH=m,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=a,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return i!==void 0&&t?.nodeType===11&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),R(t)?t===m||t==null||t===""?(this._$AH!==m&&this._$AR(),this._$AH=m):t!==this._$AH&&t!==P&&this._(t):t._$litType$!==void 0?this.$(t):t.nodeType!==void 0?this.T(t):Ee(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==m&&R(this._$AH)?this._$AA.nextSibling.data=t:this.T(T.createTextNode(t)),this._$AH=t}$(t){const{values:i,_$litType$:a}=t,o=typeof a=="number"?this._$AC(t):(a.el===void 0&&(a.el=L.createElement($e(a.h,a.h[0]),this.options)),a);if(this._$AH?._$AD===o)this._$AH.p(i);else{const r=new Be(o,this),n=r.u(this.options);r.p(i),this.T(n),this._$AH=r}}_$AC(t){let i=ge.get(t.strings);return i===void 0&&ge.set(t.strings,i=new L(t)),i}k(t){ee(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let a,o=0;for(const r of t)o===i.length?i.push(a=new E(this.O(q()),this.O(q()),this,this.options)):a=i[o],a._$AI(r),o++;o<i.length&&(this._$AR(a&&a._$AB.nextSibling,o),i.length=o)}_$AR(t=this._$AA.nextSibling,i){for(this._$AP?.(!1,!0,i);t!==this._$AB;){const a=ne(t).nextSibling;ne(t).remove(),t=a}}setConnected(t){this._$AM===void 0&&(this._$Cv=t,this._$AP?.(t))}}class F{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,a,o,r){this.type=1,this._$AH=m,this._$AN=void 0,this.element=t,this.name=i,this._$AM=o,this.options=r,a.length>2||a[0]!==""||a[1]!==""?(this._$AH=Array(a.length-1).fill(new String),this.strings=a):this._$AH=m}_$AI(t,i=this,a,o){const r=this.strings;let n=!1;if(r===void 0)t=M(this,t,i,0),n=!R(t)||t!==this._$AH&&t!==P,n&&(this._$AH=t);else{const d=t;let l,p;for(t=r[0],l=0;l<r.length-1;l++)p=M(this,d[a+l],i,l),p===P&&(p=this._$AH[l]),n||=!R(p)||p!==this._$AH[l],p===m?t=m:t!==m&&(t+=(p??"")+r[l+1]),this._$AH[l]=p}n&&!o&&this.j(t)}j(t){t===m?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class Ue extends F{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===m?void 0:t}}class We extends F{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==m)}}class Fe extends F{constructor(t,i,a,o,r){super(t,i,a,o,r),this.type=5}_$AI(t,i=this){if((t=M(this,t,i,0)??m)===P)return;const a=this._$AH,o=t===m&&a!==m||t.capture!==a.capture||t.once!==a.once||t.passive!==a.passive,r=t!==m&&(a===m||o);o&&this.element.removeEventListener(this.name,this,a),r&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class He{constructor(t,i,a){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=a}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t)}}const Ve=Z.litHtmlPolyfillSupport;Ve?.(L,E),(Z.litHtmlVersions??=[]).push("3.3.2");const je=(s,t,i)=>{const a=i?.renderBefore??t;let o=a._$litPart$;if(o===void 0){const r=i?.renderBefore??null;a._$litPart$=o=new E(t.insertBefore(q(),r),r,void 0,i??{})}return o._$AI(s),o};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
@@ -24,11 +24,11 @@
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const Qe={attribute:!0,type:String,converter:U,reflect:!1,hasChanged:J},Ke=(s=Qe,t,i)=>{const{kind:a,metadata:r}=i;let o=globalThis.litPropertyMetadata.get(r);if(o===void 0&&globalThis.litPropertyMetadata.set(r,o=new Map),a==="setter"&&((s=Object.create(s)).wrapped=!0),o.set(i.name,s),a==="accessor"){const{name:n}=i;return{set(d){const l=t.get.call(this);t.set.call(this,d),this.requestUpdate(n,l,s,!0,d)},init(d){return d!==void 0&&this.C(n,void 0,s,d),d}}}if(a==="setter"){const{name:n}=i;return function(d){const l=this[n];t.call(this,d),this.requestUpdate(n,l,s,!0,d)}}throw Error("Unsupported decorator location: "+a)};function $(s){return(t,i)=>typeof i=="object"?Ke(s,t,i):((a,r,o)=>{const n=r.hasOwnProperty(o);return r.constructor.createProperty(o,a),n?Object.getOwnPropertyDescriptor(r,o):void 0})(s,t,i)}/**
+ */const Qe={attribute:!0,type:String,converter:B,reflect:!1,hasChanged:J},Ke=(s=Qe,t,i)=>{const{kind:a,metadata:o}=i;let r=globalThis.litPropertyMetadata.get(o);if(r===void 0&&globalThis.litPropertyMetadata.set(o,r=new Map),a==="setter"&&((s=Object.create(s)).wrapped=!0),r.set(i.name,s),a==="accessor"){const{name:n}=i;return{set(d){const l=t.get.call(this);t.set.call(this,d),this.requestUpdate(n,l,s,!0,d)},init(d){return d!==void 0&&this.C(n,void 0,s,d),d}}}if(a==="setter"){const{name:n}=i;return function(d){const l=this[n];t.call(this,d),this.requestUpdate(n,l,s,!0,d)}}throw Error("Unsupported decorator location: "+a)};function $(s){return(t,i)=>typeof i=="object"?Ke(s,t,i):((a,o,r)=>{const n=o.hasOwnProperty(r);return o.constructor.createProperty(r,a),n?Object.getOwnPropertyDescriptor(o,r):void 0})(s,t,i)}/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function f(s){return $({...s,state:!0,attribute:!1})}const V=[{code:"en",name:"English",native:"English",flag:"🇬🇧"},{code:"tr",name:"Turkish",native:"Türkçe",flag:"🇹🇷"},{code:"de",name:"German",native:"Deutsch",flag:"🇩🇪"},{code:"fr",name:"French",native:"Français",flag:"🇫🇷"},{code:"es",name:"Spanish",native:"Español",flag:"🇪🇸"},{code:"it",name:"Italian",native:"Italiano",flag:"🇮🇹"},{code:"pt",name:"Portuguese",native:"Português",flag:"🇵🇹"},{code:"nl",name:"Dutch",native:"Nederlands",flag:"🇳🇱"},{code:"pl",name:"Polish",native:"Polski",flag:"🇵🇱"},{code:"ru",name:"Russian",native:"Русский",flag:"🇷🇺"},{code:"zh",name:"Chinese",native:"中文",flag:"🇨🇳"},{code:"ja",name:"Japanese",native:"日本語",flag:"🇯🇵"},{code:"ko",name:"Korean",native:"한국어",flag:"🇰🇷"},{code:"ar",name:"Arabic",native:"العربية",flag:"🇸🇦"},{code:"hi",name:"Hindi",native:"हिन्दी",flag:"🇮🇳"},{code:"sv",name:"Swedish",native:"Svenska",flag:"🇸🇪"},{code:"da",name:"Danish",native:"Dansk",flag:"🇩🇰"},{code:"fi",name:"Finnish",native:"Suomi",flag:"🇫🇮"},{code:"cs",name:"Czech",native:"Čeština",flag:"🇨🇿"},{code:"hu",name:"Hungarian",native:"Magyar",flag:"🇭🇺"},{code:"el",name:"Greek",native:"Ελληνικά",flag:"🇬🇷"},{code:"uk",name:"Ukrainian",native:"Українська",flag:"🇺🇦"},{code:"ro",name:"Romanian",native:"Română",flag:"🇷🇴"}];let S="en",he=new Map,N={};const Y=new Set;function e(s,t){return S==="en"?t:N[s]??t}function Je(){return S}async function Ze(s){if(s===S)return;if(s==="en"){S="en",N={},j();return}const t=he.get(s);if(t){S=s,N=t.translations,j();return}try{const i=await fetch(`./locales/${encodeURIComponent(s)}.json`);if(!i.ok){console.warn(`[i18n] Locale file not found for "${s}" (HTTP ${i.status}). Using English.`);return}const a=await i.json(),r={locale:s,translations:a,loadedAt:Date.now()};he.set(s,r),S=s,N=a,j()}catch(i){console.warn(`[i18n] Failed to load locale "${s}":`,i)}}function _e(s){return Y.add(s),()=>{Y.delete(s)}}function j(){for(const s of Y)try{s()}catch{}window.dispatchEvent(new CustomEvent("cgs-locale-changed",{detail:{locale:S}}))}var et=Object.defineProperty,w=(s,t,i,a)=>{for(var r=void 0,o=s.length-1,n;o>=0;o--)(n=s[o])&&(r=n(t,i,r)||r);return r&&et(t,i,r),r};const me="13.0, 12.9, 12.8, 12.7, 12.6, 12.5, 12.4, 12.3, 12.2, 12.1, 12.0",X=[{tier:"8 GB VRAM"},{tier:"12 GB+ VRAM"},{tier:"23 GB+ VRAM"}];class x extends z{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.startTab="about",this.hideHomeBtn=!1,this.startCard=0,this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragThreshold=40,this._tabCardCounts={about:13,privacy:6,eula:5,"third-party":5,safety:5,disclaimers:5},this._touchStartX=0,this._touchStartY=0,this._touchSwipeCandidate=!1,this._nextCard=()=>{if(this.currentCardIndex<this._currentTabCardCount-1)this.currentCardIndex=this.currentCardIndex+1;else{const t=this.TAB_ITEMS,i=t.findIndex(a=>a.id===this.activeTab);i<t.length-1&&(this.activeTab=t[i+1].id,this.currentCardIndex=0)}},this._prevCard=()=>{if(this.currentCardIndex>0)this.currentCardIndex=this.currentCardIndex-1;else{const t=this.TAB_ITEMS,i=t.findIndex(a=>a.id===this.activeTab);i>0&&(this.activeTab=t[i-1].id,this.currentCardIndex=this._tabCardCounts[this.activeTab]-1)}},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{if(t.key==="Escape"&&!this.fullPage&&this.open){t.preventDefault(),this.dispatchEvent(new CustomEvent("close"));return}this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{if(this._touchSwipeCandidate=!1,!this.fullPage||t.touches.length!==1)return;const i=t.composedPath()[0]??t.target;!this._isCarouselTouchTarget(i)||this._isInteractiveTouchTarget(i)||(this._touchSwipeCandidate=!0,this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY)},this._onTouchEnd=t=>{if(!this.fullPage||!this._touchSwipeCandidate||t.changedTouches.length===0){this.isCardDragging=!1,this._touchSwipeCandidate=!1;return}const i=t.changedTouches[0].clientX-this._touchStartX,a=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,this._touchSwipeCandidate=!1,Math.abs(i)>Math.abs(a)&&Math.abs(i)>this.cardDragThreshold&&(i<0?this._nextCard():this._prevCard())},this._onTouchCancel=()=>{this.isCardDragging=!1,this._touchSwipeCandidate=!1},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const i=this.position||this._defaultPosition();this.dragStartPosX=i.x,this.dragStartPosY=i.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const i=t.clientX-this.dragStartX,a=t.clientY-this.dragStartY,r={x:this.dragStartPosX+i,y:this.dragStartPosY+a};this.position=r,this.dispatchEvent(new CustomEvent("position-changed",{detail:r}))}if(this.isResizing){const i=t.clientX-this.dragStartX,a=t.clientY-this.dragStartY,r={width:Math.max(500,this.resizeStartWidth+i),height:Math.max(400,this.resizeStartHeight+a)};this.size=r,this.dispatchEvent(new CustomEvent("size-changed",{detail:r}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1}}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}static{this.styles=ve`
+ */function f(s){return $({...s,state:!0,attribute:!1})}const V=[{code:"en",name:"English",native:"English",flag:"🇬🇧"},{code:"tr",name:"Turkish",native:"Türkçe",flag:"🇹🇷"},{code:"de",name:"German",native:"Deutsch",flag:"🇩🇪"},{code:"fr",name:"French",native:"Français",flag:"🇫🇷"},{code:"es",name:"Spanish",native:"Español",flag:"🇪🇸"},{code:"it",name:"Italian",native:"Italiano",flag:"🇮🇹"},{code:"pt",name:"Portuguese",native:"Português",flag:"🇵🇹"},{code:"nl",name:"Dutch",native:"Nederlands",flag:"🇳🇱"},{code:"pl",name:"Polish",native:"Polski",flag:"🇵🇱"},{code:"ru",name:"Russian",native:"Русский",flag:"🇷🇺"},{code:"zh",name:"Chinese",native:"中文",flag:"🇨🇳"},{code:"ja",name:"Japanese",native:"日本語",flag:"🇯🇵"},{code:"ko",name:"Korean",native:"한국어",flag:"🇰🇷"},{code:"ar",name:"Arabic",native:"العربية",flag:"🇸🇦"},{code:"hi",name:"Hindi",native:"हिन्दी",flag:"🇮🇳"},{code:"sv",name:"Swedish",native:"Svenska",flag:"🇸🇪"},{code:"da",name:"Danish",native:"Dansk",flag:"🇩🇰"},{code:"fi",name:"Finnish",native:"Suomi",flag:"🇫🇮"},{code:"cs",name:"Czech",native:"Čeština",flag:"🇨🇿"},{code:"hu",name:"Hungarian",native:"Magyar",flag:"🇭🇺"},{code:"el",name:"Greek",native:"Ελληνικά",flag:"🇬🇷"},{code:"uk",name:"Ukrainian",native:"Українська",flag:"🇺🇦"},{code:"ro",name:"Romanian",native:"Română",flag:"🇷🇴"}];let S="en",he=new Map,N={};const Y=new Set;function e(s,t){return S==="en"?t:N[s]??t}function Je(){return S}async function Ze(s){if(s===S)return;if(s==="en"){S="en",N={},j();return}const t=he.get(s);if(t){S=s,N=t.translations,j();return}try{const i=await fetch(`./locales/${encodeURIComponent(s)}.json`);if(!i.ok){console.warn(`[i18n] Locale file not found for "${s}" (HTTP ${i.status}). Using English.`);return}const a=await i.json(),o={locale:s,translations:a,loadedAt:Date.now()};he.set(s,o),S=s,N=a,j()}catch(i){console.warn(`[i18n] Failed to load locale "${s}":`,i)}}function _e(s){return Y.add(s),()=>{Y.delete(s)}}function j(){for(const s of Y)try{s()}catch{}window.dispatchEvent(new CustomEvent("cgs-locale-changed",{detail:{locale:S}}))}var et=Object.defineProperty,w=(s,t,i,a)=>{for(var o=void 0,r=s.length-1,n;r>=0;r--)(n=s[r])&&(o=n(t,i,o)||o);return o&&et(t,i,o),o};const me="13.0, 12.9, 12.8, 12.7, 12.6, 12.5, 12.4, 12.3, 12.2, 12.1, 12.0",X=[{tier:"8 GB VRAM"},{tier:"12 GB+ VRAM"},{tier:"23 GB+ VRAM"}];class x extends z{constructor(){super(...arguments),this.open=!1,this.fullPage=!1,this.position=null,this.size={width:1360,height:600},this.startTab="about",this.hideHomeBtn=!1,this.startCard=0,this.activeTab="about",this.isDragging=!1,this.isResizing=!1,this.currentCardIndex=0,this.isCardDragging=!1,this.dragStartX=0,this.dragStartY=0,this.dragStartPosX=0,this.dragStartPosY=0,this.resizeStartWidth=0,this.resizeStartHeight=0,this.cardDragThreshold=40,this._tabCardCounts={about:13,privacy:6,eula:5,"third-party":5,safety:5,disclaimers:5},this._touchStartX=0,this._touchStartY=0,this._touchSwipeCandidate=!1,this._nextCard=()=>{if(this.currentCardIndex<this._currentTabCardCount-1)this.currentCardIndex=this.currentCardIndex+1;else{const t=this.TAB_ITEMS,i=t.findIndex(a=>a.id===this.activeTab);i<t.length-1&&(this.activeTab=t[i+1].id,this.currentCardIndex=0)}},this._prevCard=()=>{if(this.currentCardIndex>0)this.currentCardIndex=this.currentCardIndex-1;else{const t=this.TAB_ITEMS,i=t.findIndex(a=>a.id===this.activeTab);i>0&&(this.activeTab=t[i-1].id,this.currentCardIndex=this._tabCardCounts[this.activeTab]-1)}},this._goToCard=t=>{this.currentCardIndex=Math.max(0,Math.min(t,this._currentTabCardCount-1))},this._onKeyDown=t=>{if(t.key==="Escape"&&!this.fullPage&&this.open){t.preventDefault(),this.dispatchEvent(new CustomEvent("close"));return}this.fullPage&&(t.key==="ArrowRight"?(t.preventDefault(),this._nextCard()):t.key==="ArrowLeft"&&(t.preventDefault(),this._prevCard()))},this._onTouchStart=t=>{if(this._touchSwipeCandidate=!1,!this.fullPage||t.touches.length!==1)return;const i=t.composedPath()[0]??t.target;!this._isCarouselTouchTarget(i)||this._isInteractiveTouchTarget(i)||(this._touchSwipeCandidate=!0,this._touchStartX=t.touches[0].clientX,this._touchStartY=t.touches[0].clientY)},this._onTouchEnd=t=>{if(!this.fullPage||!this._touchSwipeCandidate||t.changedTouches.length===0){this.isCardDragging=!1,this._touchSwipeCandidate=!1;return}const i=t.changedTouches[0].clientX-this._touchStartX,a=t.changedTouches[0].clientY-this._touchStartY;this.isCardDragging=!1,this._touchSwipeCandidate=!1,Math.abs(i)>Math.abs(a)&&Math.abs(i)>this.cardDragThreshold&&(i<0?this._nextCard():this._prevCard())},this._onTouchCancel=()=>{this.isCardDragging=!1,this._touchSwipeCandidate=!1},this._onDragStart=t=>{if(t.target.closest(".about-close-btn"))return;this.isDragging=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY;const i=this.position||this._defaultPosition();this.dragStartPosX=i.x,this.dragStartPosY=i.y,t.preventDefault()},this._onResizeStart=t=>{this.isResizing=!0,this.dragStartX=t.clientX,this.dragStartY=t.clientY,this.resizeStartWidth=this.size.width,this.resizeStartHeight=this.size.height,t.preventDefault(),t.stopPropagation()},this._onMouseMove=t=>{if(this.isDragging){const i=t.clientX-this.dragStartX,a=t.clientY-this.dragStartY,o={x:this.dragStartPosX+i,y:this.dragStartPosY+a};this.position=o,this.dispatchEvent(new CustomEvent("position-changed",{detail:o}))}if(this.isResizing){const i=t.clientX-this.dragStartX,a=t.clientY-this.dragStartY,o={width:Math.max(500,this.resizeStartWidth+i),height:Math.max(400,this.resizeStartHeight+a)};this.size=o,this.dispatchEvent(new CustomEvent("size-changed",{detail:o}))}},this._onMouseUp=()=>{this.isDragging=!1,this.isResizing=!1}}get _currentTabCardCount(){return this._tabCardCounts[this.activeTab]??1}static{this.styles=ve`
     :host {
       display: block;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -864,18 +864,18 @@
       display: flex;
       flex-direction: row;
       left: 0 !important;
-      top: 0 !important;
+      /* Sit below the parent site banner so the nav is never covered */
+      top: var(--cgs-parent-nav-height, 0px) !important;
       width: 100% !important;
-      height: 100% !important;
+      height: calc(100% - var(--cgs-parent-nav-height, 0px)) !important;
       border-radius: 0 !important;
-      box-shadow: none !
- important;
+      box-shadow: none !important;
       border: none !important;
     }
 
     :host([full-page]) .about-header {
       position: fixed;
-      top: 0;
+      top: var(--cgs-parent-nav-height, 0px);
       left: 170px;
       right: 0;
       height: var(--about-header-height);
@@ -886,15 +886,15 @@
     :host([full-page]) .about-sidebar {
       position: fixed;
       left: 0;
-      top: 0;
-      height: 100%;
+      top: var(--cgs-parent-nav-height, 0px);
+      height: calc(100% - var(--cgs-parent-nav-height, 0px));
       width: 170px !important;
       z-index: 31;
     }
 
     :host([full-page]) .about-main {
       margin-left: 170px;
-      padding-top: var(--about-header-height);
+      padding-top: calc(var(--cgs-parent-nav-height, 0px) + var(--about-header-height));
     }
 
     /* Resize handle */
@@ -1087,7 +1087,8 @@
         margin: 0 auto !important;
         box-sizing: border-box !important;
         overflow-x: hidden !important;
-        padding: 20px !important;
+        /* 56px top clears the dot strip (top:10px + ~36px height + buffer) */
+        padding: 56px 20px 20px !important;
         border-radius: 20px !important;
       }
 
@@ -1191,6 +1192,23 @@
       .about-content.scroll-mode {
         padding: 10px !important;
         font-size: 13px !important;
+      }
+      /* At very narrow widths, shrink dots so 13 can fit in one row (no wrapping) */
+      .about-carousel-dots {
+        gap: 4px !important;
+        padding: 5px 8px !important;
+      }
+      .about-carousel-dot {
+        width: 16px !important;
+        height: 16px !important;
+        box-shadow: inset 0 0 0 5px var(--ui-popup-bg, rgba(12, 12, 22, 0.97)), 0 0 5px rgba(99, 102, 241, 0.15) !important;
+      }
+      .about-carousel-dot.active {
+        box-shadow: inset 0 0 0 5px var(--ui-popup-bg, rgba(12, 12, 22, 0.97)), 0 0 10px rgba(99, 102, 241, 0.5) !important;
+      }
+      /* Smaller dots = shorter strip; 52px top clears single-row dot strip */
+      .about-card {
+        padding-top: 52px !important;
       }
 
       .about-nav-side-arrow {
@@ -3679,7 +3697,7 @@
            ${e("privacy.popup.contact_desc","For any questions regarding this privacy policy or to exercise your privacy rights, please contact Comet Game Studio Ltd at the support channels provided within the Software or at: cometgamestudio.com")}
          </p>
       </div>
-    `}}w([$({type:Boolean})],x.prototype,"open");w([$({type:Boolean,attribute:"full-page"})],x.prototype,"fullPage");w([$({type:Object})],x.prototype,"position");w([$({type:Object})],x.prototype,"size");w([$({type:String})],x.prototype,"startTab");w([$({type:Boolean,attribute:"hide-home-btn"})],x.prototype,"hideHomeBtn");w([$({type:Number,attribute:"start-card"})],x.prototype,"startCard");w([f()],x.prototype,"activeTab");w([f()],x.prototype,"isDragging");w([f()],x.prototype,"isResizing");w([f()],x.prototype,"currentCardIndex");w([f()],x.prototype,"isCardDragging");customElements.get("orus-about-dialog")||customElements.define("orus-about-dialog",x);var tt=Object.defineProperty,it=Object.getOwnPropertyDescriptor,y=(s,t,i,a)=>{for(var r=a>1?void 0:a?it(t,i):t,o=s.length-1,n;o>=0;o--)(n=s[o])&&(r=(a?n(t,i,r):n(r))||r);return a&&r&&tt(t,i,r),r};const at=!0,st=!0,rt=!0,ot=!0;globalThis.WEBSITE_MODE=at;globalThis.PRODUCTION_MODE=st;globalThis.NO_INFERENCE_MODE=rt;globalThis.NO_AUTH_REQUIRED=ot;let g=class extends z{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this._editorOpen=!1,this._editorError=null,this._currentLocale="en",this._langDropdownOpen=!1,this._currentQuoteIndex=0,this._quoteFading=!1,this._activeVideoIndex=0,this._aiExpanded=!0,this._vrExpanded=!0,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._animationFrameId=0,this._unlistenI18n=null,this._quoteTimer=null,this._navResizeObserver=null,this._observedNav=null,this._quoteHoverPaused=!1,this._onPopState=s=>{const t=s.state;this._activeSection=t?.section??this._pathToSection(location.pathname),this._updatePageMeta()}}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._activeSection=this._pathToSection(location.pathname),globalThis.addEventListener("popstate",this._onPopState),this._bootSequence(),this._updatePageMeta(),this._unlistenI18n=_e(()=>{this._currentLocale=Je(),this.requestUpdate()}),this._startQuoteRotation()}disconnectedCallback(){super.disconnectedCallback(),globalThis.removeEventListener("popstate",this._onPopState),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId),this._unlistenI18n?.(),this._stopQuoteRotation(),this._navResizeObserver?.disconnect(),this._navResizeObserver=null,this._observedNav=null}firstUpdated(){this.updateComplete.then(()=>{this._observeNavHeight(),this._syncNavHeight()})}updated(s){super.updated(s),this._observeNavHeight(),this._syncNavHeight(),s.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(s){this._errorMessage=`Failed to load: ${s instanceof Error?s.message:String(s)}`,this._loading=!1}}async _initThreeScene(){try{const s=this.shadowRoot?.querySelector("#cgs-canvas");if(!s)return;const t=await Se(()=>import("./three.module-CIzvuMnW.js"),[]),i=new t.Scene,a=new t.PerspectiveCamera(60,s.clientWidth/s.clientHeight,.1,1e3);a.position.set(0,0,8);const r=new t.WebGLRenderer({canvas:s,antialias:!0,alpha:!0});r.setSize(s.clientWidth,s.clientHeight),r.setPixelRatio(Math.min(globalThis.devicePixelRatio,2)),r.setClearColor(657935,1);const o=new t.IcosahedronGeometry(2,15),n=new t.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),d=new t.Mesh(o,n);i.add(d);const l=new t.AmbientLight(16777215,.3);i.add(l);const p=new t.PointLight(6333946,1.5,20);p.position.set(5,5,5),i.add(p),this._threeRenderer=r,this._threeCanvasReady=!0;const h=()=>{this._animationFrameId=requestAnimationFrame(h),!document.hidden&&(d.rotation.y+=.003,d.rotation.x+=.001,r.render(i,a))};h(),new ResizeObserver(()=>{if(!s.parentElement)return;const b=s.clientWidth,v=s.clientHeight;a.aspect=b/v,a.updateProjectionMatrix(),r.setSize(b,v)}).observe(s)}catch{this._threeCanvasReady=!1}}_navigateTo(s){this._activeSection!==s&&(this._activeSection=s,history.pushState({section:s},"",this._sectionToPath(s)),this._updatePageMeta())}_startQuoteRotation(){this._stopQuoteRotation(),this._quoteTimer=setInterval(()=>this._advanceQuote(),8e3)}_updatePageMeta(){const t={"islands-of-life":{title:"Islands of Life — Cinematic VR Adventure | Comet Game Studio",desc:"Explore alien worlds in VR. A cinematic sci-fi adventure spanning five planets, orbital combat, and a journey through a black hole.",img:"https://www.cometgamestudio.com/images/iol/HighresScreenshot00003.jpg"},"orus-ai":{title:"Orus AI System — Privacy-First Local AI | Comet Game Studio",desc:"Meet Orus, the multimodal AI system that runs entirely on your local Windows Machine. No cloud. No data collection."},about:{title:"About Comet Game Studio",desc:"We build privacy-first AI tools and immersive VR experiences."}}[this._activeSection];document.title=t?.title??"Comet Game Studio — AI · VR · Music";const i=(a,r,o)=>{const n=document.querySelector(`meta[${a}="${r}"]`);n&&n.setAttribute("content",o)};i("property","og:title",t?.title??"Comet Game Studio"),i("property","og:description",t?.desc??"AI-Powered Creative Tools — Orus Multimodal AI System"),t?.img&&i("property","og:image",t.img),i("name","twitter:title",t?.title??"Comet Game Studio"),i("name","twitter:description",t?.desc??"Privacy-first AI tools and immersive VR experiences.")}_stopQuoteRotation(){this._quoteTimer!==null&&(clearInterval(this._quoteTimer),this._quoteTimer=null)}_advanceQuote(){this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=(this._currentQuoteIndex+1)%g._QUOTES.length,this._quoteFading=!1},400)}_pauseQuoteRotation(){this._quoteHoverPaused=!0,this._stopQuoteRotation()}_resumeQuoteRotation(){this._quoteHoverPaused&&(this._quoteHoverPaused=!1,this._startQuoteRotation())}_goToQuote(s){s!==this._currentQuoteIndex&&(this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=s,this._quoteFading=!1,this._quoteHoverPaused||this._startQuoteRotation()},400))}_observeNavHeight(){const s=this.renderRoot.querySelector(".cgs-nav");if(!s){this._navResizeObserver?.disconnect(),this._observedNav=null;return}this._observedNav!==s&&(this._navResizeObserver??=new ResizeObserver(()=>this._syncNavHeight()),this._navResizeObserver.disconnect(),this._navResizeObserver.observe(s),this._observedNav=s)}_syncNavHeight(){const s=this.renderRoot.querySelector(".cgs-nav");if(!s)return;const t=Math.ceil(s.getBoundingClientRect().height);t>0&&this.style.setProperty("--cgs-nav-height",`${t}px`)}_sectionToPath(s){const t="/cgs-public/",a={privacy:"privacy-policy",products:"products",about:"about",safety:"safety",terms:"terms",notices:"notices","orus-ai":"orus-ai","islands-of-life":"islands-of-life",enterprise:"enterprise"}[s];return a?`${t}${a}`:t}_pathToSection(s){const t="/cgs-public/".replace(/\/$/,"");switch(s.startsWith(t)?s.slice(t.length):s){case"/privacy-policy":return"privacy";case"/products":return"products";case"/about":return"about";case"/safety":return"safety";case"/terms":return"terms";case"/notices":return"notices";case"/orus-ai":return"orus-ai";case"/islands-of-life":return"islands-of-life";case"/enterprise":return"enterprise";default:return"home"}}async _switchLanguage(s){this._langDropdownOpen=!1,await Ze(s)}_renderSiteChrome(s){const t=this._activeSection==="home"||this._activeSection==="products",i=this._activeSection==="orus-ai",a=this._activeSection==="about",r=this._activeSection==="enterprise",o=t?"cgs-nav-link active":"cgs-nav-link",n=i?"cgs-nav-link active":"cgs-nav-link",d=a?"cgs-nav-link active":"cgs-nav-link",l=r?"cgs-nav-link active":"cgs-nav-link",p=t?"page":void 0,h=i?"page":void 0,u=a?"page":void 0,b=r?"page":void 0;return this._langDropdownOpen,this._langDropdownOpen&&c`
+    `}}w([$({type:Boolean})],x.prototype,"open");w([$({type:Boolean,attribute:"full-page"})],x.prototype,"fullPage");w([$({type:Object})],x.prototype,"position");w([$({type:Object})],x.prototype,"size");w([$({type:String})],x.prototype,"startTab");w([$({type:Boolean,attribute:"hide-home-btn"})],x.prototype,"hideHomeBtn");w([$({type:Number,attribute:"start-card"})],x.prototype,"startCard");w([f()],x.prototype,"activeTab");w([f()],x.prototype,"isDragging");w([f()],x.prototype,"isResizing");w([f()],x.prototype,"currentCardIndex");w([f()],x.prototype,"isCardDragging");customElements.get("orus-about-dialog")||customElements.define("orus-about-dialog",x);var tt=Object.defineProperty,it=Object.getOwnPropertyDescriptor,y=(s,t,i,a)=>{for(var o=a>1?void 0:a?it(t,i):t,r=s.length-1,n;r>=0;r--)(n=s[r])&&(o=(a?n(t,i,o):n(o))||o);return a&&o&&tt(t,i,o),o};const at=!0,st=!0,ot=!0,rt=!0;globalThis.WEBSITE_MODE=at;globalThis.PRODUCTION_MODE=st;globalThis.NO_INFERENCE_MODE=ot;globalThis.NO_AUTH_REQUIRED=rt;let g=class extends z{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this._editorOpen=!1,this._editorError=null,this._currentLocale="en",this._langDropdownOpen=!1,this._currentQuoteIndex=0,this._quoteFading=!1,this._activeVideoIndex=0,this._aiExpanded=!0,this._vrExpanded=!0,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._animationFrameId=0,this._unlistenI18n=null,this._quoteTimer=null,this._navResizeObserver=null,this._observedNav=null,this._quoteHoverPaused=!1,this._onPopState=s=>{const t=s.state;this._activeSection=t?.section??this._pathToSection(location.pathname),this._updatePageMeta()}}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._activeSection=this._pathToSection(location.pathname),globalThis.addEventListener("popstate",this._onPopState),this._bootSequence(),this._updatePageMeta(),this._unlistenI18n=_e(()=>{this._currentLocale=Je(),this.requestUpdate()}),this._startQuoteRotation()}disconnectedCallback(){super.disconnectedCallback(),globalThis.removeEventListener("popstate",this._onPopState),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId),this._unlistenI18n?.(),this._stopQuoteRotation(),this._navResizeObserver?.disconnect(),this._navResizeObserver=null,this._observedNav=null}firstUpdated(){this.updateComplete.then(()=>{this._observeNavHeight(),this._syncNavHeight()})}updated(s){super.updated(s),this._observeNavHeight(),this._syncNavHeight(),s.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(s){this._errorMessage=`Failed to load: ${s instanceof Error?s.message:String(s)}`,this._loading=!1}}async _initThreeScene(){try{const s=this.shadowRoot?.querySelector("#cgs-canvas");if(!s)return;const t=await Se(()=>import("./three.module-CIzvuMnW.js"),[]),i=new t.Scene,a=new t.PerspectiveCamera(60,s.clientWidth/s.clientHeight,.1,1e3);a.position.set(0,0,8);const o=new t.WebGLRenderer({canvas:s,antialias:!0,alpha:!0});o.setSize(s.clientWidth,s.clientHeight),o.setPixelRatio(Math.min(globalThis.devicePixelRatio,2)),o.setClearColor(657935,1);const r=new t.IcosahedronGeometry(2,15),n=new t.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),d=new t.Mesh(r,n);i.add(d);const l=new t.AmbientLight(16777215,.3);i.add(l);const p=new t.PointLight(6333946,1.5,20);p.position.set(5,5,5),i.add(p),this._threeRenderer=o,this._threeCanvasReady=!0;const h=()=>{this._animationFrameId=requestAnimationFrame(h),!document.hidden&&(d.rotation.y+=.003,d.rotation.x+=.001,o.render(i,a))};h(),new ResizeObserver(()=>{if(!s.parentElement)return;const b=s.clientWidth,v=s.clientHeight;a.aspect=b/v,a.updateProjectionMatrix(),o.setSize(b,v)}).observe(s)}catch{this._threeCanvasReady=!1}}_navigateTo(s){this._activeSection!==s&&(this._activeSection=s,history.pushState({section:s},"",this._sectionToPath(s)),this._updatePageMeta())}_startQuoteRotation(){this._stopQuoteRotation(),this._quoteTimer=setInterval(()=>this._advanceQuote(),8e3)}_updatePageMeta(){const t={"islands-of-life":{title:"Islands of Life — Cinematic VR Adventure | Comet Game Studio",desc:"Explore alien worlds in VR. A cinematic sci-fi adventure spanning five planets, orbital combat, and a journey through a black hole.",img:"https://www.cometgamestudio.com/images/iol/HighresScreenshot00003.jpg"},"orus-ai":{title:"Orus AI System — Privacy-First Local AI | Comet Game Studio",desc:"Meet Orus, the multimodal AI system that runs entirely on your local Windows Machine. No cloud. No data collection."},about:{title:"About Comet Game Studio",desc:"We build privacy-first AI tools and immersive VR experiences."}}[this._activeSection];document.title=t?.title??"Comet Game Studio — AI · VR · Music";const i=(a,o,r)=>{const n=document.querySelector(`meta[${a}="${o}"]`);n&&n.setAttribute("content",r)};i("property","og:title",t?.title??"Comet Game Studio"),i("property","og:description",t?.desc??"AI-Powered Creative Tools — Orus Multimodal AI System"),t?.img&&i("property","og:image",t.img),i("name","twitter:title",t?.title??"Comet Game Studio"),i("name","twitter:description",t?.desc??"Privacy-first AI tools and immersive VR experiences.")}_stopQuoteRotation(){this._quoteTimer!==null&&(clearInterval(this._quoteTimer),this._quoteTimer=null)}_advanceQuote(){this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=(this._currentQuoteIndex+1)%g._QUOTES.length,this._quoteFading=!1},400)}_pauseQuoteRotation(){this._quoteHoverPaused=!0,this._stopQuoteRotation()}_resumeQuoteRotation(){this._quoteHoverPaused&&(this._quoteHoverPaused=!1,this._startQuoteRotation())}_goToQuote(s){s!==this._currentQuoteIndex&&(this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=s,this._quoteFading=!1,this._quoteHoverPaused||this._startQuoteRotation()},400))}_observeNavHeight(){const s=this.renderRoot.querySelector(".cgs-nav");if(!s){this._navResizeObserver?.disconnect(),this._observedNav=null;return}this._observedNav!==s&&(this._navResizeObserver??=new ResizeObserver(()=>this._syncNavHeight()),this._navResizeObserver.disconnect(),this._navResizeObserver.observe(s),this._observedNav=s)}_syncNavHeight(){const s=this.renderRoot.querySelector(".cgs-nav");if(!s)return;const t=Math.ceil(s.getBoundingClientRect().height);t>0&&this.style.setProperty("--cgs-nav-height",`${t}px`)}_sectionToPath(s){const t="/cgs-public/",a={privacy:"privacy-policy",products:"products",about:"about",safety:"safety",terms:"terms",notices:"notices","orus-ai":"orus-ai","islands-of-life":"islands-of-life",enterprise:"enterprise"}[s];return a?`${t}${a}`:t}_pathToSection(s){const t="/cgs-public/".replace(/\/$/,"");switch(s.startsWith(t)?s.slice(t.length):s){case"/privacy-policy":return"privacy";case"/products":return"products";case"/about":return"about";case"/safety":return"safety";case"/terms":return"terms";case"/notices":return"notices";case"/orus-ai":return"orus-ai";case"/islands-of-life":return"islands-of-life";case"/enterprise":return"enterprise";default:return"home"}}async _switchLanguage(s){this._langDropdownOpen=!1,await Ze(s)}_renderSiteChrome(s){const t=this._activeSection==="home"||this._activeSection==="products",i=this._activeSection==="orus-ai",a=this._activeSection==="about",o=this._activeSection==="enterprise",r=t?"cgs-nav-link active":"cgs-nav-link",n=i?"cgs-nav-link active":"cgs-nav-link",d=a?"cgs-nav-link active":"cgs-nav-link",l=o?"cgs-nav-link active":"cgs-nav-link",p=t?"page":void 0,h=i?"page":void 0,u=a?"page":void 0,b=o?"page":void 0;return this._langDropdownOpen,this._langDropdownOpen&&c`
                             <div id="cgs-lang-dropdown" class="cgs-lang-dropdown" role="menu" aria-label="${e("nav.language_menu","Language selection")}">
                                 ${V.map(v=>c`
                                     <button class="cgs-lang-option ${this._currentLocale===v.code?"active":""}"
@@ -3698,7 +3716,7 @@
                     ${e("nav.logo","Comet Game Studio")}
                 </button>
                 <div class="cgs-nav-links">
-                    <button class="${o}"
+                    <button class="${r}"
                             type="button"
                             aria-current=${p}
                             @click=${()=>this._navigateTo("home")}>${e("nav.home","Home")}</button>
@@ -3789,12 +3807,12 @@
                     ${e("hero.showcase.hardware.footnote","For the full workload-by-workload breakdown, open About and jump to System Requirements from the index card.")}
                 </p>
             </section>
-        `}_renderProfessionsDigest(){const s=[{icon:"📚",title:e("hero.showcase.prof.admin.title","Legal, Admin, HR & Back-Office"),audience:e("hero.showcase.prof.admin.audience","Contracts, policy review, spreadsheets, task extraction, and memory-backed casework."),minimum:"8 GB RTX GPU · 16 GB RAM",recommended:"12 GB+ RTX GPU · 32 GB RAM"},{icon:"📈",title:e("hero.showcase.prof.business.title","Business, Finance & Marketing"),audience:e("hero.showcase.prof.business.audience","Research synthesis, meeting prep, campaign drafts, and multi-window guidance."),minimum:"12 GB RTX GPU · 16 GB RAM",recommended:"16–24 GB RTX GPU · 32 GB RAM"},{icon:"🔬",title:e("hero.showcase.prof.science.title","Science, Audit & Research"),audience:e("hero.showcase.prof.science.audience","Long-form reading, evidence review, reasoning, and structured retrieval."),minimum:"12 GB RTX GPU · 32 GB RAM",recommended:"24 GB+ RTX GPU · 64 GB RAM"},{icon:"🎨",title:e("hero.showcase.prof.creative.title","Creative Direction & 3D Ideation"),audience:e("hero.showcase.prof.creative.audience","Visual command workflows, Living Machine, scene experimentation, and design narration."),minimum:"12 GB RTX GPU · 32 GB RAM",recommended:"24 GB+ RTX GPU · 64 GB RAM"},{icon:"🎤",title:e("hero.showcase.prof.meetings.title","Meetings, Teaching & Support"),audience:e("hero.showcase.prof.meetings.audience","Presenter sessions, meeting transcription, multi-speaker capture, and guided walkthroughs."),minimum:"12 GB RTX GPU · 16 GB RAM",recommended:"16–24 GB RTX GPU · 32 GB RAM"},{icon:"🌙",title:e("hero.showcase.prof.batch.title","Solo & Overnight Batch Processing"),audience:e("hero.showcase.prof.batch.audience","Unattended text-first processing, long queues, and categorizer runs."),minimum:"8 GB RTX GPU · 16 GB RAM",recommended:"12 GB+ RTX GPU · 32 GB RAM"},{icon:"🧪",title:e("hero.showcase.prof.lab.title","Full Orus Lab & Studio"),audience:e("hero.showcase.prof.lab.audience","Widest feature envelope: multimodal, Orpheus, live vision, SF3D, and concurrent sessions."),minimum:"23 GB+ RTX GPU · 32 GB RAM",recommended:"24–32 GB+ RTX GPU · 64 GB RAM"}];return c`
-            <section class="cgs-showcase-specs" aria-label="Profession-based hardware recommendations">
+        `}_renderProfessionsDigest(){const s=[{icon:"📚",title:e("hero.showcase.prof.admin.title","Legal, Admin, HR & Back-Office"),audience:e("hero.showcase.prof.admin.audience","Contracts, policy review, spreadsheets, task extraction, and memory-backed casework."),activities:e("hero.showcase.prof.admin.activities","TaskChat, Categorizer, Processor, Validator, Outputs, Spreadsheet editing, Memory Lab, and overnight queue runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10 build 17763+ or Windows 11",fit:e("hero.showcase.prof.admin.min.fit","Text-first document work, quiet voice use, slower batch throughput."),notes:e("hero.showcase.prof.admin.min.notes","Use the text-focused or low-visual path. The 3D shell is optional for this workload.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("hero.showcase.prof.admin.rec.fit","Comfortable multimodal document handling with Orpheus TTS and better queue depth."),notes:e("hero.showcase.prof.admin.rec.notes","This is the best all-round professional floor if you want voice, live vision, and document tools together.")}},{icon:"📈",title:e("hero.showcase.prof.business.title","Business, Finance & Marketing"),audience:e("hero.showcase.prof.business.audience","Research synthesis, meeting prep, campaign drafts, and multi-window guidance."),activities:e("hero.showcase.prof.business.activities","Webber, Presenter, BrainStorm, Discord, Outputs, Voice Profiles, and live multimodal chat."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("hero.showcase.prof.business.min.fit","Capable of multimodal work, but with tighter concurrency and shorter comfortable sessions."),notes:e("hero.showcase.prof.business.min.notes","Suitable if you want Orpheus voice and live vision, but not the heaviest 3D or advanced visual stacks.")},recommended:{gpu:"16–24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("hero.showcase.prof.business.rec.fit","Smooth daily use across voice, research, planning, and client-facing flows."),notes:e("hero.showcase.prof.business.rec.notes","A higher-VRAM card gives more room for simultaneous speech, vision, and retrieval without comfort drops.")}},{icon:"🔬",title:e("hero.showcase.prof.science.title","Science, Audit & Research"),audience:e("hero.showcase.prof.science.audience","Long-form reading, evidence review, reasoning, and structured retrieval."),activities:e("hero.showcase.prof.science.activities","High-context engine profiles, Defrag, Memory Lab, Webber, Presenter, and reasoning-heavy sessions."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("hero.showcase.prof.science.min.fit","Usable for careful high-context work with conservative concurrency."),notes:e("hero.showcase.prof.science.min.notes","Expect tighter token budgets when voice and long-document reasoning are active together.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("hero.showcase.prof.science.rec.fit","Best for sustained high-context reasoning, deeper queues, and fewer context-trim compromises."),notes:e("hero.showcase.prof.science.rec.notes","Prime-class hardware is where long-context work starts to feel comfortably professional instead of merely possible.")}},{icon:"🎨",title:e("hero.showcase.prof.creative.title","Creative Direction & 3D Ideation"),audience:e("hero.showcase.prof.creative.audience","Visual command workflows, Living Machine, scene experimentation, and design narration."),activities:e("hero.showcase.prof.creative.activities","Visual command workflows, Boltzmann Brain, Living Machine, Webcam, Face Capture, visual themes, and scene-driven presentation."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"64-bit Windows 10/11",fit:e("hero.showcase.prof.creative.min.fit","Basic visual workflows and scene experimentation without the heaviest generation modules."),notes:e("hero.showcase.prof.creative.min.notes","Good for visual assistance and lighter 3D use. It is not the right floor for SF3D or video-heavy iteration.")},recommended:{gpu:"24 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("hero.showcase.prof.creative.rec.fit","Comfortable visual command work, richer 3D scenes, and headroom for advanced visual modules."),notes:e("hero.showcase.prof.creative.rec.notes","Use Prime-class hardware if Orus is part of a real creative pipeline rather than occasional visual support.")}},{icon:"🎤",title:e("hero.showcase.prof.meetings.title","Meetings, Teaching & Support"),audience:e("hero.showcase.prof.meetings.audience","Presenter sessions, meeting transcription, multi-speaker capture, and guided walkthroughs."),activities:e("hero.showcase.prof.meetings.activities","Meeting Mode, Presenter, Voice Profiles, per-app audio capture, Discord, and system dialogue."),minimum:{gpu:"12 GB NVIDIA RTX GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("hero.showcase.prof.meetings.min.fit","Functional voice-centric workflows with moderate simultaneous capture and response pressure."),notes:e("hero.showcase.prof.meetings.min.notes","This tier is viable, but real-time comfort improves materially as VRAM and RAM rise.")},recommended:{gpu:"16–24 GB NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("hero.showcase.prof.meetings.rec.fit","Better for long meeting runs, cleaner voice overlap handling, and more resilient STT plus TTS coexistence."),notes:e("hero.showcase.prof.meetings.rec.notes","Orpheus throughput is benchmarked at session start, so stronger GPUs usually translate directly into smoother live voice UX.")}},{icon:"🌙",title:e("hero.showcase.prof.batch.title","Solo & Overnight Batch Processing"),audience:e("hero.showcase.prof.batch.audience","Unattended text-first processing, long queues, and categorizer runs."),activities:e("hero.showcase.prof.batch.activities","Categorizer, Processor, Validator, Output export, memory cleanup, and long unattended text-first runs."),minimum:{gpu:"8 GB NVIDIA RTX-class GPU",ram:"16 GB RAM",storage:"15 GB free SSD space",os:"64-bit Windows 10/11",fit:e("hero.showcase.prof.batch.min.fit","The minimum local benchmark for patient, text-focused processing."),notes:e("hero.showcase.prof.batch.min.notes","This is the right bracket if you do not need the 3D shell and can tolerate slower TTS or lower concurrency.")},recommended:{gpu:"12 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("hero.showcase.prof.batch.rec.fit","Much better queue throughput and fewer stalls once memory retrieval, voice, and exports overlap."),notes:e("hero.showcase.prof.batch.rec.notes","If Orus is running while you sleep or process long backlogs, extra VRAM buys predictability more than flashiness.")}},{icon:"🧪",title:e("hero.showcase.prof.lab.title","Full Orus Lab & Studio"),audience:e("hero.showcase.prof.lab.audience","Widest feature envelope: multimodal, Orpheus, live vision, SF3D, and concurrent sessions."),activities:e("hero.showcase.prof.lab.activities","Prime-tier end-to-end Orus with heavy voice, visuals, generation, and concurrent sessions."),minimum:{gpu:"23 GB+ NVIDIA RTX GPU",ram:"32 GB RAM",storage:"25 GB free SSD space",os:"Windows 11 on x64 preferred",fit:e("hero.showcase.prof.lab.min.fit","The practical floor for calling Orus a full-stack local studio rather than a trimmed workstation."),notes:e("hero.showcase.prof.lab.min.notes","This is where the heaviest visual and generation modules stop feeling compromised.")},recommended:{gpu:"24–32 GB+ NVIDIA RTX GPU",ram:"64 GB RAM",storage:"50 GB+ free NVMe space",os:"Windows 11 on x64",fit:e("hero.showcase.prof.lab.rec.fit","Best for enterprise demos, creative labs, and all-feature usage with minimal negotiation between subsystems."),notes:e("hero.showcase.prof.lab.rec.notes","RTX 4090 and RTX 5090 class machines are the right target when Orus is being used as a primary workstation layer.")}}];return c`
+            <section class="cgs-showcase-specs cgs-showcase-specs--professions" aria-label="Profession-based hardware recommendations">
                 <div class="cgs-showcase-specs-head">
                     <div>
                         <div class="cgs-showcase-specs-kicker">${e("hero.showcase.prof.kicker","Professions")}</div>
-                        <div class="cgs-showcase-specs-note">${e("hero.showcase.prof.note","Recommended hardware by profession and workload type.")}</div>
+                        <div class="cgs-showcase-specs-note">${e("hero.showcase.prof.note","Recommended hardware by profession and workload type. Expand any archetype to view minimum and recommended specifications.")}</div>
                     </div>
                     <div class="cgs-showcase-specs-badge">${e("hero.showcase.prof.badge","Windows x64 · NVIDIA RTX Required")}</div>
                 </div>
@@ -3809,23 +3827,35 @@
                                 <span class="cgs-showcase-spec-chevron" aria-hidden="true">⌄</span>
                             </summary>
                             <div class="cgs-showcase-spec-body">
+                                <p class="cgs-showcase-spec-activities"><strong>${e("hero.showcase.prof.typical_activities","Typical Orus activities")}:</strong> ${t.activities}</p>
                                 <div class="cgs-showcase-spec-chip-grid">
                                     <div class="cgs-showcase-spec-chip">
                                         <span class="cgs-showcase-spec-chip-label">${e("hero.showcase.hardware.minimum","Minimum")}</span>
-                                        <strong>${t.minimum}</strong>
+                                        <ul class="cgs-showcase-spec-details-list">
+                                            <li><strong>GPU:</strong> ${t.minimum.gpu}</li>
+                                            <li><strong>RAM:</strong> ${t.minimum.ram}</li>
+                                            <li><strong>Storage:</strong> ${t.minimum.storage}</li>
+                                            <li><strong>OS:</strong> ${t.minimum.os}</li>
+                                            <li><strong>Best For:</strong> ${t.minimum.fit}</li>
+                                        </ul>
+                                        <p class="cgs-showcase-spec-note">${t.minimum.notes}</p>
                                     </div>
                                     <div class="cgs-showcase-spec-chip cgs-showcase-spec-chip--recommended">
                                         <span class="cgs-showcase-spec-chip-label">${e("hero.showcase.hardware.recommended","Recommended")}</span>
-                                        <strong>${t.recommended}</strong>
+                                        <ul class="cgs-showcase-spec-details-list">
+                                            <li><strong>GPU:</strong> ${t.recommended.gpu}</li>
+                                            <li><strong>RAM:</strong> ${t.recommended.ram}</li>
+                                            <li><strong>Storage:</strong> ${t.recommended.storage}</li>
+                                            <li><strong>OS:</strong> ${t.recommended.os}</li>
+                                            <li><strong>Best For:</strong> ${t.recommended.fit}</li>
+                                        </ul>
+                                        <p class="cgs-showcase-spec-note">${t.recommended.notes}</p>
                                     </div>
                                 </div>
                             </div>
                         </details>
                     `)}
                 </div>
-                <p class="cgs-showcase-spec-footnote">
-                    ${e("hero.showcase.prof.footnote","For the full specification breakdown with tips, open About and navigate to the Professions card.")}
-                </p>
             </section>
         `}_renderStudioPlate(){const s=g._QUOTES[this._currentQuoteIndex],t=g._QUOTES.length,i=s.portrait;return c`
             <section class="cgs-quote-stage cgs-quote-stage--studio"
@@ -3859,13 +3889,13 @@
                         </div>
                     </div>
                     <div class="cgs-quote-progress">
-                        ${Array.from({length:t},(a,r)=>c`
+                        ${Array.from({length:t},(a,o)=>c`
                             <button
-                                class="cgs-quote-progress-segment ${r===this._currentQuoteIndex?"active":""}"
+                                class="cgs-quote-progress-segment ${o===this._currentQuoteIndex?"active":""}"
                                 type="button"
-                                aria-label=${`Show quote ${r+1} by ${g._QUOTES[r].thinker}`}
-                                style="--segment-accent: ${r===this._currentQuoteIndex?"#f59e0b":"#6366f1"};"
-                                @click=${()=>this._goToQuote(r)}></button>
+                                aria-label=${`Show quote ${o+1} by ${g._QUOTES[o].thinker}`}
+                                style="--segment-accent: ${o===this._currentQuoteIndex?"#f59e0b":"#6366f1"};"
+                                @click=${()=>this._goToQuote(o)}></button>
                         `)}
                     </div>
                 </div>
@@ -3886,11 +3916,11 @@
                             <span class="cgs-root-card-toggle">${this._aiExpanded?"▲":"▼"}</span>
                             ${this._aiExpanded?c`
                                 <div class="cgs-root-card-videos" @click=${a=>a.stopPropagation()}>
-                                    ${g._SHOWCASE_ITEMS.filter(a=>a.section==="ai").map(a=>{const r=g._SHOWCASE_ITEMS.findIndex(o=>o===a);return c`
-                                        <button class="cgs-showcase-thumb ${r===this._activeVideoIndex?"active":""}"
+                                    ${g._SHOWCASE_ITEMS.filter(a=>a.section==="ai").map(a=>{const o=g._SHOWCASE_ITEMS.findIndex(r=>r===a);return c`
+                                        <button class="cgs-showcase-thumb ${o===this._activeVideoIndex?"active":""}"
                                                 type="button"
                                                 style="--thumb-accent: ${a.accent}"
-                                                @click=${()=>{this._activeVideoIndex=r}}>
+                                                @click=${()=>{this._activeVideoIndex=o}}>
                                             <span class="cgs-showcase-thumb-icon">${a.type==="video"?"▶":a.id==="professions"?"💼":"◉"}</span>
                                             <span class="cgs-showcase-thumb-label">${a.title}</span>
                                         </button>`})}
@@ -3911,11 +3941,11 @@
                             <span class="cgs-root-card-toggle">${this._vrExpanded?"▲":"▼"}</span>
                             ${this._vrExpanded?c`
                                 <div class="cgs-root-card-videos" @click=${a=>a.stopPropagation()}>
-                                    ${g._SHOWCASE_ITEMS.filter(a=>a.section==="vr").map(a=>{const r=g._SHOWCASE_ITEMS.findIndex(o=>o===a);return c`
-                                        <button class="cgs-showcase-thumb ${r===this._activeVideoIndex?"active":""}"
+                                    ${g._SHOWCASE_ITEMS.filter(a=>a.section==="vr").map(a=>{const o=g._SHOWCASE_ITEMS.findIndex(r=>r===a);return c`
+                                        <button class="cgs-showcase-thumb ${o===this._activeVideoIndex?"active":""}"
                                                 type="button"
                                                 style="--thumb-accent: ${a.accent}"
-                                                @click=${()=>{this._activeVideoIndex=r}}>
+                                                @click=${()=>{this._activeVideoIndex=o}}>
                                             <span class="cgs-showcase-thumb-icon">${a.type==="video"?"▶":"◉"}</span>
                                             <span class="cgs-showcase-thumb-label">${a.title}</span>
                                         </button>`})}
@@ -3930,7 +3960,7 @@
                     </div>
                 </div>
             </section>
-        `}render(){const s=this._activeSection==="orus-ai"||this._activeSection==="privacy",t=V.find(r=>r.code===this._currentLocale)??V[0],i=this._renderSiteChrome(t),a=s?m:this._renderSiteFooter();return this._loading?c`
+        `}render(){const s=this._activeSection==="orus-ai"||this._activeSection==="privacy",t=V.find(o=>o.code===this._currentLocale)??V[0],i=this._renderSiteChrome(t),a=s?m:this._renderSiteFooter();return this._loading?c`
                 <div class="loading-overlay" role="status" aria-live="polite" aria-label="Loading">
                     <div class="loading-spinner" aria-hidden="true"></div>
                     <div class="loading-text">${this._loadingMessage}</div>
@@ -3974,7 +4004,7 @@
 
                 <!-- Orus Editor Popup (Website Demo) -->
                 ${this._editorOpen?c`
-                <div class="cgs-editor-overlay" role="dialog" aria-modal="true" aria-label="Orus Editor Web Demo" @click=${r=>{r.target.classList.contains("cgs-editor-overlay")&&(this._editorOpen=!1)}}>
+                <div class="cgs-editor-overlay" role="dialog" aria-modal="true" aria-label="Orus Editor Web Demo" @click=${o=>{o.target.classList.contains("cgs-editor-overlay")&&(this._editorOpen=!1)}}>
                     <div class="cgs-editor-window">
                         <div class="cgs-editor-titlebar">
                             <span class="cgs-editor-win-title">◎ Orus Editor — Web Demo</span>
@@ -4044,7 +4074,7 @@
 
                 <!-- What is Orus -->
                 <section class="cgs-ent-section">
-                    <h2>${e("enterprise.what.title","What Is Orus?")}</h2>
+                    <h2>${e("enterprise.what.title","What is ORUS AI SYSTEM?")}</h2>
                     <p>${e("enterprise.what.body","Orus is a multimodal AI system built by Comet Game Studio Ltd. It combines voice, text, vision, OCR, and desktop automation into a single locally-hosted agent. Unlike cloud-dependent AI assistants, Orus runs entirely on your hardware — your data never leaves your network.")}</p>
                     <p>${e("enterprise.what.body2","Powered by the Phi-4 multimodal model architecture and the vLLM inference engine, Orus delivers enterprise-grade performance on standard NVIDIA RTX workstations. No specialised data-centre infrastructure required.")}</p>
                 </section>
@@ -4100,6 +4130,43 @@
                             <h3>${e("enterprise.licensing.msix.title","Windows MSIX Deployment")}</h3>
                             <p>${e("enterprise.licensing.msix.body","Delivered as a signed MSIX package for Windows. AppContainer sandboxing, automatic updates via Microsoft Store or sideloaded enterprise distribution. Native .NET Desktop Companion for always-on availability. No manual Python setup for end users.")}</p>
                         </article>
+                    </div>
+                </section>
+
+                <!-- Target Industries -->
+                <section class="cgs-ent-section">
+                    <h2>${e("enterprise.industries.title","Designable for")}</h2>
+                    <div class="cgs-ent-grid cgs-ent-grid--compact">
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\ud83c\udfe6</span>
+                            <strong>${e("enterprise.ind.finance","Financial Services")}</strong>
+                            <p>${e("enterprise.ind.finance.body","Offline-capable with audit-logged RBAC for regulatory compliance.")}</p>
+                        </div>
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\ud83c\udfe5</span>
+                            <strong>${e("enterprise.ind.healthcare","Healthcare")}</strong>
+                            <p>${e("enterprise.ind.healthcare.body","Local processing keeps patient data on premises. No PHI sent to cloud.")}</p>
+                        </div>
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\ud83d\udee1\ufe0f</span>
+                            <strong>${e("enterprise.ind.defence","Defence & Government")}</strong>
+                            <p>${e("enterprise.ind.defence.body","Air-gapped deployment with Rust-compiled IP protection.")}</p>
+                        </div>
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\u2696\ufe0f</span>
+                            <strong>${e("enterprise.ind.legal","Legal")}</strong>
+                            <p>${e("enterprise.ind.legal.body","Client confidentiality assured. Document OCR and meeting transcription stay local.")}</p>
+                        </div>
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\ud83c\udfec</span>
+                            <strong>${e("enterprise.ind.corporate","Corporate Teams")}</strong>
+                            <p>${e("enterprise.ind.corporate.body","One GPU workstation serving your team over LAN. No per-seat cloud fees.")}</p>
+                        </div>
+                        <div class="cgs-ent-industry">
+                            <span class="cgs-ent-industry-icon">\ud83c\udf0d</span>
+                            <strong>${e("enterprise.ind.remote","Remote & International")}</strong>
+                            <p>${e("enterprise.ind.remote.body","Timezone-agnostic. No latency to cloud. 90+ language speech support.")}</p>
+                        </div>
                     </div>
                 </section>
 
@@ -4167,49 +4234,12 @@
                     </div>
                 </section>
 
-                <!-- Target Industries -->
-                <section class="cgs-ent-section">
-                    <h2>${e("enterprise.industries.title","Designable for")}</h2>
-                    <div class="cgs-ent-grid cgs-ent-grid--compact">
-                        <div class="cgs-ent-industry">
-                            <span class="cgs-ent-industry-icon">\ud83c\udfe6</span>
-                            <strong>${e("enterprise.ind.finance","Financial Services")}</strong>
-                            <p>${e("enterprise.ind.finance.body","Offline-capable with audit-logged RBAC for regulatory compliance.")}</p>
-                        </div>
-                        <div class="cgs-ent-industry">
-                            <span class="cgs-ent-industry-icon">\ud83c\udfe5</span>
-                            <strong>${e("enterprise.ind.healthcare","Healthcare")}</strong>
-                            <p>${e("enterprise.ind.healthcare.body","Local processing keeps patient data on premises. No PHI sent to cloud.")}</p>
-                        </div>
-                        <div class="cgs-ent-industry">
-                            <span class="cgs-ent-industry-icon">\ud83d\udee1\ufe0f</span>
-                            <strong>${e("enterprise.ind.defence","Defence & Government")}</strong>
-                            <p>${e("enterprise.ind.defence.body","Air-gapped deployment with Rust-compiled IP protection.")}</p>
-                        </div>
-                        <div class="cgs-ent-industry">
-                            <span class="cgs-ent-industry-icon">\u2696\ufe0f</span>
-                            <strong>${e("enterprise.ind.legal","Legal")}</strong>
-                            <p>${e("enterprise.ind.legal.body","Client confidentiality assured. Document OCR and meeting transcription stay local.")}</p>
-                        </div>
-                        <div class="cgs-ent-industry">
-                            <span class="cgs-ent-industry-icon">\ud83c\udfec</span>
-                            <strong>${e("enterprise.ind.corporate","Corporate Teams")}</strong>
-                            <p>${e("enterprise.ind.corporate.body","One GPU workstation serving your team over LAN. No per-seat cloud fees.")}</p>
-                        </div>
-                        <div class="cgs-ent-industry">
-                            <span class="cgs-ent-industry-icon">\ud83c\udf0d</span>
-                            <strong>${e("enterprise.ind.remote","Remote & International")}</strong>
-                            <p>${e("enterprise.ind.remote.body","Timezone-agnostic. No latency to cloud. 90+ language speech support.")}</p>
-                        </div>
-                    </div>
-                </section>
-
             </div>
         `}_renderAbout(){return c`
             <div class="cgs-about-section">
                 <div class="cgs-about-icon">
                     <img src="${this._imgBase}/Orus.avif" alt="Orus the Living Machine"
-                         style="width:80px;height:80px;object-fit:cover;border-radius:50%;border:2px solid rgba(99,102,241,0.5);" />
+                        style="width:80px;height:80px;object-fit:cover;border-radius:50%;border:2px solid rgba(99,102,241,0.5);" />
                 </div>
                 <div class="cgs-about-icon-text">${e("about.company","Comet Game Studio Ltd")}</div>
                 <h2>${e("about.title","About Comet Game Studio Ltd")}</h2>
@@ -4253,7 +4283,7 @@
                         ${e("about.contact_desc","Have questions about our products or interested in collaboration? We’d love to hear from you.")}
                     </p>
                     <a class="cgs-contact-link"
-                       href="mailto:support@cometgamestudio.com">
+                    href="mailto:support@cometgamestudio.com">
                         ✉️ support@cometgamestudio.com
                     </a>
                 </div>
@@ -4578,7 +4608,7 @@
 
         .cgs-logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(13px, 1.6vw, 18px);
+            font-size: clamp(13px, 1.6vw, 25px);
             font-weight: 700;
             color: #e0e7ff;
             letter-spacing: 2px;
@@ -5016,9 +5046,9 @@
             position: relative;
             overflow: hidden;
             border-radius: 22px;
-            padding: 14px 26px 12px;
+            padding: 8px 26px 6px;
             margin-bottom: 10px;
-            height: 154px;
+            height: 90px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -5081,7 +5111,7 @@
 
         .cgs-quote-hover-panel {
             position: absolute;
-            inset: 12px 18px 28px;
+            inset: 6px 18px 18px;
             z-index: 2;
             display: flex;
             flex-direction: column;
@@ -5146,7 +5176,7 @@
         .cgs-quote-hover-text {
             max-width: 940px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(22px, 1.9vw, 30px);
+            font-size: clamp(16px, 1.4vw, 22px);
             line-height: 1.08;
             color: #ffffff;
             text-align: center;
@@ -5236,7 +5266,7 @@
             min-width: 0;
             margin: 0;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(24px, 2.2vw, 34px);
+            font-size: clamp(18px, 1.6vw, 24px);
             line-height: 1;
             letter-spacing: 0.012em;
             color: #f8fafc;
@@ -6074,18 +6104,19 @@
         .cgs-showcase-specs-badge,
         .cgs-showcase-spec-chip-label {
             font-family: 'Orbitron', sans-serif;
-            font-size: 10px;
+            font-size: 12px;
             letter-spacing: 0.14em;
             text-transform: uppercase;
         }
 
         .cgs-showcase-specs-kicker {
             color: #93c5fd;
+            font-size: 14px;
         }
 
         .cgs-showcase-specs-note {
             margin-top: 4px;
-            font-size: 11px;
+            font-size: 14px;
             line-height: 1.55;
             color: #94a3b8;
         }
@@ -6096,6 +6127,7 @@
             border: 1px solid rgba(96, 165, 250, 0.18);
             background: rgba(30, 41, 59, 0.72);
             color: #dbeafe;
+            font-size: 12px;
         }
 
         .cgs-showcase-spec-list {
@@ -6142,13 +6174,13 @@
 
         .cgs-showcase-spec-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 11px;
+            font-size: 14px;
             letter-spacing: 0.04em;
             color: #f8fafc;
         }
 
         .cgs-showcase-spec-audience {
-            font-size: 11px;
+            font-size: 14px;
             line-height: 1.5;
             color: #94a3b8;
         }
@@ -6195,9 +6227,42 @@
         }
 
         .cgs-showcase-spec-chip strong {
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.55;
             color: #f8fafc;
+        }
+
+        .cgs-showcase-spec-activities {
+            margin: 0 0 10px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .cgs-showcase-spec-details-list {
+            list-style: none;
+            margin: 4px 0 0;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #e2e8f0;
+        }
+
+        .cgs-showcase-spec-details-list li {
+            padding: 2px 0;
+        }
+
+        .cgs-showcase-spec-details-list li strong {
+            font-size: 12px;
+            color: #93c5fd;
+        }
+
+        .cgs-showcase-spec-note {
+            margin: 8px 0 0;
+            font-size: 12px;
+            line-height: 1.55;
+            color: #94a3b8;
+            font-style: italic;
         }
 
         .cgs-showcase-spec-footnote {
@@ -6651,11 +6716,11 @@
                 grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             }
             .cgs-quote-hero {
-                height: 146px;
-                padding: 12px 22px 10px;
+                height: 80px;
+                padding: 6px 22px 4px;
             }
             .cgs-quote-body {
-                font-size: clamp(22px, 2.6vw, 30px);
+                font-size: clamp(16px, 2vw, 22px);
             }
             .cgs-quote-hover-panel {
                 inset: 10px 16px 24px;
@@ -6695,7 +6760,7 @@
             }
             .cgs-logo {
                 grid-area: logo;
-                font-size: clamp(12px, 2.4vw, 16px);
+                font-size: clamp(12px, 2.4vw, 25px);
                 letter-spacing: 1px;
                 flex-shrink: 0;
                 justify-self: start;
@@ -6766,8 +6831,8 @@
                 margin-bottom: 14px;
             }
             .cgs-quote-hero {
-                padding: 10px 18px 8px;
-                height: 136px;
+                padding: 6px 18px 4px;
+                height: 72px;
                 border-radius: 18px;
             }
             .cgs-root-panel {
@@ -7083,7 +7148,7 @@
                 justify-items: center;
             }
             .cgs-logo {
-                font-size: clamp(11px, 3.2vw, 15px);
+                font-size: clamp(11px, 3.2vw, 25px);
                 letter-spacing: 0.3px;
                 justify-self: center;
                 padding-bottom: 3px;
@@ -7534,9 +7599,9 @@
 
         /* Feature list (vertical) */
         .cgs-ent-feature-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
         }
 
         .cgs-ent-feature {
@@ -7790,6 +7855,9 @@
                 font-size: 24px;
             }
             .cgs-ent-grid {
+                grid-template-columns: 1fr;
+            }
+            .cgs-ent-feature-list {
                 grid-template-columns: 1fr;
             }
             .cgs-ent-grid--compact {
