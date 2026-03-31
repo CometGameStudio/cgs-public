@@ -3697,7 +3697,7 @@
            ${e("privacy.popup.contact_desc","For any questions regarding this privacy policy or to exercise your privacy rights, please contact Comet Game Studio Ltd at the support channels provided within the Software or at: cometgamestudio.com")}
          </p>
       </div>
-    `}}w([$({type:Boolean})],y.prototype,"open");w([$({type:Boolean,attribute:"full-page"})],y.prototype,"fullPage");w([$({type:Object})],y.prototype,"position");w([$({type:Object})],y.prototype,"size");w([$({type:String})],y.prototype,"startTab");w([$({type:Boolean,attribute:"hide-home-btn"})],y.prototype,"hideHomeBtn");w([$({type:Number,attribute:"start-card"})],y.prototype,"startCard");w([f()],y.prototype,"activeTab");w([f()],y.prototype,"isDragging");w([f()],y.prototype,"isResizing");w([f()],y.prototype,"currentCardIndex");w([f()],y.prototype,"isCardDragging");customElements.get("orus-about-dialog")||customElements.define("orus-about-dialog",y);var tt=Object.defineProperty,it=Object.getOwnPropertyDescriptor,x=(s,t,i,a)=>{for(var r=a>1?void 0:a?it(t,i):t,o=s.length-1,n;o>=0;o--)(n=s[o])&&(r=(a?n(t,i,r):n(r))||r);return a&&r&&tt(t,i,r),r};const at=!0,st=!0,rt=!0,ot=!0;globalThis.WEBSITE_MODE=at;globalThis.PRODUCTION_MODE=st;globalThis.NO_INFERENCE_MODE=rt;globalThis.NO_AUTH_REQUIRED=ot;let g=class extends z{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this._editorOpen=!1,this._editorError=null,this._currentLocale="en",this._langDropdownOpen=!1,this._currentQuoteIndex=0,this._quoteFading=!1,this._activeVideoIndex=0,this._aiExpanded=!0,this._vrExpanded=!0,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._animationFrameId=0,this._unlistenI18n=null,this._quoteTimer=null,this._navResizeObserver=null,this._observedNav=null,this._quoteHoverPaused=!1,this._onPopState=s=>{const t=s.state;this._activeSection=t?.section??this._pathToSection(location.pathname),this._updatePageMeta()}}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._activeSection=this._pathToSection(location.pathname),globalThis.addEventListener("popstate",this._onPopState),this._bootSequence(),this._updatePageMeta(),this._unlistenI18n=_e(()=>{this._currentLocale=Je(),this.requestUpdate()}),this._startQuoteRotation()}disconnectedCallback(){super.disconnectedCallback(),globalThis.removeEventListener("popstate",this._onPopState),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId),this._unlistenI18n?.(),this._stopQuoteRotation(),this._navResizeObserver?.disconnect(),this._navResizeObserver=null,this._observedNav=null}firstUpdated(){this.updateComplete.then(()=>{this._observeNavHeight(),this._syncNavHeight()})}updated(s){super.updated(s),this._observeNavHeight(),this._syncNavHeight(),s.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(s){this._errorMessage=`Failed to load: ${s instanceof Error?s.message:String(s)}`,this._loading=!1}}async _initThreeScene(){try{const s=this.shadowRoot?.querySelector("#cgs-canvas");if(!s)return;const t=await Se(()=>import("./three.module-CIzvuMnW.js"),[]),i=new t.Scene,a=new t.PerspectiveCamera(60,s.clientWidth/s.clientHeight,.1,1e3);a.position.set(0,0,8);const r=new t.WebGLRenderer({canvas:s,antialias:!0,alpha:!0});r.setSize(s.clientWidth,s.clientHeight),r.setPixelRatio(Math.min(globalThis.devicePixelRatio,2)),r.setClearColor(657935,1);const o=new t.IcosahedronGeometry(2,15),n=new t.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),d=new t.Mesh(o,n);i.add(d);const l=new t.AmbientLight(16777215,.3);i.add(l);const p=new t.PointLight(6333946,1.5,20);p.position.set(5,5,5),i.add(p),this._threeRenderer=r,this._threeCanvasReady=!0;const h=()=>{this._animationFrameId=requestAnimationFrame(h),!document.hidden&&(d.rotation.y+=.003,d.rotation.x+=.001,r.render(i,a))};h(),new ResizeObserver(()=>{if(!s.parentElement)return;const b=s.clientWidth,v=s.clientHeight;a.aspect=b/v,a.updateProjectionMatrix(),r.setSize(b,v)}).observe(s)}catch{this._threeCanvasReady=!1}}_navigateTo(s){this._activeSection!==s&&(this._activeSection=s,history.pushState({section:s},"",this._sectionToPath(s)),this._updatePageMeta())}_startQuoteRotation(){this._stopQuoteRotation(),this._quoteTimer=setInterval(()=>this._advanceQuote(),8e3)}_updatePageMeta(){const t={"islands-of-life":{title:"Islands of Life — Cinematic VR Adventure | Comet Game Studio",desc:"Explore alien worlds in VR. A cinematic sci-fi adventure spanning five planets, orbital combat, and a journey through a black hole.",img:"https://www.cometgamestudio.com/images/iol/HighresScreenshot00003.jpg"},"orus-ai":{title:"Orus AI System — Privacy-First Local AI | Comet Game Studio",desc:"Meet Orus, the multimodal AI system that runs entirely on your local Windows Machine. No cloud. No data collection."},about:{title:"About Comet Game Studio",desc:"We build privacy-first AI tools and immersive VR experiences."}}[this._activeSection];document.title=t?.title??"Comet Game Studio — AI · VR · Music";const i=(a,r,o)=>{const n=document.querySelector(`meta[${a}="${r}"]`);n&&n.setAttribute("content",o)};i("property","og:title",t?.title??"Comet Game Studio"),i("property","og:description",t?.desc??"AI-Powered Creative Tools — Orus Multimodal AI System"),t?.img&&i("property","og:image",t.img),i("name","twitter:title",t?.title??"Comet Game Studio"),i("name","twitter:description",t?.desc??"Privacy-first AI tools and immersive VR experiences.")}_stopQuoteRotation(){this._quoteTimer!==null&&(clearInterval(this._quoteTimer),this._quoteTimer=null)}_advanceQuote(){this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=(this._currentQuoteIndex+1)%g._QUOTES.length,this._quoteFading=!1},400)}_pauseQuoteRotation(){this._quoteHoverPaused=!0,this._stopQuoteRotation()}_resumeQuoteRotation(){this._quoteHoverPaused&&(this._quoteHoverPaused=!1,this._startQuoteRotation())}_onSpecToggle(s){const t=s.target;if(!t.open)return;const i=t.parentElement;i&&i.querySelectorAll("details.cgs-showcase-spec-detail").forEach(a=>{a!==t&&(a.open=!1)})}_goToQuote(s){s!==this._currentQuoteIndex&&(this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=s,this._quoteFading=!1,this._quoteHoverPaused||this._startQuoteRotation()},400))}_observeNavHeight(){const s=this.renderRoot.querySelector(".cgs-nav");if(!s){this._navResizeObserver?.disconnect(),this._observedNav=null;return}this._observedNav!==s&&(this._navResizeObserver??=new ResizeObserver(()=>this._syncNavHeight()),this._navResizeObserver.disconnect(),this._navResizeObserver.observe(s),this._observedNav=s)}_syncNavHeight(){const s=this.renderRoot.querySelector(".cgs-nav");if(!s)return;const t=Math.ceil(s.getBoundingClientRect().height);t>0&&this.style.setProperty("--cgs-nav-height",`${t}px`)}_sectionToPath(s){const a={privacy:"privacy-policy",products:"products",about:"about",safety:"safety",terms:"terms",notices:"notices","orus-ai":"orus-ai","islands-of-life":"islands-of-life",enterprise:"enterprise"}[s];return a?`/${a}`:"/"}_pathToSection(s){const t="/".replace(/\/$/,"");switch(s.startsWith(t)?s.slice(t.length):s){case"/privacy-policy":return"privacy";case"/products":return"products";case"/about":return"about";case"/safety":return"safety";case"/terms":return"terms";case"/notices":return"notices";case"/orus-ai":return"orus-ai";case"/islands-of-life":return"islands-of-life";case"/enterprise":return"enterprise";default:return"home"}}async _switchLanguage(s){this._langDropdownOpen=!1,await Ze(s)}_renderSiteChrome(s){const t=this._activeSection==="home"||this._activeSection==="products",i=this._activeSection==="orus-ai",a=this._activeSection==="about",r=this._activeSection==="enterprise",o=t?"cgs-nav-link active":"cgs-nav-link",n=i?"cgs-nav-link active":"cgs-nav-link",d=a?"cgs-nav-link active":"cgs-nav-link",l=r?"cgs-nav-link active":"cgs-nav-link",p=t?"page":void 0,h=i?"page":void 0,u=a?"page":void 0,b=r?"page":void 0;return this._langDropdownOpen,this._langDropdownOpen&&c`
+    `}}w([$({type:Boolean})],y.prototype,"open");w([$({type:Boolean,attribute:"full-page"})],y.prototype,"fullPage");w([$({type:Object})],y.prototype,"position");w([$({type:Object})],y.prototype,"size");w([$({type:String})],y.prototype,"startTab");w([$({type:Boolean,attribute:"hide-home-btn"})],y.prototype,"hideHomeBtn");w([$({type:Number,attribute:"start-card"})],y.prototype,"startCard");w([f()],y.prototype,"activeTab");w([f()],y.prototype,"isDragging");w([f()],y.prototype,"isResizing");w([f()],y.prototype,"currentCardIndex");w([f()],y.prototype,"isCardDragging");customElements.get("orus-about-dialog")||customElements.define("orus-about-dialog",y);var tt=Object.defineProperty,it=Object.getOwnPropertyDescriptor,x=(s,t,i,a)=>{for(var r=a>1?void 0:a?it(t,i):t,o=s.length-1,n;o>=0;o--)(n=s[o])&&(r=(a?n(t,i,r):n(r))||r);return a&&r&&tt(t,i,r),r};const at=!0,st=!0,rt=!0,ot=!0;globalThis.WEBSITE_MODE=at;globalThis.PRODUCTION_MODE=st;globalThis.NO_INFERENCE_MODE=rt;globalThis.NO_AUTH_REQUIRED=ot;let g=class extends z{constructor(){super(...arguments),this._loading=!0,this._loadingMessage="Loading CometGameStudio.com...",this._loadingProgress=0,this._ready=!1,this._errorMessage=null,this._activeSection="home",this._threeCanvasReady=!1,this._aboutOpen=!1,this._editorOpen=!1,this._editorError=null,this._currentLocale="en",this._langDropdownOpen=!1,this._currentQuoteIndex=0,this._quoteFading=!1,this._activeVideoIndex=0,this._aiExpanded=!0,this._vrExpanded=!0,this.siteUrl="https://www.cometgamestudio.com",this._threeRenderer=null,this._animationFrameId=0,this._unlistenI18n=null,this._quoteTimer=null,this._navResizeObserver=null,this._observedNav=null,this._quoteHoverPaused=!1,this._onPopState=s=>{const t=s.state;this._activeSection=t?.section??this._pathToSection(location.pathname),this._updatePageMeta()}}get _imgBase(){return"images"}connectedCallback(){super.connectedCallback(),this._activeSection=this._pathToSection(location.pathname),globalThis.addEventListener("popstate",this._onPopState),this._bootSequence(),this._updatePageMeta(),this._unlistenI18n=_e(()=>{this._currentLocale=Je(),this.requestUpdate()}),this._startQuoteRotation()}disconnectedCallback(){super.disconnectedCallback(),globalThis.removeEventListener("popstate",this._onPopState),this._animationFrameId&&cancelAnimationFrame(this._animationFrameId),this._unlistenI18n?.(),this._stopQuoteRotation(),this._navResizeObserver?.disconnect(),this._navResizeObserver=null,this._observedNav=null}firstUpdated(){this.updateComplete.then(()=>{this._observeNavHeight(),this._syncNavHeight()})}updated(s){super.updated(s),this._observeNavHeight(),this._syncNavHeight(),s.has("_ready")&&this._ready&&!this._threeCanvasReady&&!this._threeRenderer&&this._initThreeScene()}async _bootSequence(){try{this._loadingMessage="Preparing 3D experience...",this._loadingProgress=80,this._loadingProgress=100,this._loadingMessage="Ready",this._loading=!1,this._ready=!0}catch(s){this._errorMessage=`Failed to load: ${s instanceof Error?s.message:String(s)}`,this._loading=!1}}async _initThreeScene(){try{const s=this.shadowRoot?.querySelector("#cgs-canvas");if(!s)return;const t=await Se(()=>import("./three.module-CIzvuMnW.js"),[]),i=new t.Scene,a=new t.PerspectiveCamera(60,s.clientWidth/s.clientHeight,.1,1e3);a.position.set(0,0,8);const r=new t.WebGLRenderer({canvas:s,antialias:!0,alpha:!0});r.setSize(s.clientWidth,s.clientHeight),r.setPixelRatio(Math.min(globalThis.devicePixelRatio,2)),r.setClearColor(657935,1);const o=new t.IcosahedronGeometry(2,15),n=new t.MeshStandardMaterial({color:6514417,emissive:3900150,emissiveIntensity:.4,metalness:.8,roughness:.2,wireframe:!1}),d=new t.Mesh(o,n);i.add(d);const l=new t.AmbientLight(16777215,.3);i.add(l);const p=new t.PointLight(6333946,1.5,20);p.position.set(5,5,5),i.add(p),this._threeRenderer=r,this._threeCanvasReady=!0;const h=()=>{this._animationFrameId=requestAnimationFrame(h),!document.hidden&&(d.rotation.y+=.003,d.rotation.x+=.001,r.render(i,a))};h(),new ResizeObserver(()=>{if(!s.parentElement)return;const b=s.clientWidth,v=s.clientHeight;a.aspect=b/v,a.updateProjectionMatrix(),r.setSize(b,v)}).observe(s)}catch{this._threeCanvasReady=!1}}_navigateTo(s){this._activeSection!==s&&(this._activeSection=s,history.pushState({section:s},"",this._sectionToPath(s)),this._updatePageMeta())}_startQuoteRotation(){this._stopQuoteRotation(),this._quoteTimer=setInterval(()=>this._advanceQuote(),8e3)}_updatePageMeta(){const t={"islands-of-life":{title:"Islands of Life — Cinematic VR Adventure | Comet Game Studio",desc:"Explore alien worlds in VR. A cinematic sci-fi adventure spanning five planets, orbital combat, and a journey through a black hole.",img:"https://www.cometgamestudio.com/images/iol/HighresScreenshot00003.jpg"},"orus-ai":{title:"Orus AI System — Privacy-First Local AI | Comet Game Studio",desc:"Meet Orus, the multimodal AI system that runs entirely on your local Windows Machine. No cloud. No data collection."},about:{title:"About Comet Game Studio",desc:"We build privacy-first AI tools and immersive VR experiences."}}[this._activeSection];document.title=t?.title??"Comet Game Studio — AI · VR · Music";const i=(a,r,o)=>{const n=document.querySelector(`meta[${a}="${r}"]`);n&&n.setAttribute("content",o)};i("property","og:title",t?.title??"Comet Game Studio"),i("property","og:description",t?.desc??"AI-Powered Creative Tools — Orus Multimodal AI System"),t?.img&&i("property","og:image",t.img),i("name","twitter:title",t?.title??"Comet Game Studio"),i("name","twitter:description",t?.desc??"Privacy-first AI tools and immersive VR experiences.")}_stopQuoteRotation(){this._quoteTimer!==null&&(clearInterval(this._quoteTimer),this._quoteTimer=null)}_advanceQuote(){this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=(this._currentQuoteIndex+1)%g._QUOTES.length,this._quoteFading=!1},400)}_pauseQuoteRotation(){this._quoteHoverPaused=!0,this._stopQuoteRotation()}_resumeQuoteRotation(){this._quoteHoverPaused&&(this._quoteHoverPaused=!1,this._startQuoteRotation())}_onSpecSummaryClick(s){s.preventDefault();const i=s.currentTarget.closest("details");if(i)if(i.open)this._animateClose(i);else{const a=i.parentElement;a&&a.querySelectorAll("details.cgs-showcase-spec-detail[open]").forEach(r=>{this._animateClose(r)}),i.open=!0}}_animateClose(s){s.classList.add("closing");const t=s.querySelector(".cgs-showcase-spec-body"),i=()=>{s.classList.remove("closing"),s.open=!1,t?.removeEventListener("transitionend",i)};t?(t.addEventListener("transitionend",i,{once:!1}),setTimeout(i,500)):s.open=!1}_goToQuote(s){s!==this._currentQuoteIndex&&(this._quoteFading=!0,setTimeout(()=>{this._currentQuoteIndex=s,this._quoteFading=!1,this._quoteHoverPaused||this._startQuoteRotation()},400))}_observeNavHeight(){const s=this.renderRoot.querySelector(".cgs-nav");if(!s){this._navResizeObserver?.disconnect(),this._observedNav=null;return}this._observedNav!==s&&(this._navResizeObserver??=new ResizeObserver(()=>this._syncNavHeight()),this._navResizeObserver.disconnect(),this._navResizeObserver.observe(s),this._observedNav=s)}_syncNavHeight(){const s=this.renderRoot.querySelector(".cgs-nav");if(!s)return;const t=Math.ceil(s.getBoundingClientRect().height);t>0&&this.style.setProperty("--cgs-nav-height",`${t}px`)}_sectionToPath(s){const a={privacy:"privacy-policy",products:"products",about:"about",safety:"safety",terms:"terms",notices:"notices","orus-ai":"orus-ai","islands-of-life":"islands-of-life",enterprise:"enterprise"}[s];return a?`/${a}`:"/"}_pathToSection(s){const t="/".replace(/\/$/,"");switch(s.startsWith(t)?s.slice(t.length):s){case"/privacy-policy":return"privacy";case"/products":return"products";case"/about":return"about";case"/safety":return"safety";case"/terms":return"terms";case"/notices":return"notices";case"/orus-ai":return"orus-ai";case"/islands-of-life":return"islands-of-life";case"/enterprise":return"enterprise";default:return"home"}}async _switchLanguage(s){this._langDropdownOpen=!1,await Ze(s)}_renderSiteChrome(s){const t=this._activeSection==="home"||this._activeSection==="products",i=this._activeSection==="orus-ai",a=this._activeSection==="about",r=this._activeSection==="enterprise",o=t?"cgs-nav-link active":"cgs-nav-link",n=i?"cgs-nav-link active":"cgs-nav-link",d=a?"cgs-nav-link active":"cgs-nav-link",l=r?"cgs-nav-link active":"cgs-nav-link",p=t?"page":void 0,h=i?"page":void 0,u=a?"page":void 0,b=r?"page":void 0;return this._langDropdownOpen,this._langDropdownOpen&&c`
                             <div id="cgs-lang-dropdown" class="cgs-lang-dropdown" role="menu" aria-label="${e("nav.language_menu","Language selection")}">
                                 ${V.map(v=>c`
                                     <button class="cgs-lang-option ${this._currentLocale===v.code?"active":""}"
@@ -3780,8 +3780,8 @@
                 </div>
                 <div class="cgs-showcase-spec-list">
                     ${s.map(t=>c`
-                        <details class="cgs-showcase-spec-detail" @toggle=${this._onSpecToggle}>
-                            <summary>
+                        <details class="cgs-showcase-spec-detail">
+                            <summary @click=${this._onSpecSummaryClick}>
                                 <div class="cgs-showcase-spec-summary-copy">
                                     <span class="cgs-showcase-spec-title">${t.title}</span>
                                     <span class="cgs-showcase-spec-audience">${t.audience}</span>
@@ -3820,8 +3820,8 @@
                 </div>
                 <div class="cgs-showcase-spec-list">
                     ${s.map(t=>c`
-                        <details class="cgs-showcase-spec-detail" @toggle=${this._onSpecToggle}>
-                            <summary>
+                        <details class="cgs-showcase-spec-detail">
+                            <summary @click=${this._onSpecSummaryClick}>
                                 <div class="cgs-showcase-spec-summary-copy">
                                     <span class="cgs-showcase-spec-title">${t.icon} ${t.title}</span>
                                     <span class="cgs-showcase-spec-audience">${t.audience}</span>
@@ -5151,14 +5151,15 @@
         .cgs-quote-hero-content {
             position: relative;
             z-index: 1;
-            display: grid;
-            grid-template-rows: auto auto;
-            align-content: center;
-            justify-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             row-gap: 8px;
             flex: 1;
             min-height: 0;
             min-width: 0;
+            width: 100%;
             transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
             opacity: 1;
         }
@@ -5175,7 +5176,7 @@
         .cgs-quote-hero .cgs-quote-progress {
             position: relative;
             z-index: 3;
-            margin-top: 10px;
+            margin-top: 4px;
             transition: opacity 0.35s ease;
         }
 
@@ -5312,23 +5313,23 @@
         .cgs-quote-meta {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 14px;
             min-width: 0;
             width: 100%;
-            text-align: center;
+            text-align: left;
         }
 
         .cgs-quote-thinker {
             font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
+            font-size: 12px;
             letter-spacing: 0.18em;
             color: #f8fafc;
-            margin-bottom: 4px;
+            margin-bottom: 0;
         }
 
         .cgs-quote-source {
-            font-size: 11px;
+            font-size: 10px;
             color: #94a3b8;
             letter-spacing: 0.14em;
             text-transform: uppercase;
@@ -5339,8 +5340,7 @@
             min-width: 0;
             margin: 0;
             font-family: 'Cormorant Garamond', serif;
-            max-width: min(980px, 100%);
-            margin-inline: auto;
+            max-width: 100%;
             font-size: clamp(16px, 1.2vw + 0.45rem, 24px);
             line-height: 1.08;
             letter-spacing: 0.01em;
@@ -5371,8 +5371,8 @@
         .cgs-quote-progress {
             display: grid;
             grid-template-columns: repeat(10, minmax(0, 1fr));
-            gap: 8px;
-            margin-top: 18px;
+            gap: 4px;
+            margin-top: 6px;
         }
 
         .cgs-quote-progress-segment {
@@ -5380,37 +5380,34 @@
             border: none;
             width: 100%;
             padding: 0;
-            height: 3px;
+            height: 2px;
             border-radius: 999px;
             background: rgba(148, 163, 184, 0.18);
-            overflow: hidden;
+            overflow: visible;
             cursor: pointer;
             transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
-            /* WCAG 2.5.8 — min 24px touch target */
-            min-height: 24px;
-            display: flex;
-            align-items: center;
+            min-height: 2px;
         }
 
         .cgs-quote-progress-segment::after {
             content: '';
             display: block;
             width: 100%;
-            height: 3px;
+            height: 2px;
             border-radius: 999px;
             background: inherit;
         }
 
         .cgs-quote-progress-segment:hover,
         .cgs-quote-progress-segment:focus-visible {
-            transform: scaleY(1.55);
+            transform: scaleY(2);
             background: rgba(226, 232, 240, 0.34);
             outline: none;
         }
 
         .cgs-quote-progress-segment.active {
             background: linear-gradient(90deg, var(--segment-accent, #6366f1), rgba(255, 255, 255, 0.92));
-            box-shadow: 0 0 18px rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.06);
         }
 
         .cgs-quote-portrait-shell {
@@ -6138,8 +6135,10 @@
         }
 
         .cgs-showcase-info {
-            max-width: 72ch;
+            max-width: none;
             padding: 8px 6px 2px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .cgs-showcase-tag {
@@ -6162,7 +6161,7 @@
         }
 
         .cgs-showcase-desc {
-            max-width: 68ch;
+            max-width: none;
             margin: 8px 0 0;
             font-size: 14px;
             line-height: 1.65;
@@ -6226,8 +6225,12 @@
         .cgs-showcase-spec-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 0;
             margin-top: 12px;
+        }
+
+        .cgs-showcase-spec-detail + .cgs-showcase-spec-detail {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .cgs-showcase-spec-detail {
@@ -6326,6 +6329,24 @@
             grid-template-rows: 1fr;
             padding: 0 14px 14px;
             opacity: 1;
+        }
+
+        /* Closing animation: detail still has [open] but .closing overrides styles */
+        .cgs-showcase-spec-detail.closing {
+            border-color: rgba(148, 163, 184, 0.12);
+            background: rgba(8, 12, 24, 0.66);
+            box-shadow: none;
+            transform: none;
+        }
+        .cgs-showcase-spec-detail.closing .cgs-showcase-spec-body {
+            grid-template-rows: 0fr;
+            padding: 0 14px;
+            opacity: 0;
+        }
+        .cgs-showcase-spec-detail.closing .cgs-showcase-spec-chevron {
+            transform: rotate(0deg);
+            background: rgba(15, 23, 42, 0.58);
+            border-color: rgba(96, 165, 250, 0.18);
         }
 
         .cgs-showcase-spec-body-inner {
