@@ -7697,7 +7697,7 @@
             font-size: 13px;
             color: #cbd5e1;
             line-height: 1.8;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto 16px;
         }
 
