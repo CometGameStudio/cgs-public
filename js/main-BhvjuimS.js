@@ -4347,7 +4347,7 @@
         }
 
         .cgs-nav-link {
-            font-size: 13px;
+            font-size: 18px;
             font-weight: 500;
             color: #94a3b8;
             letter-spacing: 1px;
