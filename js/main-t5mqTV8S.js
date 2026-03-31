@@ -4533,7 +4533,7 @@
 
         .cgs-logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(32px, 3.2vw, 54px);
+            font-size: clamp(20px, 3.2vw, 54px);
             font-weight: 700;
             color: #ffffff;
             letter-spacing: 4px;
