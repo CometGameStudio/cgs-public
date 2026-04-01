@@ -981,10 +981,10 @@
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        gap: 3px !important;
+        gap: 2px !important;
         padding: 6px 3px !important;
         font-size: 13px !important;
-        white-space: nowrap !important;
+        white-space: normal !important;
         overflow: hidden !important;
         border-radius: 0 !important;
         border-right: 1px solid rgba(99, 102, 241, 0.08) !important;
@@ -1013,22 +1013,25 @@
         text-overflow: ellipsis !important;
         max-width: 100% !important;
         text-align: center !important;
-        font-size: 11px !important;
+        font-size: 10px !important;
+        line-height: 1.2 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        white-space: normal !important;
       }
 
-      /* Main content area — account for parent nav + fixed nav bar + fixed title header */
+      /* Main content area — account for parent nav + fixed nav bar only (header hidden on mobile) */
       .about-main {
         flex: 1;
         min-height: 0;
         margin-left: 0 !important;
-        padding-top: calc(var(--cgs-parent-nav-height, 0px) + var(--about-mobile-nav-height) + var(--about-header-height)) !important;
+        padding-top: calc(var(--cgs-parent-nav-height, 0px) + var(--about-mobile-nav-height)) !important;
       }
 
-      /* Title bar: sits just below the about nav bar (which itself sits below parent nav) */
+      /* Title bar: hidden on mobile — the tab bar already indicates the active section */
       .about-header {
-        cursor: default !important;
-        left: 0 !important;
-        top: calc(var(--cgs-parent-nav-height, 0px) + var(--about-mobile-nav-height)) !important;
+        display: none !important;
       }
 
       /* ── Full-page overrides on mobile must match :host([full-page]) specificity ── */
@@ -1044,13 +1047,12 @@
       }
 
       :host([full-page]) .about-header {
-        left: 0 !important;
-        top: calc(var(--cgs-parent-nav-height, 0px) + var(--about-mobile-nav-height)) !important;
+        display: none !important;
       }
 
       :host([full-page]) .about-main {
         margin-left: 0 !important;
-        padding-top: calc(var(--cgs-parent-nav-height, 0px) + var(--about-mobile-nav-height) + var(--about-header-height)) !important;
+        padding-top: calc(var(--cgs-parent-nav-height, 0px) + var(--about-mobile-nav-height)) !important;
       }
 
       /* Disable resize grip on mobile */
@@ -1082,32 +1084,35 @@
         top: 0 !important;
         width: 100% !important;
         max-width: unset !important;
-        height: calc(100% - 78px) !important;
-        max-height: calc(100% - 78px) !important;
+        height: calc(100% - 60px) !important;
+        max-height: calc(100% - 60px) !important;
         margin: 0 auto !important;
         box-sizing: border-box !important;
         overflow-x: hidden !important;
-        /* 56px top clears the dot strip (top:10px + ~36px height + buffer) */
-        padding: 56px 20px 20px !important;
-        border-radius: 20px !important;
+        /* 48px top clears the dot strip (top:8px + ~32px height + buffer) */
+        padding: 48px 16px 16px !important;
+        border-radius: 16px !important;
+        border: none !important;
       }
 
       .about-arrow-row {
-        left: 12px !important;
-        right: 12px !important;
+        left: 10px !important;
+        right: 10px !important;
         top: auto !important;
-        bottom: 12px !important;
+        bottom: 8px !important;
         transform: none !important;
         justify-content: space-between !important;
-        gap: 12px !important;
+        gap: 8px !important;
       }
 
       .about-carousel-dots {
-        top: 10px !important;
+        top: 6px !important;
         max-width: calc(100% - 24px) !important;
         flex-wrap: wrap !important;
         justify-content: center !important;
         white-space: normal !important;
+        padding: 4px 10px !important;
+        gap: 5px !important;
       }
 
       .about-card h2 {
@@ -1142,7 +1147,7 @@
       .about-content-carousel {
         touch-action: pan-y;
         overscroll-behavior: contain;
-        padding: 18px 12px 64px;
+        padding: 8px 10px 56px;
         box-sizing: border-box;
       }
 
@@ -1180,14 +1185,15 @@
         display: none !important;
       }
       .about-nav-btn {
-        gap: 2px !important;
-        padding: 5px 2px !important;
+        gap: 1px !important;
+        padding: 4px 2px !important;
       }
       .about-nav-icon {
         font-size: 14px !important;
       }
       .about-nav-label {
-        font-size: 10px !important;
+        font-size: 9px !important;
+        line-height: 1.15 !important;
       }
       .about-content.scroll-mode {
         padding: 10px !important;
@@ -1195,27 +1201,29 @@
       }
       /* At very narrow widths, shrink dots so 13 can fit in one row (no wrapping) */
       .about-carousel-dots {
-        gap: 4px !important;
-        padding: 5px 8px !important;
+        gap: 3px !important;
+        padding: 4px 6px !important;
       }
       .about-carousel-dot {
-        width: 16px !important;
-        height: 16px !important;
-        box-shadow: inset 0 0 0 5px var(--ui-popup-bg, rgba(12, 12, 22, 0.97)), 0 0 5px rgba(99, 102, 241, 0.15) !important;
+        width: 14px !important;
+        height: 14px !important;
+        box-shadow: inset 0 0 0 4px var(--ui-popup-bg, rgba(12, 12, 22, 0.97)), 0 0 5px rgba(99, 102, 241, 0.15) !important;
       }
       .about-carousel-dot.active {
-        box-shadow: inset 0 0 0 5px var(--ui-popup-bg, rgba(12, 12, 22, 0.97)), 0 0 10px rgba(99, 102, 241, 0.5) !important;
+        box-shadow: inset 0 0 0 4px var(--ui-popup-bg, rgba(12, 12, 22, 0.97)), 0 0 10px rgba(99, 102, 241, 0.5) !important;
       }
-      /* Smaller dots = shorter strip; 52px top clears single-row dot strip */
+      /* Smaller dots = shorter strip; 40px top clears compact dot strip */
       .about-card {
-        padding-top: 52px !important;
+        padding-top: 40px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
       }
 
       .about-nav-side-arrow {
-        width: 34px !important;
-        height: 34px !important;
+        width: 32px !important;
+        height: 32px !important;
         border-width: 1.5px !important;
-        font-size: 13px !important;
+        font-size: 12px !important;
       }
 
       .about-arrow-spacer {
@@ -5187,7 +5195,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             gap: 10px;
             padding: 18px 30px 16px;
             border-radius: 18px;
@@ -5258,7 +5266,8 @@
         .cgs-quote-hover-meta {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            width: 100%;
             gap: 8px;
             font-size: 11px;
             letter-spacing: 0.16em;
