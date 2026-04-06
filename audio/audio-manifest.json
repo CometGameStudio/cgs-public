@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "generated": "2026-04-06T02:48:36Z",
+  "codec": "opus",
+  "container": "ogg",
+  "voice": "tara",
+  "bitrate": "24k",
+  "sample_rate": 24000,
+  "total_files": 10,
+  "total_size_bytes": 472855,
+  "total_duration_ms": 166141,
+  "categories": {
+    "general": {
+      "label": "General & Overview",
+      "range": [
+        1,
+        500
+      ],
+      "count": 10,
+      "manifest": "manifest-general.json",
+      "total_size_bytes": 472855,
+      "total_duration_ms": 166141
+    }
+  }
+}
