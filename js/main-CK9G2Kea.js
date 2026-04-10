@@ -3857,7 +3857,7 @@
                 <div class="cgs-showcase-specs-head">
                     <div>
                         <div class="cgs-showcase-specs-kicker">${e("hero.showcase.hardware.kicker","Requirement Overview")}</div>
-                        <div class="cgs-showcase-specs-note" style="cursor: pointer;" @click=${()=>{this._aboutOpen=!0}}>${e("hero.showcase.hardware.note","You can find a more detailed breakdown in the About panel.")}</div>
+                        <div class="cgs-showcase-specs-note" style="cursor: pointer;" @click=${()=>{this._aboutOpen=!0}}>Click here for a more detailed breakdown in the <span style="color: #2ecc71; font-weight: 600;">About Page</span>.</div>
                     </div>
                     <div class="cgs-showcase-specs-badge">${e("hero.showcase.hardware.badge","Windows x64 · RTX Required · Research into AMD Graphics Cards is in progress")}</div>
                 </div>
